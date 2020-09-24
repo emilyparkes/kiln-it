@@ -1,9 +1,18 @@
 import React from 'react'
+import { Route } from 'react-router-dom'
+
+import Nav from './Nav'
+import Home from './Home'
+import Register from './Register'
+import SignIn from './SignIn'
 
 export default function App () {
   return (
     <>
-      <h1>Hello</h1>
+      <Route path='/' component={Nav}/>
+      <Route path='/home' component={Home}/>
+      <Route path='/register' component={Register}/>
+      <Route path='/signin' component={SignIn}/>
     </>
   )
 }
