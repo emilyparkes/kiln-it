@@ -15,7 +15,7 @@
   | Column Name | Data Type | Purpose |
   | --- | --- | --- |
   | id | int | 
-  | name | string |  
+  | clay | string |  
 
 ## DB - shapes
   | Column Name | Data Type | Purpose |
@@ -33,7 +33,7 @@
   | Column Name | Data Type | Purpose |
   | --- | --- | --- |
   | id | int | | 
-  | name | string |  
+  | glaze | string |  
   
 ## DB - creations
   | Column Name | Data Type | Purpose |
@@ -47,4 +47,8 @@
   | weight_leather_hard | int |
   | weight_bone_dry | int |
   | weight_bisque | int |
+  | weight_glaze | int |
+  | weight_complete | int |
+  | date_created | datetime |
+  | date_complete | datetime |
   | note | string | Type of pattern/ glaze style  
