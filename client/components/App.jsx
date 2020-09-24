@@ -10,7 +10,7 @@ export default function App () {
   return (
     <>
       <Route path='/' component={Nav}/>
-      <Route path='/home' component={Home}/>
+      <Route exact path='/' component={Home}/>
       <Route path='/register' component={Register}/>
       <Route path='/signin' component={SignIn}/>
     </>
