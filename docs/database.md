@@ -1,6 +1,6 @@
 # Database
 
-![ERD Diagram](docs/ERD_diagram.png)
+![ERD_Diagram](/docs/ERD_diagram.png)
 
 ## DB - users
 
