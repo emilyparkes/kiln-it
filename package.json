@@ -38,6 +38,7 @@
     ]
   },
   "dependencies": {
+    "authenticare": "^0.4.7",
     "express": "^4.17.1",
     "knex": "^0.21.5",
     "pg": "^8.3.3",
