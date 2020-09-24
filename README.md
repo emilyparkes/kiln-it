@@ -29,10 +29,14 @@ The site should then be available on http://localhost:3000
 As an admin user:
 - [ ] I want to view a creation status log
 - [ ] I want to view a creation and all it's details
-- [ ] I want to add a new creation
-- [ ] I want to edit a creation
+- [ ] I want to view all my creations
 - [ ] I want to update the status of a creation
+- [ ] I want to edit a creation
+- [ ] I want to add a new creation
 - [ ] I want to add a note to a creation
+- [ ] I want to add a new clay type
+- [ ] I want to add a new creation shape
+- [ ] I want to add a new glaze
 
 
 As a customer user:
