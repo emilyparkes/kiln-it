@@ -42,8 +42,10 @@
   "dependencies": {
     "authenticare": "^0.4.7",
     "express": "^4.17.1",
-    "knex": "^0.21.5",
     "pg": "^8.3.3",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.3.5",
+    "sequelize-cli": "^6.2.0",
     "sqlite3": "^5.0.0"
   },
   "devDependencies": {
