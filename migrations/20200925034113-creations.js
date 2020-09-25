@@ -10,15 +10,38 @@ exports.up = async (queryInterface, Sequelize) => {
     clay_type: {
       type: Sequelize.INTEGER
     },
+    creation_type: {
+      type: Sequelize.INTEGER
+    },
+    status: {
+      type: Sequelize.INTEGER
+    },
+    glaze: {
+      type: Sequelize.INTEGER
+    },
+    weight_wet: {
+      type: Sequelize.INTEGER
+    },
+    weight_leather_hard: {
+      type: Sequelize.INTEGER
+    },
+    weight_bone_dry: {
+      type: Sequelize.INTEGER
+    },
+    weight_bis: {
+      type: Sequelize.INTEGER
+    },
     note: {
       type: Sequelize.STRING
     },
-    createdAt: {
+    created_at: {
       allowNull: false,
       type: Sequelize.DATE
     },
-    updatedAt: {
-      allowNull: false,
+    updated_at: {
+      type: Sequelize.DATE
+    },
+    completed_at: {
       type: Sequelize.DATE
     }
   })

@@ -1,5 +1,6 @@
 # Database
 *.sqlite3
+.sequelizerc
 
 # Bundle
 bundle.*
