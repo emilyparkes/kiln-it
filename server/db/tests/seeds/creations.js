@@ -2,8 +2,8 @@ exports.seed = knex => {
   return knex('creations').del()
     .then(() => {
       return knex('creations').insert([
-        { id: 1, clay_type: 1, creation_type: 2, status: 2, glaze: 4, weight_wet: 0, weight_leather_hard: 0, weight_bone_dry: 0, weight_bisque: 0, weight_complete: 0, date_created: '2020-06-15T13:45:30', date_complete: '2020-07-15T13:45:30', note: 'Glaze with criss-cross pattern' },
-        { id: 2, clay_type: 2, creation_type: 2, status: 1, glaze: 4, weight_wet: 0, weight_leather_hard: 0, weight_bone_dry: 0, weight_bisque: 0, weight_complete: 0, date_created: '2020-05-24T14:45:30', date_complete: '2020-06-24T14:45:30', note: 'Glaze with criss-cross pattern' },
+        { id: 2, clay_type: 1, creation_type: 2, status: 2, glaze: 4, weight_wet: 0, weight_leather_hard: 0, weight_bone_dry: 0, weight_bisque: 0, weight_complete: 0, date_created: '2020-06-15T13:45:30', date_complete: '2020-07-15T13:45:30', note: 'Glaze with criss-cross pattern' },
+        { id: 1, clay_type: 2, creation_type: 2, status: 1, glaze: 4, weight_wet: 0, weight_leather_hard: 0, weight_bone_dry: 0, weight_bisque: 0, weight_complete: 0, date_created: '2020-05-24T14:45:30', date_complete: '2020-06-24T14:45:30', note: 'Glaze with criss-cross pattern' },
         { id: 3, clay_type: 3, creation_type: 2, status: 3, glaze: 4, weight_wet: 0, weight_leather_hard: 0, weight_bone_dry: 0, weight_bisque: 0, weight_complete: 0, date_created: '2020-05-25T14:49:30', date_complete: '2020-06-25T14:49:30', note: 'Glaze in full colour' },
         { id: 4, clay_type: 1, creation_type: 2, status: 4, glaze: 4, weight_wet: 0, weight_leather_hard: 0, weight_bone_dry: 0, weight_bisque: 0, weight_complete: 0, date_created: '2020-05-28T16:23:30', date_complete: '2020-07-28T16:23:30', note: 'Glaze in full colour' },
         { id: 5, clay_type: 1, creation_type: 2, status: 5, glaze: 4, weight_wet: 0, weight_leather_hard: 0, weight_bone_dry: 0, weight_bisque: 0, weight_complete: 0, date_created: '2020-07-12T16:11:30', date_complete: '2020-08-15T13:45:30', note: 'Glaze top-half' },
