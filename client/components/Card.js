@@ -67,7 +67,21 @@ export const StyledContainer = styled.div`
   justify-content: left;
   margin-left: auto;
   margin-right: auto;
-  max-width: 1125px;
+  @media (min-width: 480px) {
+    max-width: 258px;
+  }
+  @media (min-width: 768px) {
+    max-width: 614px;
+  }
+  @media (min-width: 1024px) { 
+    max-width: 614px;
+}
+  @media (min-width: 1280px) { 
+    max-width: 850px;
+}
+  @media (min-width: 1600px) { 
+    max-width: 1125px;
+}
 `
 
 const StyledCard = styled.div`
