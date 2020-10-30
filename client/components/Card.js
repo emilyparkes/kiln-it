@@ -32,7 +32,7 @@ export const StyledRoot = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  align-content: center;
+  justify-content: center;
   @media (min-width: 480px) {
     max-width: 400px;
     margin-left: auto;
@@ -54,7 +54,7 @@ export const StyledRoot = styled.div`
     margin-right: auto;
   }
   @media (min-width: 1600px) { 
-    max-width: 70%;
+    max-width: 75%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -64,7 +64,10 @@ export const StyledContainer = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  align-content: left;
+  justify-content: left;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1125px;
 `
 
 const StyledCard = styled.div`
