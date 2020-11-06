@@ -6,8 +6,8 @@ on:
       - main
 
 jobs:      
-  build-lint-test:
-    name: build-lint-test
+  build:
+    name: Build 🔧 
     runs-on: ubuntu-latest
     steps:
       - name: Check out Git repository
@@ -17,7 +17,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12
-      - name: Install and build 🔧 
+      - name: Install dependencies
         run: npm install
       - name: Build bundle
         run: npm run build
