@@ -1,7 +1,7 @@
 # kiln it
 Keeping records of my clay creations. Including type of creation, weight, percent shrinkage the status of firing.
 
-<!-- [Currently deployed version](https://) -->
+[Currently deployed version](https://kiln-it.herokuapp.com/)
 
 
 ## Setup
