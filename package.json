@@ -5,9 +5,11 @@
   "main": "index.js",
   "scripts": {
     "dev": "run-p dev:client dev:server",
-    "dev:client": "npm run build -- --watch",
+    "dev:client": "npm run build:client -- --watch",
     "dev:server": "nodemon server",
-    "build": "webpack --config client/webpack.config.js",
+    "build": "run-p build:client build:server",
+    "build:client": "webpack --config client/webpack.config.js",
+    "build:server": "knex migrate:latest",
     "knex": "knex --knexfile server/db/knexfile.js",
     "db": "npm run db:migrate && npm run db:seed",
     "db:migrate": "npm run knex migrate:latest",
@@ -43,9 +45,19 @@
     "authenticare": "^0.4.7",
     "express": "^4.17.1",
     "knex": "^0.21.6",
-    "pg": "^8.3.3",
+    "pg": "^8.4.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0",
+    "sass": "^1.27.2",
+    "sass-loader": "^10.0.4",
+    "style-loader": "^1.2.1",
+    "styled-components": "^5.2.0",
+    "superagent": "^6.1.0",
     "sqlite3": "^5.0.0",
-    "styled-components": "^5.2.0"
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",
@@ -71,16 +83,6 @@
     "jest": "^26.4.2",
     "nodemon": "^2.0.4",
     "npm-run-all": "^4.1.5",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-router-dom": "^5.2.0",
-    "sass": "^1.26.10",
-    "sass-loader": "^10.0.2",
-    "style-loader": "^1.2.1",
-    "superagent": "^6.1.0",
-    "supertest": "^5.0.0",
-    "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0"
+    "supertest": "^5.0.0"
   }
 }
