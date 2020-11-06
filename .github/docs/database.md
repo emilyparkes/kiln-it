@@ -39,7 +39,7 @@
   | Column Name | Data Type | Purpose |
   | --- | --- | --- |
   | id | int |
-  | clay_type | int |
+  | clay | int |
   | creation_type | int |
   | status | int |
   | glaze | int |

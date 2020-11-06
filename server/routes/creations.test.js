@@ -9,11 +9,11 @@ jest.mock('../db/creations', () => ({
 }))
 
 const mockCreations = [
-  { id: 1, clay_type: 1, creation_type: 2, status: 2, glaze: 4, weight_wet: 0, weight_leather_hard: 0, weight_bone_dry: 0, weight_bisque: 0, weight_complete: 0, date_created: '2020-06-15T13:45:30', date_complete: '2020-07-15T13:45:30', note: 'Glaze with criss-cross pattern' },
-  { id: 2, clay_type: 2, creation_type: 2, status: 1, glaze: 4, weight_wet: 0, weight_leather_hard: 0, weight_bone_dry: 0, weight_bisque: 0, weight_complete: 0, date_created: '2020-05-24T14:45:30', date_complete: '2020-06-24T14:45:30', note: 'Glaze with criss-cross pattern' }
+  { id: 1, clay: 1, creation_type: 2, status: 2, glaze: 4, weight_wet: 0, weight_leather_hard: 0, weight_bone_dry: 0, weight_bisque: 0, weight_complete: 0, date_created: '2020-06-15T13:45:30', date_complete: '2020-07-15T13:45:30', note: 'Glaze with criss-cross pattern' },
+  { id: 2, clay: 2, creation_type: 2, status: 1, glaze: 4, weight_wet: 0, weight_leather_hard: 0, weight_bone_dry: 0, weight_bisque: 0, weight_complete: 0, date_created: '2020-05-24T14:45:30', date_complete: '2020-06-24T14:45:30', note: 'Glaze with criss-cross pattern' }
 ]
 
-const mockCreation = { id: 2, clay_type: 2, creation_type: 2, status: 1, glaze: 4, weight_wet: 0, weight_leather_hard: 0, weight_bone_dry: 0, weight_bisque: 0, weight_complete: 0, date_created: '2020-05-24T14:45:30', date_complete: '2020-06-24T14:45:30', note: 'Glaze with criss-cross pattern' }
+const mockCreation = { id: 2, clay: 2, creation_type: 2, status: 1, glaze: 4, weight_wet: 0, weight_leather_hard: 0, weight_bone_dry: 0, weight_bisque: 0, weight_complete: 0, date_created: '2020-05-24T14:45:30', date_complete: '2020-06-24T14:45:30', note: 'Glaze with criss-cross pattern' }
 
 describe('GET /api/v1/creations', () => {
   it('returns the correct number of creations', () => {
@@ -23,7 +23,7 @@ describe('GET /api/v1/creations', () => {
       .expect('Content-Type', /json/)
       .expect(200)
       .then(res => {
-        return expect(res.body.creations).toHaveLength(2)
+        return expect(res.body).toHaveLength(2)
       })
   })
 
@@ -36,7 +36,7 @@ describe('GET /api/v1/creations', () => {
         .expect('Content-Type', /json/)
         .expect(200)
         .then(res => {
-          expect(res.body.clay_type).toBe(2)
+          expect(res.body.clay).toBe(2)
           expect(res.body.creation_type).toBe(2)
           expect(res.body.status).toBe(1)
           expect(res.body.glaze).toBe(4)
