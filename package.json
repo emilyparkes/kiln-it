@@ -4,6 +4,7 @@
   "description": "\"Keep records of clay percent shrinkage, weight and dates of firing for my clay creations\"",
   "main": "index.js",
   "scripts": {
+    "start": "node server",
     "dev": "run-p dev:client dev:server",
     "dev:client": "npm run build:client -- --watch",
     "dev:server": "nodemon server",
@@ -16,7 +17,6 @@
     "db:seed": "npm run knex seed:run",
     "db:reset": "npm run knex migrate:rollback && db",
     "server": "node server",
-    "start": "run-s build server",
     "test:watch": "npm test --watchAll",
     "test": "jest --verbose",
     "lint": "eslint client server"
