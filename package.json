@@ -9,7 +9,7 @@
     "dev:server": "nodemon server",
     "build": "run-p build:client build:server",
     "build:client": "webpack --config client/webpack.config.js",
-    "build:server": "knex migrate:latest",
+    "build:server": "npm run knex migrate:latest",
     "knex": "knex --knexfile server/db/knexfile.js",
     "db": "npm run db:migrate && npm run db:seed",
     "db:migrate": "npm run knex migrate:latest",
