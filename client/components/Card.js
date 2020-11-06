@@ -1,32 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-// @media (min-width: 480px) { mobile
-//   max-width: 80%;
-//   margin-left: auto;
-//   margin-right: auto;
-// }
-
-// @media (min-width: 768px) { tablet
-//   max-width: 80%;
-//   margin-left: auto;
-//   margin-right: auto;
-// }
-// @media (min-width: 1024px) { desktop
-//   max-width: 80%;
-//   margin-left: auto;
-//   margin-right: auto;
-// }
-// @media (min-width: 1280px) { desktop-large
-//   max-width: 80%;
-//   margin-left: auto;
-//   margin-right: auto;
-// }
-// @media (min-width: 1600px) { desktop-xlarge
-//   max-width: 80%;
-//   margin-left: auto;
-//   margin-right: auto;
-// }
+import { Header, Title, Date } from './utils'
 
 export const StyledRoot = styled.div`
   display: flex;
@@ -57,7 +32,7 @@ export const StyledRoot = styled.div`
     max-width: 75%;
     margin-left: auto;
     margin-right: auto;
-}
+  }
 `
 
 export const StyledContainer = styled.div`
@@ -75,13 +50,13 @@ export const StyledContainer = styled.div`
   }
   @media (min-width: 1024px) { 
     max-width: 614px;
-}
+  }
   @media (min-width: 1280px) { 
     max-width: 850px;
-}
+  }
   @media (min-width: 1600px) { 
     max-width: 1125px;
-}
+  }
 `
 
 const StyledCard = styled.div`
@@ -97,33 +72,6 @@ const Image = styled.img`
   width: 100%;
   height: 50%;
   object-fit: cover;
-`
-
-const Header = styled.div`
-display: flex;
-padding: 8px;
-align-items: center;
-`
-
-const Title = styled.h2`
-  color: #fff;
-  font-weight: 300;
-  margin: 0px;
-  padding: 12px;
-  @media (min-width: 320px) {
-    font-size: 1rem;
-  }
-`
-const Date = styled.div`
-  color: #ccc;
-  font-weight: 300;
-  padding: 16px 0px 13px 0px;
-  @media (min-width: 320px) {
-    font-size: 0.8rem;
-  }
-  transform: rotate(0deg);
-  transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  margin-left: auto;
 `
 
 const Description = styled.p`
