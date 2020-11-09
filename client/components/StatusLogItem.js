@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { Date } from './utils'
+import { Date } from './typography'
 
 export const StyledContainer = styled.div`
   display: flex;
