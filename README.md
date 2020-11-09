@@ -39,7 +39,7 @@ As an admin user:
 - [ ] I want to add a new glaze
 
 
-As a customer user:
+As a friend user:
 - [ ] I want to be able to ...
 
 
@@ -48,9 +48,9 @@ As a customer user:
   | --- | --- | --- |
   | Sign In | * | View for user to enter their login credentials |
   | Register | * | View for user to sign up |
-  | Creations | * | View a list of all creations to date |
-  | Home | Admin | View list of clay creations and their current status |
-  | Creation Details | Admin | View an existing creation and all it's recorded details |
+  | Home | * | View list of clay creations |
+  | Creation Details | * | View an existing creation, and when Admin all it's recorded details |
+  | Creation Log | Admin | View list of clay creations and their current status |
   | Add/Edit Creation | Admin | Create new or edit an existing entry |
 
   
