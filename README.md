@@ -1,3 +1,5 @@
+![Lint and Test](https://github.com/emilyparkes/kiln-it/workflows/Lint%20and%20Test/badge.svg)
+
 # kiln it
 Keeping records of my clay creations. Including type of creation, weight, percent shrinkage the status of firing.
 
