@@ -1,48 +1,66 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from "react"
+import { Link } from "react-router-dom"
 
-export default function Nav (props) {
+import { LinkText, Navbar } from "./Navbar"
+
+export default function Nav(props) {
   let navLinks = null
 
   switch (props.location.pathname) {
-    case '/':
+    case "/":
       navLinks = (
         <>
-          <Link to='/signin'>Sign in</Link>
-          <Link to='/register'>Register</Link>
+          <LinkText>
+            <Link to="/signin">Sign in</Link>
+          </LinkText>
+          <LinkText>
+            <Link to="/register">Register</Link>
+          </LinkText>
         </>
       )
       break
-    case '/signin':
+    case "/signin":
       navLinks = (
         <>
-          <Link to='/register'>Register</Link>
-          <Link to='/'>Home</Link>
+          <LinkText>
+            <Link to="/register">Register</Link>
+          </LinkText>
+          <LinkText>
+            <Link to="/">Home</Link>
+          </LinkText>
         </>
       )
       break
-    case '/register':
+    case "/register":
       navLinks = (
         <>
-          <Link to='/signin'>Sign in</Link>
-          <Link to='/'>Home</Link>
+          <LinkText>
+            <Link to="/signin">Sign in</Link>
+          </LinkText>
+          <LinkText>
+            <Link to="/">Home</Link>
+          </LinkText>
         </>
       )
       break
     default:
       navLinks = (
         <>
-          <Link to='/signin'>Sign in</Link>
-          <Link to='/register'>Register</Link>
-          <Link to='/'>Home</Link>
+          <LinkText>
+            <Link to="/signin">Sign in</Link>
+          </LinkText>
+          <LinkText>
+            <Link to="/register">Register</Link>
+          </LinkText>
+          <LinkText>
+            <Link to="/">Home</Link>
+          </LinkText>
         </>
       )
   }
   return (
     <>
-      <div className='nav'>
-        <div>{navLinks}</div>
-      </div>
+      <Navbar navLinks={navLinks} />
     </>
   )
 }
