@@ -1,7 +1,7 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from "react"
+import styled from "styled-components"
 
-import { Date } from './typography'
+import { Date } from "./typography"
 
 export const StyledContainer = styled.div`
   display: flex;
@@ -28,7 +28,7 @@ export const StyledContainer = styled.div`
     margin-left: auto;
     margin-right: auto;
   }
-  @media (min-width: 1600px) { 
+  @media (min-width: 1600px) {
     max-width: 75%;
     margin-left: auto;
     margin-right: auto;
@@ -38,9 +38,10 @@ export const StyledContainer = styled.div`
 const StyledLog = styled.div`
   max-width: 80%;
   display: flex;
-  background-color: #744F44;
+  background-color: #744f44;
   overflow: hidden;
-  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
   border-radius: 4px;
   margin: 2px auto 2px auto;
 `
@@ -53,7 +54,9 @@ const Text = styled.div`
   padding: 4px;
   box-sizing: border-box;
   border-radius: 4px;
-  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   @media (min-width: 320px) {
     font-size: 1rem;
   }
@@ -62,27 +65,27 @@ const Text = styled.div`
   }
 `
 
-const handleColorType = status => {
+const handleColorType = (status) => {
   console.log(status)
   switch (status) {
-    case 'Wet':
-      return '#744F44'
-    case 'Leather Hard':
-      return '#C09F93'
-    case 'Bone Dry':
-      return '#03a9f3'
-    case 'Bisque Firing':
-      return '#03a9f3'
-    case 'Bisque Fired':
-      return '#744F44'
-    case 'Glazed':
-      return '#744F44'
-    case 'Glaze Firing':
-      return '#03a9f3'
-    case 'Complete':
-      return '#C09F93'
+    case "Wet":
+      return "#744F44"
+    case "Leather Hard":
+      return "#C09F93"
+    case "Bone Dry":
+      return "#03a9f3"
+    case "Bisque Firing":
+      return "#03a9f3"
+    case "Bisque Fired":
+      return "#744F44"
+    case "Glazed":
+      return "#744F44"
+    case "Glaze Firing":
+      return "#03a9f3"
+    case "Complete":
+      return "#C09F93"
     default:
-      return '#fff'
+      return "#fff"
   }
 }
 
@@ -98,15 +101,15 @@ const Status = styled.div`
   padding: 6px 16px;
   box-sizing: border-box;
   border-radius: 4px;
-  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   @media (min-width: 320px) {
     font-size: 1rem;
   }
 `
 
-export const StatusLogItem = ({
-  creation
-}) => (
+export const StatusLogItem = ({ creation }) => (
   <StyledLog key={creation.id}>
     {/* Img */}
     <Text>{creation.shape}</Text>

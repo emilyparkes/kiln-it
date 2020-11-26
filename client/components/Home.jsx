@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 
-import { getCreations } from '../api/api'
-import { Card, StyledContainer, StyledRoot } from './Card'
+import { getCreations } from "../api/api"
+import { Card, StyledContainer, StyledRoot } from "./Card"
 
-export default function Home () {
+export default function Home() {
   const [creations, setCreations] = useState(null)
 
   useEffect(() => {
     getCreations()
-      .then(resp => {
+      .then((resp) => {
         setCreations(resp)
         return null
       })
       .catch((error) => {
-        console.log('error: ', error.message)
+        console.log("error: ", error.message)
       })
   }, [])
 
@@ -23,24 +23,30 @@ export default function Home () {
       {/* <h1>Home</h1>
       <p>See a list of clay projects</p> */}
 
-      {creations
-        ? <StyledRoot>
+      {creations ? (
+        <StyledRoot>
           <StyledContainer>
-            {creations.map(creation => {
-              const shape = creation.shape.toLowerCase().replace(' ', '-')
-              return <Link to={`/creations/${shape}/${creation.creationId}`}
-                key={creation.creationId}>
-                <Card
-                  img={'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwildtussah.com%2Fwp-content%2Fuploads%2F2016%2F11%2FCeramic-plate-speckle-glaze-side-view-web.jpg&f=1&nofb=1'}
-                  title={creation.shape}
-                  date={creation.date_created}
-                  description={creation.glaze}
-                />
-              </Link>
+            {creations.map((creation) => {
+              const shape = creation.shape.toLowerCase().replace(" ", "-")
+              return (
+                <Link
+                  to={`/creations/${shape}/${creation.creationId}`}
+                  key={creation.creationId}
+                >
+                  <Card
+                    img={
+                      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwildtussah.com%2Fwp-content%2Fuploads%2F2016%2F11%2FCeramic-plate-speckle-glaze-side-view-web.jpg&f=1&nofb=1"
+                    }
+                    title={creation.shape}
+                    date={creation.date_created}
+                    description={creation.glaze}
+                  />
+                </Link>
+              )
             })}
           </StyledContainer>
         </StyledRoot>
-        : null}
+      ) : null}
     </>
   )
 }
