@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server",
-    "lint": "eslint client server",
+    "lint": "eslint --ext .js,.jsx client server",
     "dev": "npm run dev:client dev:server",
     "dev:client": "npm run build -- --watch",
     "dev:server": "nodemon server",
