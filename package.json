@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server",
-    "lint": "eslint --ext .js,.jsx client server",
+    "lint": "eslint client server",
     "dev": "npm run dev:client dev:server",
     "dev:client": "npm run build -- --watch",
     "dev:server": "nodemon server",
@@ -18,7 +18,6 @@
     "db:migrate": "npm run knex migrate:latest",
     "db:rollback": "npm run knex migrate:rollback && db",
     "test": "npm jest --verbose --watchAll"
-    
   },
   "repository": {
     "type": "git",
