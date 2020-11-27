@@ -19,9 +19,10 @@
     "server": "node server",
     "test:watch": "npm test --watchAll",
     "test": "jest --verbose",
+    "lint": "run-s lint:frontend lint:backend",
     "lint:frontend": "eslint --ext .js,.jsx ./client",
-    "lint:backend": "eslint ./server",
-    "lint": "run-s lint:frontend lint:backend"
+    "lint:backend": "eslint ./server"
+    
   },
   "repository": {
     "type": "git",
