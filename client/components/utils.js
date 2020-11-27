@@ -1,9 +1,9 @@
-import styled from 'styled-components'
+import styled from "styled-components"
 
 export const Header = styled.div`
-display: flex;
-padding: 8px;
-align-items: center;
+  display: flex;
+  padding: 8px;
+  align-items: center;
 `
 
 export const Title = styled.h2`
