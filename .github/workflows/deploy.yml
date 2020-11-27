@@ -6,8 +6,8 @@ on:
       - main
 
 jobs:
-  build:
-    name: Build 🔧
+  buildandlint:
+    name:  Build 🔧 and Lint 🧹
     runs-on: ubuntu-latest
     steps:
       - name: Check out Git repository
@@ -20,26 +20,17 @@ jobs:
         run: npm install
       - name: Build bundle
         run: npm run build
-  lint:
-    name: Lint 🧹
-    runs-on: ubuntu-latest
-    needs: [build]
-    steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v2
       - name: Run linter
         run: npm run lint
-      - name: Run tests
-        run: npm run test
   test:
     name: Test 🧪
     runs-on: ubuntu-latest
-    needs: [build, lint]
+    needs: [buildandlint]
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v2
       - name: Run tests
-        run: npm run test    
+        run: npm run test
   deploy:
     name: Deploy 🚀
     runs-on: ubuntu-latest
