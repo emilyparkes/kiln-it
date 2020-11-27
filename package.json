@@ -5,23 +5,19 @@
   "main": "index.js",
   "scripts": {
     "start": "node server",
-    "dev": "run-p dev:client dev:server",
-    "dev:client": "npm run build:client -- --watch",
-    "dev:server": "nodemon server",
-    "build": "run-p build:client build:server",
-    "build:client": "webpack --config client/webpack.config.js",
-    "build:server": "npm run knex migrate:latest",
+    "lint:frontend": "eslint --ext .js,.jsx ./client",
+    "lint:backend": "eslint ./server",
+    "lint": "run-s lint:frontend lint:backend",
+    "build": "client",
+    "client": "webpack --config client/webpack.config.js",
+    "server": "node server",
+    "dev": "run-p client server",
     "knex": "knex --knexfile server/db/knexfile.js",
     "db": "npm run db:migrate && npm run db:seed",
-    "db:migrate": "npm run knex migrate:latest",
     "db:seed": "npm run knex seed:run",
-    "db:reset": "npm run knex migrate:rollback && db",
-    "server": "node server",
-    "test:watch": "npm test --watchAll",
-    "test": "jest --verbose",
-    "lint": "run-s lint:frontend lint:backend",
-    "lint:frontend": "eslint --ext .js,.jsx ./client",
-    "lint:backend": "eslint ./server"
+    "db:migrate": "npm run knex migrate:latest",
+    "db:rollback": "npm run knex migrate:rollback && db",
+    "test": "npm jest --verbose --watchAll"
     
   },
   "repository": {
