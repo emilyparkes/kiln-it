@@ -8,7 +8,7 @@
     "lint:frontend": "eslint --ext .js,.jsx ./client",
     "lint:backend": "eslint ./server",
     "lint": "run-s lint:frontend lint:backend",
-    "build": "client",
+    "build": "npm run client -- --watch",
     "client": "webpack --config client/webpack.config.js",
     "server": "node server",
     "dev": "run-p client server",
