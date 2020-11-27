@@ -7,6 +7,12 @@ jobs:
     name: Build 🔧
     runs-on: ubuntu-latest
     steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
       - name: Install dependencies
         run: npm install
       - name: Build bundle
@@ -16,6 +22,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build]
     steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
       - name: Run linter
         run: npm run lint
       - name: Run tests
@@ -25,5 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build, lint]
     steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
       - name: Run tests
         run: npm run test
