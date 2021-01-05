@@ -6,30 +6,41 @@ jobs:
   buildandlint:
     name:  Build 🔧 and Lint 🧹
     runs-on: ubuntu-latest
+
+     strategy:
+      matrix:
+        node-version: [12.x]
+
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v2
-      - name: Set up Node.js
+      - name: Set up Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
-          node-version: 12
+           node-version: ${{ matrix.node-version }}
       - name: Install dependencies
         run: npm install
       - name: Build bundle
         run: npm run build
       - name: Run linter
         run: npm run lint
+
   test:
     name: Test 🧪
     runs-on: ubuntu-latest
     needs: [buildandlint]
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v2
       - name: Set up Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: 12
+           node-version: ${{ matrix.node-version }}
       - name: Install dependencies
         run: npm install
       - name: Run tests
