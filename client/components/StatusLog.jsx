@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState } from 'react'
 
-import { getCreations } from "../api/api"
-import { StyledContainer, StatusLogItem } from "./StatusLogItem.js"
+import { getCreations } from '../api/api'
+import { StyledContainer, StatusLogItem } from './StatusLogItem.js'
 
-export default function StatusLog() {
+export default function StatusLog () {
   const [creations, setCreations] = useState(null)
 
   useEffect(() => {
@@ -13,7 +13,7 @@ export default function StatusLog() {
         return null
       })
       .catch((error) => {
-        console.log("error: ", error.message)
+        console.log('error: ', error.message)
       })
   }, [])
 

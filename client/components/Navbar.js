@@ -1,5 +1,5 @@
-import React from "react"
-import styled from "styled-components"
+import React from 'react'
+import styled from 'styled-components'
 
 const Toolbar = styled.div``
 
@@ -23,7 +23,7 @@ export const LinkText = styled.div`
 
 export const Navbar = ({ navLinks }) => (
   <Toolbar>
-    <Logo>{"hi"}</Logo>
+    <Logo>{'hi'}</Logo>
     <LinkTexts>{navLinks}</LinkTexts>
   </Toolbar>
 )

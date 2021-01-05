@@ -1,8 +1,8 @@
 exports.seed = (knex) => {
-  return knex("creations")
+  return knex('creations')
     .del()
     .then(() => {
-      return knex("creations").insert([
+      return knex('creations').insert([
         {
           id: 1,
           clay: 1,
@@ -15,9 +15,9 @@ exports.seed = (knex) => {
           weight_bisque: 0,
           weight_glaze: 0,
           weight_complete: 0,
-          date_created: "2020-06-15T13:45:30",
-          date_complete: "2020-07-15T13:45:30",
-          note: "Glaze with criss-cross pattern",
+          date_created: '2020-06-15T13:45:30',
+          date_complete: '2020-07-15T13:45:30',
+          note: 'Glaze with criss-cross pattern'
         },
         {
           id: 2,
@@ -31,9 +31,9 @@ exports.seed = (knex) => {
           weight_bisque: 0,
           weight_glaze: 0,
           weight_complete: 0,
-          date_created: "2020-05-24T14:45:30",
-          date_complete: "2020-06-24T14:45:30",
-          note: "Glaze with criss-cross pattern",
+          date_created: '2020-05-24T14:45:30',
+          date_complete: '2020-06-24T14:45:30',
+          note: 'Glaze with criss-cross pattern'
         },
         {
           id: 3,
@@ -47,9 +47,9 @@ exports.seed = (knex) => {
           weight_bisque: 0,
           weight_glaze: 0,
           weight_complete: 0,
-          date_created: "2020-05-25T14:49:30",
-          date_complete: "2020-06-25T14:49:30",
-          note: "Glaze in full colour",
+          date_created: '2020-05-25T14:49:30',
+          date_complete: '2020-06-25T14:49:30',
+          note: 'Glaze in full colour'
         },
         {
           id: 4,
@@ -63,9 +63,9 @@ exports.seed = (knex) => {
           weight_bisque: 0,
           weight_glaze: 0,
           weight_complete: 0,
-          date_created: "2020-05-28T16:23:30",
-          date_complete: "2020-07-28T16:23:30",
-          note: "Glaze in full colour",
+          date_created: '2020-05-28T16:23:30',
+          date_complete: '2020-07-28T16:23:30',
+          note: 'Glaze in full colour'
         },
         {
           id: 5,
@@ -79,9 +79,9 @@ exports.seed = (knex) => {
           weight_bisque: 0,
           weight_glaze: 0,
           weight_complete: 0,
-          date_created: "2020-07-12T16:11:30",
-          date_complete: "2020-08-15T13:45:30",
-          note: "Glaze top-half",
+          date_created: '2020-07-12T16:11:30',
+          date_complete: '2020-08-15T13:45:30',
+          note: 'Glaze top-half'
         },
         {
           id: 6,
@@ -95,9 +95,9 @@ exports.seed = (knex) => {
           weight_bisque: 0,
           weight_glaze: 0,
           weight_complete: 0,
-          date_created: "2020-07-20T18:56:30",
-          date_complete: "2020-08-20T18:56:30",
-          note: "Glaze top-half and underglaze with black matte details",
+          date_created: '2020-07-20T18:56:30',
+          date_complete: '2020-08-20T18:56:30',
+          note: 'Glaze top-half and underglaze with black matte details'
         },
         {
           id: 7,
@@ -111,9 +111,9 @@ exports.seed = (knex) => {
           weight_bisque: 0,
           weight_glaze: 0,
           weight_complete: 0,
-          date_created: "2020-07-21T12:34:30",
-          date_complete: "2020-08-21T12:34:30",
-          note: "",
+          date_created: '2020-07-21T12:34:30',
+          date_complete: '2020-08-21T12:34:30',
+          note: ''
         },
         {
           id: 8,
@@ -127,9 +127,9 @@ exports.seed = (knex) => {
           weight_bisque: 0,
           weight_glaze: 0,
           weight_complete: 0,
-          date_created: "2020-08-03T14:12:30",
-          date_complete: "2020-09-03T14:12:30",
-          note: "",
+          date_created: '2020-08-03T14:12:30',
+          date_complete: '2020-09-03T14:12:30',
+          note: ''
         },
         {
           id: 9,
@@ -143,10 +143,10 @@ exports.seed = (knex) => {
           weight_bisque: 0,
           weight_glaze: 0,
           weight_complete: 0,
-          date_created: "2020-08-10T17:22:30",
-          date_complete: "2020-09-10T17:22:30",
-          note: "",
-        },
+          date_created: '2020-08-10T17:22:30',
+          date_complete: '2020-09-10T17:22:30',
+          note: ''
+        }
       ])
     })
 }

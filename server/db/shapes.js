@@ -1,14 +1,14 @@
-const { connection } = require("./connection")
+const { connection } = require('./connection')
 
 module.exports = {
   getShapes,
-  getShapeById,
+  getShapeById
 }
 
-function getShapes(db = connection) {
-  return db("shapes")
+function getShapes (db = connection) {
+  return db('shapes')
 }
 
-function getShapeById(id, db = connection) {
-  return db("shapes").where("id", id).select().first()
+function getShapeById (id, db = connection) {
+  return db('shapes').where('id', id).select().first()
 }

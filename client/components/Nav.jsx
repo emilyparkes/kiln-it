@@ -1,44 +1,44 @@
-import React from "react"
-import { Link } from "react-router-dom"
+import React from 'react'
+import { Link } from 'react-router-dom'
 
-import { LinkText, Navbar } from "./Navbar"
+import { LinkText, Navbar } from './Navbar'
 
-export default function Nav(props) {
+export default function Nav (props) {
   let navLinks = null
 
   switch (props.location.pathname) {
-    case "/":
+    case '/':
       navLinks = (
         <>
           <LinkText>
-            <Link to="/signin">Sign in</Link>
+            <Link to='/signin'>Sign in</Link>
           </LinkText>
           <LinkText>
-            <Link to="/register">Register</Link>
+            <Link to='/register'>Register</Link>
           </LinkText>
         </>
       )
       break
-    case "/signin":
+    case '/signin':
       navLinks = (
         <>
           <LinkText>
-            <Link to="/register">Register</Link>
+            <Link to='/register'>Register</Link>
           </LinkText>
           <LinkText>
-            <Link to="/">Home</Link>
+            <Link to='/'>Home</Link>
           </LinkText>
         </>
       )
       break
-    case "/register":
+    case '/register':
       navLinks = (
         <>
           <LinkText>
-            <Link to="/signin">Sign in</Link>
+            <Link to='/signin'>Sign in</Link>
           </LinkText>
           <LinkText>
-            <Link to="/">Home</Link>
+            <Link to='/'>Home</Link>
           </LinkText>
         </>
       )
@@ -47,13 +47,13 @@ export default function Nav(props) {
       navLinks = (
         <>
           <LinkText>
-            <Link to="/signin">Sign in</Link>
+            <Link to='/signin'>Sign in</Link>
           </LinkText>
           <LinkText>
-            <Link to="/register">Register</Link>
+            <Link to='/register'>Register</Link>
           </LinkText>
           <LinkText>
-            <Link to="/">Home</Link>
+            <Link to='/'>Home</Link>
           </LinkText>
         </>
       )

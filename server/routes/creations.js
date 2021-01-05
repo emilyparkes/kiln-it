@@ -1,10 +1,10 @@
-const express = require("express")
+const express = require('express')
 
-const db = require("../db/creations")
+const db = require('../db/creations')
 
 const router = express.Router()
 
-router.get("/", (req, res) => {
+router.get('/', (req, res) => {
   db.getCreations()
     .then((creations) => res.json(creations))
     .catch((err) => {
@@ -13,12 +13,12 @@ router.get("/", (req, res) => {
     })
 })
 
-router.get("/:id", (req, res) => {
+router.get('/:id', (req, res) => {
   db.getCreationById(Number(req.params.id))
     .then((creation) => {
       if (!creation) {
         return res.status(404).json({
-          error: "creation id not found",
+          error: 'creation id not found'
         })
       }
       res.json(creation)

@@ -1,7 +1,7 @@
-import React from "react"
-import styled from "styled-components"
+import React from 'react'
+import styled from 'styled-components'
 
-import { Date } from "./typography"
+import { Date } from './typography'
 
 export const StyledContainer = styled.div`
   display: flex;
@@ -68,24 +68,24 @@ const Text = styled.div`
 const handleColorType = (status) => {
   console.log(status)
   switch (status) {
-    case "Wet":
-      return "#744F44"
-    case "Leather Hard":
-      return "#C09F93"
-    case "Bone Dry":
-      return "#03a9f3"
-    case "Bisque Firing":
-      return "#03a9f3"
-    case "Bisque Fired":
-      return "#744F44"
-    case "Glazed":
-      return "#744F44"
-    case "Glaze Firing":
-      return "#03a9f3"
-    case "Complete":
-      return "#C09F93"
+    case 'Wet':
+      return '#744F44'
+    case 'Leather Hard':
+      return '#C09F93'
+    case 'Bone Dry':
+      return '#03a9f3'
+    case 'Bisque Firing':
+      return '#03a9f3'
+    case 'Bisque Fired':
+      return '#744F44'
+    case 'Glazed':
+      return '#744F44'
+    case 'Glaze Firing':
+      return '#03a9f3'
+    case 'Complete':
+      return '#C09F93'
     default:
-      return "#fff"
+      return '#fff'
   }
 }
 

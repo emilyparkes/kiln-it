@@ -1,7 +1,7 @@
-import React from "react"
-import styled from "styled-components"
+import React from 'react'
+import styled from 'styled-components'
 
-import { Header, Title, Date } from "./typography"
+import { Header, Title, Date } from './typography'
 
 export const StyledRoot = styled.div`
   display: flex;
