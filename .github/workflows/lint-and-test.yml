@@ -5,9 +5,9 @@ on: [pull_request, push]
 jobs:
   buildandlint:
     name:  Build 🔧 and Lint 🧹
-    runs-on: ubuntu-latest
+    runs-on: [ubuntu-latest]
 
-     strategy:
+    strategy:
       matrix:
         node-version: [12.x]
 
