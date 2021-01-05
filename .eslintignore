@@ -1,2 +1,3 @@
-public/bundle.j*
+**/public/bundle.j*
 .github
+node_modules
