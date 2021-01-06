@@ -1,5 +1,7 @@
 ![Node.js Lint and Test](https://github.com/emilyparkes/kiln-it/workflows/Node.js%20Lint%20and%20Test/badge.svg)
 
+![Deploy](https://github.com/emilyparkes/kiln-it/workflows/Deploy/badge.svg?event=deployment_status)
+
 # kiln it
 Keeping records of my clay creations. Including type of creation, weight, percent shrinkage the status of firing.
 
@@ -29,9 +31,9 @@ The site should then be available on http://localhost:3000
 ### MVP
 
 As an admin user:
-- [ ] I want to view a creation status log
+- [x] I want to view a creation status log
 - [ ] I want to view a creation and all it's details
-- [ ] I want to view all my creations
+- [x] I want to view all my creations
 - [ ] I want to update the status of a creation
 - [ ] I want to edit a creation
 - [ ] I want to add a new creation
@@ -41,7 +43,7 @@ As an admin user:
 - [ ] I want to add a new glaze
 
 
-As a friend user:
+As a friendly user:
 - [ ] I want to be able to ...
 
 
