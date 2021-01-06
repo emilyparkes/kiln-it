@@ -1,12 +1,9 @@
-name: Node.js CI
-
-# Run this workflow every time a new commit pushed to your repository
+name: Node.js Lint and Test
 on: [pull_request, push]
-  
 
 jobs:
-  Build:
-    name: Build
+  BuildandLint:
+    name: Build 🔧 and Lint 🧹
     runs-on: [ubuntu-latest]
 
     strategy:
@@ -27,3 +24,24 @@ jobs:
       - run: npm run test
         env:
           CI: true
+
+  Test:
+    name: Test 🧪	
+    runs-on: ubuntu-latest	
+    needs: [BuildandLint]	
+
+    strategy:	
+      matrix:	
+        node-version: [12.x]	
+
+    steps:	
+      - name: Check out Git repository	
+        uses: actions/checkout@v2	
+      - name: Set up Node.js	
+        uses: actions/setup-node@v1	
+        with:	
+           node-version: ${{ matrix.node-version }}	
+      - name: Install dependencies	
+        run: npm install	
+      - name: Run tests	
+        run: npm run test
