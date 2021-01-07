@@ -25,7 +25,10 @@ function getCreations (db = connection) {
       'weight_complete',
       'date_created',
       'date_complete',
-      'note'
+      'description',
+      'makers_note',
+      'name',
+      'image'
     )
 }
 

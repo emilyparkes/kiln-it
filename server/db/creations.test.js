@@ -26,7 +26,7 @@ test('getCreationById returns the correct creation details', () => {
     expect(creation.glaze).toBe(2)
     expect(creation.date_created).toBe('2020-05-24T14:45:30')
     expect(creation.date_complete).toBe('2020-06-24T14:45:30')
-    expect(creation.note).toBe('Glaze with criss-cross pattern')
+    expect(creation.makers_note).toBe('Glaze with criss-cross pattern')
     return null
   })
 })

@@ -17,7 +17,10 @@ exports.seed = (knex) => {
           weight_complete: 0,
           date_created: '2020-06-15T13:45:30',
           date_complete: '2020-07-15T13:45:30',
-          note: 'Glaze with criss-cross pattern'
+          description: 'Creations by emily is great',
+          makers_note: 'Glaze with criss-cross pattern',
+          name: '',
+          image: ''
         },
         {
           id: 2,
@@ -33,7 +36,10 @@ exports.seed = (knex) => {
           weight_complete: 0,
           date_created: '2020-05-24T14:45:30',
           date_complete: '2020-06-24T14:45:30',
-          note: 'Glaze with criss-cross pattern'
+          description: '',
+          makers_note: 'Glaze with criss-cross pattern',
+          name: '',
+          image: ''
         },
         {
           id: 3,
@@ -49,7 +55,10 @@ exports.seed = (knex) => {
           weight_complete: 0,
           date_created: '2020-05-25T14:49:30',
           date_complete: '2020-06-25T14:49:30',
-          note: 'Glaze in full colour'
+          description: '',
+          makers_note: 'Glaze in full colour',
+          name: '',
+          image: '/images/1.png'
         },
         {
           id: 4,
@@ -65,7 +74,10 @@ exports.seed = (knex) => {
           weight_complete: 0,
           date_created: '2020-05-28T16:23:30',
           date_complete: '2020-07-28T16:23:30',
-          note: 'Glaze in full colour'
+          description: '',
+          makers_note: 'Glaze in full colour',
+          name: '',
+          image: '/images/2.png'
         },
         {
           id: 5,
@@ -81,7 +93,10 @@ exports.seed = (knex) => {
           weight_complete: 0,
           date_created: '2020-07-12T16:11:30',
           date_complete: '2020-08-15T13:45:30',
-          note: 'Glaze top-half'
+          description: '',
+          makers_note: 'Glaze top-half',
+          name: '',
+          image: ''
         },
         {
           id: 6,
@@ -97,7 +112,9 @@ exports.seed = (knex) => {
           weight_complete: 0,
           date_created: '2020-07-20T18:56:30',
           date_complete: '2020-08-20T18:56:30',
-          note: 'Glaze top-half and underglaze with black matte details'
+          makers_note: 'Glaze top-half and underglaze with black matte details',
+          name: '',
+          image: ''
         },
         {
           id: 7,
@@ -113,7 +130,10 @@ exports.seed = (knex) => {
           weight_complete: 0,
           date_created: '2020-07-21T12:34:30',
           date_complete: '2020-08-21T12:34:30',
-          note: ''
+          description: '',
+          makers_note: '',
+          name: '',
+          image: ''
         },
         {
           id: 8,
@@ -129,7 +149,10 @@ exports.seed = (knex) => {
           weight_complete: 0,
           date_created: '2020-08-03T14:12:30',
           date_complete: '2020-09-03T14:12:30',
-          note: ''
+          description: '',
+          makers_note: '',
+          name: '',
+          image: ''
         },
         {
           id: 9,
@@ -145,7 +168,10 @@ exports.seed = (knex) => {
           weight_complete: 0,
           date_created: '2020-08-10T17:22:30',
           date_complete: '2020-09-10T17:22:30',
-          note: ''
+          description: '',
+          makers_note: '',
+          name: '',
+          image: ''
         }
       ])
     })

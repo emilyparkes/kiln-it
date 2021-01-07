@@ -16,7 +16,7 @@
     "db": "npm run db:migrate && npm run db:seed",
     "db:seed": "npm run knex seed:run",
     "db:migrate": "npm run knex migrate:latest",
-    "db:rollback": "npm run knex migrate:rollback && db",
+    "db:rollback": "npm run knex migrate:rollback && npm run db",
     "test": "jest --verbose",
     "test:watch": "jest --watchAll --verbose",
     "test:client": "jest /client --watchAll --verbose",

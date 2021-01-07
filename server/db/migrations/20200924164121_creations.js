@@ -13,7 +13,10 @@ exports.up = (knex) => {
     table.integer('weight_complete').defaultTo(0)
     table.dateTime('date_created')
     table.dateTime('date_complete')
-    table.string('note')
+    table.text('description')
+    table.text('makers_note')
+    table.string('name')
+    table.string('image')
   })
 }
 
