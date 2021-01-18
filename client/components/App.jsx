@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
 
-import Nav from './Nav.jsx'
+import Nav from './Nav'
 import Home from './Home'
 import Creation from './Creation'
 import Register from './Register'

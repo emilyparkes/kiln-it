@@ -7,7 +7,7 @@
     "start": "node server",
     "lint": "eslint --ext .js,.jsx client server",
     "dev": "npm run dev:client && npm run dev:server",
-    "dev:client": "npm run client --watch",
+    "dev:client": "webpack --config client/webpack.config.js --watch",
     "dev:server": "nodemon server",
     "build": "npm run client && npm run db:migrate",
     "client": "webpack --config client/webpack.config.js",
