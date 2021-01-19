@@ -10,16 +10,16 @@ const StyledBurger = styled.div`
   left: 20px;
   z-index: 20;
   display: none;
-  color: #ffffff;
+
   @media (max-width: 768px) {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-around;
     flex-flow: column nowrap;
   }
   div {
     width: 2rem;
     height: 0.25rem;
-    background-color: ${({ open }) => open ? '#ccc' : '#333'};
+    background-color: ${({ open }) => open ? '#e3c6a4' : '#744F44'};
     border-radius: 10px;
     transform-origin: 0px;
     transition: all 0.3s linear;
@@ -42,7 +42,9 @@ const Burger = () => {
   return (
     <>
       <StyledBurger open={open} onClick={() => setOpen(!open)}>
-
+        <div/>
+        <div/>
+        <div/>
       </StyledBurger>
       <LeftNav open={open}/>
     </>
