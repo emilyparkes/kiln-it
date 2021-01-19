@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
 
-import Nav from './Nav'
+import Navigation from './nav/Navigation'
 import Home from './Home'
 import Creation from './Creation'
 import Register from './Register'
@@ -11,7 +11,7 @@ import Log from './StatusLog'
 export default function App () {
   return (
     <>
-      <Route path='/' component={Nav} />
+      <Route path='/' component={Navigation} />
       <Route exact path='/' component={Home} />
       <Route path='/log' component={Log} />
       <Route path='/creations/:shape/:id' component={Creation} />
