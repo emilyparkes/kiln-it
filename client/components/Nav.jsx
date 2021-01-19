@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import { LinkText, Navbar } from './Navbar'
+import { Navbar, LinkText } from './Navbar'
 
 export default function Nav (props) {
   let navLinks = null
@@ -11,10 +11,16 @@ export default function Nav (props) {
       navLinks = (
         <>
           <LinkText>
-            <Link to='/signin'>Sign in</Link>
+            <Link to='/gallery'>gallery</Link>
           </LinkText>
           <LinkText>
-            <Link to='/register'>Register</Link>
+            <Link to='/about'>about</Link>
+          </LinkText>
+          <LinkText>
+            <Link to='/signin'>sign in</Link>
+          </LinkText>
+          <LinkText>
+            <Link to='/register'>register</Link>
           </LinkText>
         </>
       )
@@ -23,7 +29,13 @@ export default function Nav (props) {
       navLinks = (
         <>
           <LinkText>
-            <Link to='/register'>Register</Link>
+            <Link to='/gallery'>gallery</Link>
+          </LinkText>
+          <LinkText>
+            <Link to='/about'>about</Link>
+          </LinkText>
+          <LinkText>
+            <Link to='/register'>register</Link>
           </LinkText>
           <LinkText>
             <Link to='/'>Home</Link>
@@ -35,7 +47,13 @@ export default function Nav (props) {
       navLinks = (
         <>
           <LinkText>
-            <Link to='/signin'>Sign in</Link>
+            <Link to='/gallery'>gallery</Link>
+          </LinkText>
+          <LinkText>
+            <Link to='/about'>about</Link>
+          </LinkText>
+          <LinkText>
+            <Link to='/signin'>sign in</Link>
           </LinkText>
           <LinkText>
             <Link to='/'>Home</Link>
@@ -47,10 +65,16 @@ export default function Nav (props) {
       navLinks = (
         <>
           <LinkText>
-            <Link to='/signin'>Sign in</Link>
+            <Link to='/gallery'>gallery</Link>
           </LinkText>
           <LinkText>
-            <Link to='/register'>Register</Link>
+            <Link to='/about'>about</Link>
+          </LinkText>
+          <LinkText>
+            <Link to='/signin'>sign in</Link>
+          </LinkText>
+          <LinkText>
+            <Link to='/register'>register</Link>
           </LinkText>
           <LinkText>
             <Link to='/'>Home</Link>
