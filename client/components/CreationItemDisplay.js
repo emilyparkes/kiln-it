@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { Header, Title, Date } from './typography'
+import { Title, Date } from './typography'
 
 export const StyledRoot = styled.div`
   display: flex;
@@ -58,39 +58,34 @@ export const StyledContainer = styled.div`
     max-width: 1125px;
   }
 `
-// #e3c6a4 or b98462
-const StyledCard = styled.div`
-  max-width: 258px;
-  align-self: flex-start;
-  background-color: #b98462;
-  overflow: hidden;
-  margin: 10px;
-  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
-    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
-  border-radius: 4px;
-`
+
 const Image = styled.img`
   width: 100%;
-  height: 50%;
+  height: 1000%;
   object-fit: cover;
 `
 
-const Description = styled.p`
-  color: #fff;
-  font-weight: 300;
-  padding: 16px;
-  @media (min-width: 320px) {
-    font-size: 0.75rem;
-  }
+export const Text = styled.div`
+  
 `
 
-export const Card = ({ img, title, date, description }) => (
-  <StyledCard>
-    <Image src={img} />
-    <Header>
-      <Title>{title}</Title>
-      <Date>{date}</Date>
-    </Header>
-    <Description>{description}</Description>
-  </StyledCard>
+export const SubTitle = styled.h4`
+  
+`
+
+const Description = styled.p`
+  
+`
+
+export const CreationItemDisplay = ({ creation }) => (
+
+  <>
+    <Image src={creation.image} />
+    <Text>
+      <Title>{creation.name}</Title>
+      <SubTitle>{creation.shape}</SubTitle>
+      <Date>{creation.date}</Date>
+      <Description>{creation.description}</Description>
+    </Text>
+  </>
 )
