@@ -7,7 +7,7 @@
 
   @include tablet-max {
     flex-flow: column nowrap;
-    background-color: #744F44;
+    background-color: $body-bg-dark;
     position: fixed;
     top: 0;
     left: 0;
@@ -19,17 +19,18 @@
 }
 
  .open {
-    transform: translateX(0%);
+  
+  transform: translateX(0%); 
  }
 
  .closed{
-    transform: translateX(-300px);
+  transform: translateX(-300px);
  }
 
 .link {
   padding: 26px 12px 0px 12px;
-  font-family: 'Alegreya Sans', sans-serif;
-  color: #744F44;
+  font-family: $font-base;
+  color: $text-dark;
   font-size: 1rem;
   display: block;
   text-decoration: none;

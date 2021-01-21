@@ -9,11 +9,11 @@
     z-index: 20;
     display: none;
     
-      @include tablet-max {
-        display: flex;
-        justify-content: space-around;
-        flex-flow: column nowrap;
-      }
+    @include tablet-max {
+      display: flex;
+      justify-content: space-around;
+      flex-flow: column nowrap;
+    }
 }
     
 .burger-line {
@@ -26,30 +26,31 @@
 
 // OPEN BURGER LINE (===)
 .open {
-    background-color: '#e3c6a4'
-}
-.open:nth-child(1) {
-transform: rotate(45deg);
-}
-.open:nth-child(2) {
-    transform: translateX(-300);
-    opacity: 0;
-}
-.open:nth-child(3) {
-    transform: rotate(-45deg);
-}
-
-// CLOSED BURGER LINE (X)
-.closed {
     background-color: '#744F44'
     }
-.closed:nth-child(1) {
+.open:nth-child(1) {
     transform: rotate(0);
 }
-.closed:nth-child(2) {
+.open:nth-child(2) {
     transform: translateX(0%);
     opacity: 1;
 } 
-.closed:nth-child(3) {
+.open:nth-child(3) {
     transform: rotate(0);
+}
+
+
+// CLOSED BURGER LINE (X)
+.closed {
+    background-color: '#e3c6a4'
+}
+.closed:nth-child(1) {
+transform: rotate(45deg);
+}
+.closed:nth-child(2) {
+    transform: translateX(-300);
+    opacity: 0;
+}
+.closed:nth-child(3) {
+    transform: rotate(-45deg);
 }
