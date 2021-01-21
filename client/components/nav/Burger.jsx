@@ -6,8 +6,8 @@ const Burger = () => {
 
   return (
     <>
-      <div className='styled-burger'
-        open={open} onClick={() => setOpen(!open)}>
+      <div className={open ? 'styled-burger open' : 'styled-burger closed'}
+        onClick={() => setOpen(!open)}>
         <div/>
         <div/>
         <div/>

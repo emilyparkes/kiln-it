@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const LeftNav = ({ open }) => {
   return (
-    <div className='leftnav closed' open={open}>
+    <div className={open ? 'leftnav open' : 'leftnav closed'}>
       <Link to='/' className='link'><li>Home</li></Link>
       <Link to='/gallery' className='link'><li>Gallery</li></Link>
       <Link to='/about' className='link'><li>About</li></Link>
