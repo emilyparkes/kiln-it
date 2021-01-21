@@ -1,6 +1,8 @@
 // imports only in here
 
-//typography, not in styled component
+@import "_burger.scss";
+@import '_leftnav.scss';
+@import '_nav.scss';
 
 @import "_layout.scss";
 @import '_variables.scss';
