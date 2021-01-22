@@ -18,12 +18,11 @@
     }
 }
 
- .open {
-  
+ .slide-open {
   transform: translateX(0%); 
  }
 
- .closed{
+ .slide-closed{
   transform: translateX(-300px);
  }
 

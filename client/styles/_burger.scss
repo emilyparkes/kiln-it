@@ -5,7 +5,7 @@
     height: 2rem;
     position: fixed;
     top: 15px;
-    left: 20px;
+    left: 15px;
     z-index: 20;
     display: none;
     
@@ -16,41 +16,47 @@
     }
 }
     
-.burger-line {
-    width: 2rem;
-    height: 0.25rem;
-    border-radius: 10px;
-    transform-origin: 0px;
-    transition: all 0.3s linear;
-}
-
-// OPEN BURGER LINE (===)
-.open {
-    background-color: '#744F44'
+.line {
+    div {
+        width: 2rem;
+        height: 0.25rem;
+        border-radius: 10px;
+        transform-origin: 0px;
+        transition: all 0.3s linear;
     }
-.open:nth-child(1) {
-    transform: rotate(0);
-}
-.open:nth-child(2) {
-    transform: translateX(0%);
-    opacity: 1;
-} 
-.open:nth-child(3) {
-    transform: rotate(0);
+
+    &-open div{
+        background-color: #e3c6a4;
+    }
+    &-open div:nth-child(1) {
+        transform: rotate(45deg);
+    }
+    &-open div:nth-child(2) {
+        transform: translateX(-300);
+        opacity: 0;
+    }
+    &-open div:nth-child(3) {
+        transform: rotate(-45deg);
+    }
+
+    &-closed div{
+        background-color: #744F44;
+        }
+    &-closed div:nth-child(1) {
+        transform: rotate(0);
+    }
+    &-closed div:nth-child(2) {
+        transform: translateX(0%);
+        opacity: 1;
+    } 
+    &-closed div:nth-child(3) {
+        transform: rotate(0);
+    }
 }
 
+// OPEN BURGER LINE (X)
 
-// CLOSED BURGER LINE (X)
-.closed {
-    background-color: '#e3c6a4'
-}
-.closed:nth-child(1) {
-transform: rotate(45deg);
-}
-.closed:nth-child(2) {
-    transform: translateX(-300);
-    opacity: 0;
-}
-.closed:nth-child(3) {
-    transform: rotate(-45deg);
-}
+
+
+// CLOSED BURGER LINE (===)
+

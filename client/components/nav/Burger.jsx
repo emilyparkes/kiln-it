@@ -6,13 +6,13 @@ const Burger = () => {
 
   return (
     <>
-      <div className={open ? 'styled-burger open' : 'styled-burger closed'}
+      <nav className={open ? 'styled-burger line line-open' : 'styled-burger line line-closed'}
         onClick={() => setOpen(!open)}>
         <div/>
         <div/>
         <div/>
-      </div>
-      <LeftNav open={open}/>
+      </nav>
+      <LeftNav open={open} setOpen={() => setOpen(!open)}/>
     </>
   )
 }
