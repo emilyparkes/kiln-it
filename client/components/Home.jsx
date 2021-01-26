@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { getCreations } from '../api/api'
-import { Card, StyledContainer, StyledRoot } from './Card'
+import Card from './Card'
 
 export default function Home () {
   const [creations, setCreations] = useState(null)
@@ -24,8 +24,8 @@ export default function Home () {
       <p>See a list of clay projects</p> */}
 
       {creations ? (
-        <StyledRoot>
-          <StyledContainer>
+        <div className='card-root'>
+          <div className='card-container'>
             {creations.map((creation) => {
               const shape = creation.shape.toLowerCase().replace(' ', '-')
               return (
@@ -44,8 +44,8 @@ export default function Home () {
                 </Link>
               )
             })}
-          </StyledContainer>
-        </StyledRoot>
+          </div>
+        </div>
       ) : null}
     </>
   )
