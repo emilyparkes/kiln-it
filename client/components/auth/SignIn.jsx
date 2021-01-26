@@ -32,8 +32,8 @@ export default function SignIn () {
         type='password'
       />
 
-      <button data-testid='submit-button' onClick={handleClick}>
-        Sign in
+      <button data-testid='submit-button'
+        onClick={handleClick}> Sign in
       </button>
     </>
   )

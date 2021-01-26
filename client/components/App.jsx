@@ -4,8 +4,8 @@ import { Route } from 'react-router-dom'
 import Navigation from './nav/Navigation'
 import Home from './Home'
 import Creation from './Creation'
-import Register from './Register'
-import SignIn from './SignIn'
+import Register from './auth/Register'
+import SignIn from './auth/SignIn'
 import Log from './StatusLog'
 
 export default function App () {

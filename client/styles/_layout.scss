@@ -1,25 +1,21 @@
 // @use 'base'; use variabes from other scss file
 
-$base-color: #b98462;
-$primary-color: #e3c6a4;
-$secondary-color: #efb88f;
-$third-color: #e4dcd1;
-$fourth-color: #744F44;
 
-
-* {
-  margin: 0;
-  padding: 0;
+// Base
+*, html {
+  box-sizing: border-box;
 }
 
 body {
-  background: #e3c6a4;
+  margin: 0;
+  background-color: $body-bg-light;
+  // color: $text-color;
+  // font-family: $font-base;
+  font-size: 16px;
 }
 
-// .h2 {
-//   color: #fff;
-//   font-weight: 300;
-//   @media (min-width: 320px) {
-//     font-size: 1rem;
-//   }
+// h1, h2, h3 {
+//   font-family: $font-headings;
+//   font-weight: normal;
+//   color: $brand-dark;
 // }

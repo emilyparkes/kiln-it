@@ -1,0 +1,51 @@
+// LEFT NAVBAR/SIDEBAR AND LINKS
+
+.leftnav {
+  list-style: none;
+  display: flex;
+  flex-flow: row nowrap;
+
+  @include tablet-max {
+    flex-flow: column nowrap;
+    background-color: $body-bg-dark;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 300px;
+    padding-top: 3.5rem;
+    transition: transform 0.3s ease-in-out;
+    }
+}
+
+ .slide-open {
+  transform: translateX(0%); 
+ }
+
+ .slide-closed{
+  transform: translateX(-300px);
+ }
+
+.link {
+  padding: 26px 12px 0px 12px;
+  font-family: $font-base;
+  color: $text-dark;
+  font-size: 1rem;
+  display: block;
+  text-decoration: none;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  justify-content: left;
+
+    @include tablet-max {
+      color: #e3c6a4;
+    }
+}
+
+.link:hover {
+  color: #b98462;
+
+  @include tablet-max {
+    color: #b98462;
+  }
+}
