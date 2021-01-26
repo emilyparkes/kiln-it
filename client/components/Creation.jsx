@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { getCreationById } from '../api/api'
-import { CreationItemDisplay } from './CreationItemDisplay'
+import CreationItemDisplay from './CreationItemDisplay'
 
 export default function Creation (props) {
   const [creation, setCreation] = useState(null)
