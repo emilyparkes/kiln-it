@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import { getCreations } from '../api/api'
-import { StyledContainer, StatusLogItem } from './StatusLogItem.js'
+import StatusLogItem from './StatusLogItem'
 
 export default function StatusLog () {
   const [creations, setCreations] = useState(null)
@@ -20,13 +20,13 @@ export default function StatusLog () {
   return (
     <>
       {creations ? (
-        <StyledContainer>
+        <div className='log-container'>
           {creations.map((creation) => {
             return (
               <StatusLogItem key={creation.creationId} creation={creation} />
             )
           })}
-        </StyledContainer>
+        </div>
       ) : null}
     </>
   )
