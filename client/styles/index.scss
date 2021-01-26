@@ -1,8 +1,16 @@
 // imports only in here
 
-@import "_burger.scss";
+// Root
+@import '_variables.scss';
+@import '_layout.scss';
+
+// Nav
+@import '_burger.scss';
 @import '_leftnav.scss';
 @import '_nav.scss';
+// Shared
+@import '_card.scss';
+@import '_creation.scss';
 
-@import "_layout.scss";
-@import '_variables.scss';
+// Admin
+@import '_statuslog.scss';
