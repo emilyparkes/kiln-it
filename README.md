@@ -3,7 +3,8 @@
 # kiln it
 Keeping records of my clay creations. Including type of creation, weight, percent shrinkage the status of firing.
 
-[Currently deployed version](https://kiln-it.herokuapp.com/)
+🚀 [Currently deployed version](https://kiln-it.herokuapp.com/)   
+🎨 *an attempt at a* [Figma Design](https://www.figma.com/file/09q8SUt5gSTAfpNtiGyUOEGt/Kiln-it?node-id=0%3A1)
 
 
 ## Setup
