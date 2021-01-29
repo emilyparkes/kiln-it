@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import LeftNav from './LeftNav'
 
-const Burger = () => {
+export default function Burger () {
   const [open, setOpen] = useState(false)
 
   return (
@@ -16,4 +16,3 @@ const Burger = () => {
     </>
   )
 }
-export default Burger

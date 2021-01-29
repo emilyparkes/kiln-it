@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const LeftNav = ({ open, setOpen }) => {
+export default function LeftNav ({ open, setOpen }) {
   return (
     <div className={open ? 'leftnav slide-open' : 'leftnav slide-closed'}>
 
@@ -27,5 +27,3 @@ const LeftNav = ({ open, setOpen }) => {
     </div>
   )
 }
-
-export default LeftNav

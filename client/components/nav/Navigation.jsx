@@ -2,7 +2,7 @@ import React from 'react'
 import Burger from './Burger'
 // import { Link } from 'react-router-dom'
 
-const Navbar = () => {
+export default function Navbar () {
   return (
     <div className='nav'>
       <Burger />
@@ -11,5 +11,3 @@ const Navbar = () => {
     </div>
   )
 }
-
-export default Navbar
