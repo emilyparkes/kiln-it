@@ -22,46 +22,38 @@ const mockStatuses = [
 const mockStatus = { id: 2, status: 'Leather Hard' }
 
 describe('GET /api/v1/statuses', () => {
-  it('returns an object with an array of statuses', () => {
+  it('returns an object with an array of statuses', async () => {
     statusDb.getStatuses.mockImplementation(() => Promise.resolve(mockStatuses))
-
-    return request(server)
+    const { body } = await request(server)
       .get('/api/v1/statuses')
       .expect('Content-Type', /json/)
       .expect(200)
-      .then((res) => {
-        expect(res.body.statuses).toHaveLength(8)
-        expect(res.body.statuses[0].status).toBe('Wet')
-        expect(res.body.statuses[7].status).toMatch('Complete')
-        return null
-      })
+
+    expect(body.statuses).toHaveLength(8)
+    expect(body.statuses[0].status).toBe('Wet')
+    expect(body.statuses[7].status).toMatch('Complete')
   })
 })
 
 describe('GET /api/v1/statuses/:id', () => {
-  it('returns a status', () => {
+  it('returns a status', async () => {
     statusDb.getStatusById.mockImplementation(() => Promise.resolve(mockStatus))
 
-    return request(server)
+    const { body } = await request(server)
       .get('/api/v1/statuses/2')
       .expect('Content-Type', /json/)
       .expect(200)
-      .then((res) => {
-        expect(res.body.id).toBe(2)
-        expect(res.body.status).toBe('Leather Hard')
-        return null
-      })
+
+    expect(body.id).toBe(2)
+    expect(body.status).toBe('Leather Hard')
   })
 
-  it('returns a 404 if id is not found', () => {
+  it('returns a 404 if id is not found', async () => {
     statusDb.getStatusById.mockImplementation(() => Promise.resolve(null))
-
-    return request(server)
+    const { body } = await request(server)
       .get('/api/v1/statuses/9999')
       .expect(404)
-      .then((res) => {
-        expect(res.body.error).toMatch('status id not found')
-        return res
-      })
+
+    expect(body.error).toMatch('status id not found')
   })
 })

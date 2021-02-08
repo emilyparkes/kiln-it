@@ -10,17 +10,13 @@ beforeEach(() => {
   return testConn.seed.run()
 })
 
-test('getShapes returns the correct number of shapes', () => {
-  return db.getShapes(testConn).then((shapes) => {
-    expect(shapes).toHaveLength(7)
-    return null
-  })
+test('getShapes returns the correct number of shapes', async () => {
+  const shapes = await db.getShapes(testConn)
+  expect(shapes).toHaveLength(7)
 })
 
-test('getShapeById returns the correct shape details', () => {
+test('getShapeById returns the correct shape details', async () => {
   const id = 2
-  return db.getShapeById(id, testConn).then((shape) => {
-    expect(shape.shape_type).toBe('Plate')
-    return null
-  })
+  const shape = await db.getShapeById(id, testConn)
+  expect(shape.shape_type).toBe('Plate')
 })
