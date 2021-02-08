@@ -8,14 +8,14 @@ export default function Home () {
   const [creations, setCreations] = useState(null)
 
   useEffect(() => {
-    getCreations()
-      .then((resp) => {
+    (async () => {
+      try {
+        const resp = await getCreations()
         setCreations(resp)
-        return null
-      })
-      .catch((error) => {
+      } catch (error) {
         console.log('error: ', error.message)
-      })
+      }
+    })()
   }, [])
 
   return (

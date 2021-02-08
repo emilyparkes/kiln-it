@@ -14,14 +14,14 @@ export default function Creation (props) {
     .join(' ')
 
   useEffect(() => {
-    getCreationById(props.match.params.id)
-      .then((resp) => {
+    (async () => {
+      try {
+        const resp = await getCreationById(props.match.params.id)
         setCreation(resp)
-        return null
-      })
-      .catch((error) => {
+      } catch (error) {
         console.log('error: ', error.message)
-      })
+      }
+    })()
   }, [])
 
   return (
