@@ -10,17 +10,13 @@ beforeEach(() => {
   return testConn.seed.run()
 })
 
-test('getGlazes returns the correct number of clay', () => {
-  return db.getGlazes(testConn).then((glaze) => {
-    expect(glaze).toHaveLength(8)
-    return null
-  })
+test('getGlazes returns the correct number of clay', async () => {
+  const glaze = await db.getGlazes(testConn)
+  expect(glaze).toHaveLength(8)
 })
 
-test('getGlazeById returns the correct glaze details', () => {
+test('getGlazeById returns the correct glaze details', async () => {
   const id = 2
-  return db.getGlazeById(id, testConn).then((glaze) => {
-    expect(glaze.glaze).toBe('White Matte')
-    return null
-  })
+  const glaze = await db.getGlazeById(id, testConn)
+  expect(glaze.glaze).toBe('White Matte')
 })

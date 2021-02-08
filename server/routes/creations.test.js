@@ -58,51 +58,44 @@ const mockCreation = {
 }
 
 describe('GET /api/v1/creations', () => {
-  it('returns the correct number of creations', () => {
+  it('returns the correct number of creations', async () => {
     creationDb.getCreations.mockImplementation(() =>
       Promise.resolve(mockCreations)
     )
-    return request(server)
+    const { body } = await request(server)
       .get('/api/v1/creations')
       .expect('Content-Type', /json/)
       .expect(200)
-      .then((res) => {
-        return expect(res.body).toHaveLength(2)
-      })
+    expect(body).toHaveLength(2)
   })
 
   describe('GET /api/v1/creations/:id', () => {
-    it('returns the correct status', () => {
+    it('returns the correct status', async () => {
       creationDb.getCreationById.mockImplementation(() =>
         Promise.resolve(mockCreation)
       )
-
-      return request(server)
+      const { body } = await request(server)
         .get('/api/v1/creations/2')
         .expect('Content-Type', /json/)
         .expect(200)
-        .then((res) => {
-          expect(res.body.clay).toBe(2)
-          expect(res.body.shape).toBe(2)
-          expect(res.body.status).toBe(1)
-          expect(res.body.glaze).toBe(4)
-          expect(res.body.date_created).toBe('2020-05-24T14:45:30')
-          expect(res.body.date_complete).toBe('2020-06-24T14:45:30')
-          expect(res.body.note).toBe('Glaze with criss-cross pattern')
-          return null
-        })
+
+      expect(body.clay).toBe(2)
+      expect(body.shape).toBe(2)
+      expect(body.status).toBe(1)
+      expect(body.glaze).toBe(4)
+      expect(body.date_created).toBe('2020-05-24T14:45:30')
+      expect(body.date_complete).toBe('2020-06-24T14:45:30')
+      expect(body.note).toBe('Glaze with criss-cross pattern')
     })
 
-    it('returns a 404 if id is not found', () => {
+    it('returns a 404 if id is not found', async () => {
       creationDb.getCreationById.mockImplementation(() => Promise.resolve(null))
 
-      return request(server)
+      const { body } = await request(server)
         .get('/api/v1/creations/9999')
         .expect(404)
-        .then((res) => {
-          expect(res.body.error).toMatch('creation id not found')
-          return res
-        })
+
+      expect(body.error).toMatch('creation id not found')
     })
   })
 })

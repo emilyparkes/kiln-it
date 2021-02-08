@@ -10,17 +10,13 @@ beforeEach(() => {
   return testConn.seed.run()
 })
 
-test('getStatuses returns the correct number of statuses', () => {
-  return db.getStatuses(testConn).then((statuses) => {
-    expect(statuses).toHaveLength(8)
-    return null
-  })
+test('getStatuses returns the correct number of statuses', async () => {
+  const statuses = await db.getStatuses(testConn)
+  expect(statuses).toHaveLength(8)
 })
 
-test('getStatusById returns the correct status details', () => {
+test('getStatusById returns the correct status details', async () => {
   const id = 2
-  return db.getStatusById(id, testConn).then((status) => {
-    expect(status.status).toBe('Leather Hard')
-    return null
-  })
+  const status = await db.getStatusById(id, testConn)
+  expect(status.status).toBe('Leather Hard')
 })
