@@ -7,8 +7,11 @@ export default function Card ({ img, title, date, description }) {
     <div className='card' >
       <img className='card-img' src={img}
         onMouseEnter={() => setIsShown(true)}
-        onMouseLeave={() => setIsShown(false)}/>
-      <div className='item-overlay'></div>
+        onMouseLeave={() => setIsShown(false)}
+      />
+      {isShown
+        ? <div className='item-overlay'></div>
+        : null }
     </div>
   )
 }
