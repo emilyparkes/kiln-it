@@ -1,12 +1,11 @@
 exports.seed = (knex) => {
   return knex('creations')
-    .del()
     .then(() => {
       return knex('creations').insert([
         {
           id: 1,
           clay: 1,
-          shape: 2,
+          shape: 5,
           status: 2,
           glaze: 4,
           weight_wet: 0,
@@ -19,8 +18,8 @@ exports.seed = (knex) => {
           date_complete: '2020-07-15T13:45:30',
           description: 'Creations by emily is great',
           makers_note: 'Glaze with criss-cross pattern',
-          name: '',
-          image: ''
+          name: 'Le Vase',
+          image: '/images/vase.png'
         },
         {
           id: 2,

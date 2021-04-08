@@ -1,6 +1,5 @@
 exports.seed = (knex) => {
   return knex('creations')
-    .del()
     .then(() => {
       return knex('creations').insert([
         {

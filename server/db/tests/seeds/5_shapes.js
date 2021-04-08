@@ -1,6 +1,5 @@
 exports.seed = (knex) => {
   return knex('shapes')
-    .del()
     .then(() => {
       return knex('shapes').insert([
         { id: 1, shape_type: 'Coffee Cup' },

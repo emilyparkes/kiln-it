@@ -1,6 +1,5 @@
 exports.seed = (knex) => {
   return knex('clay')
-    .del()
     .then(() => {
       return knex('clay').insert([
         { id: 1, clay: 'White' },
