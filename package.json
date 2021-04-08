@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server",
-    "lint": "eslint --ext .js,.jsx client server",
-    "dev": "npm run dev:client && npm run dev:server",
+    "dev": "npm run dev:client & npm run dev:server",
     "dev:client": "webpack --config client/webpack.config.js --watch",
     "dev:server": "nodemon server",
     "build": "npm run client && npm run db:migrate",
@@ -17,6 +16,8 @@
     "db:seed": "npm run knex seed:run",
     "db:migrate": "npm run knex migrate:latest",
     "db:rollback": "npm run knex migrate:rollback && npm run db",
+    "lint": "eslint --ext .js,.jsx client server",
+    "check": "npm run lint && npm run test",
     "test": "jest --verbose",
     "test:watch": "jest --watchAll --verbose",
     "test:client": "jest /client --watchAll --verbose",
