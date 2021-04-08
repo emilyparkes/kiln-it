@@ -15,16 +15,20 @@
     width: 300px;
     padding-top: 3.5rem;
     transition: transform 0.3s ease-in-out;
-    }
+  }
 }
 
- .slide-open {
-  transform: translateX(0%); 
- }
+.slide-open {
+  @include tablet-max {
+    transform: translateX(0%); 
+  }
+}
 
- .slide-closed{
-  transform: translateX(-300px);
- }
+.slide-closed{
+  @include tablet-max {
+    transform: translateX(-300px);
+  }
+}
 
 .link {
   padding: 26px 12px 0px 12px;

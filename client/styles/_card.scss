@@ -68,15 +68,15 @@
 
 .card-img {
   width: 100%;
-  height: 50%;
+  height: 100%;
   object-fit: cover;
 }
 
-p {
-  color: #fff;
-  font-weight: 300;
-  padding: 16px;
-  @include mobile-mini {
-    font-size: 0.75rem;
-  }
-}
+// p {
+//   color: #fff;
+//   font-weight: 300;
+//   padding: 16px;
+//   @include mobile-mini {
+//     font-size: 0.75rem;
+//   }
+// }
