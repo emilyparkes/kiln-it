@@ -20,7 +20,7 @@ test('getShapes returns the correct number of shapes', () => {
 test('getShapeById returns the correct shape details', () => {
   const id = 2
   return db.getShapeById(id, testConn).then((shape) => {
-    expect(shape.shape_type).toBe('Plate')
+    expect(shape.shape).toBe('Plate')
     return null
   })
 })
