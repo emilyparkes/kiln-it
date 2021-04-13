@@ -34,11 +34,11 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: left;
+  justify-content: center;
   margin-left: auto;
   margin-right: auto;
   @include mobile {
-    max-width: 258px;
+    max-width: 400px;
   }
   @include tablet {
     max-width: 614px;
@@ -56,13 +56,12 @@
 
 // #e3c6a4 or b98462
 .card {
-  max-width: 258px;
-  align-self: flex-start;
-  background-color: #b98462;
+  display: inline-block;
+  max-width: 190px;
+  align-self: flex-end;
   overflow: hidden;
-  margin: 10px;
-  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
-    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+  margin: 1px 1px 1px 1px;
+  box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
   border-radius: 4px;
 }
 
@@ -70,6 +69,48 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.card-overlay {
+  position: relative;
+  display: inline-block;
+}
+
+.card-overlay:after {
+  content: attr(title);
+  color: rgba(255, 255, 255, 0.75);
+  padding: .5em 1em;
+  font-family: helvetica;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transition: all .25s ease-in-out;
+}
+.card-overlay:hover:after {
+  background: #b98462;
+  opacity: 50%;
+  color: #fff;
+}
+
+.card-overlay.v2:after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.card-overlay.v2:hover:before {
+  content: attr(text);
+  transition: all .25s ease-in-out;
+  position: absolute;
+  margin-top: -.5em;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  color: #fff;
+  z-index: 1;
+  text-align: center;
+  font-family: helvetica;
 }
 
 // p {
