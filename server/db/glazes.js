@@ -10,5 +10,7 @@ function getGlazes (db = connection) {
 }
 
 function getGlazeById (id, db = connection) {
-  return db('glazes').where('id', id).select().first()
+  return db('glazes')
+    .where('id', id)
+    .first()
 }

@@ -10,5 +10,7 @@ function getStatuses (db = connection) {
 }
 
 function getStatusById (id, db = connection) {
-  return db('statuses').where('id', id).select().first()
+  return db('statuses')
+    .where('id', id)
+    .first()
 }
