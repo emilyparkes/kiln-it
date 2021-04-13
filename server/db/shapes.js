@@ -10,5 +10,7 @@ function getShapes (db = connection) {
 }
 
 function getShapeById (id, db = connection) {
-  return db('shapes').where('id', id).select().first()
+  return db('shapes')
+    .where('id', id)
+    .first()
 }

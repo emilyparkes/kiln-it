@@ -25,8 +25,8 @@ test('getCreationById returns the correct creation details', () => {
     expect(creation.status).toBe('Wet')
     expect(creation.glaze).toBe('White Matte')
     expect(creation.date_created).toBe('2020-05-24T14:45:30')
-    expect(creation.date_complete).toBe('2020-06-24T14:45:30')
-    expect(creation.makers_note).toBe('Glaze with criss-cross pattern')
+    expect(creation.date_completed).toBe('2020-06-24T14:45:30')
+    expect(creation.note).toBe('Glaze with criss-cross pattern')
     return null
   })
 })

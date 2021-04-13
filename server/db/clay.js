@@ -10,5 +10,7 @@ function getClay (db = connection) {
 }
 
 function getClayById (id, db = connection) {
-  return db('clay').where('id', id).select().first()
+  return db('clay')
+    .where('id', id)
+    .first()
 }
