@@ -57,6 +57,7 @@
 // #e3c6a4 or b98462
 .card {
   display: inline-block;
+  position: relative;
   max-width: 190px;
   align-self: flex-end;
   overflow: hidden;
@@ -71,11 +72,6 @@
   object-fit: cover;
 }
 
-.card-overlay {
-  position: relative;
-  display: inline-block;
-}
-
 .card-overlay:after {
   content: attr(title);
   color: rgba(255, 255, 255, 0.75);
@@ -86,21 +82,33 @@
   right: 0;
   transition: all .25s ease-in-out;
 }
+
 .card-overlay:hover:after {
-  background: #b98462;
+  background: #e0d9d4;
   opacity: 50%;
   color: #fff;
-}
-
-.card-overlay.v2:after {
-  content: "";
   width: 100%;
   height: 100%;
-  box-sizing: border-box;
 }
 
-.card-overlay.v2:hover:before {
-  content: attr(text);
+// #b98462
+
+.card:hover .card-overlay{
+  display:block;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: auto;
+  padding-bottom: auto;
+}
+
+.card .card-overlay{
+  position: absolute;
+  display: none;
+}
+
+.card-overlay:hover:before {
   transition: all .25s ease-in-out;
   position: absolute;
   margin-top: -.5em;
@@ -112,7 +120,17 @@
   text-align: center;
   font-family: helvetica;
 }
-
+.card-overlay-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  p {
+    color: #fff;
+    margin: 0;
+  }
+}
 // p {
 //   color: #fff;
 //   font-weight: 300;

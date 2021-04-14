@@ -32,8 +32,8 @@ export default function Gallery () {
                 >
                   <Card
                     img={'/images/plate.jpeg'}
-                    title={creation.shape}
-                    date={creation.date_completed}
+                    name={creation.name}
+                    shape={creation.shape}
                     description={creation.glaze}
                   />
                 </Link>

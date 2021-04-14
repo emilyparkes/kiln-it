@@ -1,28 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
-export default function Card ({ img, title, date, description }) {
-  const [isShown, setIsShown] = useState(false)
-
-  useEffect(() => {
-  }, [isShown])
-
+export default function Card ({ img, name, shape, description }) {
   return (
     <div className='card' >
-      <div className='card-overlay v2' text={title} >
-        <img className='card-img' src={img}
-          onMouseEnter={() => setIsShown(true)}
-          onMouseLeave={() => setIsShown(false)}
-        />
+      <div className='card-overlay'>
+        <div className='card-overlay-text'>
+          <p>{name}</p>
+          <p>{shape}</p>
+        </div>
+        {/* <p>{description}</p> */}
       </div>
-
+      <img className='card-img' src={img}/>
     </div>
   )
 }
-
-// {isShown
-//   ? <div className='card-overlay'>
-//     <h6>{title}</h6>
-//     <p>{date}</p>
-//     <p>{description}</p>
-//   </div>
-//   : null }
