@@ -24,10 +24,10 @@ export default function Gallery () {
         <div className='card-root'>
           <div className='card-container'>
             {creations.map((creation) => {
-              const shape = creation.shape.toLowerCase().replace(' ', '-')
+              const name = creation.name.toLowerCase().replace(' ', '-')
               return (
                 <Link
-                  to={`/creations/${shape}/${creation.creationId}`}
+                  to={`/creations/${name}`}
                   key={creation.creationId}
                 >
                   <Card
