@@ -34,21 +34,20 @@
   margin: 2px auto 2px auto;
 }
 
-p {
-  width: 150px;
-  color: #fff;
-  font-weight: 200;
-  margin: 8px;
-  padding: 4px;
-  box-sizing: border-box;
-  border-radius: 4px;
-  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
-    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
-    border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  @include mobile-mini {
-    font-size: 1rem;
-  }
-}
+// p {
+//   color: #fff;
+//   font-weight: 200;
+//   margin: 8px;
+//   padding: 4px;
+//   box-sizing: border-box;
+//   border-radius: 4px;
+//   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+//     box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+//     border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+//   @include mobile-mini {
+//     font-size: 1rem;
+//   }
+// }
 
 .status {
   width: 150px;
