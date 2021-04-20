@@ -56,6 +56,118 @@
 
 .creation-img {
   width: 100%;
-  height: 1000%;
+  height: 100%;
+  display: block;
   object-fit: cover;
+  position: absolute;
+  width: 428px;
+  height: 577px;
+  left: 0px;
+  top: 0px;
+}
+
+.icon-dots {
+  position: absolute;
+  width: 48.67px;
+  height: 13.77px;
+  left: 189.67px;
+  top: 494px;
+}
+
+.text-card {
+  position: absolute;
+  background-color: bisque;
+  position: absolute;
+  width: 428px;
+  height: 409px;
+  left: 0px;
+  top: 517px;
+
+  box-sizing: border-box;
+  border: 1px solid bisque;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+}
+
+.text-card-content {
+  padding-left: 38px;
+}
+
+.name {
+  width: 128px;
+  height: 26px;
+  left: 38px;
+  top: 556px;
+  
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 21px;
+  display: flex;
+  align-items: center;
+  
+  color: #000000;
+}
+
+.shape {
+  width: 75px;
+  height: 20px;
+  left: 38px;
+  top: 588px;
+  
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  
+  color: #000000;
+}
+
+.description {
+  width: 353px;
+  height: 161px;
+  left: 38px;
+  top: 630px;
+  
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  color: #000000;
+}
+
+.date {
+  width: 121px;
+  height: 20px;
+  left: 154px;
+  top: 879px;
+  
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  
+  color: #000000;
+}
+
+.icon-instagram {
+  font-size: 40px;
+  position: absolute;
+  width: 48.33px;
+  height: 48.33px;
+  left: 354px;
+  top: 553px;
+}
+
+
+// ADMIN
+.icon-edit {
+  position: absolute;
+  width: 33px;
+  height: 33px;
+  left: 362px;
+  top: 872px;
 }
