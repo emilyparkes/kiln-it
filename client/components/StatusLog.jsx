@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import { getCreations } from '../api/api'
+import { getCreations } from '../apis/api'
 import StatusLogItem from './StatusLogItem'
 
 export default function StatusLog () {

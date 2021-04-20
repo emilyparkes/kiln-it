@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { getCreations } from '../api/api'
+import { getCreations } from '../apis/api'
 import Card from './Card'
 
 export default function Gallery () {
