@@ -3,14 +3,10 @@ import { getCreationById } from '../apis/api'
 
 export default function Creation (props) {
   const [creation, setCreation] = useState(null)
+  const [imgIdx, setImgIdx] = useState(0)
+  const [currentImg, setCurrentImage] = useState('')
 
-  // const { name } = props.match.params
-  // const words = name.split('-')
-  // const formatName = words
-  //   .map((word) => {
-  //     return word[0].toUpperCase() + word.substring(1)
-  //   })
-  //   .join(' ')
+  const images = ['/images/plate.jpeg', '/images/vase.png', '/images/plate.jpeg', '/images/vase.png', '/images/plate.jpeg']
 
   useEffect(() => {
     getCreationById(1)
@@ -23,12 +19,30 @@ export default function Creation (props) {
       })
   }, [])
 
+  useEffect(() => {
+    setCurrentImage(images[imgIdx])
+  }, [imgIdx])
+
+  const getImage = (idx) => {
+    setImgIdx(idx)
+  }
+
   return (
     <>
       {creation
         ? <>
-          <img className='creation-img' src='/images/plate.jpeg'/>
-          <div className='icon-dots'> O O O </div>
+          <img className='creation-img'
+            src={currentImg}/>
+
+          <div className='icon-dots' >
+            {images.map((dot, idx) => {
+              return <div key={idx}
+                className={imgIdx === idx ? 'dot selected' : 'dot'}
+                id={idx}
+                onClick={() => getImage(idx)}></div>
+            })}
+          </div>
+
           <div className='text-card'>
             <div className='text-card-content'>
               <p className='name'>{creation.name}</p>

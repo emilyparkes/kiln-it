@@ -67,11 +67,27 @@
 }
 
 .icon-dots {
+  // z-index: 5;
   position: absolute;
-  width: 48.67px;
-  height: 13.77px;
-  left: 189.67px;
-  top: 494px;
+  top: 500px;
+  width: 100%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.dot {
+  position: relative;
+  display: inline-block;
+  background-color:#b98462;
+  border-radius: 50%;
+  margin: 2px;
+  height: 10px;
+  width: 10px;
+}
+
+.selected {
+  background-color: #744F44;
 }
 
 .text-card {
