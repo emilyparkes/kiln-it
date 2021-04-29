@@ -31,12 +31,13 @@
 }
 
 .creation-container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: left;
-  margin-left: auto;
-  margin-right: auto;
+  height: auto;
+  // display: flex;
+  // flex-direction: row;
+  // flex-wrap: wrap;
+  // justify-content: left;
+  // margin-left: auto;
+  // margin-right: auto;
   @include mobile {
     max-width: 258px;
   }
@@ -170,10 +171,10 @@
 }
 
 .icon-instagram {
-  font-size: 40px;
+  color: #744F44;
   position: absolute;
-  width: 48.33px;
-  height: 48.33px;
+  width: 40px;
+  height: 40px;
   left: 354px;
   top: 553px;
 }
