@@ -13,6 +13,10 @@ export default function LeftNav ({ open, setOpen }) {
         <li>Gallery</li>
       </Link>
 
+      <Link to='/creations/le-vase/edit' className='link'onClick={setOpen}>
+        <li>Edit</li>
+      </Link>
+
       <Link to='/about' className='link'onClick={setOpen}>
         <li>About</li>
       </Link>
