@@ -4,6 +4,7 @@
   list-style: none;
   display: flex;
   flex-flow: row nowrap;
+  z-index: 100;
 
   @include tablet-max {
     flex-flow: column nowrap;
