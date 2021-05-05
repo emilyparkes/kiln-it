@@ -56,15 +56,20 @@
 }
 
 .creation-img {
-  width: 100%;
-  height: 100%;
+  position: absolute;
   display: block;
   object-fit: cover;
-  position: absolute;
+  width: 100%;
+  height: 100%;
   width: 428px;
   height: 577px;
   left: 0px;
   top: 0px;
+  
+  .edit & {
+    width: 428px;
+    height: 280px;
+  }
 }
 
 .icon-dots {
@@ -75,6 +80,11 @@
   text-align: center;
   margin-left: auto;
   margin-right: auto;
+
+  .edit & {
+    height: 13.77px;
+    top: 230px;
+  }
 }
 
 .dot {
@@ -104,6 +114,12 @@
   border: 1px solid bisque;
   border-top-left-radius: 25px;
   border-top-right-radius: 25px;
+
+  .edit & {
+    width: 430px;
+    height: 675px;
+    top: 250px;
+  }
 }
 
 .text-card-content {
@@ -116,7 +132,7 @@
   left: 38px;
   top: 556px;
   
-  font-family: 'Alegreya Sans SC';
+  font-family: Roboto;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
