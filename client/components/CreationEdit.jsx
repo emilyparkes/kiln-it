@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 
 import { TextField, MenuItem, InputAdornment } from '@material-ui/core'
 import { IoLogoInstagram } from 'react-icons/io'
@@ -8,7 +7,7 @@ import { VscSaveAs } from 'react-icons/vsc'
 import { useEditStyles } from '../styles/mui_overrides'
 import { getCreationById } from '../apis/api'
 
-export default function CreationEdit () {
+export default function CreationEdit (props) {
   const classes = useEditStyles()
   const [imgIdx, setImgIdx] = useState(0)
   const [currentImg, setCurrentImage] = useState('')
@@ -59,6 +58,7 @@ export default function CreationEdit () {
 
   const onSubmit = (e) => {
     e.preventDefault()
+    props.history.push('/creations/le-vase')
     // sendForm(form)
   }
 
@@ -213,9 +213,7 @@ export default function CreationEdit () {
               </div>
             </div>
             <IoLogoInstagram className='icon-instagram' />
-            <Link to={`/creation/${form.name}`}>
-              <VscSaveAs className='icon-save' onClick={onSubmit}/>
-            </Link>
+            <VscSaveAs className='icon-save' onClick={onSubmit}/>
 
           </div>
         </form>
