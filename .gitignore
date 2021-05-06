@@ -108,5 +108,5 @@ dist
 
 # TernJS port file
 .tern-port
-server/public/bundle.js.map
-server/public/bundle.js
+
+*bundle.js*

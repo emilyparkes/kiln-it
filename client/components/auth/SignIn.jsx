@@ -1,10 +1,37 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useFirebaseApp } from 'reactfire'
+import 'firebase/auth'
+
+import {saveUser, getUser} from './utils'
 
 export default function SignIn () {
-  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [ error, setError ] = useState('')
 
-  const handleClick = () => {}
+  const [ auth, setAuth ] = useState( null )
+
+  const firebase = useFirebaseApp()
+
+  const signIn = e => {
+    e.preventDefault()
+    setError('')
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .then(user => {
+        setAuth(user)
+        saveUser({ uid:user.user.uid, email, password })
+      })
+      .catch(err => setError(err.message))
+  }
+
+  useEffect(() => {
+    getUser((err, user) => {
+      if (user) {
+        firebase.auth().signInWithEmailAndPassword(user.email, user.password)
+          .then(user => setAuth(user))
+      }
+    })
+  }, [])
 
   return (
     <>
@@ -12,13 +39,15 @@ export default function SignIn () {
         <h1>Sign in</h1>
       </div>
 
-      <label>Username</label>
+      {error && error}
+
+      <label>Email</label>
       <input
-        id='username'
-        name='username'
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        placeholder='Username'
+        id='email'
+        name='email'
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder='Email'
         type='text'
       />
 
@@ -33,7 +62,7 @@ export default function SignIn () {
       />
 
       <button data-testid='submit-button'
-        onClick={handleClick}> Sign in
+        onClick={signIn}> Sign in
       </button>
     </>
   )
