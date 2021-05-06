@@ -13,28 +13,6 @@ export default function CreationEdit () {
   const [imgIdx, setImgIdx] = useState(0)
   const [currentImg, setCurrentImage] = useState('')
   const [form, setForm] = useState(null)
-  // {
-  //   clay: 'White',
-  //   creationId: 1,
-  //   date_completed: '2020-07-15T13:45:30',
-  //   date_created: '2020-06-15T13:45:30',
-  //   description: 'Creations by emily is great',
-  //   glaze: 'Black Matte',
-  //   img_bisque_fired: '',
-  //   img_complete: '',
-  //   img_gallery: '/images/vase.png',
-  //   img_glazed: '',
-  //   img_leather_hard: '',
-  //   name: 'Le Vase',
-  //   note: 'Glaze with criss-cross pattern',
-  //   shape: 'Vase',
-  //   status: 'Leather Hard',
-  //   weight_bisque_fired: 0,
-  //   weight_bone_dry: 0,
-  //   weight_complete: 0,
-  //   weight_glazed: 0,
-  //   weight_leather_hard: 0
-  // }
 
   // HARD CODED FOR NOW
   const shapes = ['Vase', 'Mug', 'Plate', 'Bowl', 'Artistic']
@@ -47,7 +25,6 @@ export default function CreationEdit () {
   useEffect(() => {
     getCreationById(1)
       .then((resp) => {
-        console.log(resp)
         setForm({
           name: resp.name,
           shape: resp.shape,
@@ -89,7 +66,6 @@ export default function CreationEdit () {
     <>
       {form
         ? <form>
-          {console.log(form)}
           <div className='creation-container edit'>
 
             <img className='creation-img'
