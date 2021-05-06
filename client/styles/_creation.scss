@@ -123,7 +123,21 @@
 }
 
 .text-card-content {
-  padding-left: 38px;
+  margin-left: 20px;
+  margin-right: 20px;
+  padding-top: 20px;
+
+  .edit & {
+    padding-top: 23px;
+
+  }
+}
+
+.edit-item {
+  margin-top: 8px;
+  margin-bottom: 4px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .name {
@@ -132,7 +146,7 @@
   left: 38px;
   top: 556px;
   
-  font-family: Roboto;
+  font-family: $font-base;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
@@ -149,13 +163,12 @@
   left: 38px;
   top: 588px;
   
-  font-family: 'Alegreya Sans SC';
+  font-family: $font-base;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 16px;
   
-  color: #000000;
 }
 
 .description {
@@ -168,39 +181,54 @@
   font-weight: normal;
   font-size: 14px;
   line-height: 16px;
-  color: #000000;
 }
 
 .date {
+  position: absolute;
   width: 121px;
   height: 20px;
-  left: 154px;
-  top: 879px;
-  
+  left: 21px;
+  bottom: 64px;
+  margin-top: 8px;
+
   font-family: 'Alegreya Sans SC';
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 16px;
-  
-  color: #000000;
+  color: $text-dark;
 }
 
 .icon-instagram {
-  color: #744F44;
   position: absolute;
+  color: $text-dark;
   width: 40px;
   height: 40px;
-  left: 354px;
+  right: 18px;
   top: 553px;
+
+  .edit & {
+    height: 46px;
+    top: 277px;
+  }
 }
 
 
 // ADMIN
 .icon-edit {
   position: absolute;
+  color: #744F44;
   width: 33px;
   height: 33px;
   left: 362px;
   top: 872px;
+}
+
+.icon-save{
+  position: absolute;
+  color: #744F44;
+  width: 35px;
+  height: 35px;
+  right: 18px;
+  bottom: 72px;
 }

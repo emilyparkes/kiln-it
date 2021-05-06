@@ -86,7 +86,7 @@
   content: attr(title);
   color: rgba(255, 255, 255, 0.75);
   padding: .5em 1em;
-  font-family: helvetica;
+  font-family: $font-base;
   position: absolute;
   top: 0;
   right: 0;
@@ -128,7 +128,7 @@
   color: #fff;
   z-index: 1;
   text-align: center;
-  font-family: helvetica;
+  font-family: $font-base;
 }
 .card-overlay-text {
   display: flex;

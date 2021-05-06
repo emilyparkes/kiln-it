@@ -1,39 +1,61 @@
 import React, { useEffect, useState } from 'react'
-import { IoLogoInstagram } from 'react-icons/io'
+import { Link } from 'react-router-dom'
 
+import { TextField, MenuItem, InputAdornment } from '@material-ui/core'
+import { IoLogoInstagram } from 'react-icons/io'
+import { VscSaveAs } from 'react-icons/vsc'
+
+import { useEditStyles } from '../styles/mui_overrides'
 import { getCreationById } from '../apis/api'
 
 export default function CreationEdit () {
-  // const [creation, setCreation] = useState(null)
+  const classes = useEditStyles()
   const [imgIdx, setImgIdx] = useState(0)
   const [currentImg, setCurrentImage] = useState('')
-  const [form, setForm] = useState({
-    name: '',
-    shape: '',
-    status: '',
-    clay: '',
-    weight: '',
-    glaze: '',
-    makersNote: '',
-    description: ''
-  })
-  const shapes = ['vase', 'mug', 'plate', 'bowl', 'artistic']
+  const [form, setForm] = useState(null)
+  // {
+  //   clay: 'White',
+  //   creationId: 1,
+  //   date_completed: '2020-07-15T13:45:30',
+  //   date_created: '2020-06-15T13:45:30',
+  //   description: 'Creations by emily is great',
+  //   glaze: 'Black Matte',
+  //   img_bisque_fired: '',
+  //   img_complete: '',
+  //   img_gallery: '/images/vase.png',
+  //   img_glazed: '',
+  //   img_leather_hard: '',
+  //   name: 'Le Vase',
+  //   note: 'Glaze with criss-cross pattern',
+  //   shape: 'Vase',
+  //   status: 'Leather Hard',
+  //   weight_bisque_fired: 0,
+  //   weight_bone_dry: 0,
+  //   weight_complete: 0,
+  //   weight_glazed: 0,
+  //   weight_leather_hard: 0
+  // }
+
+  // HARD CODED FOR NOW
+  const shapes = ['Vase', 'Mug', 'Plate', 'Bowl', 'Artistic']
   const images = ['/images/plate.jpeg', '/images/vase.png', '/images/plate.jpeg', '/images/vase.png', '/images/plate.jpeg']
-  const statuses = ['leather hard', 'wet', 'glazed', 'glaze firing']
-  const clays = ['white', 'red', 'white speckle']
+  const statuses = ['Leather Hard', 'Wet', 'Glazed', 'Glaze Firing']
+  const clays = ['White', 'Red', 'White Speckle']
+  const glazes = ['Black Matte', 'White', 'White Speckle']
+  //
+
   useEffect(() => {
     getCreationById(1)
       .then((resp) => {
         console.log(resp)
-        // setCreation(resp)
         setForm({
           name: resp.name,
           shape: resp.shape,
           status: resp.status,
           clay: resp.clay,
-          weight: resp.weight,
+          weight: resp.weight_complete,
           glaze: resp.glaze,
-          makersNote: resp.makersNote,
+          makersNote: resp.note,
           description: resp.description
         })
         return null
@@ -52,7 +74,6 @@ export default function CreationEdit () {
   }
 
   const handleChange = (e) => {
-    console.log(e.target.name)
     setForm({
       ...form,
       [e.target.name]: e.target.value
@@ -66,86 +87,164 @@ export default function CreationEdit () {
 
   return (
     <>
-      <form>
-        <div className='creation-container edit'>
+      {form
+        ? <form>
+          {console.log(form)}
+          <div className='creation-container edit'>
 
-          <img className='creation-img'
-            src={currentImg} />
+            <img className='creation-img'
+              src={currentImg} />
 
-          <div className='icon-dots' >
-            {images.map((dot, idx) => {
-              return <div key={idx}
-                className={imgIdx === idx ? 'dot selected' : 'dot'}
-                id={idx}
-                onClick={() => getImage(idx)}></div>
-            })}
-          </div>
-
-          <div className='text-card'>
-            <div className='text-card-content'>
-              <label>
-                Name
-                <input className='name' onChange={handleChange}
-                  name='name' value={form.name} />
-              </label>
-
-              <label>
-                Shape
-                <select value={form.shape} onChange={handleChange}>
-                  {shapes.map(shape => {
-                    return <option key={shape}
-                      name='shape' value={shape}>{shape}</option>
-                  })}
-                </select>
-              </label>
-
-              <label>
-                Status
-                <select value={form.status} onChange={handleChange}>
-                  {statuses.map(status => {
-                    return <option key={status}
-                      name='status' value={status}>{status}</option>
-                  })}
-                </select>
-              </label>
-
-              <label>
-                Clay
-                <select value={form.clay} onChange={handleChange}>
-                  {clays.map(clay => {
-                    return <option key={clay}
-                      name='clay' value={clay}>{clay}</option>
-                  })}
-                </select>
-              </label>
-
-              <label>
-                    Last Recorded Weight
-                <input className='weight' onChange={handleChange}
-                  name='weight' value={form.weight} />
-              </label>
-
-              <label>
-                    Makers Note
-                <textarea className='makersNote' onChange={handleChange}
-                  name='makersNote' value={form.makersNote} />
-              </label>
-
-              <label>
-                    Description
-                <textarea className='description' onChange={handleChange}
-                  name='description' value={form.description} />
-              </label>
-
-              <p className='date'>March 12 2021</p>
-
+            <div className='icon-dots' >
+              {images.map((dot, idx) => {
+                return <div key={idx}
+                  className={imgIdx === idx ? 'dot selected' : 'dot'}
+                  id={idx}
+                  onClick={() => getImage(idx)}></div>
+              })}
             </div>
-          </div>
-          <IoLogoInstagram className='icon-instagram' />
-          <button onClick={onSubmit}>Save</button>
 
-        </div>
-      </form>
+            <div className='text-card'>
+              <div className='text-card-content'>
+                <div className={classes.root}>
+
+                  <TextField label='Name'
+                    className={classes.name}
+                    variant='outlined'
+                    size='small'
+                    id='outlined-name'
+                    margin="dense"
+                    name='name'
+                    value={form.name}
+                    onChange={handleChange}
+                  />
+
+                  <TextField label='Shape'
+                    className={classes.textField}
+                    variant='outlined'
+                    size='small'
+                    id='outlined-shape'
+                    margin="dense"
+                    select
+                    name='shape'
+                    value={form.shape}
+                    onChange={handleChange}
+                  >
+                    {shapes.map((shape) => (
+                      <MenuItem key={shape} value={shape}>
+                        {shape}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+
+                  <TextField label='Status'
+                    className={classes.textField}
+                    variant='outlined'
+                    size='small'
+                    id='outlined-status'
+                    margin="dense"
+                    select
+                    name='status'
+                    value={form.status}
+                    onChange={handleChange}
+                  >
+                    {statuses.map((status) => (
+                      <MenuItem key={status} value={status}>
+                        {status}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+
+                  <TextField label='Clay'
+                    className={classes.textField}
+                    variant='outlined'
+                    size='small'
+                    id='outlined-clay'
+                    margin="dense"
+                    select
+                    name='clay'
+                    value={form.clay}
+                    onChange={handleChange}
+                  >
+                    {clays.map((clay) => (
+                      <MenuItem key={clay} value={clay}>
+                        {clay}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+
+                  <TextField label='Weight'
+                    className={classes.textField}
+                    variant='outlined'
+                    size='small'
+                    id='outlined-weight'
+                    margin="dense"
+                    InputProps={{
+                      endAdornment: <InputAdornment position="end">g</InputAdornment>
+                    }}
+                    name='weight'
+                    value={form.weight}
+                    onChange={handleChange}
+                  />
+
+                  <TextField label='Glaze'
+                    variant='outlined'
+                    size='small'
+                    id='outlined-glaze'
+                    margin="dense"
+                    select
+                    fullWidth
+                    name='glaze'
+                    value={form.glaze}
+                    onChange={handleChange}
+                  >
+                    {glazes.map((glaze) => (
+                      <MenuItem key={glaze} value={glaze}>
+                        {glaze}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+
+                  <TextField label='Makers Note'
+                    variant='outlined'
+                    size='small'
+                    id='outlined-makers-note'
+                    margin="dense"
+                    multiline
+                    rows={5}
+                    fullWidth
+                    name='makersNote'
+                    value={form.makersNote}
+                    onChange={handleChange}
+                  />
+
+                  <TextField label='Description'
+                    variant='outlined'
+                    size='small'
+                    id='outlined-multiline-static'
+                    margin="dense"
+                    multiline
+                    rows={8}
+                    fullWidth
+                    name='description'
+                    value={form.description}
+                    onChange={handleChange}
+                  />
+
+                  <p className='date'>March 12 2021</p>
+                </div>
+
+              </div>
+            </div>
+            <IoLogoInstagram className='icon-instagram' />
+            <Link to={`/creation/${form.name}`}>
+              <VscSaveAs className='icon-save' onClick={onSubmit}/>
+            </Link>
+
+          </div>
+        </form>
+        : null
+      }
     </>
   )
 }
