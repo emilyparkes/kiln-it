@@ -69,6 +69,7 @@
 .current {
   margin-bottom: 45px;
   text-align: center;
+  color: $brand-dark;
 }
 
 .statusList {
@@ -142,7 +143,10 @@
     top:0px;
     border-style: none;
   }
+
 }
+
+
 
 // STATUS COLOURS
 .wet{

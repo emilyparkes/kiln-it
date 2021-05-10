@@ -5,7 +5,7 @@
 
 .model-box {
   position:fixed;
-  background: white;
+  background: $body-bg-light;
   width: 80%;
   height: 612px;
   top:50%;
@@ -40,4 +40,11 @@
 
 .save{
   margin: 30px;
+  width: 115px;
+  height: 30px;
+  border-radius: 4px;
+  background: $body-bg-dark;
+  color: white;
+  font-family: 'Alegreya Sans SC';
+  border-style: none;
 }
