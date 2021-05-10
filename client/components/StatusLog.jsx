@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
-import { getCreations } from '../apis/api'
 import StatusLogItem from './StatusLogItem'
+import { getCreations } from '../apis/api'
 
 export default function StatusLog () {
   const [creations, setCreations] = useState(null)

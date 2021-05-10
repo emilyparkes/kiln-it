@@ -10,7 +10,7 @@ import Register from './auth/Register'
 import SignIn from './auth/SignIn'
 import Log from './StatusLog'
 
-export default function App() {
+export default function App () {
   return (
     <>
       <Route path='/' component={Navigation} />
