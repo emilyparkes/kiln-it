@@ -20,10 +20,17 @@ h1, h2, h3 {
     color: $brand-dark;
   }
 
-  p {
-    font-family: $font-base;
-  }
+p {
+  font-family: $font-base;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
   
-  .heading {
-    font-family: $font-headings;
-  }
+.heading {
+  font-family: $font-headings;
+}
+
+
