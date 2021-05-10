@@ -17,6 +17,10 @@ export default function LeftNav ({ open, setOpen }) {
         <li>Edit</li>
       </Link>
 
+      <Link to='/log' className='link'onClick={setOpen}>
+        <li>Log</li>
+      </Link>
+
       <Link to='/about' className='link'onClick={setOpen}>
         <li>About</li>
       </Link>
