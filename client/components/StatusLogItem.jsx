@@ -73,10 +73,25 @@ export default function StatusLogItem ({ creation }) {
             <img className='log-img'
               src='/images/plate.jpeg'/>
 
-            <div className='info'>
-              <div>{creation.shape}</div>
-              <div>{creation.date_created}</div>
-            </div>
+            {/* <div className='info'> */}
+            <table className='info'>
+              <tbody >
+                <tr>
+                  <td className='width info-shape'>{creation.shape}</td>
+                  <td className='width'>Name: {creation.name}</td>
+                </tr>
+                <tr>
+                  <td className='width'>Clay: {creation.clay}</td>
+                  <td className='width'>Glaze: {creation.glaze}</td>
+                </tr>
+                <tr>
+                  <td colSpan="2">
+                    Made on {creation.date_created}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            {/* </div> */}
 
           </div>
         </Link>

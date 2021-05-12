@@ -30,8 +30,8 @@
 
 .log-box {
   display: flex;
-  width: 377.71px;
-  height: 127.65px;
+  width: 400px;
+  height: 127px;
   // max-width: 80%;
   background-color: #744f44;
   overflow: hidden;
@@ -94,18 +94,42 @@
 }
 
 .info {
-  position: absolute;
+  position: relative;
   display: flex;
-  width: 145.46px;
-  height: 48.77px;
-  left: 173px;
-  top: 61px;
-  align-content: space-between;
+  height: 70%;
+  padding: 0px 3px 0px 6px;
+  top: 40px;
+  align-content: center;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  color: whitesmoke;
 }
 
-.select{
-  text-align: center;
+.width {
+  width: 150px;
+}
+
+.info-shape {
+  font-weight: 500;
+}
+
+.info-name {
+  position: absolute;
+  left: 30px;
+  top: 0px;
+}
+
+.info-clay {
+  position: absolute;
+}
+
+.info-glaze {
+  position: absolute;
+}
+
+.info-date {
+  position: absolute;
 }
 
 .item {
