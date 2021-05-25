@@ -10,6 +10,8 @@ export default function StatusLogItem ({ creation }) {
   const [currentStatus, setStatus] = useState(creation.status)
 
   const style = currentStatus.toLowerCase().replace(/\s/g, '-')
+  const date = creation.date_completed || creation.date_completed
+  const formattedDate = new Date(date).toDateString()
 
   useEffect(() => {
     show
@@ -81,12 +83,12 @@ export default function StatusLogItem ({ creation }) {
                   <td className='width'>Name: {creation.name}</td>
                 </tr>
                 <tr>
-                  <td className='width'>Clay: {creation.clay}</td>
-                  <td className='width'>Glaze: {creation.glaze}</td>
+                  <td className='width'>{creation.clay} Clay</td>
+                  <td className='width'>{creation.glaze} Glaze</td>
                 </tr>
                 <tr>
                   <td colSpan="2">
-                    Made on {creation.date_created}
+                    Made on {formattedDate}
                   </td>
                 </tr>
               </tbody>
