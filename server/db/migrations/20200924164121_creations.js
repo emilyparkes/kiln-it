@@ -14,7 +14,7 @@ exports.up = (knex) => {
     table.text('description')
     table.text('note')
     table.string('date_created')
-    table.string('date_completed')
+    table.string('date_complete')
     table.string('img_leather_hard')
     table.string('img_bisque_fired')
     table.string('img_glazed')

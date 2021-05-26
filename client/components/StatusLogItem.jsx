@@ -10,7 +10,7 @@ export default function StatusLogItem ({ creation }) {
   const [currentStatus, setStatus] = useState(creation.status)
 
   const style = currentStatus.toLowerCase().replace(/\s/g, '-')
-  const date = creation.date_completed || creation.date_completed
+  const date = creation.date_complete || creation.date_created
   const formattedDate = new Date(date).toDateString()
 
   useEffect(() => {
