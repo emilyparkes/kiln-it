@@ -1,21 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { getCreations } from '../apis/api'
+import { fetchCreations } from '../actions/creations'
 import Card from './Card'
 
-export default function Gallery () {
-  const [creations, setCreations] = useState(null)
-
+function Gallery ({ creations }) {
   useEffect(() => {
-    getCreations()
-      .then((resp) => {
-        setCreations(resp)
-        return null
-      })
-      .catch((error) => {
-        console.log('error: ', error.message)
-      })
+    fetchCreations()
   }, [])
 
   return (
@@ -45,3 +37,11 @@ export default function Gallery () {
     </>
   )
 }
+
+const mapStateToProps = (store) => {
+  return {
+    creations: store.creations
+  }
+}
+
+export default connect(mapStateToProps)(Gallery)
