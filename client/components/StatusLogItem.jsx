@@ -2,22 +2,16 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { findString } from '../utils'
 import StatusModal from './StatusModal'
 
 function StatusLogItem ({ all, creation, updateCreation, history }) {
   const [show, setShowModel] = useState(false)
-  const [statusStyle, setStatusStyle] = useState('')
-  const [currentStatus, setStatus] = useState({})
+  const [statusStyle, setStatusStyle] = useState(creation.status)
+  const [currentStatus, setStatus] = useState({ id: creation.statusId, status: creation.status })
 
   const style = statusStyle.toLowerCase().replace(/\s/g, '-')
   const date = creation.dateComplete || creation.dateCreated
   const formattedDate = new Date(date).toDateString()
-
-  useEffect(() => {
-    setStatusStyle(findString(all.statuses, creation.statusId, 'status'))
-    setStatus(findString(all.statuses, creation.statusId))
-  }, [])
 
   useEffect(() => {
     show
@@ -42,9 +36,11 @@ function StatusLogItem ({ all, creation, updateCreation, history }) {
   const onSubmit = (e) => {
     // e.preventDefault()
     hideModal()
-    creation.status = currentStatus.id
+    delete creation.clay
+    delete creation.shape
+    delete creation.glaze
+    delete creation.status
     const updatedCreation = { ...creation }
-    console.log(updatedCreation)
     updateCreation(updatedCreation)
     history.push('/log')
   }
@@ -92,12 +88,12 @@ function StatusLogItem ({ all, creation, updateCreation, history }) {
               <table className='info'>
                 <tbody >
                   <tr>
-                    <td className='width info-shape'>{findString(all.shapes, creation.shapeId, 'shape')}</td>
+                    <td className='width info-shape'>{creation.shape}</td>
                     <td className='width'>Name: {creation.name}</td>
                   </tr>
                   <tr>
-                    <td className='width'>{findString(all.clay, creation.clayId, 'clay')} Clay</td>
-                    <td className='width'>{findString(all.glazes, creation.glazeId, 'glaze')} Glaze</td>
+                    <td className='width'>{creation.clay} Clay</td>
+                    <td className='width'>{creation.glaze} Glaze</td>
                   </tr>
                   <tr>
                     <td colSpan="2">
