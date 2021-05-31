@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { connect } from 'react-redux'
 
 import { TextField, MenuItem, InputAdornment } from '@material-ui/core'
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
@@ -7,20 +8,17 @@ import { IoLogoInstagram } from 'react-icons/io'
 import { VscSaveAs } from 'react-icons/vsc'
 
 import { useEditStyles } from '../styles/mui_overrides'
-import { getCreationById } from '../apis/api'
+import { updateCreation } from '../apis/creations'
+import { findString, toLowHyphen, toCapSpace } from '../client-utils'
 
-export default function CreationEdit (props) {
+function CreationEdit ({ all, match, history }) {
   const classes = useEditStyles()
   const [imgIdx, setImgIdx] = useState(0)
   const [currentImg, setCurrentImage] = useState('')
   const [form, setForm] = useState(null)
 
   // HARD CODED FOR NOW
-  const shapes = ['Vase', 'Mug', 'Plate', 'Bowl', 'Artistic']
   const images = ['/images/plate.jpeg', '/images/vase.png', '/images/plate.jpeg', '/images/vase.png', '/images/plate.jpeg']
-  const statuses = ['Leather Hard', 'Wet', 'Glazed', 'Glaze Firing']
-  const clays = ['White', 'Red', 'White Speckle']
-  const glazes = ['Black Matte', 'White', 'White Speckle']
   //
 
   const theme = createMuiTheme({
@@ -30,24 +28,12 @@ export default function CreationEdit (props) {
   })
 
   useEffect(() => {
-    getCreationById(1)
-      .then((resp) => {
-        setForm({
-          name: resp.name,
-          shape: resp.shape,
-          status: resp.status,
-          clay: resp.clay,
-          weight: resp.weight_complete,
-          glaze: resp.glaze,
-          makersNote: resp.note,
-          description: resp.description
-        })
-        return null
-      })
-      .catch((error) => {
-        console.log('error: ', error.message)
-      })
-  }, [])
+    if (all) {
+      const name = toCapSpace(match.params.name)
+      const creation = findString(all.creations, 'name', name)
+      setForm(creation)
+    }
+  }, [all])
 
   useEffect(() => {
     setCurrentImage(images[imgIdx])
@@ -66,13 +52,18 @@ export default function CreationEdit (props) {
 
   const onSubmit = (e) => {
     e.preventDefault()
-    props.history.push('/creations/le-vase')
-    // sendForm(form)
+    delete form.clay
+    delete form.shape
+    delete form.glaze
+    delete form.status
+    updateCreation(form)
+    const newName = toLowHyphen(form.name)
+    history.push(`/creations/${newName}`)
   }
 
   return (
     <>
-      {form
+      { (form && all)
         ? <form>
           <div className='creation-container edit'>
 
@@ -115,9 +106,9 @@ export default function CreationEdit (props) {
                       value={form.shape}
                       onChange={handleChange}
                     >
-                      {shapes.map((shape) => (
-                        <MenuItem key={shape} value={shape}>
-                          {shape}
+                      {all.shapes.map((obj) => (
+                        <MenuItem key={obj.id} value={obj.shape}>
+                          {obj.shape}
                         </MenuItem>
                       ))}
                     </TextField>
@@ -133,9 +124,9 @@ export default function CreationEdit (props) {
                       value={form.status}
                       onChange={handleChange}
                     >
-                      {statuses.map((status) => (
-                        <MenuItem key={status} value={status}>
-                          {status}
+                      {all.statuses.map((obj) => (
+                        <MenuItem key={obj.id} value={obj.status}>
+                          {obj.status}
                         </MenuItem>
                       ))}
                     </TextField>
@@ -151,9 +142,9 @@ export default function CreationEdit (props) {
                       value={form.clay}
                       onChange={handleChange}
                     >
-                      {clays.map((clay) => (
-                        <MenuItem key={clay} value={clay}>
-                          {clay}
+                      {all.clay.map((obj) => (
+                        <MenuItem key={obj.id} value={obj.clay}>
+                          {obj.clay}
                         </MenuItem>
                       ))}
                     </TextField>
@@ -183,9 +174,9 @@ export default function CreationEdit (props) {
                       value={form.glaze}
                       onChange={handleChange}
                     >
-                      {glazes.map((glaze) => (
-                        <MenuItem key={glaze} value={glaze}>
-                          {glaze}
+                      {all.glazes.map((obj) => (
+                        <MenuItem key={obj.id} value={obj.glaze}>
+                          {obj.glaze}
                         </MenuItem>
                       ))}
                     </TextField>
@@ -227,8 +218,15 @@ export default function CreationEdit (props) {
 
           </div>
         </form>
-        : null
-      }
+        : null }
     </>
   )
 }
+
+const mapStateToProps = (store) => {
+  return {
+    all: store.all
+  }
+}
+
+export default connect(mapStateToProps)(CreationEdit)

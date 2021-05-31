@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import { connect } from 'react-redux'
 import { IoLogoInstagram } from 'react-icons/io'
 
-import { getCreationById } from '../apis/api'
+import { findString, toCapSpace } from '../client-utils'
 
-export default function Creation (props) {
+function Creation ({ all, match }) {
   const [creation, setCreation] = useState(null)
   const [imgIdx, setImgIdx] = useState(0)
   const [currentImg, setCurrentImage] = useState('')
@@ -11,15 +12,12 @@ export default function Creation (props) {
   const images = ['/images/plate.jpeg', '/images/vase.png', '/images/plate.jpeg', '/images/vase.png', '/images/plate.jpeg']
 
   useEffect(() => {
-    getCreationById(1)
-      .then((resp) => {
-        setCreation(resp)
-        return null
-      })
-      .catch((error) => {
-        console.log('error: ', error.message)
-      })
-  }, [])
+    if (all) {
+      const name = toCapSpace(match.params.name)
+      const creation = findString(all.creations, 'name', name)
+      setCreation(creation)
+    }
+  }, [all])
 
   useEffect(() => {
     setCurrentImage(images[imgIdx])
@@ -35,7 +33,7 @@ export default function Creation (props) {
         ? <>
           <div className='creation-container'>
             <img className='creation-img'
-              src={currentImg}/>
+              src={currentImg} />
 
             <div className='icon-dots' >
               {images.map((dot, idx) => {
@@ -54,13 +52,21 @@ export default function Creation (props) {
                 <p className='date'>March 12 2021</p>
               </div>
             </div>
-            <IoLogoInstagram className='icon-instagram'/>
+            <IoLogoInstagram className='icon-instagram' />
           </div>
         </>
         : 'I\'m sorry no art was made apparently'}
     </>
   )
 }
+
+const mapStateToProps = (store) => {
+  return {
+    all: store.all
+  }
+}
+
+export default connect(mapStateToProps)(Creation)
 
 // const [touchStart, setTouchStart] = React.useState(0);
 // const [touchEnd, setTouchEnd] = React.useState(0);

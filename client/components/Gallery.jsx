@@ -1,17 +1,18 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { toLowHyphen } from '../client-utils'
 
 import Card from './Card'
 
-function Gallery ({ creations }) {
+function Gallery ({ all }) {
   return (
     <>
-      {creations ? (
+      {all ? (
         <div className='card-root'>
           <div className='card-container'>
-            {creations.map((creation) => {
-              const name = creation.name.toLowerCase().replace(' ', '-')
+            {all.creations.map((creation) => {
+              const name = toLowHyphen(creation.name)
               return (
                 <Link
                   to={`/creations/${name}`}
@@ -35,7 +36,7 @@ function Gallery ({ creations }) {
 
 const mapStateToProps = (store) => {
   return {
-    creations: store.all.creations
+    all: store.all
   }
 }
 
