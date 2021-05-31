@@ -1,15 +1,10 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { fetchCreations } from '../actions/creations'
 import Card from './Card'
 
 function Gallery ({ creations }) {
-  useEffect(() => {
-    fetchCreations()
-  }, [])
-
   return (
     <>
       {creations ? (
@@ -20,7 +15,7 @@ function Gallery ({ creations }) {
               return (
                 <Link
                   to={`/creations/${name}`}
-                  key={creation.creationId}
+                  key={creation.id}
                 >
                   <Card
                     img={'/images/plate.jpeg'}
@@ -40,7 +35,7 @@ function Gallery ({ creations }) {
 
 const mapStateToProps = (store) => {
   return {
-    creations: store.creations
+    creations: store.all.creations
   }
 }
 
