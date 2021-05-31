@@ -1,5 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Route, Switch } from 'react-router-dom'
+import { connect } from 'react-redux'
+
+import { fetchAll } from '../actions/all'
 
 import Navigation from './nav/Navigation'
 import Home from './Home'
@@ -10,7 +13,11 @@ import Register from './auth/Register'
 import SignIn from './auth/SignIn'
 import Log from './StatusLog'
 
-export default function App () {
+function App ({ dispatch }) {
+  useEffect(() => {
+    dispatch(fetchAll())
+  }, [])
+
   return (
     <>
       <Route path='/' component={Navigation} />
@@ -26,3 +33,5 @@ export default function App () {
     </>
   )
 }
+
+export default connect()(App)

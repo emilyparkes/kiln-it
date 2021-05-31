@@ -1,29 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import { connect } from 'react-redux'
 
 import StatusLogItem from './StatusLogItem'
-import { getCreations } from '../apis/api'
+import { updateCreation } from '../apis/creations'
 
-export default function StatusLog () {
-  const [creations, setCreations] = useState(null)
-
-  useEffect(() => {
-    getCreations()
-      .then((resp) => {
-        setCreations(resp)
-        return null
-      })
-      .catch((error) => {
-        console.log('error: ', error.message)
-      })
-  }, [])
-
+function StatusLog ({ creations, history }) {
   return (
     <>
       {creations ? (
         <div className='log-container'>
           {creations.map((creation) => {
             return (
-              <StatusLogItem key={creation.creationId} creation={creation} />
+              <StatusLogItem key={creation.id}
+                creation={creation}
+                updateCreation={updateCreation}
+                history={history}/>
             )
           })}
         </div>
@@ -31,3 +22,11 @@ export default function StatusLog () {
     </>
   )
 }
+
+const mapStateToProps = (store) => {
+  return {
+    creations: store.all.creations
+  }
+}
+
+export default connect(mapStateToProps)(StatusLog)

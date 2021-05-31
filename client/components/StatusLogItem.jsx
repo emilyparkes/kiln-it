@@ -1,17 +1,23 @@
 import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
+import { findString } from '../utils'
 import StatusModal from './StatusModal'
 
-const statuses = ['Wet', 'Leather Hard', 'Bone Dry', 'Bisque Firing', 'Bisque Fired', 'Glazed', 'Glaze Firing', 'Complete']
-
-export default function StatusLogItem ({ creation }) {
+function StatusLogItem ({ all, creation, updateCreation, history }) {
   const [show, setShowModel] = useState(false)
-  const [currentStatus, setStatus] = useState(creation.status)
+  const [statusStyle, setStatusStyle] = useState('')
+  const [currentStatus, setStatus] = useState({})
 
-  const style = currentStatus.toLowerCase().replace(/\s/g, '-')
-  const date = creation.date_complete || creation.date_created
+  const style = statusStyle.toLowerCase().replace(/\s/g, '-')
+  const date = creation.dateComplete || creation.dateCreated
   const formattedDate = new Date(date).toDateString()
+
+  useEffect(() => {
+    setStatusStyle(findString(all.statuses, creation.statusId, 'status'))
+    setStatus(findString(all.statuses, creation.statusId))
+  }, [])
 
   useEffect(() => {
     show
@@ -28,13 +34,19 @@ export default function StatusLogItem ({ creation }) {
   }
 
   const handleSelect = (e) => {
-    setStatus(e.target.value)
+    const selected = all.statuses.find(obj => obj.status === e.target.value)
+    setStatus(selected)
+    setStatusStyle(e.target.value)
   }
 
   const onSubmit = (e) => {
     // e.preventDefault()
     hideModal()
-    // sendForm(form)
+    creation.status = currentStatus.id
+    const updatedCreation = { ...creation }
+    console.log(updatedCreation)
+    updateCreation(updatedCreation)
+    history.push('/log')
   }
 
   return (
@@ -45,60 +57,69 @@ export default function StatusLogItem ({ creation }) {
             <div className='current'>
               <p>Selected</p>
               <p className={`status ${style}`}>
-                {currentStatus}
+                {currentStatus.status}
               </p>
             </div>
             <div className='statusList'>
-              {statuses.map((status) => {
-                const styleItem = status.toLowerCase().replace(/\s/g, '-')
+              {all.statuses ? all.statuses.map((statusobj) => {
+                const styleItem = statusobj.status.toLowerCase().replace(/\s/g, '-')
 
                 return <button className={`status ${styleItem}`}
-                  key={status} value={status}
+                  key={statusobj.id} value={statusobj.status}
                   onClick={handleSelect}>
-                  {status}
+                  {statusobj.status}
                 </button>
-              })}
+              })
+                : 'no statuses found'}
             </div>
           </StatusModal>
         </main>
         : null}
 
-      <div className='item'>
-        <div className={`status ${style}`}
-          onClick={showModal}>
-          {currentStatus}
-        </div>
-
-        <Link to='/creations/le-vase'>
-          <div className='log-box' key={creation.id}>
-
-            <img className='log-img'
-              src='/images/plate.jpeg'/>
-
-            {/* <div className='info'> */}
-            <table className='info'>
-              <tbody >
-                <tr>
-                  <td className='width info-shape'>{creation.shape}</td>
-                  <td className='width'>Name: {creation.name}</td>
-                </tr>
-                <tr>
-                  <td className='width'>{creation.clay} Clay</td>
-                  <td className='width'>{creation.glaze} Glaze</td>
-                </tr>
-                <tr>
-                  <td colSpan="2">
-                    Made on {formattedDate}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            {/* </div> */}
-
+      { all
+        ? <div className='item'>
+          <div className={`status ${style}`}
+            onClick={showModal}>
+            {currentStatus.status}
           </div>
-        </Link>
 
-      </div>
+          <Link to='/creations/le-vase'>
+            <div className='log-box' key={creation.id}>
+
+              <img className='log-img'
+                src='/images/plate.jpeg'/>
+
+              <table className='info'>
+                <tbody >
+                  <tr>
+                    <td className='width info-shape'>{findString(all.shapes, creation.shapeId, 'shape')}</td>
+                    <td className='width'>Name: {creation.name}</td>
+                  </tr>
+                  <tr>
+                    <td className='width'>{findString(all.clay, creation.clayId, 'clay')} Clay</td>
+                    <td className='width'>{findString(all.glazes, creation.glazeId, 'glaze')} Glaze</td>
+                  </tr>
+                  <tr>
+                    <td colSpan="2">
+                    Made on {formattedDate}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+          </Link>
+
+        </div>
+        : 'Sorry, I couldn\'t load data...'}
     </>
   )
 }
+
+const mapStateToProps = (store) => {
+  return {
+    all: store.all
+  }
+}
+
+export default connect(mapStateToProps)(StatusLogItem)

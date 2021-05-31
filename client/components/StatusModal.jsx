@@ -4,7 +4,7 @@ export default function StatusModal ({ save, close, show, children }) {
   const showHideClassName = show ? 'modal open' : 'modal closed'
 
   const handleSave = () => {
-    // save()
+    save()
     close()
   }
 
