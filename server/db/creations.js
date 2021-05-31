@@ -2,7 +2,8 @@ const { connection } = require('./connection')
 
 module.exports = {
   getCreations,
-  getCreationById
+  getCreationById,
+  updateCreationById
 }
 
 function getCreations (db = connection) {
@@ -12,11 +13,11 @@ function getCreations (db = connection) {
     .join('shapes', 'shapes.id', 'creations.shape')
     .join('statuses', 'statuses.id', 'creations.status')
     .select(
-      'creations.id as creationId',
-      'clay.clay as clay',
-      'glazes.glaze as glaze',
-      'shapes.shape as shape',
-      'statuses.status as status',
+      'creations.id',
+      'clay.id as clayId',
+      'glazes.id as glazeId',
+      'shapes.id as shapeId',
+      'statuses.id as statusId',
       'weight_leather_hard',
       'weight_bone_dry',
       'weight_bisque_fired',
@@ -43,11 +44,11 @@ function getCreationById (id, db = connection) {
     .join('statuses', 'statuses.id', 'creations.status')
     .where('creations.id', id)
     .select(
-      'creations.id as creationId',
-      'clay.clay as clay',
-      'glazes.glaze as glaze',
-      'shapes.shape as shape',
-      'statuses.status as status',
+      'creations.id',
+      'clay.id as clayId',
+      'glazes.id as glazeId',
+      'shapes.id as shapeId',
+      'statuses.id as statusId',
       'weight_leather_hard',
       'weight_bone_dry',
       'weight_bisque_fired',
@@ -64,4 +65,11 @@ function getCreationById (id, db = connection) {
       'img_complete',
       'img_gallery'
     ).first()
+}
+
+// how to insert shape change when it is value and not id?
+function updateCreationById (id, creation, db = connection) {
+  return db('creations')
+    .where('creations.id', id)
+    .update(creation)
 }
