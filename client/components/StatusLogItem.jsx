@@ -3,13 +3,14 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import StatusModal from './StatusModal'
+import { toLowHyphen } from '../client-utils'
 
-function StatusLogItem ({ all, creation, updateCreation, history }) {
+function StatusLogItem({ all, creation, updateCreation, history }) {
   const [show, setShowModel] = useState(false)
   const [statusStyle, setStatusStyle] = useState(creation.status)
   const [currentStatus, setStatus] = useState({ id: creation.statusId, status: creation.status })
 
-  const style = statusStyle.toLowerCase().replace(/\s/g, '-')
+  const style = toLowHyphen(statusStyle)
   const date = creation.dateComplete || creation.dateCreated
   const formattedDate = new Date(date).toDateString()
 
@@ -58,7 +59,7 @@ function StatusLogItem ({ all, creation, updateCreation, history }) {
             </div>
             <div className='statusList'>
               {all.statuses ? all.statuses.map((statusobj) => {
-                const styleItem = statusobj.status.toLowerCase().replace(/\s/g, '-')
+                const styleItem = toLowHyphen(statusobj.status)
 
                 return <button className={`status ${styleItem}`}
                   key={statusobj.id} value={statusobj.status}
@@ -83,7 +84,7 @@ function StatusLogItem ({ all, creation, updateCreation, history }) {
             <div className='log-box' key={creation.id}>
 
               <img className='log-img'
-                src='/images/plate.jpeg'/>
+                src='/images/plate.jpeg' />
 
               <table className='info'>
                 <tbody >
@@ -97,7 +98,7 @@ function StatusLogItem ({ all, creation, updateCreation, history }) {
                   </tr>
                   <tr>
                     <td colSpan="2">
-                    Made on {formattedDate}
+                      Made on {formattedDate}
                     </td>
                   </tr>
                 </tbody>

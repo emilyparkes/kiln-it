@@ -35,7 +35,7 @@ exports.seed = (knex) => {
           date_complete: '2020-06-24T14:45:30',
           description: '',
           note: 'Glaze with criss-cross pattern',
-          name: '',
+          name: 'Le Plate',
           img_complete: ''
         },
         {
@@ -53,7 +53,7 @@ exports.seed = (knex) => {
           date_complete: '2020-06-25T14:49:30',
           description: '',
           note: 'Glaze in full colour',
-          name: '',
+          name: 'Le Cup',
           img_complete: '/images/1.png'
         },
         {
@@ -71,7 +71,7 @@ exports.seed = (knex) => {
           date_complete: '2020-07-28T16:23:30',
           description: '',
           note: 'Glaze in full colour',
-          name: '',
+          name: 'Le Art',
           img_complete: '/images/2.png'
         },
         {

@@ -6,7 +6,7 @@ const getStatuses = require('../db/statuses').getStatuses
 const getClay = require('../db/clay').getClay
 const getShapes = require('../db/shapes').getShapes
 
-const { prepForJS } = require('../utils')
+const { prepForJS } = require('../server-utils')
 
 const router = express.Router()
 
