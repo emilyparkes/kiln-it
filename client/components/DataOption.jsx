@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 
+import { TextField } from '@material-ui/core'
 import { showError } from '../actions/error'
 // import { addNewShape, addNewStatus, addNewClay, addNewGlaze } from '../apis/dataOptions'
 
@@ -9,7 +10,7 @@ function DataOption ({ name, arrOfType, dispatch }) {
   const [newInputVisible, setNewInputVisible] = useState(false)
 
   const showAddInput = () => {
-    setNewInputVisible(true)
+    setNewInputVisible(!newInputVisible)
   }
 
   const handleChange = (e) => {
@@ -45,26 +46,35 @@ function DataOption ({ name, arrOfType, dispatch }) {
 
   return (
     <>
-      <form onSubmit={submit}>
-        {arrOfType.map((obj) => (
-          <div key={obj.id} value={obj[name]}>
-            {obj[name]}
-          </div>
-        ))}
-        {newInputVisible && <p>
-          <input type='text'
-            placeholder='New Shape name'
-            name={name}
-            value={currentAddition}
-            onChange={handleChange}
-          />
-        </p>}
-        {
-          newInputVisible
-            ? <button id='' className='button is-primary' onClick={save}>Save</button>
+      <div>
+        <form onSubmit={submit}>
+          {arrOfType.map((obj) => (
+            <div key={obj.id} value={obj[name]}>
+              {obj[name]}
+            </div>
+          ))}
+          {newInputVisible &&
+            <TextField
+              label={name}
+              variant='outlined'
+              size='small'
+              id='outlined'
+              margin='dense'
+              placeholder={`new ${name} option`}
+              name={name}
+              value={currentAddition}
+              onChange={handleChange}
+            />
+          }
+          {newInputVisible
+            ? <div>
+              <button id={name} className='button is-primary' onClick={save}>Save</button>
+              <button className='button is-primary' onClick={showAddInput}>X</button>
+            </div>
             : <button className='button is-primary' onClick={showAddInput}>+</button>
-        }
-      </form>
+          }
+        </form>
+      </div>
     </>
   )
 }
