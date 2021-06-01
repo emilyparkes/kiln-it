@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Card ({ img, name, shape, description }) {
+function Card ({ img, name, shape, description }) {
   return (
     <div className='card' >
       <div className='card-overlay'>
@@ -14,3 +14,5 @@ export default function Card ({ img, name, shape, description }) {
     </div>
   )
 }
+
+export default Card

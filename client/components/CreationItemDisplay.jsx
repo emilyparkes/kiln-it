@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function CreationItemDisplay ({ creation }) {
+function CreationItemDisplay ({ creation }) {
   return (
     <>
       <img className='creation-img' src={creation.image} />
@@ -13,3 +13,5 @@ export default function CreationItemDisplay ({ creation }) {
     </>
   )
 }
+
+export default CreationItemDisplay

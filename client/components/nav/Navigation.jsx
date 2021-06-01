@@ -1,8 +1,7 @@
 import React from 'react'
 import Burger from './Burger'
-// import { Link } from 'react-router-dom'
 
-export default function Navbar () {
+function Navbar () {
   return (
     <div className='nav'>
       <Burger />
@@ -11,3 +10,5 @@ export default function Navbar () {
     </div>
   )
 }
+
+export default Navbar

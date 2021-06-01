@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import StatusModal from './StatusModal'
 import { toLowHyphen } from '../client-utils'
 
-function StatusLogItem({ all, creation, updateCreation, history }) {
+function StatusLogItem ({ all, creation, updateCreation, history }) {
   const [show, setShowModel] = useState(false)
   const [statusStyle, setStatusStyle] = useState(creation.status)
   const [currentStatus, setStatus] = useState({ id: creation.statusId, status: creation.status })
@@ -48,17 +48,18 @@ function StatusLogItem({ all, creation, updateCreation, history }) {
 
   return (
     <>
-      {show
-        ? <main className='main edit'>
-          <StatusModal show={show} save={onSubmit} close={hideModal}>
-            <div className='current'>
-              <p>Selected</p>
-              <p className={`status ${style}`}>
-                {currentStatus.status}
-              </p>
-            </div>
-            <div className='statusList'>
-              {all.statuses ? all.statuses.map((statusobj) => {
+      {show &&
+      <main className='main edit'>
+        <StatusModal show={show} save={onSubmit} close={hideModal}>
+          <div className='current'>
+            <p>Selected</p>
+            <p className={`status ${style}`}>
+              {currentStatus.status}
+            </p>
+          </div>
+          <div className='statusList'>
+            {all.statuses
+              ? all.statuses.map((statusobj) => {
                 const styleItem = toLowHyphen(statusobj.status)
 
                 return <button className={`status ${styleItem}`}
@@ -67,11 +68,11 @@ function StatusLogItem({ all, creation, updateCreation, history }) {
                   {statusobj.status}
                 </button>
               })
-                : 'no statuses found'}
-            </div>
-          </StatusModal>
-        </main>
-        : null}
+              : 'no statuses found'}
+          </div>
+        </StatusModal>
+      </main>
+      }
 
       { all
         ? <div className='item'>

@@ -8,7 +8,7 @@ import Card from './Card'
 function Gallery ({ all }) {
   return (
     <>
-      {all ? (
+      {all && (
         <div className='card-root'>
           <div className='card-container'>
             {all.creations.map((creation) => {
@@ -29,7 +29,7 @@ function Gallery ({ all }) {
             })}
           </div>
         </div>
-      ) : null}
+      )}
     </>
   )
 }

@@ -7,7 +7,7 @@ import { updateCreation } from '../apis/creations'
 function StatusLog ({ creations, history }) {
   return (
     <>
-      {creations ? (
+      {creations && (
         <div className='log-container'>
           {creations.map((creation) => {
             return (
@@ -18,7 +18,7 @@ function StatusLog ({ creations, history }) {
             )
           })}
         </div>
-      ) : null}
+      )}
     </>
   )
 }

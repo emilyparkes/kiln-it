@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function StatusModal ({ save, close, show, children }) {
+function StatusModal ({ save, close, show, children }) {
   const showHideClassName = show ? 'modal open' : 'modal closed'
 
   const handleSave = () => {
@@ -19,3 +19,5 @@ export default function StatusModal ({ save, close, show, children }) {
     </div>
   )
 }
+
+export default StatusModal

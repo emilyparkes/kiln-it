@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-export default function SignIn () {
+function SignIn () {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
@@ -38,3 +38,4 @@ export default function SignIn () {
     </>
   )
 }
+export default SignIn
