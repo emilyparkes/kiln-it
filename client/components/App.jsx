@@ -12,6 +12,7 @@ import Creation from './Creation'
 import Register from './auth/Register'
 import SignIn from './auth/SignIn'
 import Log from './StatusLog'
+import AddDataOptions from './AddDataOptions'
 
 function App ({ dispatch }) {
   useEffect(() => {
@@ -27,6 +28,7 @@ function App ({ dispatch }) {
         <Route path='/log' component={Log} />
         <Route path='/creations/:name/edit' component={CreationEdit} />
         <Route path='/creations/:name' component={Creation} />
+        <Route path='/options/edit' component={AddDataOptions} />
         <Route path='/register' component={Register} />
         <Route path='/signin' component={SignIn} />
       </Switch>
