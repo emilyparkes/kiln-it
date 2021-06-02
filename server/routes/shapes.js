@@ -8,7 +8,6 @@ const router = express.Router()
 router.post('/', (req, res) => {
   console.log('body: ', req.body)
   const creation = prepForDb(req.body)
-  const 
   req.body.map(shape => {
     db.addNewShape(shape)
   })
