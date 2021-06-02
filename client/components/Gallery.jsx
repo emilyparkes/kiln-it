@@ -5,13 +5,13 @@ import { toLowHyphen } from '../client-utils'
 
 import Card from './Card'
 
-function Gallery ({ all }) {
+function Gallery ({ creations }) {
   return (
     <>
-      {all && (
+      {creations && (
         <div className='card-root'>
           <div className='card-container'>
-            {all.creations.map((creation) => {
+            {creations.map((creation) => {
               const name = toLowHyphen(creation.name)
               return (
                 <Link
@@ -36,7 +36,7 @@ function Gallery ({ all }) {
 
 const mapStateToProps = (store) => {
   return {
-    all: store.all
+    creations: store.creations
   }
 }
 

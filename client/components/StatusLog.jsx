@@ -25,7 +25,7 @@ function StatusLog ({ creations, history }) {
 
 const mapStateToProps = (store) => {
   return {
-    creations: store.all.creations
+    creations: store.creations
   }
 }
 

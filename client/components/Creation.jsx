@@ -4,7 +4,7 @@ import { IoLogoInstagram } from 'react-icons/io'
 
 import { findString, toCapSpace } from '../client-utils'
 
-function Creation ({ all, match }) {
+function Creation ({ creations, match }) {
   const [creation, setCreation] = useState(null)
   const [imgIdx, setImgIdx] = useState(0)
   const [currentImg, setCurrentImage] = useState('')
@@ -12,12 +12,12 @@ function Creation ({ all, match }) {
   const images = ['/images/plate.jpeg', '/images/vase.png', '/images/plate.jpeg', '/images/vase.png', '/images/plate.jpeg']
 
   useEffect(() => {
-    if (all) {
+    if (creations) {
       const name = toCapSpace(match.params.name)
-      const creation = findString(all.creations, 'name', name)
+      const creation = findString(creations, 'name', name)
       setCreation(creation)
     }
-  }, [all])
+  }, [creations])
 
   useEffect(() => {
     setCurrentImage(images[imgIdx])
@@ -61,7 +61,7 @@ function Creation ({ all, match }) {
 
 const mapStateToProps = (store) => {
   return {
-    all: store.all
+    creations: store.creations
   }
 }
 

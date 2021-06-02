@@ -11,7 +11,7 @@ import { useEditStyles } from '../styles/mui_overrides'
 import { updateCreation } from '../apis/creations'
 import { findString, toLowHyphen, toCapSpace } from '../client-utils'
 
-function CreationEdit ({ all, match, history }) {
+function CreationEdit ({ creations, clay, glazes, shapes, statuses, match, history }) {
   const classes = useEditStyles()
   const [imgIdx, setImgIdx] = useState(0)
   const [currentImg, setCurrentImage] = useState('')
@@ -28,12 +28,12 @@ function CreationEdit ({ all, match, history }) {
   })
 
   useEffect(() => {
-    if (all) {
+    if (creations) {
       const name = toCapSpace(match.params.name)
-      const creation = findString(all.creations, 'name', name)
+      const creation = findString(creations, 'name', name)
       setForm(creation)
     }
-  }, [all])
+  }, [creations])
 
   useEffect(() => {
     setCurrentImage(images[imgIdx])
@@ -63,7 +63,7 @@ function CreationEdit ({ all, match, history }) {
 
   return (
     <>
-      { (form && all) &&
+      { (form && creations) &&
       <form>
         <div className='creation-container edit'>
 
@@ -106,7 +106,7 @@ function CreationEdit ({ all, match, history }) {
                     value={form.shape}
                     onChange={handleChange}
                   >
-                    {all.shapes.map((obj) => (
+                    {shapes.map((obj) => (
                       <MenuItem key={obj.id} value={obj.shape}>
                         {obj.shape}
                       </MenuItem>
@@ -124,7 +124,7 @@ function CreationEdit ({ all, match, history }) {
                     value={form.status}
                     onChange={handleChange}
                   >
-                    {all.statuses.map((obj) => (
+                    {statuses.map((obj) => (
                       <MenuItem key={obj.id} value={obj.status}>
                         {obj.status}
                       </MenuItem>
@@ -142,7 +142,7 @@ function CreationEdit ({ all, match, history }) {
                     value={form.clay}
                     onChange={handleChange}
                   >
-                    {all.clay.map((obj) => (
+                    {clay.map((obj) => (
                       <MenuItem key={obj.id} value={obj.clay}>
                         {obj.clay}
                       </MenuItem>
@@ -174,7 +174,7 @@ function CreationEdit ({ all, match, history }) {
                     value={form.glaze}
                     onChange={handleChange}
                   >
-                    {all.glazes.map((obj) => (
+                    {glazes.map((obj) => (
                       <MenuItem key={obj.id} value={obj.glaze}>
                         {obj.glaze}
                       </MenuItem>
@@ -225,7 +225,11 @@ function CreationEdit ({ all, match, history }) {
 
 const mapStateToProps = (store) => {
   return {
-    all: store.all
+    creations: store.creations,
+    clay: store.clay,
+    glazes: store.glazes,
+    shapes: store.shapes,
+    statuses: store.statuses
   }
 }
 

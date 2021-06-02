@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 
 import { TextField } from '@material-ui/core'
 import { showError } from '../actions/error'
-// import { addNewShape, addNewStatus, addNewClay, addNewGlaze } from '../apis/dataOptions'
+import { addNewShape, addNewStatus, addNewClay, addNewGlaze } from '../apis/dataOptions'
 
 function DataOption ({ name, arrOfType, dispatch }) {
-  const [dataList, setDataList] = useState(null)
+  const [dataList, setDataList] = useState([])
   const [currentAddition, setCurrentAddition] = useState('')
   const [newInputVisible, setNewInputVisible] = useState(false)
 
@@ -16,19 +16,20 @@ function DataOption ({ name, arrOfType, dispatch }) {
   const handleChange = (e) => {
     setCurrentAddition(e.target.value)
   }
-
   const submit = (e) => {
     e.preventDefault()
     setDataList([
       ...dataList,
       currentAddition
     ])
+    setCurrentAddition('')
   }
 
   const save = (e) => {
+    setNewInputVisible(!newInputVisible)
     switch (name) {
       case 'shape':
-        // addNewShape(dataList)
+        addNewShape(dataList)
         break
       case 'status':
         // addNewStatus(dataList)
@@ -42,6 +43,7 @@ function DataOption ({ name, arrOfType, dispatch }) {
       default:
         dispatch(showError('Sorry I don\'t understand which item is being saved...'))
     }
+    setDataList([])
   }
 
   return (
@@ -53,6 +55,15 @@ function DataOption ({ name, arrOfType, dispatch }) {
               {obj[name]}
             </div>
           ))}
+
+          {newInputVisible &&
+        <div>
+          <p>Things to add:</p>
+          <ul>
+            {dataList.map(el => <li key={el}>{el}</li>)}
+          </ul>
+        </div>}
+
           {newInputVisible &&
             <TextField
               label={name}
@@ -66,14 +77,15 @@ function DataOption ({ name, arrOfType, dispatch }) {
               onChange={handleChange}
             />
           }
-          {newInputVisible
-            ? <div>
-              <button id={name} className='button is-primary' onClick={save}>Save</button>
-              <button className='button is-primary' onClick={showAddInput}>X</button>
-            </div>
-            : <button className='button is-primary' onClick={showAddInput}>+</button>
-          }
         </form>
+
+        {newInputVisible
+          ? <div>
+            <button id={name} className='button is-primary' onClick={save}>Save</button>
+            <button className='button is-primary' onClick={showAddInput}>X</button>
+          </div>
+          : <button className='button is-primary' onClick={showAddInput}>+</button>
+        }
       </div>
     </>
   )

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import StatusModal from './StatusModal'
 import { toLowHyphen } from '../client-utils'
 
-function StatusLogItem ({ all, creation, updateCreation, history }) {
+function StatusLogItem ({ statuses, creation, updateCreation, history }) {
   const [show, setShowModel] = useState(false)
   const [statusStyle, setStatusStyle] = useState(creation.status)
   const [currentStatus, setStatus] = useState({ id: creation.statusId, status: creation.status })
@@ -29,7 +29,7 @@ function StatusLogItem ({ all, creation, updateCreation, history }) {
   }
 
   const handleSelect = (e) => {
-    const selected = all.statuses.find(obj => obj.status === e.target.value)
+    const selected = statuses.find(obj => obj.status === e.target.value)
     setStatus(selected)
     setStatusStyle(e.target.value)
   }
@@ -58,8 +58,8 @@ function StatusLogItem ({ all, creation, updateCreation, history }) {
             </p>
           </div>
           <div className='statusList'>
-            {all.statuses
-              ? all.statuses.map((statusobj) => {
+            {statuses
+              ? statuses.map((statusobj) => {
                 const styleItem = toLowHyphen(statusobj.status)
 
                 return <button className={`status ${styleItem}`}
@@ -74,7 +74,7 @@ function StatusLogItem ({ all, creation, updateCreation, history }) {
       </main>
       }
 
-      { all
+      { statuses
         ? <div className='item'>
           <div className={`status ${style}`}
             onClick={showModal}>
@@ -116,7 +116,7 @@ function StatusLogItem ({ all, creation, updateCreation, history }) {
 
 const mapStateToProps = (store) => {
   return {
-    all: store.all
+    statuses: store.statuses
   }
 }
 
