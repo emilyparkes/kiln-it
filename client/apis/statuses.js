@@ -7,3 +7,10 @@ export function getStatuses () {
     return resp.body.statuses
   })
 }
+
+export function addNewStatus (statuses) {
+  return request.post(baseUrl).send(statuses)
+    .then((resp) => {
+      return resp.body
+    })
+}
