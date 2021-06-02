@@ -2,15 +2,14 @@ const { connection } = require('./connection')
 
 module.exports = {
   getShapes,
-  getShapeById
+  addNewShape
 }
 
 function getShapes (db = connection) {
   return db('shapes')
 }
 
-function getShapeById (id, db = connection) {
+function addNewShape (shape, db = connection) {
   return db('shapes')
-    .where('id', id)
-    .first()
+    .insert({ shape })
 }
