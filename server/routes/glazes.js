@@ -1,28 +1,21 @@
 const express = require('express')
 
-const db = require('../db/creations')
+const db = require('../db/glazes')
 const { prepForDb, prepForJS } = require('../server-utils')
 
 const router = express.Router()
 
-router.patch('/:id', (req, res) => {
-  console.log('body: ', req.body)
-  const creation = prepForDb(req.body)
-  db.updateCreationById(Number(req.params.id), creation)
-    .then((creation) => {
-      if (!creation) {
-        return res.status(404).json({
-          error: 'creation id not found'
-        })
-      }
-      creation = prepForJS(creation)
-      res.json(creation)
-      return null
-    })
+router.get('/', (req, res) => {
+  db.getGlazes()
+    .then((glazes) => res.json(glazes))
     .catch((err) => {
       console.error(err)
       res.sendStatus(500)
     })
+})
+
+router.patch('/:id', (req, res) => {
+
 })
 
 module.exports = router

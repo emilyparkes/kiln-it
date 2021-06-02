@@ -1,31 +1,20 @@
 const express = require('express')
 
-const db = require('../db/creations')
+const db = require('../db/shapes')
 const { prepForDb, prepForJS } = require('../server-utils')
 
 const router = express.Router()
 
+router.get('/', (req, res) => {
+  db.getShapes()
+    .then((shapes) => res.json(shapes))
+    .catch((err) => {
+      console.error(err)
+      res.sendStatus(500)
+    })
+})
+
 router.post('/', (req, res) => {
-  console.log('body: ', req.body)
-  const creation = prepForDb(req.body)
-  req.body.map(shape => {
-    db.addNewShape(shape)
-  })
-  // db.addShape()
-  //   .then((creation) => {
-  //     if (!creation) {
-  //       return res.status(404).json({
-  //         error: 'creation id not found'
-  //       })
-  //     }
-  //     creation = prepForJS(creation)
-  //     res.json(creation)
-  //     return null
-  //   })
-  //   .catch((err) => {
-  //     console.error(err)
-  //     res.sendStatus(500)
-  //   })
 })
 
 module.exports = router
