@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
-
 import { TextField } from '@material-ui/core'
+
 import { showError } from '../actions/error'
-import { addNewShape, addNewStatus, addNewClay, addNewGlaze } from '../apis/dataOptions'
+import { addNewClay } from '../apis/clay'
+import { addNewGlaze } from '../apis/glazes'
+import { addNewShape } from '../apis/shapes'
+import { addNewStatus } from '../apis/statuses'
 
 function DataOption ({ name, arrOfType, dispatch }) {
   const [dataList, setDataList] = useState([])
@@ -57,12 +60,12 @@ function DataOption ({ name, arrOfType, dispatch }) {
           ))}
 
           {newInputVisible &&
-        <div>
-          <p>Things to add:</p>
-          <ul>
-            {dataList.map(el => <li key={el}>{el}</li>)}
-          </ul>
-        </div>}
+            <div>
+              <p>Things to add:</p>
+              <ul>
+                {dataList.map(el => <li key={el}>{el}</li>)}
+              </ul>
+            </div>}
 
           {newInputVisible &&
             <TextField
