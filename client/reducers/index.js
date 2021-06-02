@@ -3,11 +3,19 @@ import { combineReducers } from 'redux'
 import all from './all'
 import error from './error'
 import waitIndicator from './waitIndicator'
+import clay from './clay'
 import creations from './creations'
+import glazes from './glazes'
+import shapes from './shapes'
+import statuses from './statuses'
 
 export default combineReducers({
   all,
   error,
   waitIndicator,
-  creations
+  clay,
+  creations,
+  glazes,
+  shapes,
+  statuses
 })

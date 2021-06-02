@@ -1,5 +1,8 @@
-import { showError } from './error'
-import { getAll } from '../apis/all'
+import { fetchClay } from './clay'
+import { fetchCreations } from './creations'
+import { fetchGlazes } from './glazes'
+import { fetchShapes } from './shapes'
+import { fetchStatuses } from './statuses'
 
 const GET_ALL_PENDING = 'GET_ALL_PENDING'
 const RECEIVE_ALL = 'RECEIVE_ALL'
@@ -21,8 +24,10 @@ export function fetchAll () {
   return dispatch => {
     dispatch(getAllPending())
 
-    getAll()
-      .then(all => dispatch(receiveAll(all)))
-      .catch(err => dispatch(showError(err.message)))
+    fetchClay()
+    fetchCreations()
+    fetchGlazes()
+    fetchShapes()
+    fetchStatuses()
   }
 }
