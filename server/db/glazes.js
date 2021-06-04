@@ -6,7 +6,7 @@ module.exports = {
 }
 
 function getGlazes (db = connection) {
-  return db('glazes')
+  return db('glazes').select()
 }
 
 function getGlazeById (id, db = connection) {

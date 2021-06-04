@@ -6,7 +6,7 @@ module.exports = {
 }
 
 function getClay (db = connection) {
-  return db('clay')
+  return db('clay').select()
 }
 
 function getClayById (id, db = connection) {

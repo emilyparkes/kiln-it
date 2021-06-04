@@ -2,7 +2,11 @@ import React, { useEffect } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import { fetchAll } from '../actions/all'
+import { fetchCreations } from '../actions/creations'
+import { fetchClay } from '../actions/clay'
+import { fetchGlazes } from '../actions/glazes'
+import { fetchShapes } from '../actions/shapes'
+import { fetchStatuses } from '../actions/statuses'
 
 import Navigation from './nav/Navigation'
 import Home from './Home'
@@ -16,7 +20,11 @@ import AddDataOptions from './AddDataOptions'
 
 function App ({ dispatch }) {
   useEffect(() => {
-    dispatch(fetchAll())
+    dispatch(fetchCreations())
+    dispatch(fetchClay())
+    dispatch(fetchGlazes())
+    dispatch(fetchShapes())
+    dispatch(fetchStatuses())
   }, [])
 
   return (

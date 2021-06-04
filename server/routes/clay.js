@@ -7,7 +7,7 @@ const router = express.Router()
 
 router.get('/', (req, res) => {
   db.getClay()
-    .then((clay) => res.json(clay))
+    .then((clay) => res.json({ clay }))
     .catch((err) => {
       console.error(err)
       res.sendStatus(500)

@@ -1,6 +1,6 @@
 const express = require('express')
 
-const db = require('../db/creations')
+const db = require('../db/statuses')
 const { prepForDb, prepForJS } = require('../server-utils')
 
 const router = express.Router()

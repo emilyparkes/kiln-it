@@ -7,7 +7,7 @@ const router = express.Router()
 
 router.get('/', (req, res) => {
   db.getShapes()
-    .then((shapes) => res.json(shapes))
+    .then((shapes) => res.json({shapes}))
     .catch((err) => {
       console.error(err)
       res.sendStatus(500)

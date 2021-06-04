@@ -6,7 +6,7 @@ module.exports = {
 }
 
 function getShapes (db = connection) {
-  return db('shapes')
+  return db('shapes').select()
 }
 
 function addNewShape (shape, db = connection) {
