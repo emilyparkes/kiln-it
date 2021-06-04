@@ -35,13 +35,13 @@ function DataOption ({ name, arrOfType, dispatch }) {
         addNewShape(dataList)
         break
       case 'status':
-        // addNewStatus(dataList)
+        addNewStatus(dataList)
         break
       case 'clay':
-        // addNewClay(dataList)
+        addNewClay(dataList)
         break
       case 'glaze':
-        // addNewGlaze(dataList)
+        addNewGlaze(dataList)
         break
       default:
         dispatch(showError('Sorry I don\'t understand which item is being saved...'))
