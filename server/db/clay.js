@@ -2,15 +2,14 @@ const { connection } = require('./connection')
 
 module.exports = {
   getClay,
-  getClayById
+  addNewClay
 }
 
 function getClay (db = connection) {
   return db('clay').select()
 }
 
-function getClayById (id, db = connection) {
+function addNewClay (clay, db = connection) {
   return db('clay')
-    .where('id', id)
-    .first()
+    .insert({ clay })
 }

@@ -14,8 +14,19 @@ router.get('/', (req, res) => {
     })
 })
 
-router.patch('/:id', (req, res) => {
-
+router.post('/', (req, res) => {
+  const addedGlazes = req.body.map(glaze => {
+    return db.addNewGlaze(glaze)
+      .then((id) => {
+        return { id: id[0], glaze }
+      })
+  })
+  Promise.all(addedGlazes)
+    .then((glazes) => res.json({ glazes }))
+    .catch((err) => {
+      console.error(err)
+      res.sendStatus(500)
+    })
 })
 
 module.exports = router

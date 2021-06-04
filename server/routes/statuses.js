@@ -32,7 +32,6 @@ router.get('/:id', (req, res) => {
 })
 
 router.patch('/:id', (req, res) => {
-  console.log('body: ', req.body)
   const creation = prepForDb(req.body)
   db.updateCreationById(Number(req.params.id), creation)
     .then((creation) => {
@@ -51,4 +50,18 @@ router.patch('/:id', (req, res) => {
     })
 })
 
+router.post('/', (req, res) => {
+  const addedStatuses = req.body.map(status => {
+    return db.addNewStatus(status)
+      .then((id) => {
+        return { id: id[0], status }
+      })
+  })
+  Promise.all(addedStatuses)
+    .then((statuses) => res.json({ statuses }))
+    .catch((err) => {
+      console.error(err)
+      res.sendStatus(500)
+    })
+})
 module.exports = router

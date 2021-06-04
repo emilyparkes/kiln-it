@@ -2,15 +2,14 @@ const { connection } = require('./connection')
 
 module.exports = {
   getGlazes,
-  getGlazeById
+  addNewGlaze
 }
 
 function getGlazes (db = connection) {
   return db('glazes').select()
 }
 
-function getGlazeById (id, db = connection) {
+function addNewGlaze (glaze, db = connection) {
   return db('glazes')
-    .where('id', id)
-    .first()
+    .insert({ glaze })
 }
