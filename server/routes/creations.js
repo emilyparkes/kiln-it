@@ -14,21 +14,8 @@ router.get('/', (req, res) => {
     })
 })
 
-router.get('/:id', (req, res) => {
-  db.getCreationById(Number(req.params.id))
-    .then((creation) => {
-      if (!creation) {
-        return res.status(404).json({
-          error: 'creation id not found'
-        })
-      }
-      res.json(creation)
-      return null
-    })
-    .catch((err) => {
-      console.error(err)
-      res.sendStatus(500)
-    })
+router.post('/', (req, res) => {
+  //
 })
 
 router.patch('/:id', (req, res) => {
@@ -45,6 +32,15 @@ router.patch('/:id', (req, res) => {
       res.json(creation)
       return null
     })
+    .catch((err) => {
+      console.error(err)
+      res.sendStatus(500)
+    })
+})
+
+router.delete('/:id', (req, res) => {
+  return db.deleteCreation(Number(req.params.id))
+    .then((deleted) => res.json({ deleted: `${deleted} item(s) have been deleted successfully` }))
     .catch((err) => {
       console.error(err)
       res.sendStatus(500)
