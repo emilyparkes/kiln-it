@@ -8,8 +8,22 @@ export function getShapes () {
   })
 }
 
-export function addNewShape (shapes) {
+export function addShapes (shapes) {
   return request.post(baseUrl).send(shapes)
+    .then((resp) => {
+      return resp.body.shapes
+    })
+}
+
+export function updateShape (id, shape) {
+  return request.patch(`${baseUrl}/${id}`).send(shape)
+    .then((resp) => {
+      return resp.body
+    })
+}
+
+export function deleteShape (id) {
+  return request.delete(`${baseUrl}/${id}`)
     .then((resp) => {
       return resp.body
     })
