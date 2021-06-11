@@ -15,14 +15,27 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  const addedClays = req.body.map(clay => {
-    return db.addNewClay(clay)
+  const addedClay = req.body.map(clay => {
+    return db.addClay(clay)
       .then((id) => {
         return { id: id[0], clay }
       })
   })
-  Promise.all(addedClays)
-    .then((clays) => res.json({ clays }))
+  Promise.all(addedClay)
+    .then((clay) => res.json({ clay }))
+    .catch((err) => {
+      console.error(err)
+      res.sendStatus(500)
+    })
+})
+
+router.patch('/:id', (req, res) => {
+  console.log('route not made yet')
+})
+
+router.delete('/:id', (req, res) => {
+  return db.deleteClay(Number(req.params.id))
+    .then((deleted) => res.json({ deleted: `${deleted} item(s) have been deleted successfully` }))
     .catch((err) => {
       console.error(err)
       res.sendStatus(500)
