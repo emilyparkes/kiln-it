@@ -1,28 +1,82 @@
 import { showError } from './error'
-import { getCreations } from '../apis/creations'
+import { getCreations, addCreation, updateCreation, deleteCreation } from '../apis/creations'
 
-const GET_CREATIONS_PENDING = 'GET_CREATIONS_PENDING'
-const RECEIVE_CREATIONS = 'RECEIVE_CREATIONS'
+export const CREATIONS_REQUEST_PENDING = 'CREATIONS_REQUEST_PENDING'
+export const RECEIVE_CREATIONS = 'RECEIVE_CREATIONS'
+export const ADD_NEW_CREATIONS = 'ADD_NEW_CREATIONS'
+export const UPDATE_CREATION = 'UPDATE_CREATION'
+export const REMOVE_CREATION = 'REMOVE_CREATION'
 
-export function getCreationsPending () {
+export function requestCreationsPending () {
   return {
-    type: GET_CREATIONS_PENDING
+    type: CREATIONS_REQUEST_PENDING
   }
 }
 
-export function receiveCreations (creations) {
+export function newCreationsSuccess (creations) {
+  return {
+    type: ADD_NEW_CREATIONS,
+    creations
+  }
+}
+
+export function receiveCreationsSuccess (creations) {
   return {
     type: RECEIVE_CREATIONS,
     creations
   }
 }
 
+export function updateCreationSuccess (creation) {
+  return {
+    type: UPDATE_CREATION,
+    creation
+  }
+}
+
+export function removeCreationSuccess (id) {
+  return {
+    type: REMOVE_CREATION,
+    id
+  }
+}
+
 export function fetchCreations () {
   return dispatch => {
-    dispatch(getCreationsPending())
+    dispatch(requestCreationsPending())
 
     getCreations()
-      .then(creations => dispatch(receiveCreations(creations)))
+      .then(creations => dispatch(receiveCreationsSuccess(creations)))
+      .catch(err => dispatch(showError(err.message)))
+  }
+}
+
+export function createCreations () {
+  return dispatch => {
+    dispatch(requestCreationsPending())
+
+    addCreation()
+      .then(creations => dispatch(newCreationsSuccess(creations)))
+      .catch(err => dispatch(showError(err.message)))
+  }
+}
+
+export function updateCreations (creation) {
+  return dispatch => {
+    dispatch(requestCreationsPending())
+
+    updateCreation(creation)
+      .then(creation => dispatch(updateCreationSuccess(creation)))
+      .catch(err => dispatch(showError(err.message)))
+  }
+}
+
+export function removeCreations (id) {
+  return dispatch => {
+    dispatch(requestCreationsPending())
+
+    deleteCreation(id)
+      .then(() => dispatch(removeCreationSuccess(id)))
       .catch(err => dispatch(showError(err.message)))
   }
 }

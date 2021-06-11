@@ -9,8 +9,8 @@ export function getCreations () {
     })
 }
 
-export function getCreationById (id) {
-  return request.get(`${baseUrl}/${id}`)
+export function addCreation (creation) {
+  return request.post(baseUrl).send(creation)
     .then((resp) => {
       return resp.body
     })
@@ -18,6 +18,13 @@ export function getCreationById (id) {
 
 export function updateCreation (creation) {
   return request.patch(`${baseUrl}/${creation.id}`).send(creation)
+    .then(resp => {
+      return resp.body
+    })
+}
+
+export function deleteCreation (id) {
+  return request.delete(`${baseUrl}/${id}`)
     .then(resp => {
       return resp.body
     })
