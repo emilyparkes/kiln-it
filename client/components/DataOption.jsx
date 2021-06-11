@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import { TextField } from '@material-ui/core'
 
 import { showError } from '../actions/error'
-import { addNewClay } from '../apis/clay'
-import { addNewGlaze } from '../apis/glazes'
-import { addNewShape } from '../apis/shapes'
-import { addNewStatus } from '../apis/statuses'
+import { createClay, removeClay } from '../actions/clay'
+import { createGlazes, removeGlaze } from '../actions/glazes'
+import { createShapes, removeShape } from '../actions/shapes'
+import { createStatuses, removeStatus } from '../actions/statuses'
 
 function DataOption ({ name, arrOfType, dispatch }) {
   const [dataList, setDataList] = useState([])
@@ -19,6 +19,31 @@ function DataOption ({ name, arrOfType, dispatch }) {
   const handleChange = (e) => {
     setCurrentAddition(e.target.value)
   }
+
+  const handleRemove = (el) => {
+    const updatedList = dataList.filter(item => item !== el)
+    setDataList(updatedList)
+  }
+
+  const deleteItem = (id) => {
+    switch (name) {
+      case 'shape':
+        dispatch(removeShape(id))
+        break
+      case 'status':
+        dispatch(removeStatus(id))
+        break
+      case 'clay':
+        dispatch(removeClay(id))
+        break
+      case 'glaze':
+        dispatch(removeGlaze(id))
+        break
+      default:
+        dispatch(showError('Sorry I don\'t understand which item is being deleted...'))
+    }
+  }
+
   const submit = (e) => {
     e.preventDefault()
     setDataList([
@@ -32,16 +57,16 @@ function DataOption ({ name, arrOfType, dispatch }) {
     setNewInputVisible(!newInputVisible)
     switch (name) {
       case 'shape':
-        addNewShape(dataList)
+        dispatch(createShapes(dataList))
         break
       case 'status':
-        addNewStatus(dataList)
+        dispatch(createStatuses(dataList))
         break
       case 'clay':
-        addNewClay(dataList)
+        dispatch(createClay(dataList))
         break
       case 'glaze':
-        addNewGlaze(dataList)
+        dispatch(createGlazes(dataList))
         break
       default:
         dispatch(showError('Sorry I don\'t understand which item is being saved...'))
@@ -52,21 +77,30 @@ function DataOption ({ name, arrOfType, dispatch }) {
   return (
     <>
       <div>
-        <form onSubmit={submit}>
-          {arrOfType.map((obj) => (
-            <div key={obj.id} value={obj[name]}>
-              {obj[name]}
-            </div>
-          ))}
+        {console.log(arrOfType)}
+        {arrOfType.map((type) => (
+          <div key={type.id} value={type[name]}>
+            {type[name]}
+            <button onClick={() => deleteItem(type.id)}>
+              x
+            </button>
+          </div>
+        ))}
 
-          {newInputVisible &&
+        {newInputVisible &&
             <div>
               <p>Things to add:</p>
-              <ul>
-                {dataList.map(el => <li key={el}>{el}</li>)}
-              </ul>
+              <div>
+                {dataList.map(el => {
+                  return <div key={el}>
+                    <p>{el}</p>
+                    <button onClick={() => handleRemove(el)}>remove</button>
+                  </div>
+                })}
+              </div>
             </div>}
 
+        <form onSubmit={submit}>
           {newInputVisible &&
             <TextField
               label={name}
@@ -84,10 +118,10 @@ function DataOption ({ name, arrOfType, dispatch }) {
 
         {newInputVisible
           ? <div>
-            <button id={name} className='button is-primary' onClick={save}>Save</button>
-            <button className='button is-primary' onClick={showAddInput}>X</button>
+            <button id={name} onClick={save}>Save</button>
+            <button onClick={showAddInput}>X</button>
           </div>
-          : <button className='button is-primary' onClick={showAddInput}>+</button>
+          : <button onClick={showAddInput}>+</button>
         }
       </div>
     </>
