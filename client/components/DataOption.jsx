@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { TextField } from '@material-ui/core'
 
+import DataOptionItem from './DataOptionItem'
+
 import { showError } from '../actions/error'
 import { createClay, removeClay } from '../actions/clay'
 import { createGlazes, removeGlaze } from '../actions/glazes'
@@ -11,9 +13,20 @@ function DataOption ({ name, arrOfType, dispatch }) {
   const [dataList, setDataList] = useState([])
   const [currentAddition, setCurrentAddition] = useState('')
   const [newInputVisible, setNewInputVisible] = useState(false)
+  const [editVisible, setEditVisible] = useState(false)
 
-  const showAddInput = () => {
-    setNewInputVisible(!newInputVisible)
+  const showEditable = () => {
+    if (newInputVisible) {
+      clear()
+    } else {
+      setEditVisible(!editVisible)
+    }
+  }
+
+  const clear = () => {
+    setEditVisible(false)
+    setNewInputVisible(false)
+    setDataList([])
   }
 
   const handleChange = (e) => {
@@ -71,21 +84,36 @@ function DataOption ({ name, arrOfType, dispatch }) {
       default:
         dispatch(showError('Sorry I don\'t understand which item is being saved...'))
     }
-    setDataList([])
+    clear()
+  }
+
+  const renderEditable = (type) => {
+    return <DataOptionItem
+      key={type.id}
+      type={type}
+      name={name}
+      deleteItem={deleteItem}/>
+  }
+
+  const renderView = (type) => {
+    return <div
+      key={type.id}
+      value={type[name]}>
+      {type[name]}
+    </div>
   }
 
   return (
     <>
       <div>
-        {console.log(arrOfType)}
+        {/* <InputLabel htmlFor="my-input">{ name }</InputLabel> */}
         {arrOfType.map((type) => (
-          <div key={type.id} value={type[name]}>
-            {type[name]}
-            <button onClick={() => deleteItem(type.id)}>
-              x
-            </button>
-          </div>
+          editVisible
+            ? renderEditable(type)
+            : renderView(type)
+
         ))}
+        {editVisible && <button onClick={setNewInputVisible}>+</button>}
 
         {newInputVisible &&
             <div>
@@ -93,10 +121,10 @@ function DataOption ({ name, arrOfType, dispatch }) {
               <div>
                 {dataList.map(el => {
                   return <div key={el}>
-                    <p>{el}</p>
-                    <button onClick={() => handleRemove(el)}>remove</button>
+                    <p>{el}</p><button onClick={() => handleRemove(el)}>Undo</button>
                   </div>
                 })}
+                {dataList.length >= 1 && <button id={name} onClick={save}>Save</button>}
               </div>
             </div>}
 
@@ -116,12 +144,9 @@ function DataOption ({ name, arrOfType, dispatch }) {
           }
         </form>
 
-        {newInputVisible
-          ? <div>
-            <button id={name} onClick={save}>Save</button>
-            <button onClick={showAddInput}>X</button>
-          </div>
-          : <button onClick={showAddInput}>+</button>
+        {editVisible
+          ? <button onClick={showEditable}>Close</button>
+          : <button onClick={showEditable}>Edit</button>
         }
       </div>
     </>
