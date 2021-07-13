@@ -6,7 +6,7 @@ export default function clay (state = initialState, action) {
     case RECEIVE_CLAY:
       return action.clay
     case ADD_NEW_CLAY:
-      return state ? [...state, ...action.clay] : action.clay
+      return [...state, action.clay]
     case UPDATE_CLAY:
       return state.map(clay => clay.id === action.clay.id ? action.clay : clay)
     case REMOVE_CLAY:
