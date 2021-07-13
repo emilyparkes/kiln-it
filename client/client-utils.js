@@ -7,13 +7,13 @@ export function findString (arr, property, value, type) {
   }
 }
 
-function capitalize (str) {
+function capitalise (str) {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
 // le-vase => Le Vase
 export function toCapSpace (name) {
-  return name.split('-').map(capitalize).join(' ')
+  return name.split('-').map(capitalise).join(' ')
 }
 
 // Le Vase => le-vase
