@@ -1,0 +1,82 @@
+.pg-title {
+  margin-left: 83px;
+}
+
+.options {
+  margin-left: 83px;
+  position: relative;
+}
+
+.option-block {
+  position: relative;
+}
+
+.option-btn {
+  position: absolute;
+
+  &--close {
+    left: 197px;
+    height: 33px;
+    top: -14px;
+  }
+  
+  &--undo {
+    left: 197px;
+    height: 33px;
+    top: -14px;
+  }
+  
+  &--edit {
+    left: 197px;
+    height: 33px;
+    top: -14px;
+  }
+
+  &--plus {
+    left: 210px;
+    height: 23px;
+    top: -66px;
+  }
+
+  &--minus {
+    left: 211px;
+    height: 23px;
+    top: -98px;
+  }
+
+  &--del {
+    left: 211px;
+    height: 22px;
+    top: 8px;
+  }
+}
+.option-add {
+  position: relative;
+}
+
+.details {
+  position: relative;
+
+  .read & {
+    margin-bottom: 2px;
+  }
+
+  .edit & {
+    margin-bottom: 75px;
+  }
+}
+
+.text-item {
+  position: relative;
+}
+
+.break-line {
+  width: 237px;
+  border: 1px solid #000000;
+  margin-bottom: 16px;
+}
+
+.sml-mar {
+  margin-bottom: 5px;
+}
+
