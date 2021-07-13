@@ -1,7 +1,7 @@
 const express = require('express')
 
 const db = require('../db/clay')
-const { prepForDb, prepForJS } = require('../server-utils')
+// const { prepForDb, prepForJS } = require('../server-utils')
 
 const router = express.Router()
 
@@ -15,14 +15,8 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  const addedClay = req.body.map(clay => {
-    return db.addClay(clay)
-      .then((id) => {
-        return { id: id[0], clay }
-      })
-  })
-  Promise.all(addedClay)
-    .then((clay) => res.json({ clay }))
+  return db.addClay(req.body.clay)
+    .then((id) => res.json({ id: id[0], clay: req.body.clay }))
     .catch((err) => {
       console.error(err)
       res.sendStatus(500)
