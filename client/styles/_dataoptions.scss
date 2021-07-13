@@ -20,16 +20,16 @@
     top: -14px;
   }
   
-  &--undo {
+  &--edit {
     left: 197px;
     height: 33px;
     top: -14px;
   }
   
-  &--edit {
-    left: 197px;
-    height: 33px;
-    top: -14px;
+  &--del {
+    left: 211px;
+    height: 22px;
+    top: 8px;
   }
 
   &--plus {
@@ -37,17 +37,23 @@
     height: 23px;
     top: -66px;
   }
-
+  
   &--minus {
     left: 211px;
     height: 23px;
     top: -98px;
   }
+  
+  &--undo {
+    left: 200px;
+    height: 23px;
+    top: 101px;
+  }
 
-  &--del {
-    left: 211px;
+  &--save {
+    left: 197px;
     height: 22px;
-    top: 8px;
+    top: 173px;
   }
 }
 .option-add {
