@@ -9,6 +9,8 @@ import { createGlazes, removeGlaze } from '../actions/glazes'
 import { createShapes, removeShape } from '../actions/shapes'
 import { createStatuses, removeStatus } from '../actions/statuses'
 
+import { toCapSpace } from '../client-utils'
+
 function DataOption ({ name, arrOfType, dispatch }) {
   const [dataList, setDataList] = useState([])
   const [currentAddition, setCurrentAddition] = useState('')
@@ -67,7 +69,6 @@ function DataOption ({ name, arrOfType, dispatch }) {
   }
 
   const save = (e) => {
-    setNewInputVisible(!newInputVisible)
     switch (name) {
       case 'shape':
         dispatch(createShapes(dataList))
@@ -87,7 +88,7 @@ function DataOption ({ name, arrOfType, dispatch }) {
     clear()
   }
 
-  const renderEditable = (type) => {
+  const renderEditView = (type) => {
     return <DataOptionItem
       key={type.id}
       type={type}
@@ -95,59 +96,74 @@ function DataOption ({ name, arrOfType, dispatch }) {
       deleteItem={deleteItem}/>
   }
 
-  const renderView = (type) => {
-    return <div
-      key={type.id}
-      value={type[name]}>
+  const renderReadView = (type) => {
+    return <div className='text-item' key={type.id} value={type[name]}>
       {type[name]}
     </div>
   }
 
   return (
     <>
-      <div>
-        {/* <InputLabel htmlFor="my-input">{ name }</InputLabel> */}
-        {arrOfType.map((type) => (
-          editVisible
-            ? renderEditable(type)
-            : renderView(type)
+      <div className='option-block'>
+        <h4 className='option sml-mar heading'>{ toCapSpace(name) }</h4>
 
-        ))}
-        {editVisible && <button onClick={setNewInputVisible}>+</button>}
+        {editVisible
+          ? <button className='option-btn option-btn--close' onClick={showEditable}>Close</button>
+          : <button className='option-btn option-btn--edit' onClick={showEditable}>Edit</button>
+        }
 
-        {newInputVisible &&
-            <div>
-              <p>Things to add:</p>
+        <div className='break-line'></div>
+
+        { editVisible
+          ? <div className='edit'>
+            <div className='details'>
+              {arrOfType.map((type) => renderEditView(type))}
+
+              {newInputVisible &&
               <div>
                 {dataList.map(el => {
                   return <div key={el}>
-                    <p>{el}</p><button onClick={() => handleRemove(el)}>Undo</button>
+                    <TextField
+                      key={el}
+                      name={el}
+                      value={el}
+                      onChange={handleChange}
+                    />
+                    <button className='option-btn option-btn--undo' onClick={() => handleRemove(el)}>Undo</button>
                   </div>
                 })}
-                {dataList.length >= 1 && <button id={name} onClick={save}>Save</button>}
-              </div>
-            </div>}
+                {dataList.length >= 1 && <button className='option-btn option-btn--save' id={name} onClick={save}>Save</button>}
+              </div>}
 
-        <form onSubmit={submit}>
-          {newInputVisible &&
-            <TextField
-              label={name}
-              variant='outlined'
-              size='small'
-              id='outlined'
-              margin='dense'
-              placeholder={`new ${name} option`}
-              name={name}
-              value={currentAddition}
-              onChange={handleChange}
-            />
-          }
-        </form>
+              <form onSubmit={submit}>
+                {newInputVisible &&
+                  <TextField
+                    key={name}
+                    name={name}
+                    placeholder={`new ${name}`}
+                    value={currentAddition}
+                    onChange={handleChange}
+                  />
+                }
+              </form>
 
-        {editVisible
-          ? <button onClick={showEditable}>Close</button>
-          : <button onClick={showEditable}>Edit</button>
+            </div>
+          </div>
+          : <div className='read'>
+            <div className='details'>
+              {arrOfType.map((type) => renderReadView(type))}
+            </div>
+          </div>
         }
+
+        {editVisible &&
+          <div className='option-add'>
+            {newInputVisible
+              ? <button className='option-btn option-btn--minus' onClick={() => setNewInputVisible(false)}> - </button>
+              : <button className='option-btn option-btn--plus' onClick={() => setNewInputVisible(true)}> + </button>}
+          </div>
+        }
+
       </div>
     </>
   )
