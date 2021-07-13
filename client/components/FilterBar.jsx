@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-function Filter (props) {
+function FilterBar (props) {
   return (
     <div>
       <div>Filter Logo</div>
@@ -17,4 +17,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(Filter)
+export default connect(mapStateToProps)(FilterBar)
