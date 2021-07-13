@@ -9,14 +9,14 @@ export function getClay () {
 }
 
 export function addClay (clay) {
-  return request.post(baseUrl).send(clay)
+  return request.post(baseUrl).send({ clay })
     .then((resp) => {
-      return resp.body.clay
+      return resp.body
     })
 }
 
 export function updateClay (id, clay) {
-  return request.patch(`${baseUrl}/${id}`).send(clay)
+  return request.patch(`${baseUrl}/${id}`).send({ clay })
     .then((resp) => {
       return resp.body
     })
