@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { toLowHyphen } from '../client-utils'
+
+import { toLowHyphen, filterBy } from '../client-utils'
 
 import Card from './Card'
 
@@ -36,7 +37,7 @@ function Gallery ({ creations }) {
 
 const mapStateToProps = (store) => {
   return {
-    creations: store.creations
+    creations: filterBy(store.filter, store.creations)
   }
 }
 

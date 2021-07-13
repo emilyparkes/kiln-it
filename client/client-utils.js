@@ -20,3 +20,13 @@ export function toCapSpace (name) {
 export function toLowHyphen (name) {
   return name.toLowerCase().split(' ').join('-')
 }
+
+export function filterBy (filters, itemsToFilter) {
+  itemsToFilter.filter(creation => {
+    let isFilterOption = true
+    for (let key in filters) {
+      if (creation[key] !== filters[key]) isFilterOption = false
+    }
+    return isFilterOption
+  })
+}

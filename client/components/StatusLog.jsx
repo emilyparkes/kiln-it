@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import { filterBy } from '../client-utils'
+
 import StatusLogItem from './StatusLogItem'
 import { updateCreation } from '../apis/creations'
 
@@ -25,7 +27,8 @@ function StatusLog ({ creations, history }) {
 
 const mapStateToProps = (store) => {
   return {
-    creations: store.creations
+    creations: filterBy(store.filter, store.creations)
+
   }
 }
 
