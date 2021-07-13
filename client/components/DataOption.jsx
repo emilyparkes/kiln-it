@@ -12,32 +12,21 @@ import { createStatuses, removeStatus } from '../actions/statuses'
 import { toCapSpace } from '../client-utils'
 
 function DataOption ({ name, arrOfType, dispatch }) {
-  const [dataList, setDataList] = useState([])
   const [currentAddition, setCurrentAddition] = useState('')
   const [newInputVisible, setNewInputVisible] = useState(false)
   const [editVisible, setEditVisible] = useState(false)
 
   const showEditable = () => {
-    if (newInputVisible) {
-      clear()
-    } else {
-      setEditVisible(!editVisible)
-    }
+    setEditVisible(!editVisible)
+    clear()
   }
 
   const clear = () => {
-    setEditVisible(false)
-    setNewInputVisible(false)
-    setDataList([])
+    setCurrentAddition('')
   }
 
   const handleChange = (e) => {
     setCurrentAddition(e.target.value)
-  }
-
-  const handleRemove = (el) => {
-    const updatedList = dataList.filter(item => item !== el)
-    setDataList(updatedList)
   }
 
   const deleteItem = (id) => {
@@ -57,30 +46,23 @@ function DataOption ({ name, arrOfType, dispatch }) {
       default:
         dispatch(showError('Sorry I don\'t understand which item is being deleted...'))
     }
-  }
-
-  const submit = (e) => {
-    e.preventDefault()
-    setDataList([
-      ...dataList,
-      currentAddition
-    ])
-    setCurrentAddition('')
+    clear()
   }
 
   const save = (e) => {
+    e.preventDefault()
     switch (name) {
       case 'shape':
-        dispatch(createShapes(dataList))
+        dispatch(createShapes(currentAddition))
         break
       case 'status':
-        dispatch(createStatuses(dataList))
+        dispatch(createStatuses(currentAddition))
         break
       case 'clay':
-        dispatch(createClay(dataList))
+        dispatch(createClay(currentAddition))
         break
       case 'glaze':
-        dispatch(createGlazes(dataList))
+        dispatch(createGlazes(currentAddition))
         break
       default:
         dispatch(showError('Sorry I don\'t understand which item is being saved...'))
@@ -119,23 +101,7 @@ function DataOption ({ name, arrOfType, dispatch }) {
             <div className='details'>
               {arrOfType.map((type) => renderEditView(type))}
 
-              {newInputVisible &&
-              <div>
-                {dataList.map(el => {
-                  return <div key={el}>
-                    <TextField
-                      key={el}
-                      name={el}
-                      value={el}
-                      onChange={handleChange}
-                    />
-                    <button className='option-btn option-btn--undo' onClick={() => handleRemove(el)}>Undo</button>
-                  </div>
-                })}
-                {dataList.length >= 1 && <button className='option-btn option-btn--save' id={name} onClick={save}>Save</button>}
-              </div>}
-
-              <form onSubmit={submit}>
+              <form onSubmit={save}>
                 {newInputVisible &&
                   <TextField
                     key={name}
