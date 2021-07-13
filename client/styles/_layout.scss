@@ -1,7 +1,7 @@
 // @use 'base'; use variabes from other scss file
 
 
-// Base
+// BASE
 *, html {
   box-sizing: border-box;
 }
@@ -14,11 +14,12 @@ body {
   font-size: 16px;
 }
 
-h1, h2, h3 {
-    font-family: $font-headings;
-    font-weight: normal;
-    color: $brand-dark;
-  }
+// TEXT AND HEADNGS
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-headings;
+  font-weight: normal;
+  color: $brand-dark;
+}
 
 p {
   font-family: $font-base;
@@ -28,9 +29,28 @@ a {
   color: inherit;
   text-decoration: none;
 }
-  
+
 .heading {
   font-family: $font-headings;
 }
 
+// .sml-text {
+//   font-size: 26px;
+// }
 
+// .med-text {
+//   font-size: 18px;
+// }
+
+// .lrg-text {
+//   font-size: 25px;
+// }
+
+
+// ITEMS
+
+button {
+  .option & {
+    padding: 3px;
+  }
+}
