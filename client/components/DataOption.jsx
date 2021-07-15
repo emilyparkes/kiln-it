@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import { TextField } from '@material-ui/core'
+import { VscEdit } from 'react-icons/vsc'
+import { IoAddCircleSharp, IoCheckmarkDoneSharp } from 'react-icons/io5'
+import { AiFillMinusCircle } from 'react-icons/ai'
 
 import DataOptionItem from './DataOptionItem'
 
@@ -90,8 +93,8 @@ function DataOption ({ name, arrOfType, dispatch }) {
         <h4 className='option sml-mar heading'>{ toCapSpace(name) }</h4>
 
         {editVisible
-          ? <button className='option-btn option-btn--close' onClick={showEditable}>Close</button>
-          : <button className='option-btn option-btn--edit' onClick={showEditable}>Edit</button>
+          ? <IoCheckmarkDoneSharp className='option-btn option-btn--close' onClick={showEditable} />
+          : <VscEdit className='option-btn option-btn--edit' onClick={showEditable} />
         }
 
         <div className='break-line'></div>
@@ -125,8 +128,9 @@ function DataOption ({ name, arrOfType, dispatch }) {
         {editVisible &&
           <div className='option-add'>
             {newInputVisible
-              ? <button className='option-btn option-btn--minus' onClick={() => setNewInputVisible(false)}> - </button>
-              : <button className='option-btn option-btn--plus' onClick={() => setNewInputVisible(true)}> + </button>}
+              ? <AiFillMinusCircle className='option-btn option-btn--minus' onClick={() => setNewInputVisible(false)} />
+              : <IoAddCircleSharp className='option-btn option-btn--plus' onClick={() => setNewInputVisible(true)}/>
+            }
           </div>
         }
 
