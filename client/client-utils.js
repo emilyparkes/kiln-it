@@ -22,11 +22,13 @@ export function toLowHyphen (name) {
 }
 
 export function filterBy (filters, itemsToFilter) {
-  itemsToFilter.filter(creation => {
-    let isFilterOption = true
-    for (let key in filters) {
-      if (creation[key] !== filters[key]) isFilterOption = false
-    }
-    return isFilterOption
-  })
+  return itemsToFilter === null
+    ? null
+    : itemsToFilter.filter(creation => {
+      let isFilterOption = true
+      for (let key in filters) {
+        if (creation[key] !== filters[key]) isFilterOption = false
+      }
+      return isFilterOption
+    })
 }

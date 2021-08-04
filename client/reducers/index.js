@@ -8,6 +8,7 @@ import creations from './creations'
 import glazes from './glazes'
 import shapes from './shapes'
 import statuses from './statuses'
+import filter from './filter'
 
 export default combineReducers({
   all,
@@ -17,5 +18,6 @@ export default combineReducers({
   creations,
   glazes,
   shapes,
-  statuses
+  statuses,
+  filter
 })
