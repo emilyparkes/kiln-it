@@ -1,6 +1,7 @@
 const express = require('express')
 
 const db = require('../db/clay')
+const { getCreations } = require('../db/creations')
 // const { prepForDb, prepForJS } = require('../server-utils')
 
 const router = express.Router()
@@ -28,12 +29,36 @@ router.patch('/:id', (req, res) => {
 })
 
 router.delete('/:id', (req, res) => {
-  return db.deleteClay(Number(req.params.id))
+  const id = Number(req.params.id)
+
+  if (existsInCreations(id)) {
+    return db.getClayById(id)
+      .then(clay => {
+        clay.in_use = false
+        return db.updateClay(id, clay)
+      })
+      .then((clay) => res.json({ clay: clay }))
+      .catch((err) => {
+        console.error(err)
+        res.sendStatus(500)
+      })
+  }
+  return db.deleteClay(id)
     .then((deleted) => res.json({ deleted: `${deleted} item(s) have been deleted successfully` }))
     .catch((err) => {
       console.error(err)
       res.sendStatus(500)
     })
 })
+
+function existsInCreations (id) {
+  let exists = false
+  return getCreations()
+    .then((creations) => {
+      const filteredOut = creations.filter(creation => creation.clayId === id)
+      filteredOut.length > 0 ? exists = true : exists = false
+      return exists
+    })
+}
 
 module.exports = router
