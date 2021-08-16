@@ -1,3 +1,4 @@
+const { CLIEngine } = require('eslint')
 const { connection } = require('./connection')
 
 module.exports = {
@@ -17,6 +18,7 @@ function getClayById (id, db = connection) {
   return db('clay')
     .where('id', id)
     .select()
+    .first()
 }
 
 function addClay (clay, db = connection) {
@@ -27,7 +29,7 @@ function addClay (clay, db = connection) {
 function updateClay (id, clay, db = connection) {
   return db('clay')
     .where('id', id)
-    .update({ clay })
+    .update(clay)
 }
 
 function deleteClay (id, db = connection) {
