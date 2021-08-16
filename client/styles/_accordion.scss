@@ -1,0 +1,39 @@
+.accordions {
+  position: relative;
+  // margin-top: 175px;
+
+}
+
+.accordion-item {
+  width: 300px;
+}
+
+.accordion-summary {
+  color: $brand-dark;
+  width: 300px;
+  height: 30px;
+  background-color: antiquewhite;
+  border-radius: 5px;
+  display: flex;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.accordion-title {
+  color: $brand-dark;
+  width: 300px;
+}
+
+.accordion-symbol {
+  color: $brand-dark;
+  width: 300px;
+}
+
+.accordion-content {
+  color: $brand-dark;
+  background-color: antiquewhite;
+  padding: 10px;
+}
