@@ -1,3 +1,4 @@
+/* eslint-disable promise/no-nesting */
 const express = require('express')
 
 const db = require('../db/clay')
@@ -30,21 +31,18 @@ router.patch('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   const id = Number(req.params.id)
-
-  if (existsInCreations(id)) {
-    return db.getClayById(id)
-      .then(clay => {
-        clay.in_use = false
-        return db.updateClay(id, clay)
-      })
-      .then((clay) => res.json({ clay: clay }))
-      .catch((err) => {
-        console.error(err)
-        res.sendStatus(500)
-      })
-  }
-  return db.deleteClay(id)
-    .then((deleted) => res.json({ deleted: `${deleted} item(s) have been deleted successfully` }))
+  return existsInCreations(id)
+    .then(exists => {
+      if (exists) {
+        return db.getClayById(id)
+          .then(() => {
+            return db.updateClay(id, { in_use: false })
+          })
+          .then((clay) => res.json({ clay: clay }))
+      }
+      return db.deleteClay(id)
+        .then((deleted) => res.json({ deleted: `${deleted} item(s) have been deleted successfully` }))
+    })
     .catch((err) => {
       console.error(err)
       res.sendStatus(500)
