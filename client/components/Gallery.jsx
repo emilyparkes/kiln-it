@@ -37,6 +37,7 @@ function Gallery ({ creations }) {
 
 const mapStateToProps = (store) => {
   return {
+    // creations: store.creations
     creations: filterBy(store.filter, store.creations)
   }
 }

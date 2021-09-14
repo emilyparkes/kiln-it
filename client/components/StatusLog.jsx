@@ -1,14 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { filterBy } from '../client-utils'
+// import { filterBy } from '../client-utils'
 
+import FilterBar from './filter/FilterBar'
 import StatusLogItem from './StatusLogItem'
 import { updateCreation } from '../apis/creations'
 
 function StatusLog ({ creations, history }) {
   return (
     <>
+      <FilterBar/>
       {creations && (
         <div className='log-container'>
           {creations.map((creation) => {
@@ -27,7 +29,8 @@ function StatusLog ({ creations, history }) {
 
 const mapStateToProps = (store) => {
   return {
-    creations: filterBy(store.filter, store.creations)
+    creations: store.creations
+    // filterBy(store.filter, store.creations)
 
   }
 }
