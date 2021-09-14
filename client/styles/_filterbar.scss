@@ -1,0 +1,70 @@
+.filter-model-box {
+  position: relative;
+  background: $body-bg-light;
+  width: 80%;
+  min-height: 690px;
+  top:50%;
+  left:50%;
+  border-radius: 10px;
+  transform: translate(-50%,-50%);
+}
+
+.filterbar {  
+  position: relative;
+  text-align: center;
+  width: 285px;
+  height: 36px;
+  background: #b98462;
+  border-radius: 100px;
+  margin: 0px 0px 0px 15px;
+}
+
+.filter-modal-heading {
+  position: relative;
+  padding: 24px 2px 2px 2px;
+
+}
+
+.current-filter {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #3A2E39;
+  align-content: center;
+  // position: absolute;
+  // top: 30px;
+  // left: 139px;
+}
+
+.selected-filters {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 20px 90px 20px;
+}
+
+.selected-filter-item {
+  margin-right: 3px;
+  border-radius: 15px;
+  padding: 5px;
+}
+
+.filter-label-shape {
+  background-color: #88A4B8;
+}
+
+.filter-label-clay {
+  background-color: #BA6D32;
+}
+
+.filter-label-glazes {
+  background-color: #6BA368;
+}
+
+
