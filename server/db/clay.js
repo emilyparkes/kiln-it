@@ -1,4 +1,3 @@
-const { CLIEngine } = require('eslint')
 const { connection } = require('./connection')
 
 module.exports = {

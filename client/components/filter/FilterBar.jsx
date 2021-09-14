@@ -21,9 +21,9 @@ function FilterBar ({ filter, clay, glazes, shapes, dispatch }) {
     setShowModel(true)
   }
 
-  const closeModal = () => {
-    setShowModel(false)
-  }
+  // const closeModal = () => {
+  //   setShowModel(false)
+  // }
 
   const renderAccordian = (categoryName) => {
     const options = {
