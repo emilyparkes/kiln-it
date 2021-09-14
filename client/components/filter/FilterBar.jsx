@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 
 import FilterModal from './FilterModal'
@@ -7,6 +7,8 @@ import Accordion from '../accordion/Accordion'
 import { addFilter, removeFilter } from '../../actions/filter'
 
 function FilterBar ({ filter, clay, glazes, shapes, dispatch }) {
+  const [show, setShowModel] = useState(false)
+
   const handleSelect = (category, value) => {
     dispatch(addFilter(category, value))
   }
@@ -15,70 +17,82 @@ function FilterBar ({ filter, clay, glazes, shapes, dispatch }) {
     dispatch(removeFilter(category, value))
   }
 
-  return (
-    <div className='filter-bar'>
+  const openModal = () => {
+    setShowModel(true)
+  }
 
-      <FilterModal>
+  const closeModal = () => {
+    setShowModel(false)
+  }
 
-        <div className='current-filter'>
-          <p>Selected Filters</p>
-          {Object.keys(filter).map(categoryName => {
-            return <div className={`category-${categoryName}`} key={categoryName}>
-              {filter[categoryName]?.map(name => {
-                return <div className='category name' key={name}>{name}</div>
-              }
-              )}</div>
+  const renderAccordian = (categoryName) => {
+    const options = {
+      shape: { id: 1, colour: '#88A4B8', category: shapes, type: 'shape' },
+      clay: { id: 2, colour: '#BA6D32', category: clay, type: 'clay' },
+      glazes: { id: 2, colour: '#6BA368', category: glazes, type: 'glaze' }
+    }
+    const { id, colour, category, type } = options[categoryName]
+    return (
+      <Accordion title={categoryName} num={id}>
+        <div className='checklist'>
+          {category.map((item) => {
+            return <FilterOption
+              key={item.id}
+              category={categoryName}
+              colour={colour}
+              name={item[type]}
+              select={handleSelect}
+              remove={handleRemove}
+              checked={filter[categoryName]?.includes(item[type])} />
           })}
         </div>
+      </Accordion>
+    )
+  }
 
-        <div className='accordions'>
-          {shapes &&
-            <Accordion title={'shape'} num='1'>
-              <div className='checklist'>
-                {shapes.map((shapeobj) => {
-                  return <FilterOption
-                    key={shapeobj.id}
-                    category='shape'
-                    name={shapeobj.shape}
-                    select={handleSelect}
-                    remove={handleRemove}
-                    checked={filter['shape']?.includes(shapeobj.shape)} />
-                })}
-              </div>
-            </Accordion>}
+  return (
+    <div className='filterbar' onClick={openModal}>
+      filter
 
-          {clay &&
-            <Accordion title={'clay'} num='2'>
-              <div className='checklist'>
-                {clay.map((clayobj) => {
-                  return <FilterOption
-                    key={clayobj.id}
-                    category='clay'
-                    name={clayobj.clay}
-                    select={handleSelect}
-                    remove={handleRemove}
-                    checked={filter['clay']?.includes(clayobj.clay)} />
-                })}
-              </div>
-            </Accordion>}
+      {show &&
+        <FilterModal>
+          <div >
 
-          {glazes &&
-            <Accordion title={'glazes'} num='3'>
-              <div className='checklist'>
-                {glazes.map((glazesobj) => {
-                  return <FilterOption
-                    key={glazesobj.id}
-                    category='glazes'
-                    name={glazesobj.glaze}
-                    select={handleSelect}
-                    remove={handleRemove}
-                    checked={filter['glazes']?.includes(glazesobj.glazes)} />
-                })}
-              </div>
-            </Accordion>}
+            <div className='styled-burger line line-closed'>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
 
-        </div>
-      </FilterModal>
+            <p className='filter-modal-heading'>FILTER</p>
+          </div>
+
+          <div className='current-filter'>
+            <p>Selected Filters</p>
+          </div>
+
+          <div className='selected-filters'>
+            {Object.keys(filter).map(categoryName => {
+              let arr = []
+              filter[categoryName]?.map(name => {
+                arr.push(name)
+              })
+              return arr.map(item => {
+                return <div className={`selected-filter-item filter-label-${categoryName}`} key={item}>
+                  {item}
+                </div>
+              }
+              )
+            })}
+          </div>
+
+          <div className='accordions'>
+            {shapes && renderAccordian('shape')}
+            {clay && renderAccordian('clay')}
+            {glazes && renderAccordian('glazes')}
+          </div>
+
+        </FilterModal>}
     </div>
   )
 }

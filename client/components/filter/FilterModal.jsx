@@ -5,7 +5,7 @@ function FilterModal ({ filter, close, show, children }) {
 
   return (
     <div className={showHideClassName}>
-      <section className='model-box'>
+      <section className='filter-model-box'>
         {children}
       </section>
     </div>

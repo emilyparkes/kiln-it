@@ -3,12 +3,12 @@ import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import { withStyles } from '@material-ui/core/styles'
 
-export default function FilterOption ({ category, name, select, remove, checked: initChecked }) {
+export default function FilterOption ({ category, name, colour, select, remove, checked: initChecked }) {
   const CustomCheckbox = withStyles({
     root: {
-      color: '#3A2E39',
+      color: colour,
       '&$checked': {
-        color: '#3A2E39'
+        color: colour
       }
     },
     checked: {}
