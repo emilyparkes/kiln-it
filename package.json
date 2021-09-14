@@ -15,7 +15,7 @@
     "db": "npm run db:migrate && npm run db:seed",
     "db:seed": "npm run knex seed:run",
     "db:migrate": "npm run knex migrate:latest",
-    "db:rollback": "npm run knex migrate:rollback && npm run db",
+    "db:reset": "npm run knex migrate:rollback && npm run db",
     "lint": "eslint --ext .js,.jsx client server",
     "check": "npm run lint && npm run test",
     "test": "jest --verbose",
