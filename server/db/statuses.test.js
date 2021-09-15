@@ -16,11 +16,3 @@ test('getStatuses returns the correct number of statuses', () => {
     return null
   })
 })
-
-test('getStatusById returns the correct status details', () => {
-  const id = 2
-  return db.getStatusById(id, testConn).then((status) => {
-    expect(status.status).toBe('Leather Hard')
-    return null
-  })
-})

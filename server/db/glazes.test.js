@@ -16,11 +16,3 @@ test('getGlazes returns the correct number of clay', () => {
     return null
   })
 })
-
-test('getGlazeById returns the correct glaze details', () => {
-  const id = 2
-  return db.getGlazeById(id, testConn).then((glaze) => {
-    expect(glaze.glaze).toBe('White Matte')
-    return null
-  })
-})
