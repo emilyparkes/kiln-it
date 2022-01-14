@@ -21,6 +21,10 @@ function LeftNav ({ open, setOpen }) {
         <li>Log</li>
       </Link>
 
+      <Link to='/options/edit' className='link'onClick={setOpen}>
+        <li>Options</li>
+      </Link>
+
       <Link to='/about' className='link'onClick={setOpen}>
         <li>About</li>
       </Link>
