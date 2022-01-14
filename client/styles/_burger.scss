@@ -25,7 +25,7 @@
         transition: all 0.3s linear;
     }
 
-    &-open div{
+    &-light div{
         background-color: #e3c6a4;
     }
     &-open div:nth-child(1) {
@@ -39,7 +39,7 @@
         transform: rotate(-45deg);
     }
 
-    &-closed div{
+    &-dark div{
         background-color: #744F44;
         }
     &-closed div:nth-child(1) {

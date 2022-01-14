@@ -6,7 +6,7 @@ function Burger () {
 
   return (
     <>
-      <nav className={open ? 'styled-burger line line-open' : 'styled-burger line line-closed'}
+      <nav className={open ? 'styled-burger line line-light line-open' : 'styled-burger line line-dark line-closed'}
         onClick={() => setOpen(!open)}>
         <div/>
         <div/>
