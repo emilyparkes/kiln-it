@@ -25,7 +25,7 @@ function FilterBar ({ filter, clay, glazes, shapes, dispatch }) {
   //   setShowModel(false)
   // }
 
-  const renderAccordian = (categoryName) => {
+  const renderAccordion = (categoryName) => {
     const options = {
       shape: { id: 1, colour: '#88A4B8', category: shapes, type: 'shape' },
       clay: { id: 2, colour: '#BA6D32', category: clay, type: 'clay' },
@@ -87,9 +87,9 @@ function FilterBar ({ filter, clay, glazes, shapes, dispatch }) {
           </div>
 
           <div className='accordions'>
-            {shapes && renderAccordian('shape')}
-            {clay && renderAccordian('clay')}
-            {glazes && renderAccordian('glazes')}
+            {shapes && renderAccordion('shape')}
+            {clay && renderAccordion('clay')}
+            {glazes && renderAccordion('glazes')}
           </div>
 
         </FilterModal>}
