@@ -4,15 +4,18 @@
 @import '_variables.scss';
 @import '_layout.scss';
 
+
 // Nav
 @import '_burger.scss';
 @import '_leftnav.scss';
 @import '_nav.scss';
+@import '_nav-utils.scss';
+@import '_filterbar.scss';
+@import '_searchbar.scss';
 
 // Shared
 @import '_card.scss';
 @import '_creation.scss';
-@import '_filterbar.scss';
 @import '_accordion.scss';
 
 // Admin

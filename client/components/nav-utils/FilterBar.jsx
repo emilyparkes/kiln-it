@@ -6,7 +6,7 @@ import FilterOption from './FilterOption'
 import Accordion from '../accordion/Accordion'
 import { addFilter, removeFilter } from '../../actions/filter'
 
-function FilterBar ({ filter, clay, glazes, shapes, dispatch }) {
+function FilterBar ({ filter, clay, glazes, shapes, dispatch, focus, toggleFocus }) {
   const [show, setShowModel] = useState(false)
 
   const handleSelect = (category, value) => {
@@ -17,13 +17,17 @@ function FilterBar ({ filter, clay, glazes, shapes, dispatch }) {
     dispatch(removeFilter(category, value))
   }
 
+  const closeModal = () => {
+    setShowModel(false)
+  }
+
+  const toggleModal = () => {
+    setShowModel(!show)
+  }
+
   const openModal = () => {
     setShowModel(true)
   }
-
-  // const closeModal = () => {
-  //   setShowModel(false)
-  // }
 
   const renderAccordion = (categoryName) => {
     const options = {
@@ -51,21 +55,24 @@ function FilterBar ({ filter, clay, glazes, shapes, dispatch }) {
   }
 
   return (
-    <div className='filterbar' onClick={openModal}>
-      filter
+    <>
+      <div className={'filter-bar'}>
+        <input type='text' className={focus ? 'focused' : undefined} placeholder='filterrs'/>
+        <button onClick={toggleFocus} id='filter-button' 
+            className={focus ? 'active' : undefined}>filter</button>
+      </div>
 
       {show &&
         <FilterModal>
-          <div >
 
-            <div className='styled-burger line line-closed'>
-              <div></div>
-              <div></div>
-              <div></div>
-            </div>
-
-            <p className='filter-modal-heading'>FILTER</p>
+          <div className='styled-burger line line-dark line-open'
+            onClick={toggleModal}>
+            <div></div>
+            <div></div>
+            <div></div>
           </div>
+
+          <p className='filter-modal-heading'>FILTER</p>
 
           <div className='current-filter'>
             <p>Selected Filters</p>
@@ -93,7 +100,7 @@ function FilterBar ({ filter, clay, glazes, shapes, dispatch }) {
           </div>
 
         </FilterModal>}
-    </div>
+    </>
   )
 }
 

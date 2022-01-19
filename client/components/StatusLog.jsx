@@ -3,14 +3,16 @@ import { connect } from 'react-redux'
 
 // import { filterBy } from '../client-utils'
 
-import FilterBar from './filter/FilterBar'
+// import FilterBar from './nav-utils/FilterBar'
+// import SearchBar from './nav-utils/SearchBar'
+import NavUtils from './nav-utils/NavUtils'
 import StatusLogItem from './StatusLogItem'
 import { updateCreation } from '../apis/creations'
 
 function StatusLog ({ creations, history }) {
   return (
     <>
-      <FilterBar/>
+      <NavUtils/>
       {creations && (
         <div className='log-container'>
           {creations.map((creation) => {
