@@ -17,17 +17,17 @@ function FilterBar ({ filter, clay, glazes, shapes, dispatch, focus, toggleFocus
     dispatch(removeFilter(category, value))
   }
 
-  const closeModal = () => {
-    setShowModel(false)
-  }
+  // const closeModal = () => {
+  //   setShowModel(false)
+  // }
 
   const toggleModal = () => {
     setShowModel(!show)
   }
 
-  const openModal = () => {
-    setShowModel(true)
-  }
+  // const openModal = () => {
+  //   setShowModel(true)
+  // }
 
   const renderAccordion = (categoryName) => {
     const options = {
@@ -57,9 +57,9 @@ function FilterBar ({ filter, clay, glazes, shapes, dispatch, focus, toggleFocus
   return (
     <>
       <div className={'filter-bar'}>
-        <input type='text' className={focus ? 'focused' : undefined} placeholder='filterrs'/>
-        <button onClick={toggleFocus} id='filter-button' 
-            className={focus ? 'active' : undefined}>filter</button>
+        <div type='text' className={focus ? 'extendable-bar focused' : 'extendable-bar'} />
+        <button onClick={toggleFocus} id='filter-button'
+          className={focus ? 'active' : undefined}>filter</button>
       </div>
 
       {show &&

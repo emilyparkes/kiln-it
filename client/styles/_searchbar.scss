@@ -1,7 +1,6 @@
   .search {
-    width: 300px;
-    height: 100px;
     position: relative;
+    margin: 0px 15px 0px 15px;
     
     input {
       outline: none;
@@ -19,7 +18,7 @@
       right: 0;
     }
     input.focused {
-      width: 100%;
+      width: 85%;
     }
     ::-webkit-input-placeholder{color: #D071A0;}
     ::-moz-input-placeholder{color: #D071A0;}

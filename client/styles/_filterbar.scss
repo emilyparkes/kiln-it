@@ -11,14 +11,9 @@
 
 .filter-bar {  
   position: relative;
-  text-align: center;
-  width: 285px;
-  height: 36px;
-  background: #b98462;
-  border-radius: 100px;
-  margin: 0px 0px 0px 15px;
+  margin: 0px 15px 0px 15px;
 
-  input {
+  .extendable-bar {
     outline: none;
     background-color: #fff;
     border: none;
@@ -34,8 +29,8 @@
     left: 0;
   }
 
-  input.focused {
-    width: 100%;
+  .focused {
+    width: 85%;
   }
 
   // ::-webkit-input-placeholder{color: #D071A0;}
