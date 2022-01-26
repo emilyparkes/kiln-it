@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
+import { HiFilter } from 'react-icons/hi'
 
 import FilterModal from './FilterModal'
 import FilterOption from './FilterOption'
@@ -59,7 +60,7 @@ function FilterBar ({ filter, clay, glazes, shapes, dispatch, focus, toggleFocus
       <div className={'filter-bar'}>
         <div type='text' className={focus ? 'extendable-bar focused' : 'extendable-bar'} />
         <button onClick={toggleFocus} id='filter-button'
-          className={focus ? 'active' : undefined}>filter</button>
+          className={focus ? 'active' : undefined}><HiFilter/></button>
       </div>
 
       {show &&
