@@ -5,7 +5,7 @@ import { HiFilter } from 'react-icons/hi'
 import FilterModal from './FilterModal'
 import FilterOption from './FilterOption'
 import Accordion from '../accordion/Accordion'
-import { addFilter, removeFilter } from '../../actions/filter'
+import { addFilter, removeFilter, clearFilter } from '../../actions/filter'
 
 function FilterBar ({ filter, clay, glazes, shapes, dispatch, focus, toggleFocus }) {
   const [show, setShowModel] = useState(false)
@@ -20,6 +20,10 @@ function FilterBar ({ filter, clay, glazes, shapes, dispatch, focus, toggleFocus
 
   const toggleModal = () => {
     setShowModel(!show)
+  }
+
+  const clear = () => {
+    dispatch(clearFilter())
   }
 
   const renderSelectedFilters = (className) => {
@@ -95,6 +99,8 @@ function FilterBar ({ filter, clay, glazes, shapes, dispatch, focus, toggleFocus
             {clay && renderAccordion('clay')}
             {glazes && renderAccordion('glazes')}
           </div>
+
+          <div onClick={clear}>Clear</div>
 
         </FilterModal>
       }
