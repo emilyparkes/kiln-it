@@ -18,17 +18,24 @@ function FilterBar ({ filter, clay, glazes, shapes, dispatch, focus, toggleFocus
     dispatch(removeFilter(category, value))
   }
 
-  // const closeModal = () => {
-  //   setShowModel(false)
-  // }
-
   const toggleModal = () => {
     setShowModel(!show)
   }
 
-  // const openModal = () => {
-  //   setShowModel(true)
-  // }
+  const renderSelectedFilters = (className) => {
+    return Object.keys(filter).map(categoryName => {
+      let arr = []
+      filter[categoryName]?.map(name => {
+        arr.push(name)
+      })
+      return arr.map(item => {
+        return <p className={`${className} filter-label-${categoryName}`} key={item}>
+          {item}
+        </p>
+      }
+      )
+    })
+  }
 
   const renderAccordion = (categoryName) => {
     const options = {
@@ -58,7 +65,9 @@ function FilterBar ({ filter, clay, glazes, shapes, dispatch, focus, toggleFocus
   return (
     <>
       <div className={'filter-bar'}>
-        <div type='text' className={focus ? 'extendable-bar focused' : 'extendable-bar'} />
+        <div onClick={toggleModal} type='text' className={focus ? 'extendable-bar focused' : 'extendable-bar'}>
+          {renderSelectedFilters('filter-horizontal')}
+        </div>
         <button onClick={toggleFocus} id='filter-button'
           className={focus ? 'active' : undefined}><HiFilter/></button>
       </div>
@@ -75,23 +84,10 @@ function FilterBar ({ filter, clay, glazes, shapes, dispatch, focus, toggleFocus
 
           <p className='filter-modal-heading'>FILTER</p>
 
-          <div className='current-filter'>
-            <p>Selected Filters</p>
-          </div>
+          <p className='current-filter'>Selected Filters</p>
 
           <div className='selected-filters'>
-            {Object.keys(filter).map(categoryName => {
-              let arr = []
-              filter[categoryName]?.map(name => {
-                arr.push(name)
-              })
-              return arr.map(item => {
-                return <div className={`selected-filter-item filter-label-${categoryName}`} key={item}>
-                  {item}
-                </div>
-              }
-              )
-            })}
+            {renderSelectedFilters('selected-filter-item')}
           </div>
 
           <div className='accordions'>
@@ -100,7 +96,8 @@ function FilterBar ({ filter, clay, glazes, shapes, dispatch, focus, toggleFocus
             {glazes && renderAccordion('glazes')}
           </div>
 
-        </FilterModal>}
+        </FilterModal>
+      }
     </>
   )
 }

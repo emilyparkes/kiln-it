@@ -18,7 +18,7 @@
     background-color: #fff;
     border: none;
     border-radius: 50px;
-    padding: 15px 15px;
+    padding: 0px 38px;
     font-size: 15px;
     height: 35px;
     width: 0px;
@@ -31,6 +31,17 @@
 
   .focused {
     width: 89%;
+    flex-direction: row;
+    display: flex;
+    overflow: hidden;
+    flex-wrap: wrap;
+  }
+
+  .filter-horizontal {
+    margin: 3px 0px 9px 5px;
+    padding: 5px;
+    width: fit-content;
+    border-radius: 20px;
   }
 
   // ::-webkit-input-placeholder{color: #D071A0;}
@@ -58,7 +69,14 @@
 .filter-modal-heading {
   position: relative;
   padding: 24px 2px 2px 2px;
-
+  display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #3A2E39;
+    align-content: center;
 }
 
 .current-filter {
@@ -82,11 +100,11 @@
   align-content: center;
   justify-content: center;
   align-items: center;
-  margin: 0px 20px 90px 20px;
+  margin: 0px 20px 20px 20px;
 }
 
 .selected-filter-item {
-  margin-right: 3px;
+  margin: 3px;
   border-radius: 15px;
   padding: 5px;
 }
