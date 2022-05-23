@@ -41,6 +41,15 @@ function FilterBar ({ filter, clay, glazes, shapes, dispatch, focus, toggleFocus
     })
   }
 
+  const trueFalseCheckboxes = (categoryName, cat, type) => {
+    console.log('obj keys: ', Object.keys(filter).length > 0)
+    if (Object.keys(filter).length > 0 && filter[categoryName]?.includes(cat[type])) {
+      return true
+    } else {
+      return false
+    }
+  }
+
   const renderAccordion = (categoryName) => {
     const options = {
       shape: { id: 1, colour: '#88A4B8', category: shapes, type: 'shape' },
@@ -51,15 +60,16 @@ function FilterBar ({ filter, clay, glazes, shapes, dispatch, focus, toggleFocus
     return (
       <Accordion title={categoryName} num={id}>
         <div className='checklist'>
-          {category.map((item) => {
+          {category.map((cat) => {
+            console.log('checked val: ', filter, filter[categoryName]?.includes(cat[type]))
             return <FilterOption
-              key={item.id}
+              key={cat.id}
               category={categoryName}
               colour={colour}
-              name={item[type]}
+              name={cat[type]}
               select={handleSelect}
               remove={handleRemove}
-              checked={filter[categoryName]?.includes(item[type])} />
+              checked={trueFalseCheckboxes(categoryName, cat, type)} />
           })}
         </div>
       </Accordion>
@@ -68,9 +78,9 @@ function FilterBar ({ filter, clay, glazes, shapes, dispatch, focus, toggleFocus
 
   return (
     <>
-      <div className={'filter-bar'}>
+      <div className='filter-bar'>
         <div onClick={toggleModal} type='text' className={focus ? 'extendable-bar focused' : 'extendable-bar'}>
-          {renderSelectedFilters('filter-horizontal')}
+          {focus ? renderSelectedFilters('filter-horizontal') : null}
         </div>
         <button onClick={toggleFocus} id='filter-button'
           className={focus ? 'active' : undefined}><HiFilter/></button>
