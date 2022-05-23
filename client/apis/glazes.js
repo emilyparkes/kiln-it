@@ -11,7 +11,6 @@ export function getGlazes () {
 export function addGlazes (glazes) {
   return request.post(baseUrl).send(glazes)
     .then((resp) => {
-      console.log('api: ', resp.body)
       return resp.body.glazes
     })
 }

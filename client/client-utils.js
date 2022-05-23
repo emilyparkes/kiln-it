@@ -27,7 +27,7 @@ export function filterBy (filters, itemsToFilter) {
     : itemsToFilter.filter(creation => {
       let isFilterOption = true
       for (let key in filters) {
-        if (creation[key] !== filters[key]) isFilterOption = false
+        if (!filters[key].includes(creation[key])) isFilterOption = false
       }
       return isFilterOption
     })

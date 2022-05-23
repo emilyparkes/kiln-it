@@ -1,17 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-// import { filterBy } from '../client-utils'
-
-import FilterBar from './filter/FilterBar'
+import NavUtils from './nav-utils/NavUtils'
 import StatusLogItem from './StatusLogItem'
 import { updateCreation } from '../apis/creations'
+import { filterBy } from '../client-utils'
 
 function StatusLog ({ creations, history }) {
   return (
     <>
-      <FilterBar/>
-      {creations && (
+      <NavUtils/>
+      {creations?.length ? (
         <div className='log-container'>
           {creations.map((creation) => {
             return (
@@ -22,16 +21,16 @@ function StatusLog ({ creations, history }) {
             )
           })}
         </div>
-      )}
+      )
+        : 'Sorry nothing for you'
+      }
     </>
   )
 }
 
 const mapStateToProps = (store) => {
   return {
-    creations: store.creations
-    // filterBy(store.filter, store.creations)
-
+    creations: filterBy(store.filter, store.creations)
   }
 }
 

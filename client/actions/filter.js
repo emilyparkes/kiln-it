@@ -3,8 +3,6 @@ export const REMOVE_FILTER = 'REMOVE_FILTER'
 export const CLEAR_FILTER = 'CLEAR_FILTER'
 
 export function addFilter (category, value) {
-  console.log(category, value)
-
   return {
     type: ADD_FILTER,
     category,

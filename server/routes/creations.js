@@ -19,9 +19,8 @@ router.post('/', (req, res) => {
 })
 
 router.patch('/:id', (req, res) => {
-  console.log('body: ', req.body)
-  const creation = prepForDb(req.body)
-  db.updateCreationById(Number(req.params.id), creation)
+  const dbCreation = prepForDb(req.body)
+  db.updateCreationById(Number(req.params.id), dbCreation)
     .then((creation) => {
       if (!creation) {
         return res.status(404).json({
