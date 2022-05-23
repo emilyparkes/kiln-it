@@ -8,10 +8,10 @@ module.exports = {
 
 function getCreations (db = connection) {
   return db('creations')
-    .join('clay', 'clay.id', 'creations.clay')
-    .join('glazes', 'glazes.id', 'creations.glaze')
-    .join('shapes', 'shapes.id', 'creations.shape')
-    .join('statuses', 'statuses.id', 'creations.status')
+    .join('clay', 'clay.id', 'creations.clay_id')
+    .join('glazes', 'glazes.id', 'creations.glaze_id')
+    .join('shapes', 'shapes.id', 'creations.shape_id')
+    .join('statuses', 'statuses.id', 'creations.status_id')
     .select(
       'creations.id',
       'clay.id as clayId',
@@ -42,10 +42,10 @@ function getCreations (db = connection) {
 
 function getCreationById (id, db = connection) {
   return db('creations')
-    .join('clay', 'clay.id', 'creations.clay')
-    .join('glazes', 'glazes.id', 'creations.glaze')
-    .join('shapes', 'shapes.id', 'creations.shape')
-    .join('statuses', 'statuses.id', 'creations.status')
+    .join('clay', 'clay.id', 'creations.clay_id')
+    .join('glazes', 'glazes.id', 'creations.glaze_id')
+    .join('shapes', 'shapes.id', 'creations.shape_id')
+    .join('statuses', 'statuses.id', 'creations.status_id')
     .where('creations.id', id)
     .select(
       'creations.id',

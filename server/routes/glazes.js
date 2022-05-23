@@ -23,7 +23,6 @@ router.post('/', (req, res) => {
   })
   Promise.all(addedGlazes)
     .then((glazes) => {
-      console.log(glazes)
       return res.json({ glazes })
     })
     .catch((err) => {
