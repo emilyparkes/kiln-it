@@ -8,7 +8,7 @@ function NavUtils (props) {
   const [searchFocus, setSearchFocus] = useState(false)
 
   const toggleFocus = (event) => {
-    event.preventDefault();
+    event.preventDefault()
     setFilterFocus(!filterFocus)
     setSearchFocus(!searchFocus)
   }
