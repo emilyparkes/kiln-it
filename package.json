@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "\"Keep records of clay percent shrinkage, weight and dates of firing for my clay creations\"",
   "main": "index.js",
+  "engines": {
+    "node": "16.13.2"
+},
   "scripts": {
     "start": "node server",
     "dev": "npm run dev:client & npm run dev:server",
