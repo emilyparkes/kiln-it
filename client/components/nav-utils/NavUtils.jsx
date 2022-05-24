@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import FilterBar from './FilterBar'
 import SearchBar from './SearchBar'
 
-function NavUtils (props) {
+function NavUtils () {
   const [filterFocus, setFilterFocus] = useState(true)
   const [searchFocus, setSearchFocus] = useState(false)
 

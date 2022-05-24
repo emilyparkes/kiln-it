@@ -26,19 +26,29 @@ function FilterBar ({ filter, clay, glazes, shapes, dispatch, focus, toggleFocus
     dispatch(clearFilter())
   }
 
-  const renderSelectedFilters = (className) => {
-    return Object.keys(filter).map(categoryName => {
-      let arr = []
-      filter[categoryName]?.map(name => {
-        arr.push(name)
+  const renderSelectedFilters = (className, onBar) => {
+    const listFilters = () => {
+      // take filters out of store categorised objects, put into list
+      return Object.keys(filter).map(categoryName => {
+        let selecterFilters = []
+        filter[categoryName]?.map(name => {
+          selecterFilters.push(name)
+        })
+        // list out list and colour-code!
+        return selecterFilters.map(aFilter => {
+          return <p className={`${className} filter-label-${categoryName}`} key={aFilter}>
+            {aFilter}
+          </p>
+        })
       })
-      return arr.map(item => {
-        return <p className={`${className} filter-label-${categoryName}`} key={item}>
-          {item}
-        </p>
-      }
-      )
-    })
+    }
+    if (Object.keys(filter).length && !onBar) { // if have filter and not on bar (on modal) - show resuts
+      return listFilters()
+    } else if (!Object.keys(filter).length && onBar) { // if no filter and on bar - show placeholder
+      return <p className={`${className} placeholder`}>Select Filters</p>
+    } else if (Object.keys(filter).length && onBar) { // if have filter and on bar - show resuts
+      return listFilters()
+    }
   }
 
   const trueFalseCheckboxes = (categoryName, cat, type) => {
@@ -61,7 +71,7 @@ function FilterBar ({ filter, clay, glazes, shapes, dispatch, focus, toggleFocus
       <Accordion title={categoryName} num={id}>
         <div className='checklist'>
           {category.map((cat) => {
-            console.log('checked val: ', filter, filter[categoryName]?.includes(cat[type]))
+            // console.log('checked val: ', filter, filter[categoryName]?.includes(cat[type]))
             return <FilterOption
               key={cat.id}
               category={categoryName}
@@ -80,8 +90,9 @@ function FilterBar ({ filter, clay, glazes, shapes, dispatch, focus, toggleFocus
     <>
       <div className='filter-bar'>
         <div onClick={toggleModal} type='text' className={focus ? 'extendable-bar focused' : 'extendable-bar'}>
-          {focus ? renderSelectedFilters('filter-horizontal') : null}
+          {focus ? renderSelectedFilters('filter-horizontal', true) : null}
         </div>
+
         <button onClick={toggleFocus} id='filter-button'
           className={focus ? 'active' : undefined}><HiFilter/></button>
       </div>
@@ -97,11 +108,10 @@ function FilterBar ({ filter, clay, glazes, shapes, dispatch, focus, toggleFocus
           </div>
 
           <p className='filter-modal-heading'>FILTER</p>
-
           <p className='current-filter'>Selected Filters</p>
 
           <div className='selected-filters'>
-            {renderSelectedFilters('selected-filter-item')}
+            {renderSelectedFilters('selected-filter-item', false)}
           </div>
 
           <div className='accordions'>
