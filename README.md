@@ -21,6 +21,7 @@ Run the following commands in your terminal
 ```sh
 npm install
 npm run db
+cp .env.example .env
 npm run dev
 ```
 
