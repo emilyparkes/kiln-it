@@ -5,10 +5,12 @@ import { Link } from 'react-router-dom'
 import { toLowHyphen, filterBy } from '../client-utils'
 
 import Card from './Card'
+import NavUtils from './nav-utils/NavUtils'
 
 function Gallery ({ creations }) {
   return (
     <>
+      <NavUtils/>
       {creations && (
         <div className='card-root'>
           <div className='card-container'>
