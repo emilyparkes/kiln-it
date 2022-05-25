@@ -213,7 +213,9 @@ function CreationEdit ({ creations, clay, glazes, shapes, statuses, match, histo
 
             </div>
           </div>
-          <IoLogoInstagram className='icon-instagram' />
+          <a href='https://www.instagram.com/emily_coco/'>
+            <IoLogoInstagram className='icon-instagram' />
+          </a>
           <VscSaveAs className='icon-save' onClick={onSubmit}/>
 
         </div>
