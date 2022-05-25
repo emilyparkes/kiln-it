@@ -20,11 +20,11 @@
     input.focused {
       width: 89%;
     }
-    ::-webkit-input-placeholder{color: #D071A0;}
-    ::-moz-input-placeholder{color: #D071A0;}
-    ::-ms-input-placeholder{color: #D071A0;}
-    ::-o-input-placeholder{color: #D071A0;}
-    ::input-placeholder{color: #D071A0;}
+    ::-webkit-input-placeholder{color: rgba(128, 128, 128, 0.517);}
+    ::-moz-input-placeholder{color: rgba(128, 128, 128, 0.517);}
+    ::-ms-input-placeholder{color: rgba(128, 128, 128, 0.517);}
+    ::-o-input-placeholder{color: rgba(128, 128, 128, 0.517);}
+    ::input-placeholder{color: rgba(128, 128, 128, 0.517);}
     
     #search-button {
       position: absolute;
@@ -39,5 +39,4 @@
       color: $text-dark;
       transition: all 0.5s ease;
     }
-
   }
