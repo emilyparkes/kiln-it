@@ -11,6 +11,7 @@ import { fetchStatuses } from '../actions/statuses'
 import Navigation from './nav/Navigation'
 import Home from './Home'
 import Gallery from './Gallery'
+import About from './About'
 import CreationEdit from './CreationEdit'
 import Creation from './Creation'
 import Register from './auth/Register'
@@ -34,6 +35,7 @@ function App ({ dispatch }) {
         <Route exact path='/' component={Home} />
         <Route path='/gallery' component={Gallery} />
         <Route path='/log' component={Log} />
+        <Route path='/about' component={About} />
         <Route path='/creations/:name/edit' component={CreationEdit} />
         <Route path='/creations/:name' component={Creation} />
         <Route path='/options/edit' component={DataOptionsView} />
