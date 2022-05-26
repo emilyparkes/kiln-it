@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 
+import auth from './auth'
 import all from './all'
 import error from './error'
 import waitIndicator from './waitIndicator'
@@ -11,6 +12,7 @@ import statuses from './statuses'
 import filter from './filter'
 
 export default combineReducers({
+  auth,
   all,
   error,
   waitIndicator,
