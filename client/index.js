@@ -5,6 +5,9 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import { BrowserRouter as Router } from 'react-router-dom'
 
+// eslint-disable-next-line no-unused-vars
+import initializeFirebase from './apis/firebase'
+
 import reducers from './reducers'
 import App from './components/App'
 
