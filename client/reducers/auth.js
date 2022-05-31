@@ -5,7 +5,7 @@ const initialState = null
 export default function auth (state = initialState, action) {
   switch (action.type) {
     case SIGN_IN_USER:
-      return action.user
+      return action.signedIn
 
     case LOG_OUT_USER:
       return null

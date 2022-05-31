@@ -22,34 +22,30 @@ function LeftNav ({ sidebarOpen, setSidebar }) {
         <li>About</li>
       </Link>
 
-      <div className='link'>------hidden-------</div>
+      {user() &&
+         <div><Link to='/creations/le-vase/edit' className='link' onClick={setSidebar}>
+           <li>Edit</li>
+         </Link>
 
-      <Link to='/creations/le-vase/edit' className='link' onClick={setSidebar}>
-        <li>Edit</li>
-      </Link>
+         <Link to='/log' className='link' onClick={setSidebar}>
+           <li>Log</li>
+         </Link>
 
-      <Link to='/log' className='link' onClick={setSidebar}>
-        <li>Log</li>
-      </Link>
+         <Link to='/options/edit' className='link' onClick={setSidebar}>
+           <li>Options</li>
+         </Link>
 
-      <Link to='/options/edit' className='link' onClick={setSidebar}>
-        <li>Options</li>
-      </Link>
+         <LogOut className='link' setSidebar={setSidebar}/>
+         </div>
 
-      {user?.uid
-        ? <LogOut className='link' setSidebar={setSidebar}/>
-
-        : <div>
-          <Link to='/signin' className='link' onClick={setSidebar}>
-            <li>Sign In</li>
-          </Link>
-          <Link to='/register' className='link' onClick={setSidebar}>
-            <li>Register</li>
-          </Link>
-        </div>
+        //   <Link to='/signin' className='link' onClick={setSidebar}>
+        //     <li>Sign In</li>
+        //   </Link>
+        //   <Link to='/register' className='link' onClick={setSidebar}>
+        //     <li>Register</li>
+        //   </Link>
+        // </div>
       }
-
-      <LogOut className='link' setSidebar={setSidebar}/>
 
     </div>
   )

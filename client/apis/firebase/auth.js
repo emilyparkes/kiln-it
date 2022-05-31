@@ -5,8 +5,6 @@ import {
   signOut
 } from 'firebase/auth'
 
-import request from 'superagent'
-
 const auth = getAuth()
 export default auth
 
@@ -16,7 +14,7 @@ export function getUser () {
 
 export function register (email, password, errFn) {
   return createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => createWhanauRole(email, userCredential.user.uid, userCredential.user))
+    .then((userCredential) => userCredential.user)
     .catch(({ code }) => errFn(readError(code)))
 }
 
@@ -52,14 +50,4 @@ function readError (code) {
     default:
       return code
   }
-}
-
-function createWhanauRole (email, uid, firebaseUser) {
-  return request.post('/api/v1/auth')
-    .send({ email, uid })
-    .then((resp) => {
-      const body = { ...resp.body, firebaseUser }
-      console.log(body)
-      return body
-    })
 }
