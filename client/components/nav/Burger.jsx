@@ -2,17 +2,17 @@ import React, { useState } from 'react'
 import LeftNav from './LeftNav'
 
 function Burger () {
-  const [open, setOpen] = useState(false)
+  const [sidebarOpen, setSidebar] = useState(false)
 
   return (
     <>
-      <nav className={open ? 'styled-burger line line-light line-open' : 'styled-burger line line-dark line-closed'}
-        onClick={() => setOpen(!open)}>
+      <nav className={sidebarOpen ? 'styled-burger line line-light line-sidebar' : 'styled-burger line line-dark line-closed'}
+        onClick={() => setSidebar(!sidebarOpen)}>
         <div/>
         <div/>
         <div/>
       </nav>
-      <LeftNav open={open} setOpen={() => setOpen(!open)}/>
+      <LeftNav sidebarOpen={sidebarOpen} setSidebar={() => setSidebar(!sidebarOpen)}/>
     </>
   )
 }

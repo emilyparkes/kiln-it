@@ -1,6 +1,7 @@
 const path = require('path')
 const express = require('express')
 
+const authRoutes = require('./routes/auth')
 const allItemsRoutes = require('./routes/all')
 const creationRoutes = require('./routes/creations')
 const statusRoutes = require('./routes/statuses')
@@ -13,6 +14,7 @@ const server = express()
 server.use(express.static(path.join(__dirname, 'public')))
 server.use(express.json())
 
+server.use('/api/v1/auth', authRoutes)
 server.use('/api/v1/all', allItemsRoutes)
 server.use('/api/v1/creations', creationRoutes)
 server.use('/api/v1/statuses', statusRoutes)

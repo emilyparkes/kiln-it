@@ -1,9 +1,9 @@
-export const SIGNIN_USER = 'SIGNIN_USER'
+export const SIGN_IN_USER = 'SIGN_IN_USER'
 export const LOG_OUT_USER = 'LOG_OUT_USER'
 
 export function signInUser (user) {
   return {
-    type: SIGNIN_USER,
+    type: SIGN_IN_USER,
     user
   }
 }

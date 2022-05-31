@@ -8,6 +8,7 @@ import { brown } from '@material-ui/core/colors'
 import { useEditStyles } from '../../styles/mui_overrides'
 
 import { register } from '../../apis/firebase/auth'
+import { signInUser } from '../../actions/auth'
 
 function Register () {
   const [email, setEmail] = useState('')
@@ -29,7 +30,7 @@ function Register () {
     register(email, password, setFormErr)
       // eslint-disable-next-line promise/always-return
       .then(user => {
-        dispatch(user)
+        dispatch(signInUser(user))
         navigate('/gallery')
       })
       .catch(err => console.log(err.message))

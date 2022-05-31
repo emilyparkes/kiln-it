@@ -1,10 +1,10 @@
-import { SIGNIN_USER, LOG_OUT_USER } from '../actions/auth'
+import { SIGN_IN_USER, LOG_OUT_USER } from '../actions/auth'
 
 const initialState = null
 
 export default function auth (state = initialState, action) {
   switch (action.type) {
-    case SIGNIN_USER:
+    case SIGN_IN_USER:
       return action.user
 
     case LOG_OUT_USER:

@@ -5,7 +5,7 @@
   "main": "index.js",
   "engines": {
     "node": "16.13.2"
-},
+  },
   "scripts": {
     "start": "node server",
     "dev": "npm run dev:client & npm run dev:server",
@@ -67,7 +67,10 @@
     "babel-jest": "^26.3.0",
     "babel-loader": "^8.1.0",
     "css-loader": "^6.5.1",
+    "dotenv-webpack": "^7.1.0",
     "express": "^4.17.1",
+    "firebase": "^9.8.1",
+    "firebase-admin": "^10.2.0",
     "http-errors": "^1.8.0",
     "knex": "^0.95.15",
     "lodash": "^4.17.21",
@@ -76,7 +79,7 @@
     "react-dom": "^16.13.1",
     "react-icons": "^4.2.0",
     "react-redux": "^7.2.4",
-    "react-router-dom": "^5.2.0",
+    "react-router-dom": "^6.3.0",
     "redux": "^4.1.0",
     "redux-thunk": "^2.3.0",
     "sass": "^1.27.2",

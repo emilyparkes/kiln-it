@@ -1,41 +1,56 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-function LeftNav ({ open, setOpen }) {
-  return (
-    <div className={open ? 'leftnav slide-open' : 'leftnav slide-closed'}>
+import { getUser } from '../../apis/firebase/auth'
+import LogOut from '../auth/LogOut'
 
-      <Link to='/' className='link'onClick={setOpen}>
+function LeftNav ({ sidebarOpen, setSidebar }) {
+  const user = getUser
+
+  return (
+    <div className={sidebarOpen ? 'leftnav slide-open' : 'leftnav slide-closed'}>
+
+      <Link to='/' className='link' onClick={setSidebar}>
         <li>Home</li>
       </Link>
 
-      <Link to='/gallery' className='link'onClick={setOpen}>
+      <Link to='/gallery' className='link' onClick={setSidebar}>
         <li>Gallery</li>
       </Link>
 
-      <Link to='/creations/le-vase/edit' className='link'onClick={setOpen}>
-        <li>Edit</li>
-      </Link>
-
-      <Link to='/log' className='link'onClick={setOpen}>
-        <li>Log</li>
-      </Link>
-
-      <Link to='/options/edit' className='link'onClick={setOpen}>
-        <li>Options</li>
-      </Link>
-
-      <Link to='/about' className='link'onClick={setOpen}>
+      <Link to='/about' className='link' onClick={setSidebar}>
         <li>About</li>
       </Link>
 
-      <Link to='/signin' className='link'onClick={setOpen}>
-        <li>Sign In</li>
+      <div className='link'>------hidden-------</div>
+
+      <Link to='/creations/le-vase/edit' className='link' onClick={setSidebar}>
+        <li>Edit</li>
       </Link>
 
-      <Link to='/register' className='link'onClick={setOpen}>
-        <li>Register</li>
+      <Link to='/log' className='link' onClick={setSidebar}>
+        <li>Log</li>
       </Link>
+
+      <Link to='/options/edit' className='link' onClick={setSidebar}>
+        <li>Options</li>
+      </Link>
+
+      {user?.uid
+        ? <LogOut className='link' setSidebar={setSidebar}/>
+
+        : <div>
+          <Link to='/signin' className='link' onClick={setSidebar}>
+            <li>Sign In</li>
+          </Link>
+          <Link to='/register' className='link' onClick={setSidebar}>
+            <li>Register</li>
+          </Link>
+        </div>
+      }
+
+      <LogOut className='link' setSidebar={setSidebar}/>
+
     </div>
   )
 }
