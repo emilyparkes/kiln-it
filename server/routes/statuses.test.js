@@ -6,7 +6,7 @@ const statusDb = require('../db/statuses')
 
 jest.mock('../db/statuses', () => ({
   getStatuses: jest.fn(),
-  getStatusById: jest.fn()
+  getStatusById: jest.fn(),
 }))
 
 const mockStatuses = [
@@ -17,7 +17,7 @@ const mockStatuses = [
   { id: 5, status: 'Bisque Fired' },
   { id: 6, status: 'Glazed' },
   { id: 7, status: 'Glaze Firing' },
-  { id: 8, status: 'Complete' }
+  { id: 8, status: 'Complete' },
 ]
 
 // const mockStatus = { id: 2, status: 'Leather Hard' }
