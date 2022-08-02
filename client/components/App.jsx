@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
-import { Route, Switch } from 'react-router-dom'
-import { connect } from 'react-redux'
+import { Routes, Route } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
 import { fetchCreations } from '../actions/creations'
 import { fetchClay } from '../actions/clay'
@@ -19,7 +19,9 @@ import SignIn from './auth/SignIn'
 import Log from './StatusLog'
 import DataOptionsView from './DataOptionsView'
 
-function App ({ dispatch }) {
+function App () {
+  const dispatch = useDispatch()
+
   useEffect(() => {
     dispatch(fetchCreations())
     dispatch(fetchClay())
@@ -30,20 +32,20 @@ function App ({ dispatch }) {
 
   return (
     <>
-      <Route path='/' component={Navigation} />
-      <Switch>
-        <Route exact path='/' component={Home} />
-        <Route path='/gallery' component={Gallery} />
-        <Route path='/log' component={Log} />
-        <Route path='/about' component={About} />
-        <Route path='/creations/:name/edit' component={CreationEdit} />
-        <Route path='/creations/:name' component={Creation} />
-        <Route path='/options/edit' component={DataOptionsView} />
-        <Route path='/register' component={Register} />
-        <Route path='/signin' component={SignIn} />
-      </Switch>
+      <Navigation />
+      <Routes>
+        <Route path='/' element={<Home/>} />
+        <Route path='/gallery' element={<Gallery/>} />
+        <Route path='/log' element={<Log/>} />
+        <Route path='/about' element={<About/>} />
+        <Route path='/creations/:name/edit' element={<CreationEdit/>} />
+        <Route path='/creations/:name' element={<Creation/>} />
+        <Route path='/options/edit' element={<DataOptionsView/>} />
+        <Route path='/register' element={<Register/>} />
+        <Route path='/signin' element={<SignIn/>} />
+      </Routes>
     </>
   )
 }
 
-export default connect()(App)
+export default App

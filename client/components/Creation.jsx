@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from 'react'
-import { connect } from 'react-redux'
+import { useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import { IoLogoInstagram } from 'react-icons/io'
 
 import { findString, toCapSpace } from '../client-utils'
 
-function Creation ({ creations, match }) {
+function Creation () {
   const [creation, setCreation] = useState(null)
   const [imgIdx, setImgIdx] = useState(0)
   const [currentImg, setCurrentImage] = useState('')
 
+  const params = useParams()
+  const creations = useSelector(store => store.creations)
+  
   const images = ['/images/plate.jpeg', '/images/vase.png', '/images/plate.jpeg', '/images/vase.png', '/images/plate.jpeg']
-
+  
   useEffect(() => {
     if (creations) {
-      const name = toCapSpace(match.params.name)
+      const name = toCapSpace(params.name)
       const creation = findString(creations, 'name', name)
       setCreation(creation)
     }
@@ -59,13 +63,7 @@ function Creation ({ creations, match }) {
   )
 }
 
-const mapStateToProps = (store) => {
-  return {
-    creations: store.creations
-  }
-}
-
-export default connect(mapStateToProps)(Creation)
+export default Creation
 
 // const [touchStart, setTouchStart] = React.useState(0);
 // const [touchEnd, setTouchEnd] = React.useState(0);

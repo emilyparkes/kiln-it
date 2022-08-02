@@ -1,9 +1,15 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import DataOption from './DataOption'
 
-function AddDataOptions ({ clay, glazes, shapes, statuses, dispatch }) {
+function AddDataOptions () {
+
+const clay = useSelector(store => store.clay)
+const glazes = useSelector(store => store.glazes)
+const shapes = useSelector(store => store.shapes)
+const statuses = useSelector(store => store.statuses)
+
   return (
     <>
       { (statuses && clay && glazes && shapes) &&
@@ -21,13 +27,4 @@ function AddDataOptions ({ clay, glazes, shapes, statuses, dispatch }) {
   )
 }
 
-const mapStateToProps = (store) => {
-  return {
-    clay: store.clay,
-    glazes: store.glazes,
-    shapes: store.shapes,
-    statuses: store.statuses
-  }
-}
-
-export default connect(mapStateToProps)(AddDataOptions)
+export default AddDataOptions

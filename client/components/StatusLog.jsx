@@ -1,12 +1,15 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import NavUtils from './nav-utils/NavUtils'
 import StatusLogItem from './StatusLogItem'
 import { updateCreation } from '../apis/creations'
 import { filterBy } from '../client-utils'
 
-function StatusLog ({ creations, history }) {
+function StatusLog ({ history }) {
+
+  const creations = useSelector(store => filterBy(store.filter, store.creations))
+
   return (
     <>
       <NavUtils/>
@@ -28,10 +31,4 @@ function StatusLog ({ creations, history }) {
   )
 }
 
-const mapStateToProps = (store) => {
-  return {
-    creations: filterBy(store.filter, store.creations)
-  }
-}
-
-export default connect(mapStateToProps)(StatusLog)
+export default StatusLog
