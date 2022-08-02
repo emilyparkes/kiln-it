@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import StatusModal from './StatusModal'
 import { toLowHyphen } from '../client-utils'
 
-function StatusLogItem ({ statuses, creation, updateCreation, history }) {
+function StatusLogItem ({ creation, updateCreation, history }) {
   const [show, setShowModel] = useState(false)
   const [statusStyle, setStatusStyle] = useState(creation.status)
   const [currentStatus, setStatus] = useState({ id: creation.statusId, status: creation.status })
+
+  const statuses = useSelector(store => store.statuses)
 
   const style = toLowHyphen(statusStyle)
   const date = creation.dateComplete || creation.dateCreated
@@ -34,7 +36,7 @@ function StatusLogItem ({ statuses, creation, updateCreation, history }) {
     setStatusStyle(e.target.value)
   }
 
-  const onSubmit = (e) => {
+  const onSubmit = () => {
     // e.preventDefault()
     hideModal()
     delete creation.clay
@@ -85,7 +87,7 @@ function StatusLogItem ({ statuses, creation, updateCreation, history }) {
             <div className='log-box' key={creation.id}>
 
               <img className='log-img'
-                src='/images/plate.jpeg' />
+                src='/images/plate.jpeg' alt='text tdb' />
 
               <table className='info'>
                 <tbody >
@@ -114,10 +116,4 @@ function StatusLogItem ({ statuses, creation, updateCreation, history }) {
   )
 }
 
-const mapStateToProps = (store) => {
-  return {
-    statuses: store.statuses
-  }
-}
-
-export default connect(mapStateToProps)(StatusLogItem)
+export default StatusLogItem

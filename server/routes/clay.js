@@ -26,9 +26,9 @@ router.post('/', (req, res) => {
     })
 })
 
-router.patch('/:id', (req, res) => {
-  console.log('route not made yet')
-})
+// router.patch('/:id', (req, res) => {
+//   console.log('route not made yet')
+// })
 
 router.delete('/:id', (req, res) => {
   const id = Number(req.params.id)

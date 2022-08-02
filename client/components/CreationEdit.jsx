@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
 
 import { TextField, MenuItem, InputAdornment } from '@material-ui/core'
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
@@ -11,7 +12,7 @@ import { useEditStyles } from '../styles/mui_overrides'
 import { updateCreation } from '../apis/creations'
 import { findString, toLowHyphen, toCapSpace } from '../client-utils'
 
-function CreationEdit ({ creations, clay, glazes, shapes, statuses, match, history }) {
+function CreationEdit ({ history }) {
   const classes = useEditStyles()
   const [imgIdx, setImgIdx] = useState(0)
   const [currentImg, setCurrentImage] = useState('')
@@ -20,16 +21,23 @@ function CreationEdit ({ creations, clay, glazes, shapes, statuses, match, histo
   // HARD CODED FOR NOW
   const images = ['/images/plate.jpeg', '/images/vase.png', '/images/plate.jpeg', '/images/vase.png', '/images/plate.jpeg']
   //
-
   const theme = createMuiTheme({
     palette: {
       primary: brown
     }
   })
 
+  const params = useParams()
+
+  const creations = useSelector(store => store.creations)
+  const clay = useSelector(store => store.clay)
+  const glazes = useSelector(store => store.glazes)
+  const shapes = useSelector(store => store.shapes)
+  const statuses = useSelector(store => store.statuses)
+
   useEffect(() => {
     if (creations) {
-      const name = toCapSpace(match.params.name)
+      const name = toCapSpace(params.name)
       const creation = findString(creations, 'name', name)
       setForm(creation)
     }
@@ -225,14 +233,6 @@ function CreationEdit ({ creations, clay, glazes, shapes, statuses, match, histo
   )
 }
 
-const mapStateToProps = (store) => {
-  return {
-    creations: store.creations,
-    clay: store.clay,
-    glazes: store.glazes,
-    shapes: store.shapes,
-    statuses: store.statuses
-  }
-}
 
-export default connect(mapStateToProps)(CreationEdit)
+
+export default CreationEdit

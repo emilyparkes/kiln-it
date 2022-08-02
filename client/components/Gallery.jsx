@@ -1,5 +1,5 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { toLowHyphen, filterBy } from '../client-utils'
@@ -7,7 +7,10 @@ import { toLowHyphen, filterBy } from '../client-utils'
 import Card from './Card'
 import NavUtils from './nav-utils/NavUtils'
 
-function Gallery ({ creations }) {
+function Gallery () {
+
+  const creations = useSelector(store => filterBy(store.filter, store.creations))
+
   return (
     <>
       <NavUtils/>
@@ -37,11 +40,4 @@ function Gallery ({ creations }) {
   )
 }
 
-const mapStateToProps = (store) => {
-  return {
-    // creations: store.creations
-    creations: filterBy(store.filter, store.creations)
-  }
-}
-
-export default connect(mapStateToProps)(Gallery)
+export default Gallery

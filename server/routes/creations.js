@@ -14,9 +14,9 @@ router.get('/', (req, res) => {
     })
 })
 
-router.post('/', (req, res) => {
-  //
-})
+// router.post('/', (req, res) => {
+//   //
+// })
 
 router.patch('/:id', (req, res) => {
   const dbCreation = prepForDb(req.body)

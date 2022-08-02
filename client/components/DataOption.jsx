@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { TextField } from '@material-ui/core'
 import { VscEdit } from 'react-icons/vsc'
 import { IoAddCircleSharp, IoCheckmarkDoneSharp } from 'react-icons/io5'
@@ -14,10 +15,12 @@ import { createStatuses, removeStatus } from '../actions/statuses'
 
 import { toCapSpace } from '../client-utils'
 
-function DataOption ({ name, arrOfType, dispatch }) {
+function DataOption ({ name, arrOfType }) {
   const [currentAddition, setCurrentAddition] = useState('')
   const [newInputVisible, setNewInputVisible] = useState(false)
   const [editVisible, setEditVisible] = useState(false)
+
+  const dispatch = useDispatch()
 
   const showEditable = () => {
     setEditVisible(!editVisible)
