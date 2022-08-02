@@ -1,14 +1,22 @@
 import React, { useState } from 'react'
-import { connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { HiFilter } from 'react-icons/hi'
 
-import FilterModal from './FilterModal'
+import FilterSidebar from './FilterSidebar.jsx'
 import FilterOption from './FilterOption'
+
 import Accordion from '../accordion/Accordion'
 import { addFilter, removeFilter, clearFilter } from '../../actions/filter'
 
-function FilterBar ({ filter, clay, glazes, shapes, dispatch, focus, toggleFocus }) {
-  const [show, setShowModel] = useState(false)
+function FilterBar ({ focus, toggleFocus }) {
+  const [open, setOpen] = useState(false)
+
+  const dispatch = useDispatch()
+
+  const filter = useSelector(store => store.filter)
+  const clay = useSelector(store => store.clay)
+  const glazes = useSelector(store => store.glazes)
+  const shapes = useSelector(store => store.shapes)
 
   const handleSelect = (category, value) => {
     dispatch(addFilter(category, value))
@@ -18,9 +26,9 @@ function FilterBar ({ filter, clay, glazes, shapes, dispatch, focus, toggleFocus
     dispatch(removeFilter(category, value))
   }
 
-  const toggleModal = () => {
-    setShowModel(!show)
-  }
+  // const toggleModal = () => {
+  //   setOpen(!open)
+  // }
 
   const clear = () => {
     dispatch(clearFilter())
@@ -52,7 +60,6 @@ function FilterBar ({ filter, clay, glazes, shapes, dispatch, focus, toggleFocus
   }
 
   const trueFalseCheckboxes = (categoryName, cat, type) => {
-    console.log('obj keys: ', Object.keys(filter).length > 0)
     if (Object.keys(filter).length > 0 && filter[categoryName]?.includes(cat[type])) {
       return true
     } else {
@@ -89,7 +96,7 @@ function FilterBar ({ filter, clay, glazes, shapes, dispatch, focus, toggleFocus
   return (
     <>
       <div className='filter-bar'>
-        <div onClick={toggleModal} type='text' className={focus ? 'extendable-bar focused' : 'extendable-bar'}>
+        <div onClick={() => setOpen(true)} type='text' className={focus ? 'extendable-bar focused' : 'extendable-bar'}>
           {focus ? renderSelectedFilters('filter-horizontal', true) : null}
         </div>
 
@@ -97,11 +104,10 @@ function FilterBar ({ filter, clay, glazes, shapes, dispatch, focus, toggleFocus
           className={focus ? 'active' : undefined}><HiFilter/></button>
       </div>
 
-      {show &&
-        <FilterModal>
+        <FilterSidebar open={open} setOpen={setOpen}>
 
-          <div className='styled-burger line line-dark line-open'
-            onClick={toggleModal}>
+          <div className='styled-X line line-dark line-open'
+            onClick={() => setOpen(false)}>
             <div></div>
             <div></div>
             <div></div>
@@ -122,19 +128,9 @@ function FilterBar ({ filter, clay, glazes, shapes, dispatch, focus, toggleFocus
 
           <div onClick={clear}>Clear</div>
 
-        </FilterModal>
-      }
+        </FilterSidebar>
     </>
   )
 }
 
-const mapStateToProps = (store) => {
-  return {
-    filter: store.filter,
-    clay: store.clay,
-    glazes: store.glazes,
-    shapes: store.shapes
-  }
-}
-
-export default connect(mapStateToProps)(FilterBar)
+export default FilterBar

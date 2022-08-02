@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-function LeftNav ({ open, setOpen }) {
+function NavSidebar ({ open, setOpen }) {
   return (
-    <div className={open ? 'leftnav slide-open' : 'leftnav slide-closed'}>
+    <div className={open ? 'leftnav nav-slide-open' : 'leftnav nav-slide-closed'}>
 
       <Link to='/' className='link'onClick={setOpen}>
         <li>Home</li>
@@ -40,4 +40,4 @@ function LeftNav ({ open, setOpen }) {
   )
 }
 
-export default LeftNav
+export default NavSidebar
