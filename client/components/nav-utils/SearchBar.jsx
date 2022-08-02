@@ -12,3 +12,6 @@ function SearchBar ({ focus, toggleFocus }) {
 }
 
 export default SearchBar
+
+// elastic search
+// https://www.elastic.co/?ultron=B-Stack-Trials-APJ-ANZ-Exact&gambit=Stack-Core&blade=adwords-s&hulk=paid&Device=c&thor=elastisearch
