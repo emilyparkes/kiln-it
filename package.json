@@ -6,6 +6,22 @@
   "engines": {
     "node": "16.13.2"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emilyparkes/kiln-it.git"
+  },
+  "author": "Emily Coco Parkes",
+  "keywords": [
+    "fullstack",
+    "web",
+    "development",
+    "practice"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/emilyparkes/kiln-it/issues"
+  },
+  "homepage": "https://github.com/emilyparkes/kiln-it#readme",
   "scripts": {
     "start": "node server",
     "dev": "npm run dev:client & npm run dev:server",
@@ -27,33 +43,31 @@
     "test:client": "jest /client --watchAll --verbose",
     "test:server": "jest /server --watchAll --verbose"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/emilyparkes/kiln-it.git"
-  },
-  "author": "Emily Coco Parkes",
-  "keywords": [
-    "fullstack",
-    "web",
-    "development",
-    "practice"
-  ],
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/emilyparkes/kiln-it/issues"
-  },
-  "homepage": "https://github.com/emilyparkes/kiln-it#readme",
   "babel": {
     "presets": [
+      "@babel/preset-typescript",
       "@babel/preset-env",
       "@babel/preset-react"
-    ],
-    "plugins": [
-      "@babel/plugin-proposal-class-properties",
-      "@babel/plugin-proposal-object-rest-spread"
+    ]
+  },
+  "plugins": [
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-object-rest-spread"
+  ],
+  "eslintConfig": {
+    "extends": "eda/react",
+    "ignorePatterns": [
+      "bundle.js"
     ]
   },
   "dependencies": {
+    "sqlite3": "^5.0.8",
+    "express": "^4.17.2",
+    "knex": "^2.1.0",
+    "pg": "^8.7.1",
+    "superagent": "7.1.1"
+  },
+  "devDependencies": {
     "@babel/core": "^7.15.6",
     "@babel/plugin-proposal-class-properties": "^7.14.5",
     "@babel/plugin-proposal-object-rest-spread": "^7.15.6",
@@ -61,62 +75,44 @@
     "@babel/preset-react": "^7.14.5",
     "@babel/register": "^7.13.14",
     "@material-ui/core": "^4.11.4",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.1.3",
+    "@testing-library/user-event": "^12.7.1",
     "authenticare": "^0.4.7",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.3.0",
     "babel-loader": "^8.2.2",
-    "css-loader": "^6.5.1",
+    "css-loader": "^6.3.0",
     "eslint": "^8.10.0",
     "eslint-config-eda": "^1.2.0",
+    "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-jest": "^26.1.1",
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-react": "^7.29.4",
-    "express": "^4.17.2",
     "http-errors": "^1.8.0",
     "jest": "^27.5.1",
-    "knex": "^0.95.15",
     "lodash": "^4.17.21",
+    "mini-css-extract-plugin": "^2.3.0",
+    "nodemon": "^2.0.15",
     "npm-run-all": "^4.1.5",
-    "pg": "^8.4.2",
     "prettier": "2.6.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.2.0",
     "react-redux": "^7.2.5",
     "react-router-dom": "^6.2.2",
-    "redux": "^4.1.0",
+    "redux": "^4.1.1",
     "redux-thunk": "^2.3.0",
-    "sass": "^1.27.2",
-    "sass-loader": "^10.0.4",
-    "sqlite3": "^4.2.0",
-    "style-loader": "^1.2.1",
-    "superagent": "^6.1.0",
+    "sass": "^1.50.1",
+    "sass-loader": "12.6.0",
+    "style-loader": "^3.3.0",
+    "supertest": "^6.2.2",
     "webpack": "^5.69.1",
     "webpack-cli": "^4.9.2",
-    "webpack-dev-server": "^4.9.3"
-  },
-  "devDependencies": {
-    "@testing-library/jest-dom": "^5.11.6",
-    "@testing-library/react": "^11.2.2",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^8.17.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-config-standard": "^12.0.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-jest": "^26.1.0",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-promise": "^6.0.0",
-    "eslint-plugin-react": "^7.28.0",
-    "eslint-plugin-security": "^1.4.0",
-    "eslint-plugin-standard": "^4.0.0",
-    "jest": "^26.6.3",
-    "nodemon": "^2.0.7",
-    "npm-run-all": "^4.1.5",
-    "prettier": "^2.5.1",
-    "supertest": "^5.0.0"
+    "webpack-dev-server": "^4.9.3",
+    "@babel/preset-typescript": "^7.17.12"
   }
 }
