@@ -10,7 +10,7 @@ import '@testing-library/jest-dom/extend-expect'
 export const renderWithRedux = (
   ui,
   {
-    initialState,
+    // initialState,
     initialEntries = ['/']
     // store = createStore(reducer, initialState)
   } = {}

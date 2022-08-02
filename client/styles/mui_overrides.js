@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles'
 
-export const useEditStyles = makeStyles((theme) => ({
+export const useEditStyles = makeStyles(() => ({
   root: {
     display: 'flex',
     flexDirection: 'row',

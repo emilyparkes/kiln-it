@@ -36,7 +36,7 @@ function StatusLogItem ({ creation, updateCreation, history }) {
     setStatusStyle(e.target.value)
   }
 
-  const onSubmit = (e) => {
+  const onSubmit = () => {
     // e.preventDefault()
     hideModal()
     delete creation.clay
@@ -87,7 +87,7 @@ function StatusLogItem ({ creation, updateCreation, history }) {
             <div className='log-box' key={creation.id}>
 
               <img className='log-img'
-                src='/images/plate.jpeg' />
+                src='/images/plate.jpeg' alt='text tdb' />
 
               <table className='info'>
                 <tbody >

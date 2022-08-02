@@ -1,5 +1,6 @@
 import React from 'react'
 
+// eslint-disable-next-line no-unused-vars
 function FilterModal ({ filter, close, show, children }) {
   const showHideClassName = show ? 'modal open' : 'modal closed'
 

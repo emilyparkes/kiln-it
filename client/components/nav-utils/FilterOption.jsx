@@ -16,7 +16,7 @@ export default function FilterOption ({ category, name, colour, select, remove, 
 
   const [checked, setChecked] = useState(Boolean(initChecked))
 
-  const handleChange = (event) => {
+  const handleChange = () => {
     setChecked(!checked)
   }
 

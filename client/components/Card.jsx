@@ -1,5 +1,6 @@
 import React from 'react'
 
+// eslint-disable-next-line no-unused-vars
 function Card ({ img, name, shape, description }) {
   return (
     <div className='card' >
@@ -10,7 +11,7 @@ function Card ({ img, name, shape, description }) {
         </div>
         {/* <p>{description}</p> */}
       </div>
-      <img className='card-img' src={img}/>
+      <img className='card-img' src={img} alt='description tbd'/>
     </div>
   )
 }
