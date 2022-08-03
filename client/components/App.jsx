@@ -2,8 +2,6 @@ import React, { useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
-// import { ThemeProvider } from '@mui/material'
-
 import { fetchCreations } from '../actions/creations'
 import { fetchClay } from '../actions/clay'
 import { fetchGlazes } from '../actions/glazes'
@@ -21,9 +19,7 @@ import SignIn from './auth/SignIn'
 import Log from './StatusLog'
 import DataOptionsView from './DataOptionsView'
 
-// import { theme } from './theme/Palette'
-
-function App () {
+function App() {
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -36,18 +32,18 @@ function App () {
 
   return (
     <>
-    {/* <ThemeProvider theme={theme}> */}
+      {/* <ThemeProvider theme={theme}> */}
       <Navigation />
       <Routes>
-        <Route path='/' element={<Home/>} />
-        <Route path='/gallery' element={<Gallery/>} />
-        <Route path='/log' element={<Log/>} />
-        <Route path='/about' element={<About/>} />
-        <Route path='/creations/:name/edit' element={<CreationEdit/>} />
-        <Route path='/creations/:name' element={<Creation/>} />
-        <Route path='/options/edit' element={<DataOptionsView/>} />
-        <Route path='/register' element={<Register/>} />
-        <Route path='/signin' element={<SignIn/>} />
+        <Route path="/" element={<Home />} />
+        <Route path="/gallery" element={<Gallery />} />
+        <Route path="/log" element={<Log />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/creations/:name/edit" element={<CreationEdit />} />
+        <Route path="/creations/:name" element={<Creation />} />
+        <Route path="/options/edit" element={<DataOptionsView />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/signin" element={<SignIn />} />
       </Routes>
       {/* </ThemeProvider> */}
     </>

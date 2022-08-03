@@ -2,11 +2,10 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  flex-wrap: nowrap;
-  align-content: center;
-  justify-content: center;
-  align-items: center;
   padding-bottom: 20px;
+  width: 96%;
+  margin-left: 2%;
+  margin-right: 2%;
 }
 
 .accordion-item {

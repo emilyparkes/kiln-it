@@ -1,27 +1,31 @@
-import React, { useState } from 'react'
+import React from 'react'
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Typography
+} from '@mui/material'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
-const Accordion = ({ title, children, num }) => {
-  const [isActive, setIsActive] = useState(false)
-
+function AnAccordion({ title, children, num, currentAccordian, openAccordian }) {
   return (
-    <div className='accordion-item'>
-      <button className='accordion-summary'
-        aria-expanded={isActive ? 'true' : 'false'}
-        aria-controls={`accordion-panel-${num}`}
-        id={`accordion-header-${num}`}
-        onClick={() => setIsActive(!isActive)}>
+      <Accordion
+        expanded={currentAccordian === `panel${num}`}
+        onChange={() => openAccordian(`panel${num}`)}
+      >
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon/>}
+          aria-controls={`panel${num}bh-content`}
+          id={`panel${num}bh-header`}
+        >
+          <Typography sx={{ width: '33%', flexShrink: 0 }}>{title}</Typography>
+        </AccordionSummary>
 
-        <div className='accordion-title'>{title}</div>
-        <div className='accordion-symbol'>{isActive ? '-' : '+'}</div>
-
-      </button>
-
-      {isActive &&
-      <div className='accordion-content' aria-labelledby={`accordion-header-${num}`}>
-        {children}
-      </div>}
-    </div>
+        <AccordionDetails>
+          {children}
+        </AccordionDetails>
+      </Accordion>
   )
 }
 
-export default Accordion
+export default AnAccordion
