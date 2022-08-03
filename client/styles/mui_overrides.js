@@ -1,16 +1,16 @@
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@mui/styles'
 
 export const useEditStyles = makeStyles(() => ({
   root: {
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   textField: {
-    width: '22ch'
+    width: '22ch',
   },
   name: {
-    width: '40ch'
-  }
+    width: '40ch',
+  },
 }))

@@ -1,11 +1,15 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+
 import { HiFilter } from 'react-icons/hi'
+import { Stack, Button, ThemeProvider } from '@mui/material'
+import { theme } from '../theme/Palette'
+
 
 import FilterSidebar from './FilterSidebar.jsx'
 import FilterOption from './FilterOption'
-
 import Accordion from '../accordion/Accordion'
+
 import { addFilter, removeFilter, clearFilter } from '../../actions/filter'
 
 function FilterBar ({ focus, toggleFocus }) {
@@ -26,9 +30,9 @@ function FilterBar ({ focus, toggleFocus }) {
     dispatch(removeFilter(category, value))
   }
 
-  // const toggleModal = () => {
-  //   setOpen(!open)
-  // }
+  const closeSlider = () => {
+    setOpen(false)
+  }
 
   const clear = () => {
     dispatch(clearFilter())
@@ -105,14 +109,6 @@ function FilterBar ({ focus, toggleFocus }) {
       </div>
 
         <FilterSidebar open={open} setOpen={setOpen}>
-
-          <div className='styled-X line line-dark line-open'
-            onClick={() => setOpen(false)}>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-
           <p className='filter-modal-heading'>FILTER</p>
           <p className='current-filter'>Selected Filters</p>
 
@@ -126,8 +122,13 @@ function FilterBar ({ focus, toggleFocus }) {
             {glazes && renderAccordion('glazes')}
           </div>
 
-          <div onClick={clear}>Clear</div>
 
+          <ThemeProvider theme={theme}>
+            <Stack spacing={4} direction='row' justifyContent='center' alignItems='center'>
+              <Button onClick={clear} variant='outlined' color='secondary'>Clear</Button>
+              <Button onClick={closeSlider} variant='contained' color='secondary'>Apply</Button>
+            </Stack>
+          </ThemeProvider>
         </FilterSidebar>
     </>
   )

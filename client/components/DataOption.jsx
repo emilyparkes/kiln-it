@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { TextField } from '@material-ui/core'
+import { TextField } from '@mui/material'
 import { VscEdit } from 'react-icons/vsc'
 import { IoAddCircleSharp, IoCheckmarkDoneSharp } from 'react-icons/io5'
 import { AiFillMinusCircle } from 'react-icons/ai'
@@ -15,7 +15,7 @@ import { createStatuses, removeStatus } from '../actions/statuses'
 
 import { toCapSpace } from '../client-utils'
 
-function DataOption ({ name, arrOfType }) {
+function DataOption({ name, arrOfType }) {
   const [currentAddition, setCurrentAddition] = useState('')
   const [newInputVisible, setNewInputVisible] = useState(false)
   const [editVisible, setEditVisible] = useState(false)
@@ -50,7 +50,9 @@ function DataOption ({ name, arrOfType }) {
         dispatch(removeGlaze(id))
         break
       default:
-        dispatch(showError('Sorry I don\'t understand which item is being deleted...'))
+        dispatch(
+          showError("Sorry I don't understand which item is being deleted...")
+        )
     }
     clear()
   }
@@ -71,44 +73,58 @@ function DataOption ({ name, arrOfType }) {
         dispatch(createGlazes(currentAddition))
         break
       default:
-        dispatch(showError('Sorry I don\'t understand which item is being saved...'))
+        dispatch(
+          showError("Sorry I don't understand which item is being saved...")
+        )
     }
     clear()
   }
 
   const renderEditView = (type) => {
-    return <DataOptionItem
-      key={type.id}
-      type={type}
-      name={name}
-      deleteItem={deleteItem}/>
+    return (
+      <DataOptionItem
+        key={type.id}
+        type={type}
+        name={name}
+        deleteItem={deleteItem}
+      />
+    )
   }
 
   const renderReadView = (type) => {
-    return <div className='text-item' key={type.id} value={type[name]}>
-      {type[name]}
-    </div>
+    return (
+      <div className="text-item" key={type.id} value={type[name]}>
+        {type[name]}
+      </div>
+    )
   }
 
   return (
     <>
-      <div className='option-block'>
-        <h4 className='option sml-mar heading'>{ toCapSpace(name) }</h4>
+      <div className="option-block">
+        <h4 className="option sml-mar heading">{toCapSpace(name)}</h4>
 
-        {editVisible
-          ? <IoCheckmarkDoneSharp className='option-btn option-btn--close' onClick={showEditable} />
-          : <VscEdit className='option-btn option-btn--edit' onClick={showEditable} />
-        }
+        {editVisible ? (
+          <IoCheckmarkDoneSharp
+            className="option-btn option-btn--close"
+            onClick={showEditable}
+          />
+        ) : (
+          <VscEdit
+            className="option-btn option-btn--edit"
+            onClick={showEditable}
+          />
+        )}
 
-        <div className='break-line'></div>
+        <div className="break-line"></div>
 
-        { editVisible
-          ? <div className='edit'>
-            <div className='details'>
+        {editVisible ? (
+          <div className="edit">
+            <div className="details">
               {arrOfType.map((type) => renderEditView(type))}
 
               <form onSubmit={save}>
-                {newInputVisible &&
+                {newInputVisible && (
                   <TextField
                     key={name}
                     name={name}
@@ -116,27 +132,33 @@ function DataOption ({ name, arrOfType }) {
                     value={currentAddition}
                     onChange={handleChange}
                   />
-                }
+                )}
               </form>
-
             </div>
           </div>
-          : <div className='read'>
-            <div className='details'>
+        ) : (
+          <div className="read">
+            <div className="details">
               {arrOfType.map((type) => renderReadView(type))}
             </div>
           </div>
-        }
+        )}
 
-        {editVisible &&
-          <div className='option-add'>
-            {newInputVisible
-              ? <AiFillMinusCircle className='option-btn option-btn--minus' onClick={() => setNewInputVisible(false)} />
-              : <IoAddCircleSharp className='option-btn option-btn--plus' onClick={() => setNewInputVisible(true)}/>
-            }
+        {editVisible && (
+          <div className="option-add">
+            {newInputVisible ? (
+              <AiFillMinusCircle
+                className="option-btn option-btn--minus"
+                onClick={() => setNewInputVisible(false)}
+              />
+            ) : (
+              <IoAddCircleSharp
+                className="option-btn option-btn--plus"
+                onClick={() => setNewInputVisible(true)}
+              />
+            )}
           </div>
-        }
-
+        )}
       </div>
     </>
   )
