@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { HiFilter } from 'react-icons/hi'
 import { Chip, Stack, Button, ThemeProvider } from '@mui/material'
-import { theme } from '../theme/Palette'
+import { theme } from '../theme/theme'
+
 
 import FilterSidebar from './FilterSidebar.jsx'
 import FilterOption from './FilterOption'
@@ -24,12 +25,17 @@ function FilterBar({ focus, toggleFocus }) {
 
   const filterKeyArr = Object.keys(filter)
 
-  const handleSelect = (category, value) => {
+  const select = (category, value) => {
     dispatch(addFilter(category, value))
   }
 
-  const handleRemove = (category, value) => {
+  const remove = (category, value) => {
     dispatch(removeFilter(category, value))
+  }
+
+  const clear = () => {
+    dispatch(clearFilter())
+    setCurrentAccordian('panel1')
   }
 
   const openAccordian = (accordianNum,) => {
@@ -50,9 +56,8 @@ function FilterBar({ focus, toggleFocus }) {
              <Chip 
              key={aFilter} 
              label={aFilter} 
-             color='primary'
-             onDelete={handleDelete}
-             className={`${className} filter-label-${categoryName}`} />
+             color={categoryName}
+             onDelete={() => remove(categoryName, aFilter)}/>
           )
         })
       })
@@ -100,8 +105,8 @@ function FilterBar({ focus, toggleFocus }) {
                 category={categoryName}
                 colour={colour}
                 name={cat[type]}
-                select={handleSelect}
-                remove={handleRemove}
+                select={select}
+                remove={remove}
                 checked={trueFalseCheckboxes(categoryName, cat, type)}
               />
             )
@@ -136,7 +141,9 @@ function FilterBar({ focus, toggleFocus }) {
         <p className='current-filter'>Selected Filters</p>
 
         <div className='selected-filters'>
-          {renderSelectedFilters('selected-filter-item', false)}
+          <Stack direction='row' spacing={1} justifyContent='center' flexWrap='wrap'>
+            {renderSelectedFilters('selected-filter-item', false)}
+          </Stack>
         </div>
 
         <div className='accordions'>
@@ -146,8 +153,8 @@ function FilterBar({ focus, toggleFocus }) {
         </div>
 
         <ThemeProvider theme={theme}>
-          <Stack spacing={4} direction='row' justifyContent='center' alignItems='center'>
-            <Button onClick={() => dispatch(clearFilter())} variant='outlined' color='secondary'>
+          <Stack direction='row' spacing={4} justifyContent='center' alignItems='center' >
+            <Button onClick={clear} variant='outlined' color='secondary'>
               Clear
             </Button>
             <Button onClick={() => setOpen(false)} variant='contained' color='secondary'>

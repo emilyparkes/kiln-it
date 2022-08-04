@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import { ThemeProvider } from '@mui/material/styles'
+import { theme } from './theme/theme'
 
 import { fetchCreations } from '../actions/creations'
 import { fetchClay } from '../actions/clay'
@@ -32,7 +34,7 @@ function App() {
 
   return (
     <>
-      {/* <ThemeProvider theme={theme}> */}
+      <ThemeProvider theme={theme}>
       <Navigation />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -45,7 +47,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/signin" element={<SignIn />} />
       </Routes>
-      {/* </ThemeProvider> */}
+      </ThemeProvider>
     </>
   )
 }

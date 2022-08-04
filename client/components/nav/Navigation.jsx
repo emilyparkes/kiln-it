@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { AppBar, Toolbar, useScrollTrigger } from '@mui/material'
 import { ThemeProvider } from '@mui/material/styles'
 
-import { theme } from '../theme/Palette'
+import { theme } from '../theme/theme'
 
 function ElevationScroll({ children }) {
   const trigger = useScrollTrigger({
