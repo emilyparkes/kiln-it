@@ -3,6 +3,7 @@ const { connection } = require('./connection')
 module.exports = {
   getCreations,
   getCreationById,
+  updateCreationStatusById,
   updateCreationById
 }
 
@@ -75,9 +76,31 @@ function getCreationById (id, db = connection) {
     ).first()
 }
 
-// how to insert shape change when it is value and not id?
+function updateCreationStatusById (id, creation, db = connection) {
+  return db('creations')
+    .where('creations.id', id)
+    .update({status_id: creation.status_id})
+}
+
 function updateCreationById (id, creation, db = connection) {
   return db('creations')
     .where('creations.id', id)
-    .update(creation)
+    .update({
+      clay_id: creation.clay_id,
+      shape_id: creation.shape_id,
+      status_id: creation.status_id,
+      glaze_id: creation.glaze_id,
+      weight_leather_hard: creation.weight_leather_hard,
+      weight_bone_dry: creation.weight_bone_dry,
+      weight_bisque_fired: creation.weight_bisque_fired,
+      weight_glazed: creation.weight_glazed,
+      weight_complete: creation.weight_complete,
+      name: creation.name,
+      description: creation.description,
+      note: creation.note
+
+
+    })
+    .then( () => {
+    })
 }

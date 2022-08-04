@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
 
 import StatusModal from './StatusModal'
 import { toLowHyphen } from '../client-utils'
+import { updateCreationStatus } from '../actions/creations'
 
-function StatusLogItem ({ creation, updateCreation, history }) {
+function StatusLogItem ({ creation }) {
   const [show, setShowModel] = useState(false)
   const [statusStyle, setStatusStyle] = useState(creation.status)
   const [currentStatus, setStatus] = useState({ id: creation.statusId, status: creation.status })
+
+  let navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const statuses = useSelector(store => store.statuses)
 
@@ -39,13 +43,15 @@ function StatusLogItem ({ creation, updateCreation, history }) {
   const onSubmit = () => {
     // e.preventDefault()
     hideModal()
-    delete creation.clay
-    delete creation.shape
-    delete creation.glaze
-    delete creation.status
-    const updatedCreation = { ...creation }
-    updateCreation(updatedCreation)
-    history.push('/log')
+    // delete creation.clay
+    // delete creation.shape
+    // delete creation.glaze
+    creation.status = currentStatus.status
+    creation.statusId = currentStatus.id
+    const updatedCreation = { ...creation}
+    console.log(updatedCreation, currentStatus)
+    dispatch(updateCreationStatus(updatedCreation))
+    navigate('/log')
   }
 
   return (

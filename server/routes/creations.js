@@ -14,11 +14,28 @@ router.get('/', (req, res) => {
     })
 })
 
-// router.post('/', (req, res) => {
-//   //
-// })
+router.patch('/update-creation-status/:id', (req, res) => {
+  const dbCreation = prepForDb(req.body)
+  db.updateCreationStatusById(Number(req.params.id), dbCreation)
+    .then((creation) => {
+      if (!creation) {
+        return res.status(404).json({
+          error: 'creation id not found'
+        })
+      }
+      creation = prepForJS(creation)
+      res.json(creation)
+      return null
+    })
+    .catch((err) => {
+      console.error(err)
+      res.sendStatus(500)
+    })
+})
 
-router.patch('/:id', (req, res) => {
+
+
+router.patch('/update-creation/:id', (req, res) => {
   const dbCreation = prepForDb(req.body)
   db.updateCreationById(Number(req.params.id), dbCreation)
     .then((creation) => {

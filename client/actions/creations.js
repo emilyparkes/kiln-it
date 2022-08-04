@@ -1,5 +1,11 @@
 import { showError } from './error'
-import { getCreations, addCreation, updateCreation, deleteCreation } from '../apis/creations'
+import {
+  getCreations,
+  postCreation,
+  patchCreationStatus,
+  patchCreation,
+  deleteCreation,
+} from '../apis/creations'
 
 export const CREATIONS_REQUEST_PENDING = 'CREATIONS_REQUEST_PENDING'
 export const RECEIVE_CREATIONS = 'RECEIVE_CREATIONS'
@@ -7,76 +13,86 @@ export const ADD_NEW_CREATIONS = 'ADD_NEW_CREATIONS'
 export const UPDATE_CREATION = 'UPDATE_CREATION'
 export const REMOVE_CREATION = 'REMOVE_CREATION'
 
-export function requestCreationsPending () {
+export function requestCreationsPending() {
   return {
-    type: CREATIONS_REQUEST_PENDING
+    type: CREATIONS_REQUEST_PENDING,
   }
 }
 
-export function newCreationsSuccess (creations) {
+export function newCreationsSuccess(creations) {
   return {
     type: ADD_NEW_CREATIONS,
-    creations
+    creations,
   }
 }
 
-export function receiveCreationsSuccess (creations) {
+export function receiveCreationsSuccess(creations) {
   return {
     type: RECEIVE_CREATIONS,
-    creations
+    creations,
   }
 }
 
-export function updateCreationSuccess (creation) {
+export function updateCreationSuccess(creation) {
   return {
     type: UPDATE_CREATION,
-    creation
+    creation,
   }
 }
 
-export function removeCreationSuccess (id) {
+export function removeCreationSuccess(id) {
   return {
     type: REMOVE_CREATION,
-    id
+    id,
   }
 }
 
-export function fetchCreations () {
-  return dispatch => {
+export function fetchCreations() {
+  return (dispatch) => {
     dispatch(requestCreationsPending())
 
     getCreations()
-      .then(creations => dispatch(receiveCreationsSuccess(creations)))
-      .catch(err => dispatch(showError(err.message)))
+      .then((creations) => dispatch(receiveCreationsSuccess(creations)))
+      .catch((err) => dispatch(showError(err.message)))
   }
 }
 
-export function createCreations () {
-  return dispatch => {
+export function createCreation() {
+  return (dispatch) => {
     dispatch(requestCreationsPending())
 
-    addCreation()
-      .then(creations => dispatch(newCreationsSuccess(creations)))
-      .catch(err => dispatch(showError(err.message)))
+    postCreation()
+      .then((creations) => dispatch(newCreationsSuccess(creations)))
+      .catch((err) => dispatch(showError(err.message)))
   }
 }
 
-export function updateCreations (creation) {
-  return dispatch => {
+export function updateCreationStatus(creation) {
+  return (dispatch) => {
     dispatch(requestCreationsPending())
 
-    updateCreation(creation)
-      .then(creation => dispatch(updateCreationSuccess(creation)))
-      .catch(err => dispatch(showError(err.message)))
+    patchCreationStatus(creation)
+      .then((creation) => dispatch(updateCreationSuccess(creation)))
+      .catch((err) => dispatch(showError(err.message)))
   }
 }
 
-export function removeCreations (id) {
-  return dispatch => {
+export function updateCreation(creation) {
+  return (dispatch) => {
+    dispatch(requestCreationsPending())
+
+    patchCreation(creation)
+      .then((creation) => dispatch(updateCreationSuccess(creation)))
+      .catch((err) => dispatch(showError(err.message)))
+  }
+}
+
+export function removeCreations(id) {
+  return (dispatch) => {
     dispatch(requestCreationsPending())
 
     deleteCreation(id)
       .then(() => dispatch(removeCreationSuccess(id)))
-      .catch(err => dispatch(showError(err.message)))
+      .catch((err) => dispatch(showError(err.message)))
   }
 }

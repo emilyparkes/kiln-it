@@ -3,10 +3,9 @@ import { useSelector } from 'react-redux'
 
 import NavUtils from './nav-utils/NavUtils'
 import StatusLogItem from './StatusLogItem'
-import { updateCreation } from '../apis/creations'
 import { filterBy } from '../client-utils'
 
-function StatusLog ({ history }) {
+function StatusLog () {
 
   const creations = useSelector(store => filterBy(store.filter, store.creations))
 
@@ -19,8 +18,7 @@ function StatusLog ({ history }) {
             return (
               <StatusLogItem key={creation.id}
                 creation={creation}
-                updateCreation={updateCreation}
-                history={history}/>
+                />
             )
           })}
         </div>

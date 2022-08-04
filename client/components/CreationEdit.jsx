@@ -9,7 +9,7 @@ import { IoLogoInstagram } from 'react-icons/io'
 import { VscSaveAs } from 'react-icons/vsc'
 
 import { useEditStyles } from '../styles/mui_overrides'
-import { updateCreation } from '../apis/creations'
+import { patchCreation } from '../apis/creations'
 import { findString, toLowHyphen, toCapSpace } from '../client-utils'
 
 function CreationEdit({ history }) {
@@ -70,7 +70,7 @@ function CreationEdit({ history }) {
     delete form.shape
     delete form.glaze
     delete form.status
-    updateCreation(form)
+    patchCreation(form)
     const newName = toLowHyphen(form.name)
     history.push(`/creations/${newName}`)
   }
