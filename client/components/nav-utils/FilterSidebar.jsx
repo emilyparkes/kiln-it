@@ -1,7 +1,7 @@
 import React from 'react'
 
 // eslint-disable-next-line no-unused-vars
-function FilterSidebar ({ filter, open, setOpen, children }) {
+function FilterSidebar ({ open, children }) {
   const showHideClassName = open ? 'filtersidebar filter-slide-open' : 'filtersidebar filter-slide-closed'
   
   return (
