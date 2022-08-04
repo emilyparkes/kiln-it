@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 
 import all from './all'
 import error from './error'
+import navUtils from './navutils-focus'
 import waitIndicator from './waitIndicator'
 import clay from './clay'
 import creations from './creations'
@@ -12,6 +13,7 @@ import filter from './filter'
 
 export default combineReducers({
   all,
+  navUtils,
   error,
   waitIndicator,
   clay,
