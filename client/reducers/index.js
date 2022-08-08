@@ -10,6 +10,7 @@ import glazes from './glazes'
 import shapes from './shapes'
 import statuses from './statuses'
 import filter from './filter'
+import search from './search'
 
 export default combineReducers({
   all,
@@ -21,5 +22,6 @@ export default combineReducers({
   glazes,
   shapes,
   statuses,
-  filter
+  filter,
+  search
 })
