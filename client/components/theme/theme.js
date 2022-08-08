@@ -38,6 +38,14 @@ export const theme = createTheme({
     },
   },
   components: {
-    // Name of the component
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          margin: 'auto',
+          maxWidth: '90%',
+          backgroundColor: 'rgba(255, 255, 255, 0.6)',
+        },
+      },
+    },
   },
 })
