@@ -32,3 +32,10 @@ export function filterBy (filters, itemsToFilter) {
       return isFilterOption
     })
 }
+
+export function searchBy (searchterm, itemsToSearch) {
+  searchterm = searchterm?.toLowerCase()
+  return itemsToSearch === null
+    ? null
+    : itemsToSearch
+}

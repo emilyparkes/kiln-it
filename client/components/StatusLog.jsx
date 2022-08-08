@@ -4,12 +4,12 @@ import { useSelector } from 'react-redux'
 import NavUtils from './nav-utils/NavUtils'
 import StatusLogItem from './StatusLogItem'
 
-import { filterBy } from '../client-utils'
+import { filterBy, searchBy } from '../client-utils'
 
 function StatusLog () {
   const focus = useSelector(store => store.navUtils)
   const creationsFiltered = useSelector(store => filterBy(store.filter, store.creations))
-  // const creationsSearched = useSelector(store => searchBy(store.search, store.creations))
+  const creationsSearched = useSelector(store => searchBy(store.search, store.creations))
 
   return (
     <>
@@ -25,19 +25,20 @@ function StatusLog () {
             )
           })}
         </div>
-      ) : 'Sorry not yet searchable'
+      ) : 
+      // 'Sorry not yet searchable'
       
-      // ( // or search bar active, list based on search terms
-      //     <div className='log-container'>
-      //       {creationsSearched?.map((creation) => {
-      //         return (
-      //           <StatusLogItem key={creation.id}
-      //             creation={creation}
-      //             />
-      //         )
-      //       })}
-      //     </div>
-      //   )
+      ( // or search bar active, list based on search terms
+          <div className='log-container'>
+            {creationsSearched?.map((creation) => {
+              return (
+                <StatusLogItem key={creation.id}
+                  creation={creation}
+                  />
+              )
+            })}
+          </div>
+        )
       }
     </>
   )
