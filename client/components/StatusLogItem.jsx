@@ -7,9 +7,11 @@ import { toLowHyphen } from '../client-utils'
 import { updateCreationStatus } from '../actions/creations'
 
 function StatusLogItem ({ creation }) {
+  const initialState = { id: creation.statusId, status: creation.status }
+
   const [show, setShowModel] = useState(false)
   const [statusStyle, setStatusStyle] = useState(creation.status)
-  const [currentStatus, setStatus] = useState({ id: creation.statusId, status: creation.status })
+  const [currentStatus, setStatus] = useState(initialState)
 
   let navigate = useNavigate()
   const dispatch = useDispatch()
@@ -36,8 +38,12 @@ function StatusLogItem ({ creation }) {
 
   const handleSelect = (e) => {
     const selected = statuses.find(obj => obj.status === e.target.value)
-    setStatus(selected)
-    setStatusStyle(e.target.value)
+    setStatusAndStyle(selected, e.target.value)
+  }
+
+  const setStatusAndStyle = (status, styleValue) => {
+    setStatus(status)
+    setStatusStyle(styleValue)
   }
 
   const onSubmit = () => {
@@ -58,7 +64,7 @@ function StatusLogItem ({ creation }) {
     <>
       {show &&
       <main className='main edit'>
-        <StatusModal show={show} save={onSubmit} close={hideModal}>
+        <StatusModal show={show} save={onSubmit} close={hideModal} resetState={() => setStatusAndStyle(initialState, initialState.status)}>
           <div className='current'>
             <p>Selected</p>
             <p className={`status ${style}`}>
