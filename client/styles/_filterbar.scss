@@ -21,12 +21,12 @@
     padding: 4px 0px 0px 35px;
     font-size: 15px;
     height: 40px;
-    width: 0px;
+    width: 40px;
     box-sizing: border-box;
     transition: all 0.7s ease-in-out;
     position: absolute;
     top: 0;
-    left: 0;
+    left: -4px;
   }
 
   .focused {
@@ -69,17 +69,24 @@
   }
 }
 
-.filter-modal-heading {
-  position: relative;
-  padding: 24px 2px 2px 2px;
+
+.filter-header {
   display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: #3A2E39;
-    align-content: center;
+  align-items: baseline;
+  justify-content: space-around;
+}
+
+.filter-modal-heading {
+  // position: relative;
+  padding: 24px 2px 2px 2px;
+  // display: flex;
+    // flex-direction: column;
+    // flex-wrap: nowrap;
+    // justify-content: center;
+    // align-items: center;
+    // text-align: center;
+    color: $text-dark;
+    // align-content: center;
 }
 
 .current-filter {
@@ -89,7 +96,7 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  color: #3A2E39;
+  color: $text-dark;
   align-content: center;
   // position: absolute;
   // top: 30px;
@@ -104,6 +111,7 @@
   justify-content: center;
   align-items: center;
   margin: 0px 20px 20px 20px;
+  min-height: 32px;
 }
 
 .selected-filter-item {

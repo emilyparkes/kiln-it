@@ -1,5 +1,19 @@
 .utils-container {
     height: 35px;
-    width: 100%;
-    margin: 10px 0px 10px 0px;
+    margin: 10px auto 10px auto;
+    @include mobile {
+        max-width: 400px;
+      }
+      @include tablet {
+        max-width: 614px;
+      }
+      @include desktop {
+        max-width: 850px;
+      }
+      @include desktop-large {
+        max-width: 80%;
+      }
+      @include desktop-xlarge {
+        max-width: 75%;
+      }
 }

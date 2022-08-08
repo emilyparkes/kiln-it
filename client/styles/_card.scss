@@ -41,7 +41,7 @@
   align-content: center;
   @include mobile-mini {
     max-width: 400px;
-    padding-left: 2%;
+    // padding-left: 2%;
   }
   @include mobile {
     max-width: 400px;
@@ -67,7 +67,7 @@
   max-width: 190px;
   align-self: flex-end;
   overflow: hidden;
-  margin: 1px 3px 1px 1px;
+  margin: 1px 0px 1px 6px;
   box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
   border-radius: 4px;
   align-items: center;
