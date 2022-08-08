@@ -137,8 +137,23 @@ function FilterBar({ focus, toggleFocus }) {
       </div>
 
       <FilterSidebar open={open} setOpen={setOpen}>
-        <p className='filter-modal-heading'>FILTER</p>
+        <div className='filter-header'>
+          <h4 className='filter-modal-heading'>FILTER</h4>
+
+          <ThemeProvider theme={theme}>
+            <Stack direction='row' spacing={4} justifyContent='center' alignItems='center' >
+              <Button onClick={clear} variant='outlined' color='secondary' size='small'>
+                Clear
+              </Button>
+              <Button onClick={() => setOpen(false)} variant='contained' color='secondary' size='small'>
+                {filterKeyArr.length ? 'Apply' : 'Go Back'}
+              </Button>
+            </Stack>
+          </ThemeProvider>
+        </div>
+
         <p className='current-filter'>Selected Filters</p>
+
 
         <div className='selected-filters'>
           <Stack direction='row' spacing={1} justifyContent='center' flexWrap='wrap'>
@@ -152,16 +167,6 @@ function FilterBar({ focus, toggleFocus }) {
           {glazes && renderAccordion('glazes')}
         </div>
 
-        <ThemeProvider theme={theme}>
-          <Stack direction='row' spacing={4} justifyContent='center' alignItems='center' >
-            <Button onClick={clear} variant='outlined' color='secondary'>
-              Clear
-            </Button>
-            <Button onClick={() => setOpen(false)} variant='contained' color='secondary'>
-              {filterKeyArr.length ? 'Apply' : 'Go Back'}
-            </Button>
-          </Stack>
-        </ThemeProvider>
       </FilterSidebar>
     </>
   )
