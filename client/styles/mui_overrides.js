@@ -10,6 +10,9 @@ export const useEditStyles = makeStyles(() => ({
   textField: {
     width: '22ch',
   },
+  multiSelect: {
+    width: '43.5ch',
+  },
   name: {
     width: '40ch',
   },

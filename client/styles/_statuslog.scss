@@ -8,6 +8,9 @@
   margin-left: auto;
   margin-right: auto;
   overflow: auto;
+  @include mobile-mini {
+    max-width: 400px;
+  }
   @include mobile {
     max-width: 400px;
   }
@@ -86,7 +89,7 @@
 .log-img {
   display: block;
   width: 129.95px;
-  height: 127.65px;
+  height: 128.65px;
   object-fit: cover;
   
   border-radius: 4px;
@@ -124,7 +127,7 @@
   width: 256px;
   height: 30px;
   position: absolute;
-  left: 142px;
+  left: 129px;
   top: 0.59px;
   color: black;
   font-weight: 200;
