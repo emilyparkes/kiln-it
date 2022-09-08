@@ -2,6 +2,7 @@ exports.up = (knex) => {
   return knex.schema.createTable('glazes', (table) => {
     table.increments('id')
     table.string('glaze')
+    table.boolean('underglaze')
     table.boolean('in_use').defaultTo(true)
   })
 }

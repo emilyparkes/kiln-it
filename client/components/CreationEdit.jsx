@@ -5,17 +5,15 @@ import { useParams } from 'react-router-dom'
 import {
   TextField,
   MenuItem,
-  // Input,
+  OutlinedInput,
   InputLabel,
   InputAdornment,
   Checkbox,
   ListItemText,
   Select,
   FormControl,
-  InputBase,
 } from '@mui/material'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
-import { withStyles } from '@mui/styles'
 import { brown } from '@mui/material/colors'
 import { IoLogoInstagram } from 'react-icons/io'
 import { VscSaveAs } from 'react-icons/vsc'
@@ -31,41 +29,6 @@ function CreationEdit({ history }) {
   const [form, setForm] = useState(null)
   const [selectedGlaze, setSelectedGlaze] = useState([])
 
-  const StyledInput = withStyles((theme) => ({
-    root: {
-      'label + &': {
-        marginTop: theme.spacing(3),
-      },
-    },
-    input: {
-      borderRadius: 4,
-      position: 'relative',
-      backgroundColor: theme.palette.primary,
-      border: '1px solid #744F44',
-      fontSize: 16,
-      padding: '10px 26px 10px 12px',
-      transition: theme.transitions.create(['border-color', 'box-shadow']),
-      // Use the system font instead of the default Roboto font.
-      fontFamily: [
-        '-apple-system',
-        'BlinkMacSystemFont',
-        '"Segoe UI"',
-        'Roboto',
-        '"Helvetica Neue"',
-        'Arial',
-        'sans-serif',
-        '"Apple Color Emoji"',
-        '"Segoe UI Emoji"',
-        '"Segoe UI Symbol"',
-      ].join(','),
-      '&:focus': {
-        borderRadius: 4,
-        borderColor: '#80bdff',
-        boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
-      },
-    },
-  }))(InputBase)
-
   // HARD CODED FOR NOW
   const images = [
     '/images/plate.jpeg',
@@ -74,7 +37,7 @@ function CreationEdit({ history }) {
     '/images/vase.png',
     '/images/plate.jpeg',
   ]
-  //
+
   const ITEM_HEIGHT = 48
   const ITEM_PADDING_TOP = 8
   const MenuProps = {
@@ -101,17 +64,17 @@ function CreationEdit({ history }) {
   const statuses = useSelector((store) => store.statuses)
 
   useEffect(() => {
-    if (creations) {
+    if (creations && glazes) {
       const name = toCapSpace(params.name)
       const creation = findString(creations, 'name', name)
       setForm(creation)
-      const cleanselection = creation.glazes.length ? creation.glazes.map(selected => selected.glaze) : creation.glazes
-      console.log('pre join', cleanselection)
-      
-      console.log('useEffect', cleanselection)
-      setSelectedGlaze(cleanselection)
+
+      const prettyState = glazes.filter((glazeObj) => {
+        return creation.glazes.find((glaze) => glaze.glazeId === glazeObj.id)
+      })
+      setSelectedGlaze(prettyState)
     }
-  }, [creations])
+  }, [creations, glazes])
 
   useEffect(() => {
     setCurrentImage(images[imgIdx])
@@ -129,13 +92,17 @@ function CreationEdit({ history }) {
   }
 
   const selectGlaze = (event) => {
-    console.log(event.target.value.glaze)
-    const newselection = [...selectedGlaze, event.target.value.glaze]
-    console.log(newselection.toString(), typeof newselection.toString())
-    setSelectedGlaze(newselection)
+    setSelectedGlaze(event.target.value)
+    const formattedGlazes = event.target.value.map((selected) => {
+      if (selected.in_use) {
+        delete selected.in_use
+        delete selected.underglaze
+      }
+      return selected
+    })
     setForm({
       ...form,
-      glazes: [...selectedGlaze, event.target.value]
+      glazes: formattedGlazes,
     })
   }
 
@@ -266,68 +233,47 @@ function CreationEdit({ history }) {
                       onChange={handleChange}
                     />
 
-                    {/*  */}
                     {glazes && (
-                      <TextField
-                      id="outlined-select-currency"
-                      select
-                      multiple
-                      label="Select"
-                      value={selectedGlaze}
-                      onChange={selectGlaze}
-                      helperText="Please select all glazes used"
-                      variant="outlined"
-                    >
-                        {/* <Select
-                          labelId="mutiple-checkbox-outlined-label"
-                          id="mutiple-checkbox-outlined"
-                          label="Glazes"
+                      <FormControl margin="dense">
+                        <InputLabel id="demo-multiple-checkbox-label">
+                          Glazes
+                        </InputLabel>
+                        <Select
+                          className={classes.multiSelect}
+                          labelId="demo-multiple-checkbox-label"
+                          id="demo-multiple-checkbox"
                           multiple
                           value={selectedGlaze}
                           onChange={selectGlaze}
-                          input={<StyledInput />}
-                          renderValue={(selected) => {
-                            const cleanselection = selected.map(
+                          input={<OutlinedInput label="Glazes" />}
+                          renderValue={() => {
+                            const glazeStrings = selectedGlaze.map(
                               (selected) => selected.glaze
                             )
-                            return cleanselection.join(', ')
+                            if (!selectedGlaze.length) {
+                              return 'Unglazed'
+                            } else {
+                              return glazeStrings.join(', ')
+                            }
                           }}
                           MenuProps={MenuProps}
-                        > */}
-                          {glazes.map((glazeobj) => (
-                            <MenuItem key={glazeobj.glazeId} value={glazeobj}>
-                              <Checkbox
-                                checked={selectedGlaze.indexOf(glazeobj) > -1}
-                              />
-                              <ListItemText primary={glazeobj.glaze} />
-                            </MenuItem>
-                          ))}
-                        {/* </Select> */}
-                      </TextField>
+                        >
+                          {glazes.map((glazeObj) => {
+                            const selectedIds = selectedGlaze.map(
+                              (selected) => selected.id
+                            )
+                            return (
+                              <MenuItem key={glazeObj.id} value={glazeObj}>
+                                <Checkbox
+                                  checked={selectedIds.includes(glazeObj.id)}
+                                />
+                                <ListItemText primary={glazeObj.glaze} />
+                              </MenuItem>
+                            )
+                          })}
+                        </Select>
+                      </FormControl>
                     )}
-
-                    
-                      
-            
-
-                    {/* { glazes && <TextField
-                      label='Glaze'
-                      variant='outlined'
-                      size='small'
-                      id='outlined-glaze'
-                      margin='dense'
-                      select
-                      fullWidth
-                      name='glaze'
-                      value={form.glaze}
-                      onChange={handleChange}
-                    >
-                      {glazes.map((obj) => (
-                        <MenuItem key={obj.id} value={obj.glaze}>
-                          {obj.glaze}
-                        </MenuItem>
-                      ))}
-                    </TextField>} */}
 
                     <TextField
                       label="Makers Note"

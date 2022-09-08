@@ -2,6 +2,7 @@ const { connection } = require('./connection')
 
 module.exports = {
   getCreations,
+  getGlazesByCreationId,
   getCreationById,
   updateCreationStatusById,
   updateCreationById
@@ -10,15 +11,12 @@ module.exports = {
 function getCreations (db = connection) {
   return db('creations')
     .join('clay', 'clay.id', 'creations.clay_id')
-    .join('glazes', 'glazes.id', 'creations.glaze_id')
     .join('shapes', 'shapes.id', 'creations.shape_id')
     .join('statuses', 'statuses.id', 'creations.status_id')
     .select(
       'creations.id',
       'clay.id as clayId',
       'clay.clay',
-      'glazes.id as glazeId',
-      'glazes.glaze',
       'shapes.id as shapeId',
       'shapes.shape',
       'statuses.id as statusId',
@@ -39,6 +37,13 @@ function getCreations (db = connection) {
       'img_complete',
       'img_gallery'
     )
+}
+
+function getGlazesByCreationId (id, db = connection ) {
+  return db('glaze_creations')
+    .join('glazes', 'glazes.id', 'glaze_creations.glaze_id')
+    .where('glaze_creations.creation_id', id)
+    .select('glazes.id as glazeId', 'glazes.glaze')
 }
 
 function getCreationById (id, db = connection) {

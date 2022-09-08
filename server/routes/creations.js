@@ -1,3 +1,4 @@
+/* eslint-disable promise/no-nesting */
 const express = require('express')
 
 const db = require('../db/creations')
@@ -5,9 +6,22 @@ const { prepForDb, prepForJS } = require('../server-utils')
 
 const router = express.Router()
 
+// '/api/v1/creations'
+
 router.get('/', (req, res) => {
   db.getCreations()
-    .then((creations) => res.json(creations))
+  .then(creations => {
+    return Promise.all(
+      creations.map(creation => {
+      return db.getGlazesByCreationId(creation.id)
+      .then(glazes => {
+        creation.glazes = glazes
+        return creation
+      })
+    })
+    )
+  })
+  .then((creations) => res.json(creations))
     .catch((err) => {
       console.error(err)
       res.sendStatus(500)
