@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { useParams, useNavigate } from 'react-router-dom'
 
 import {
   TextField,
@@ -19,10 +19,10 @@ import { IoLogoInstagram } from 'react-icons/io'
 import { VscSaveAs } from 'react-icons/vsc'
 
 import { useEditStyles } from '../styles/mui_overrides'
-import { patchCreation } from '../apis/creations'
+import { updateCreation } from '../actions/creations'
 import { findString, toLowHyphen, toCapSpace } from '../client-utils'
 
-function CreationEdit({ history }) {
+function CreationEdit() {
   const classes = useEditStyles()
   const [imgIdx, setImgIdx] = useState(0)
   const [currentImg, setCurrentImage] = useState('')
@@ -56,25 +56,28 @@ function CreationEdit({ history }) {
   })
 
   const params = useParams()
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const creations = useSelector((store) => store.creations)
   const clay = useSelector((store) => store.clay)
-  const glazes = useSelector((store) => store.glazes)
+  const storeGlazes = useSelector((store) => store.glazes)
   const shapes = useSelector((store) => store.shapes)
   const statuses = useSelector((store) => store.statuses)
 
   useEffect(() => {
-    if (creations && glazes) {
+    if (creations && storeGlazes) {
       const name = toCapSpace(params.name)
       const creation = findString(creations, 'name', name)
       setForm(creation)
 
-      const prettyState = glazes.filter((glazeObj) => {
-        return creation.glazes.find((glaze) => glaze.glazeId === glazeObj.id)
+      const copyGlazes = [...storeGlazes]
+      const prettyState = copyGlazes.filter((glazeObj) => {
+        return creation.glazes.find((glaze) => glaze.id === glazeObj.id)
       })
       setSelectedGlaze(prettyState)
     }
-  }, [creations, glazes])
+  }, [creations, storeGlazes])
 
   useEffect(() => {
     setCurrentImage(images[imgIdx])
@@ -92,18 +95,13 @@ function CreationEdit({ history }) {
   }
 
   const selectGlaze = (event) => {
-    setSelectedGlaze(event.target.value)
-    const formattedGlazes = event.target.value.map((selected) => {
-      if (selected.in_use) {
-        delete selected.in_use
-        delete selected.underglaze
-      }
-      return selected
-    })
+    console.log("event.target.value ", event.target.value)
+   
     setForm({
       ...form,
-      glazes: formattedGlazes,
+      glazes:  event.target.value,
     })
+    setSelectedGlaze(event.target.value)
   }
 
   const onSubmit = (e) => {
@@ -112,9 +110,19 @@ function CreationEdit({ history }) {
     delete form.shape
     delete form.glaze
     delete form.status
-    patchCreation(form)
+    console.log('selectedGlaze: ',  selectedGlaze)
+     const formattedGlazes = selectedGlaze.map((selected) => {
+      if (selected.in_use) {
+        delete selected.in_use
+        delete selected.underglaze
+      }
+      return selected
+    })
+    form.glazes = formattedGlazes
+    console.log("form ", form)
+    dispatch(updateCreation(form))
     const newName = toLowHyphen(form.name)
-    history.push(`/creations/${newName}`)
+    navigate(`/creations/${newName}`)
   }
 
   return (
@@ -233,7 +241,7 @@ function CreationEdit({ history }) {
                       onChange={handleChange}
                     />
 
-                    {glazes && (
+                    {storeGlazes && (
                       <FormControl margin="dense">
                         <InputLabel id="demo-multiple-checkbox-label">
                           Glazes
@@ -258,16 +266,19 @@ function CreationEdit({ history }) {
                           }}
                           MenuProps={MenuProps}
                         >
-                          {glazes.map((glazeObj) => {
+                          {storeGlazes.map((glazeObj) => {
+                            // console.log('glazes ', storeGlazes , "glazeObj ", glazeObj)
+                            const underglaze = glazeObj.underglaze ? 'underglaze' : '-'
                             const selectedIds = selectedGlaze.map(
                               (selected) => selected.id
                             )
+                            // console.log("selectedIds", selectedIds)
                             return (
                               <MenuItem key={glazeObj.id} value={glazeObj}>
                                 <Checkbox
                                   checked={selectedIds.includes(glazeObj.id)}
                                 />
-                                <ListItemText primary={glazeObj.glaze} />
+                                <ListItemText primary={glazeObj.glaze} secondary={underglaze}/>
                               </MenuItem>
                             )
                           })}
@@ -284,8 +295,8 @@ function CreationEdit({ history }) {
                       multiline
                       rows={5}
                       fullWidth
-                      name="makersNote"
-                      value={form.makersNote}
+                      name="note"
+                      value={form.note}
                       onChange={handleChange}
                     />
 
