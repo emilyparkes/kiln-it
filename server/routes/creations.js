@@ -6,22 +6,22 @@ const { prepForDb, prepForJS } = require('../server-utils')
 
 const router = express.Router()
 
-// '/api/v1/creations'
+// /api/v1/creations
 
 router.get('/', (req, res) => {
   db.getCreations()
-  .then(creations => {
-    return Promise.all(
-      creations.map(creation => {
-      return db.getGlazesByCreationId(creation.id)
-      .then(glazes => {
-        creation.glazes = glazes
-        return creation
-      })
+    .then((creations) => {
+      return Promise.all(
+        creations.map((creation) => {
+          return db.getGlazesByCreationId(creation.id).then((glazes) => {
+            creation.glazes = glazes
+            creation = prepForJS(creation)
+            return creation
+          })
+        })
+      )
     })
-    )
-  })
-  .then((creations) => res.json(creations))
+    .then((creations) => res.json(creations))
     .catch((err) => {
       console.error(err)
       res.sendStatus(500)
@@ -30,16 +30,17 @@ router.get('/', (req, res) => {
 
 router.patch('/update-creation-status/:id', (req, res) => {
   const dbCreation = prepForDb(req.body)
-  db.updateCreationStatusById(Number(req.params.id), dbCreation)
+  const creationId = Number(req.params.id)
+
+  db.updateCreationStatusById(creationId, dbCreation)
     .then((creation) => {
       if (!creation) {
         return res.status(404).json({
-          error: 'creation id not found'
+          error: 'creation id not found',
         })
       }
       creation = prepForJS(creation)
       res.json(creation)
-      return null
     })
     .catch((err) => {
       console.error(err)
@@ -47,21 +48,50 @@ router.patch('/update-creation-status/:id', (req, res) => {
     })
 })
 
-
-
+// /api/v1/creations
 router.patch('/update-creation/:id', (req, res) => {
   const dbCreation = prepForDb(req.body)
-  db.updateCreationById(Number(req.params.id), dbCreation)
+  const creationId = Number(req.params.id)
+
+  db.updateCreationById(creationId, dbCreation)
     .then((creation) => {
       if (!creation) {
         return res.status(404).json({
-          error: 'creation id not found'
+          error: 'creation id not found',
         })
+      } else {
+        return Promise.all(
+          dbCreation.glazes.map((glazeObj) => {
+            return db.createCreationGlazes(creationId, glazeObj.id)
+          })
+        )
       }
-      creation = prepForJS(creation)
-      res.json(creation)
-      return null
     })
+    .then(() =>
+      db.getCreationById(creationId).then((creation) =>
+        db.getGlazesByCreationId(creation.id).then((glazes) => {
+          creation.glazes = glazes
+          creation = prepForJS(creation)
+          res.json(creation)
+        })
+      )
+    )
+    .catch((err) => {
+      console.error(err)
+      res.sendStatus(500)
+    })
+})
+
+router.get('/:id', (req, res) => {
+  const creationId = Number(req.params.id)
+  db.getCreationById(creationId)
+    .then((creation) =>
+      db.getGlazesByCreationId(creation.id).then((glazes) => {
+        creation.glazes = glazes
+        creation = prepForJS(creation)
+        res.json(creation)
+      })
+    )
     .catch((err) => {
       console.error(err)
       res.sendStatus(500)
@@ -69,8 +99,10 @@ router.patch('/update-creation/:id', (req, res) => {
 })
 
 router.delete('/:id', (req, res) => {
-  return db.deleteCreation(Number(req.params.id))
-    .then((deleted) => res.json({ deleted: `${deleted} item(s) have been deleted successfully` }))
+  db.deleteCreation(Number(req.params.id))
+    .then((deleted) =>
+      res.json({ deleted: `${deleted} item(s) have been deleted successfully` })
+    )
     .catch((err) => {
       console.error(err)
       res.sendStatus(500)
