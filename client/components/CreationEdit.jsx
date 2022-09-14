@@ -94,9 +94,7 @@ function CreationEdit() {
     })
   }
 
-  const selectGlaze = (event) => {
-    console.log("event.target.value ", event.target.value)
-   
+  const selectGlaze = (event) => {   
     setForm({
       ...form,
       glazes:  event.target.value,
@@ -110,7 +108,6 @@ function CreationEdit() {
     delete form.shape
     delete form.glaze
     delete form.status
-    console.log('selectedGlaze: ',  selectedGlaze)
      const formattedGlazes = selectedGlaze.map((selected) => {
       if (selected.in_use) {
         delete selected.in_use
@@ -119,7 +116,6 @@ function CreationEdit() {
       return selected
     })
     form.glazes = formattedGlazes
-    console.log("form ", form)
     dispatch(updateCreation(form))
     const newName = toLowHyphen(form.name)
     navigate(`/creations/${newName}`)
@@ -267,12 +263,10 @@ function CreationEdit() {
                           MenuProps={MenuProps}
                         >
                           {storeGlazes.map((glazeObj) => {
-                            // console.log('glazes ', storeGlazes , "glazeObj ", glazeObj)
                             const underglaze = glazeObj.underglaze ? 'underglaze' : '-'
                             const selectedIds = selectedGlaze.map(
                               (selected) => selected.id
                             )
-                            // console.log("selectedIds", selectedIds)
                             return (
                               <MenuItem key={glazeObj.id} value={glazeObj}>
                                 <Checkbox
