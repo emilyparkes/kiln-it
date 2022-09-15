@@ -28,9 +28,31 @@
   }
 }
 
+.button-add-new {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: auto;
+  align-content: center;
+  justify-content: flex-end;
+  align-items: center;
+  z-index: 50;
+}
+
+.fab {
+  margin: 0px;
+  top: auto;
+  right: 20px;
+  bottom: 20px;
+  left: auto;
+  position: fixed;
+};
+
 
 // LOG ITEM 
-
 .log-box {
   display: flex;
   height: 128px;
@@ -63,7 +85,6 @@
 // }
 
 // MODAL IN STATUS LOG ITEM
-
 .main {
   position: relative
 }
@@ -85,7 +106,6 @@
 }
 
 // STATUS LOG ITEM
-
 .log-img {
   display: block;
   width: 129.95px;
@@ -154,8 +174,6 @@
   }
 
 }
-
-
 
 // STATUS COLOURS
 .wet{

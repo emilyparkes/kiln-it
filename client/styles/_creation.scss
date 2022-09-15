@@ -202,16 +202,18 @@
 .icon-instagram {
   position: absolute;
   color: $text-dark;
-  width: 40px;
+  // width: 40px;
   height: 40px;
   right: 18px;
   top: 553px;
 
   .edit & {
     height: 46px;
-    top: 277px;
+    top: 285px;
+    right: 25px;
   }
 }
+
 
 
 // ADMIN
