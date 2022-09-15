@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { TextField } from '@mui/material'
-import { VscEdit } from 'react-icons/vsc'
+import { EditRounded as EditIcon } from '@mui/icons-material';
 import { IoAddCircleSharp, IoCheckmarkDoneSharp } from 'react-icons/io5'
 import { AiFillMinusCircle } from 'react-icons/ai'
 
@@ -110,7 +110,7 @@ function DataOption({ name, arrOfType }) {
             onClick={showEditable}
           />
         ) : (
-          <VscEdit
+          <EditIcon
             className="option-btn option-btn--edit"
             onClick={showEditable}
           />
