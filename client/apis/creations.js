@@ -8,10 +8,10 @@ export function getCreations() {
   })
 }
 
-export function postCreation(creation) {
+export function postCreation(newCreation) {
   return request
-    .post(baseUrl)
-    .send(creation)
+    .post(`${baseUrl}/new-creation`)
+    .send(newCreation)
     .then((resp) => {
       return resp.body
     })

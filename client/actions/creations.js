@@ -9,7 +9,7 @@ import {
 
 export const CREATIONS_REQUEST_PENDING = 'CREATIONS_REQUEST_PENDING'
 export const RECEIVE_CREATIONS = 'RECEIVE_CREATIONS'
-export const ADD_NEW_CREATIONS = 'ADD_NEW_CREATIONS'
+export const ADD_NEW_CREATION = 'ADD_NEW_CREATION'
 export const UPDATE_CREATION = 'UPDATE_CREATION'
 export const REMOVE_CREATION = 'REMOVE_CREATION'
 
@@ -19,10 +19,10 @@ export function requestCreationsPending() {
   }
 }
 
-export function newCreationsSuccess(creations) {
+export function newCreationSuccess(creation) {
   return {
-    type: ADD_NEW_CREATIONS,
-    creations,
+    type: ADD_NEW_CREATION,
+    creation,
   }
 }
 
@@ -57,12 +57,12 @@ export function fetchCreations() {
   }
 }
 
-export function createCreation() {
+export function createCreation(newCreation) {
   return (dispatch) => {
     dispatch(requestCreationsPending())
 
-    postCreation()
-      .then((creations) => dispatch(newCreationsSuccess(creations)))
+    postCreation(newCreation)
+      .then((creation) => dispatch(newCreationSuccess(creation)))
       .catch((err) => dispatch(showError(err.message)))
   }
 }
