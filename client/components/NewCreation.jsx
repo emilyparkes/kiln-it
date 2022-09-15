@@ -306,7 +306,7 @@ function NewCreation() {
                       id="outlined-makers-note"
                       margin="dense"
                       multiline
-                      rows={5}
+                      rows={9}
                       fullWidth
                       name="note"
                       value={form.note}
