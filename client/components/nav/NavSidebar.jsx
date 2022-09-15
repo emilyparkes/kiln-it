@@ -28,6 +28,11 @@ function NavSidebar({ open, setOpen }) {
             <ListItemText primary={'Edit'} />
           </Link>
         </ListItem>
+        <ListItem key={'New'} disablePadding>
+          <Link to="/creations/new" className="link" onClick={setOpen}>
+            <ListItemText primary={'New'} />
+          </Link>
+        </ListItem>
         <ListItem key={'Log'} disablePadding>
           <Link to="/log" className="link" onClick={setOpen}>
             <ListItemText primary={'Log'} />
