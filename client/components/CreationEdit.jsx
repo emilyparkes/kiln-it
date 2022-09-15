@@ -13,17 +13,18 @@ import {
   Select,
   FormControl,
 } from '@mui/material'
-import { ThemeProvider, createTheme } from '@mui/material/styles'
+import {
+  SaveRounded as SaveIcon,
+  Instagram as InstagramIcon,
+} from '@mui/icons-material'
 import { brown } from '@mui/material/colors'
-import { IoLogoInstagram } from 'react-icons/io'
-import { VscSaveAs } from 'react-icons/vsc'
+import { ThemeProvider, createTheme } from '@mui/material/styles'
 
-import { useEditStyles } from '../styles/mui_overrides'
+import { useStyles } from '../styles/mui_overrides'
 import { updateCreation } from '../actions/creations'
 import { findString, toLowHyphen, toCapSpace } from '../client-utils'
 
 function CreationEdit() {
-  const classes = useEditStyles()
   const [imgIdx, setImgIdx] = useState(0)
   const [currentImg, setCurrentImage] = useState('')
   const [form, setForm] = useState(null)
@@ -56,6 +57,8 @@ function CreationEdit() {
   })
 
   const params = useParams()
+  const classes = useStyles()
+
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -94,10 +97,10 @@ function CreationEdit() {
     })
   }
 
-  const selectGlaze = (event) => {   
+  const selectGlaze = (event) => {
     setForm({
       ...form,
-      glazes:  event.target.value,
+      glazes: event.target.value,
     })
     setSelectedGlaze(event.target.value)
   }
@@ -108,7 +111,7 @@ function CreationEdit() {
     delete form.shape
     delete form.glaze
     delete form.status
-     const formattedGlazes = selectedGlaze.map((selected) => {
+    const formattedGlazes = selectedGlaze.map((selected) => {
       if (selected.in_use) {
         delete selected.in_use
         delete selected.underglaze
@@ -143,11 +146,11 @@ function CreationEdit() {
 
             <div className="text-card">
               <div className="text-card-content">
-                <div className={classes.root}>
+                <div className={classes.box}>
                   <ThemeProvider theme={theme}>
                     <TextField
                       label="Name"
-                      className={classes.name}
+                      className={classes.titleLabel}
                       variant="outlined"
                       size="small"
                       id="outlined-name"
@@ -160,7 +163,7 @@ function CreationEdit() {
                     {shapes && (
                       <TextField
                         label="Shape"
-                        className={classes.textField}
+                        className={classes.inputLabel}
                         variant="outlined"
                         size="small"
                         id="outlined-shape"
@@ -181,7 +184,7 @@ function CreationEdit() {
                     {statuses && (
                       <TextField
                         label="Status"
-                        className={classes.textField}
+                        className={classes.inputLabel}
                         variant="outlined"
                         size="small"
                         id="outlined-status"
@@ -202,7 +205,7 @@ function CreationEdit() {
                     {clay && (
                       <TextField
                         label="Clay"
-                        className={classes.textField}
+                        className={classes.inputLabel}
                         variant="outlined"
                         size="small"
                         id="outlined-clay"
@@ -222,7 +225,7 @@ function CreationEdit() {
 
                     <TextField
                       label="Weight"
-                      className={classes.textField}
+                      className={classes.inputLabel}
                       variant="outlined"
                       size="small"
                       id="outlined-weight"
@@ -263,7 +266,9 @@ function CreationEdit() {
                           MenuProps={MenuProps}
                         >
                           {storeGlazes.map((glazeObj) => {
-                            const underglaze = glazeObj.underglaze ? 'underglaze' : '-'
+                            const underglaze = glazeObj.underglaze
+                              ? 'underglaze'
+                              : '-'
                             const selectedIds = selectedGlaze.map(
                               (selected) => selected.id
                             )
@@ -272,7 +277,10 @@ function CreationEdit() {
                                 <Checkbox
                                   checked={selectedIds.includes(glazeObj.id)}
                                 />
-                                <ListItemText primary={glazeObj.glaze} secondary={underglaze}/>
+                                <ListItemText
+                                  primary={glazeObj.glaze}
+                                  secondary={underglaze}
+                                />
                               </MenuItem>
                             )
                           })}
@@ -314,9 +322,9 @@ function CreationEdit() {
               </div>
             </div>
             <a href="https://www.instagram.com/emily_coco/">
-              <IoLogoInstagram className="icon-instagram" />
+              <InstagramIcon fontSize="large"  className="icon-instagram" />
             </a>
-            <VscSaveAs className="icon-save" onClick={onSubmit} />
+            <SaveIcon fontSize="large"  className="icon-save" onClick={onSubmit} />
           </div>
         </form>
       )}
