@@ -16,12 +16,14 @@ export const useStyles = makeStyles(() => ({
   titleLabel: {
     width: '40ch',
   },
+  titleLabelWide: {
+    width: '56ch',
+  },
   saveButton: {
     position: 'absolute',
     color: '#e3c6a4',
     backgroundColor: '#744F44',
     right: '18px',
-    width: '95px',
     bottom: '50px',
     height: '35px'
   },

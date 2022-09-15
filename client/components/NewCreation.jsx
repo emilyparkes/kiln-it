@@ -12,14 +12,11 @@ import {
   ListItemText,
   Select,
   FormControl,
-  Button
+  Button,
 } from '@mui/material'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import { brown } from '@mui/material/colors'
-import {
-  SaveRounded as SaveIcon,
-  Instagram as InstagramIcon,
-} from '@mui/icons-material'
+import { SaveRounded as SaveIcon } from '@mui/icons-material'
 
 import { useStyles } from '../styles/mui_overrides'
 import { createCreation } from '../actions/creations'
@@ -144,7 +141,7 @@ function NewCreation() {
                   <ThemeProvider theme={theme}>
                     <TextField
                       label="Name"
-                      className={classes.titleLabel}
+                      className={classes.titleLabelWide}
                       variant="outlined"
                       size="small"
                       id="outlined-name"
@@ -316,27 +313,19 @@ function NewCreation() {
                       onChange={handleChange}
                     />
 
-                    <p className="date">March 12 2021</p>
+                    <div className="date">Today</div>
                   </ThemeProvider>
                 </div>
               </div>
             </div>
-            <a href="https://www.instagram.com/emily_coco/" className="icon-instagram">
-              <InstagramIcon fontSize="large"  />
-            </a>
 
             <Button
               variant="contained"
               className={classes.saveButton}
               onClick={onSubmit}
-              endIcon={
-                <SaveIcon
-                  fontSize="large"
-                  
-                />
-              }
+              endIcon={<SaveIcon fontSize="large" />}
             >
-              Save
+              Save Creation
             </Button>
           </div>
         </form>

@@ -185,18 +185,20 @@
 
 .date {
   position: absolute;
-  width: 121px;
-  height: 20px;
-  left: 21px;
-  bottom: 64px;
-  margin-top: 8px;
-
-  font-family: 'Alegreya Sans SC';
+  height: 31px;
+  left: 18px;
+  bottom: 50px;
+  padding: 6px 16px;
+  font-family: "Alegreya Sans SC";
   font-style: normal;
   font-weight: normal;
-  font-size: 14px;
-  line-height: 16px;
   color: $text-dark;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.75;
+  letter-spacing: 0.02857em;
+  min-width: 64px;
+  border-radius: 4px;
 }
 
 .icon-instagram {
@@ -206,6 +208,7 @@
   height: 40px;
   right: 18px;
   top: 553px;
+  
 
   .edit & {
     height: 46px;

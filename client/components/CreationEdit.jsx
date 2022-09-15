@@ -12,6 +12,7 @@ import {
   ListItemText,
   Select,
   FormControl,
+  Button,
 } from '@mui/material'
 import {
   SaveRounded as SaveIcon,
@@ -306,25 +307,35 @@ function CreationEdit() {
                       label="Description"
                       variant="outlined"
                       size="small"
-                      id="outlined-multiline-static"
+                      id="outlined-description"
                       margin="dense"
                       multiline
-                      rows={8}
+                      rows={7}
                       fullWidth
                       name="description"
                       value={form.description}
                       onChange={handleChange}
                     />
 
-                    <p className="date">March 12 2021</p>
+                    <div className="date">March 12 2021</div>
                   </ThemeProvider>
                 </div>
               </div>
             </div>
-            <a href="https://www.instagram.com/emily_coco/">
-              <InstagramIcon fontSize="large"  className="icon-instagram" />
+            <a
+              href="https://www.instagram.com/emily_coco/"
+              className="icon-instagram"
+            >
+              <InstagramIcon fontSize="large" />
             </a>
-            <SaveIcon fontSize="large"  className="icon-save" onClick={onSubmit} />
+            <Button
+              variant="contained"
+              className={classes.saveButton}
+              onClick={onSubmit}
+              endIcon={<SaveIcon fontSize="large" />}
+            >
+              Save Changes
+            </Button>
           </div>
         </form>
       )}
