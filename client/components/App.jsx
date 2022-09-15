@@ -14,6 +14,7 @@ import Navigation from './nav/Navigation'
 import Home from './Home'
 import Gallery from './Gallery'
 import About from './About'
+import NewCreation from './NewCreation'
 import CreationEdit from './CreationEdit'
 import Creation from './Creation'
 import Register from './auth/Register'
@@ -41,6 +42,7 @@ function App() {
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/log" element={<Log />} />
         <Route path="/about" element={<About />} />
+        <Route path="/creations/new" element={<NewCreation />} />
         <Route path="/creations/:name/edit" element={<CreationEdit />} />
         <Route path="/creations/:name" element={<Creation />} />
         <Route path="/options/edit" element={<DataOptionsView />} />
