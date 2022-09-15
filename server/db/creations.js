@@ -8,6 +8,7 @@ module.exports = {
   getCreationById,
   updateCreationStatusById,
   updateCreationById,
+  createCreation,
 }
 
 function getCreations(db = connection) {
@@ -101,6 +102,23 @@ function updateCreationStatusById(id, creation, db = connection) {
 
 function updateCreationById(id, creation, db = connection) {
   return db('creations').where('creations.id', id).update({
+    clay_id: creation.clay_id,
+    shape_id: creation.shape_id,
+    status_id: creation.status_id,
+    glaze_id: creation.glaze_id,
+    weight_leather_hard: creation.weight_leather_hard,
+    weight_bone_dry: creation.weight_bone_dry,
+    weight_bisque_fired: creation.weight_bisque_fired,
+    weight_glazed: creation.weight_glazed,
+    weight_complete: creation.weight_complete,
+    name: creation.name,
+    description: creation.description,
+    note: creation.note,
+  })
+}
+
+function createCreation(creation, db = connection) {
+  return db('creations').insert({
     clay_id: creation.clay_id,
     shape_id: creation.shape_id,
     status_id: creation.status_id,

@@ -28,19 +28,26 @@ router.get('/', (req, res) => {
     })
 })
 
-router.patch('/update-creation-status/:id', (req, res) => {
+router.post('/new-creation', (req, res) => {
   const dbCreation = prepForDb(req.body)
-  const creationId = Number(req.params.id)
-
-  db.updateCreationStatusById(creationId, dbCreation)
-    .then((creation) => {
-      if (!creation) {
-        return res.status(404).json({
-          error: 'creation id not found',
+  let creationId = null
+  db.createCreation(dbCreation)
+    .then((creationIdArr) => {
+      creationId = creationIdArr[0]
+      return Promise.all(
+        dbCreation.glazes.map((glazeObj) => {
+          return db.createCreationGlazes(creationId, glazeObj.id)
         })
-      }
-      creation = prepForJS(creation)
-      res.json(creation)
+      )
+    })
+    .then(() => {
+      return db.getCreationById(creationId).then((creation) => {
+        return db.getGlazesByCreationId(creation.id).then((glazes) => {
+          creation.glazes = glazes
+          creation = prepForJS(creation)
+          res.json(creation)
+        })
+      })
     })
     .catch((err) => {
       console.error(err)
@@ -76,6 +83,26 @@ router.patch('/update-creation/:id', (req, res) => {
         })
       )
     )
+    .catch((err) => {
+      console.error(err)
+      res.sendStatus(500)
+    })
+})
+
+router.patch('/update-creation-status/:id', (req, res) => {
+  const dbCreation = prepForDb(req.body)
+  const creationId = Number(req.params.id)
+
+  db.updateCreationStatusById(creationId, dbCreation)
+    .then((creation) => {
+      if (!creation) {
+        return res.status(404).json({
+          error: 'creation id not found',
+        })
+      }
+      creation = prepForJS(creation)
+      res.json(creation)
+    })
     .catch((err) => {
       console.error(err)
       res.sendStatus(500)
