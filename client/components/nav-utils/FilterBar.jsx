@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { HiFilter } from 'react-icons/hi'
+import { FilterAltRounded as FilterIcon } from '@mui/icons-material'
+
 import { Chip, Stack, Button, ThemeProvider } from '@mui/material'
 import { theme } from '../theme/theme'
 
@@ -132,7 +133,7 @@ function FilterBar({ focus, toggleFocus }) {
           id='filter-button'
           className={focus ? 'active' : undefined}
         >
-        <HiFilter/>
+        <FilterIcon/>
         </button>
       </div>
 

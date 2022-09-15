@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { IoLogoInstagram } from 'react-icons/io'
+
+import { Instagram as InstagramIcon } from '@mui/icons-material'
 
 import { findString, toCapSpace } from '../client-utils'
 
@@ -55,7 +56,7 @@ function Creation () {
               <p className='date'>March 12 2021</p>
             </div>
           </div>
-          <IoLogoInstagram className='icon-instagram' />
+          <InstagramIcon className='icon-instagram' />
         </div>
       </>
       }

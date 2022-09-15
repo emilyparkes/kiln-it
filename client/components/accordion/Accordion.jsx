@@ -3,28 +3,32 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Typography
+  Typography,
 } from '@mui/material'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import { ExpandMore as ExpandMoreIcon } from '@mui/icons-material'
 
-function AnAccordion({ title, children, num, currentAccordian, openAccordian }) {
+function AnAccordion({
+  title,
+  children,
+  num,
+  currentAccordian,
+  openAccordian,
+}) {
   return (
-      <Accordion
-        expanded={currentAccordian === `panel${num}`}
-        onChange={() => openAccordian(`panel${num}`)}
+    <Accordion
+      expanded={currentAccordian === `panel${num}`}
+      onChange={() => openAccordian(`panel${num}`)}
+    >
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon />}
+        aria-controls={`panel${num}bh-content`}
+        id={`panel${num}bh-header`}
       >
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon/>}
-          aria-controls={`panel${num}bh-content`}
-          id={`panel${num}bh-header`}
-        >
-          <Typography sx={{ width: '33%', flexShrink: 0 }}>{title}</Typography>
-        </AccordionSummary>
+        <Typography sx={{ width: '33%', flexShrink: 0 }}>{title}</Typography>
+      </AccordionSummary>
 
-        <AccordionDetails>
-          {children}
-        </AccordionDetails>
-      </Accordion>
+      <AccordionDetails>{children}</AccordionDetails>
+    </Accordion>
   )
 }
 

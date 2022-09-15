@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useDispatch } from 'react-redux'
-import { HiOutlineSearch } from 'react-icons/hi'
+import { SearchRounded as SearchIcon } from '@mui/icons-material'
 import _ from 'lodash'
 
 import { setSearchTerm } from '../../actions/search'
@@ -40,7 +40,7 @@ function SearchBar({ focus, toggleFocus }) {
           id="search-button"
           className={focus ? 'active' : undefined}
         >
-          <HiOutlineSearch />
+          <SearchIcon />
         </button>
       </form>
     </div>
