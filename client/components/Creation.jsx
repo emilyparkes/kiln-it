@@ -53,10 +53,10 @@ function Creation () {
               <p className='name'>{creation.name}</p>
               <p className='shape'>{creation.shape}</p>
               <p className='description'>{creation.description + ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut quam cras pharetra magna. Mattis auctor integer nunc adipiscing. Urna tempus integer aliquam ultricies consequat, tempus, aliquam rhoncus, urna. Tortor tellus ac arcu nec, pulvinar. Ut praesent etiam dui, elit non mi viverra nisi. Accumsan commodo neque, in turpis. Morbi in id elit, ultrices donec erat gravida diam.'}</p>
-              <p className='date'>March 12 2021</p>
+              <div className="date">March 12 2021</div>
             </div>
           </div>
-          <InstagramIcon className='icon-instagram' />
+          <InstagramIcon fontSize='large' className='icon-instagram' />
         </div>
       </>
       }
