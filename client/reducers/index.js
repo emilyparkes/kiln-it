@@ -17,11 +17,12 @@ export default combineReducers({
   navUtils,
   error,
   waitIndicator,
-  clay,
+  filter,
+  search,
   creations,
+  clay,
   glazes,
   shapes,
   statuses,
-  filter,
-  search
+ 
 })

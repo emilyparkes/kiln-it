@@ -6,6 +6,8 @@ import { toLowHyphen, filterBy } from '../client-utils'
 
 import Card from './Card'
 import NavUtils from './nav-utils/NavUtils'
+import WaitIndicator from './WaitIndicator'
+
 
 function Gallery () {
 
@@ -14,6 +16,7 @@ function Gallery () {
   return (
     <>
       <NavUtils/>
+      <WaitIndicator/>
       {creations && (
         <div className='card-root'>
           <div className='card-container'>

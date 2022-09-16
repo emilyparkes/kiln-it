@@ -6,6 +6,7 @@ import StatusLogItem from './StatusLogItem'
 
 import { filterBy, searchBy } from '../client-utils'
 import FloatingAddNew from './FloatingAddNew'
+import WaitIndicator from './WaitIndicator'
 
 function StatusLog() {
   const focus = useSelector((store) => store.navUtils)
@@ -19,6 +20,7 @@ function StatusLog() {
   return (
     <>
       <NavUtils />
+      <WaitIndicator/>
       {focus?.filter ? ( // filter bar active, list based on filters
         <>
           <div className="log-container">
