@@ -23,22 +23,18 @@ function StatusLog() {
       <WaitIndicator/>
       {focus?.filter ? ( // filter bar active, list based on filters
         <>
-          <div className="log-container">
             {creationsFiltered?.map((creation) => {
               return <StatusLogItem key={creation.id} creation={creation} />
             })}
-          </div>
 
           <FloatingAddNew />
         </>
       ) : (
         // or search bar active, list based on search terms
         <>
-          <div className="log-container">
             {creationsSearched?.map((creation) => {
               return <StatusLogItem key={creation.id} creation={creation} />
             })}
-          </div>
 
           <FloatingAddNew />
         </>

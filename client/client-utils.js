@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 export function findString(arr, property, value, type) {
   const found = arr.find((obj) => obj[property] === value)
   if (type) {
@@ -19,6 +21,10 @@ export function toCapSpace(name) {
 // Le Vase => le-vase
 export function toLowHyphen(name) {
   return name.toLowerCase().split(' ').join('-')
+}
+
+export function toCamelCase(name) {
+  return _ .camelCase(name)
 }
 
 export function filterBy(filters, itemsToFilter) {
