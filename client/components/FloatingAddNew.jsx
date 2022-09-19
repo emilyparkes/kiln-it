@@ -15,7 +15,7 @@ function FloatingAddNew() {
   }
   return (
       <Box sx={{ '& > :not(style)': { m: 1 } }} onClick={handleClick}>
-        <Fab color="secondary" aria-label="add" className={classes.MuiFab} >
+        <Fab color="primary" aria-label="add" className={classes.MuiFab} >
           <AddIcon />
         </Fab>
       </Box>
