@@ -12,7 +12,7 @@ import {
 } from '@mui/material'
 
 import StatusModal from './StatusModal'
-import { toCamelCase } from '../client-utils'
+import { toCamelCase, toLowHyphen } from '../client-utils'
 import { updateCreationStatus } from '../actions/creations'
 import { useStyles } from '../styles/mui_overrides'
 
@@ -45,6 +45,17 @@ function StatusLogItem({ creation }) {
 
   const hideModal = () => {
     setShowModel(false)
+  }
+
+  const formatGlazeText = (selectedGlaze) => {
+    const glazeStrings = selectedGlaze.map(
+      (selected) => selected.glaze
+    )
+    if (!selectedGlaze.length) {
+      return 'Unglazed'
+    } else {
+      return glazeStrings.join(', ')
+    }
   }
 
   const handleSelect = (e) => {
@@ -84,7 +95,7 @@ function StatusLogItem({ creation }) {
           >
             <div className="current">
               <p>Selected</p>
-              <p className={`status ${style}`}>{currentStatus.status}</p>
+              <p className={classes[`${style}`]}>{currentStatus.status}</p>
             </div>
             <div className="statusList">
               {statuses
@@ -93,7 +104,7 @@ function StatusLogItem({ creation }) {
 
                     return (
                       <button
-                        className={`status ${styleItem}`}
+                        className={classes[`${styleItem}`]}
                         key={statusobj.id}
                         value={statusobj.status}
                         onClick={handleSelect}
@@ -109,10 +120,8 @@ function StatusLogItem({ creation }) {
       )}
 
       {statuses ? (
-
-
         <Card sx={{ display: 'flex' }} className={classes.StatusLogItemCard}>
-          <Link to="/creations/le-vase">
+          <Link to={`/creations/${toLowHyphen(creation.name)}`}>
             <CardMedia
               component="img"
               sx={{ width: 151 }}
@@ -132,7 +141,7 @@ function StatusLogItem({ creation }) {
                 </Typography>
                 <Typography>Clay: {creation.clay}</Typography>
                 <Typography>
-                  Glazes: {creation.glazes.map((glazeObj) => glazeObj.glaze)}
+                  Glazes: {formatGlazeText(creation?.glazes)}
                 </Typography>
               </Stack>
             </CardContent>

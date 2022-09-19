@@ -23,7 +23,9 @@ export function toLowHyphen(name) {
   return name.toLowerCase().split(' ').join('-')
 }
 
+// Le Vase => leVase
 export function toCamelCase(name) {
+  name = name.toLowerCase()
   return _ .camelCase(name)
 }
 
