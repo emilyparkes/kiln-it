@@ -154,17 +154,6 @@ export const useStyles = makeStyles(() => ({
     backgroundColor: '#744F44',
     color: 'white',
   },
-  statusButton: {
-    fontWeight: '200',
-    textTransform: 'uppercase',
-    textAlign: 'center',
-    margin: '8px',
-    padding: '6px 16px',
-    boxSizing: 'border-box',
-    borderRadius: '4px',
-    width: '252px',
-    color: 'white',
-  },
   saveButton: {
     position: 'absolute',
     color: '#e3c6a4',
@@ -172,6 +161,9 @@ export const useStyles = makeStyles(() => ({
     right: '18px',
     bottom: '50px',
     height: '35px',
+  },
+  ButtonIcon: {
+    color: '#e3c6a4',
   },
   MuiFab: {
     position: 'fixed',

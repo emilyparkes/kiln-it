@@ -15,27 +15,30 @@ export const theme = createTheme({
       // dark: will be calculated from palette.secondary.main,
       contrastText: '#e3c6a4',
     },
-    shape: {
-      // blue
-      light: '#88A4B8',
-      main: '#88A4B8',
-      dark: '#88A4B8',
-      contrastText: 'rgba(0, 0, 0, 0.87)',
-    },
-    clay: {
-      // clay
-      light: '#BA6D32',
-      main: '#BA6D32',
-      dark: '#BA6D32',
-      contrastText: 'rgba(0, 0, 0, 0.87)',
-    },
-    glazes: {
-      // green
-      light: '#6BA368',
-      main: '#6BA368',
-      dark: '#6BA368',
-      contrastText: 'rgba(0, 0, 0, 0.87)',
-    },
+    // wet: {
+    //   main: '#A3D9FF',
+    // },
+    // leatherHard: {
+    //   main: '#88A4B8',
+    // },
+    // boneDry: {
+    //   main: '#C09F93',
+    // },
+    // bisqueFiring: {
+    //   main: '#b98462',
+    // },
+    // bisqueFired: {
+    //   main: '#BA6D32',
+    // },
+    // glazed: {
+    //   main: '#6BA368',
+    // },
+    // glazeFiring: {
+    //   main: '#AFE07E',
+    // },
+    // complete: {
+    //   main: '#744F44',
+    // },
   },
   components: {
     MuiCard: {
