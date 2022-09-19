@@ -87,7 +87,7 @@ export function updateCreation(creation) {
   }
 }
 
-export function removeCreations(id) {
+export function removeCreation(id) {
   return (dispatch) => {
     dispatch(requestCreationsPending())
 

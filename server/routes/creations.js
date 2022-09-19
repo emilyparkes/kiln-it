@@ -126,10 +126,14 @@ router.get('/:id', (req, res) => {
 })
 
 router.delete('/:id', (req, res) => {
-  db.deleteCreation(Number(req.params.id))
-    .then((deleted) =>
-      res.json({ deleted: `${deleted} item(s) have been deleted successfully` })
-    )
+  const creationId = Number(req.params.id)
+
+  db.deleteCreationGlazes(creationId)
+    .then(() => db.deleteCreation(creationId).then((deleted) =>
+        res.json({
+          deleted: `${deleted} item(s) have been deleted successfully`,
+        })
+      ))
     .catch((err) => {
       console.error(err)
       res.sendStatus(500)

@@ -9,6 +9,8 @@ module.exports = {
   updateCreationStatusById,
   updateCreationById,
   createCreation,
+  deleteCreationGlazes,
+  deleteCreation
 }
 
 function getCreations(db = connection) {
@@ -59,6 +61,12 @@ function createCreationGlazes(id, glazeId, db = connection) {
         creation_id: id,
       })
     })
+}
+
+function deleteCreationGlazes(id, db = connection) {
+  return db('glaze_creations')
+  .where('creation_id', id)
+  .delete()
 }
 
 function getCreationById(id, db = connection) {
@@ -132,4 +140,8 @@ function createCreation(creation, db = connection) {
     description: creation.description,
     note: creation.note,
   })
+}
+
+function deleteCreation(id, db = connection) {
+  return db('creations').where('id', id).delete()
 }

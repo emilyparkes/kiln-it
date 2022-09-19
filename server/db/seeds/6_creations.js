@@ -84,7 +84,7 @@ exports.seed = (knex) => {
           date_complete: '2020-08-15T13:45:30',
           description: '',
           note: 'Glaze top-half',
-          name: '',
+          name: 'Platter',
           img_complete: ''
         },
         {
@@ -100,7 +100,7 @@ exports.seed = (knex) => {
           date_created: '2020-07-20T18:56:30',
           date_complete: '2020-08-20T18:56:30',
           note: 'Glaze top-half and underglaze with black matte details',
-          name: '',
+          name: 'We\'ll See',
           img_complete: ''
         },
         {
@@ -117,7 +117,7 @@ exports.seed = (knex) => {
           date_complete: '2020-08-21T12:34:30',
           description: '',
           note: '',
-          name: '',
+          name: 'Caffiene Fix',
           img_complete: ''
         },
         {
@@ -134,7 +134,7 @@ exports.seed = (knex) => {
           date_complete: '2020-09-03T14:12:30',
           description: '',
           note: '',
-          name: '',
+          name: 'Plant Hug',
           img_complete: ''
         },
         {
@@ -151,7 +151,7 @@ exports.seed = (knex) => {
           date_complete: '2020-09-10T17:22:30',
           description: '',
           note: '',
-          name: '',
+          name: 'Artist\'s Plate',
           img_complete: ''
         }
       ])
