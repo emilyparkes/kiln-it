@@ -55,6 +55,7 @@ function Creation() {
 
   const deleteCreation = () => {
     dispatch(removeCreation(creation.id))
+    navigate('/gallery')
   }
 
   return (
