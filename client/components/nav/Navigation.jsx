@@ -4,12 +4,12 @@ import PropTypes from 'prop-types'
 import { AppBar, Toolbar, useScrollTrigger } from '@mui/material'
 import { ThemeProvider } from '@mui/material/styles'
 
-import { theme } from '../theme/theme'
+import { theme } from '../../styles/theme'
 
 function ElevationScroll({ children }) {
   const trigger = useScrollTrigger({
     disableHysteresis: true,
-    threshold: 0
+    threshold: 0,
   })
 
   return React.cloneElement(children, {
@@ -18,28 +18,25 @@ function ElevationScroll({ children }) {
 }
 
 ElevationScroll.propTypes = {
-  children: PropTypes.element.isRequired
+  children: PropTypes.element.isRequired,
 }
 
-export default function Navigation (props) {
+export default function Navigation(props) {
   return (
     <>
-    <ThemeProvider theme={theme}>
-      <ElevationScroll {...props}>
-        <AppBar position='fixed'>
-          <Toolbar>
-          <div className='nav'>
-            <Burger />
-              <div className='logo'>
-                Dirty Hands Studio
+      <ThemeProvider theme={theme}>
+        <ElevationScroll {...props}>
+          <AppBar position='fixed'>
+            <Toolbar>
+              <div className='nav'>
+                <Burger />
+                <div className='logo'>Dirty Hands Studio</div>
               </div>
-          </div>
-          </Toolbar>
-        </AppBar>
-      </ElevationScroll>
-      <Toolbar />
+            </Toolbar>
+          </AppBar>
+        </ElevationScroll>
+        <Toolbar />
       </ThemeProvider>
     </>
   )
 }
-

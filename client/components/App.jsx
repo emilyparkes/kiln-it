@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { ThemeProvider } from '@mui/material/styles'
-import { theme } from './theme/theme'
+import { theme } from '../styles/theme'
 
 import { fetchCreations } from '../actions/creations'
 import { fetchClay } from '../actions/clay'

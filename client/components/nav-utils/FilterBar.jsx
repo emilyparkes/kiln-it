@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { FilterAltRounded as FilterIcon } from '@mui/icons-material'
 
 import { Chip, Stack, Button, ThemeProvider } from '@mui/material'
-import { theme } from '../theme/theme'
+import { theme } from '../../styles/theme'
 
 
 import FilterSidebar from './FilterSidebar.jsx'
