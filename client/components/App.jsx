@@ -21,6 +21,7 @@ import Register from './auth/Register'
 import SignIn from './auth/SignIn'
 import Log from './StatusLog'
 import DataOptionsView from './DataOptionsView'
+import PageNotFound from './PageNotFound'
 
 function App() {
   const dispatch = useDispatch()
@@ -48,6 +49,7 @@ function App() {
         <Route path="/options/edit" element={<DataOptionsView />} />
         <Route path="/register" element={<Register />} />
         <Route path="/signin" element={<SignIn />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
       </ThemeProvider>
     </>
