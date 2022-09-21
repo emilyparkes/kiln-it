@@ -1,3 +1,4 @@
+/* eslint-disable promise/no-nesting */
 const express = require('express')
 
 const db = require('../db/creations')
@@ -5,8 +6,21 @@ const { prepForDb, prepForJS } = require('../server-utils')
 
 const router = express.Router()
 
+// /api/v1/creations
+
 router.get('/', (req, res) => {
   db.getCreations()
+    .then((creations) => {
+      return Promise.all(
+        creations.map((creation) => {
+          return db.getGlazesByCreationId(creation.id).then((glazes) => {
+            creation.glazes = glazes
+            creation = prepForJS(creation)
+            return creation
+          })
+        })
+      )
+    })
     .then((creations) => res.json(creations))
     .catch((err) => {
       console.error(err)
@@ -14,22 +28,26 @@ router.get('/', (req, res) => {
     })
 })
 
-router.post('/', (req, res) => {
-  //
-})
-
-router.patch('/:id', (req, res) => {
+router.post('/new-creation', (req, res) => {
   const dbCreation = prepForDb(req.body)
-  db.updateCreationById(Number(req.params.id), dbCreation)
-    .then((creation) => {
-      if (!creation) {
-        return res.status(404).json({
-          error: 'creation id not found'
+  let creationId = null
+  db.createCreation(dbCreation)
+    .then((creationIdArr) => {
+      creationId = creationIdArr[0]
+      return Promise.all(
+        dbCreation.glazes.map((glazeObj) => {
+          return db.createCreationGlazes(creationId, glazeObj.id)
         })
-      }
-      creation = prepForJS(creation)
-      res.json(creation)
-      return null
+      )
+    })
+    .then(() => {
+      return db.getCreationById(creationId).then((creation) => {
+        return db.getGlazesByCreationId(creation.id).then((glazes) => {
+          creation.glazes = glazes
+          creation = prepForJS(creation)
+          res.json(creation)
+        })
+      })
     })
     .catch((err) => {
       console.error(err)
@@ -37,9 +55,85 @@ router.patch('/:id', (req, res) => {
     })
 })
 
+// /api/v1/creations
+router.patch('/update-creation/:id', (req, res) => {
+  const dbCreation = prepForDb(req.body)
+  const creationId = Number(req.params.id)
+
+  db.updateCreationById(creationId, dbCreation)
+    .then((creation) => {
+      if (!creation) {
+        return res.status(404).json({
+          error: 'creation id not found',
+        })
+      } else {
+        return Promise.all(
+          dbCreation.glazes.map((glazeObj) => {
+            return db.createCreationGlazes(creationId, glazeObj.id)
+          })
+        )
+      }
+    })
+    .then(() =>
+      db.getCreationById(creationId).then((creation) =>
+        db.getGlazesByCreationId(creation.id).then((glazes) => {
+          creation.glazes = glazes
+          creation = prepForJS(creation)
+          res.json(creation)
+        })
+      )
+    )
+    .catch((err) => {
+      console.error(err)
+      res.sendStatus(500)
+    })
+})
+
+router.patch('/update-creation-status/:id', (req, res) => {
+  const dbCreation = prepForDb(req.body)
+  const creationId = Number(req.params.id)
+
+  db.updateCreationStatusById(creationId, dbCreation)
+    .then((creation) => {
+      if (!creation) {
+        return res.status(404).json({
+          error: 'creation id not found',
+        })
+      }
+      creation = prepForJS(creation)
+      res.json(creation)
+    })
+    .catch((err) => {
+      console.error(err)
+      res.sendStatus(500)
+    })
+})
+
+router.get('/:id', (req, res) => {
+  const creationId = Number(req.params.id)
+  db.getCreationById(creationId)
+    .then((creation) =>
+      db.getGlazesByCreationId(creation.id).then((glazes) => {
+        creation.glazes = glazes
+        creation = prepForJS(creation)
+        res.json(creation)
+      })
+    )
+    .catch((err) => {
+      console.error(err)
+      res.sendStatus(500)
+    })
+})
+
 router.delete('/:id', (req, res) => {
-  return db.deleteCreation(Number(req.params.id))
-    .then((deleted) => res.json({ deleted: `${deleted} item(s) have been deleted successfully` }))
+  const creationId = Number(req.params.id)
+
+  db.deleteCreationGlazes(creationId)
+    .then(() => db.deleteCreation(creationId).then((deleted) =>
+        res.json({
+          deleted: `${deleted} item(s) have been deleted successfully`,
+        })
+      ))
     .catch((err) => {
       console.error(err)
       res.sendStatus(500)

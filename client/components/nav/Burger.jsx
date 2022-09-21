@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import LeftNav from './LeftNav'
+import NavSidebar from './NavSidebar'
 
 function Burger () {
   const [open, setOpen] = useState(false)
@@ -12,7 +12,7 @@ function Burger () {
         <div/>
         <div/>
       </nav>
-      <LeftNav open={open} setOpen={() => setOpen(!open)}/>
+      <NavSidebar open={open} setOpen={() => setOpen(!open)}/>
     </>
   )
 }

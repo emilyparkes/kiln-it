@@ -11,28 +11,27 @@
 
 .filter-bar {  
   position: relative;
-  margin: 0px 15px 0px 15px;
+  margin: 0px 15px 0px 20px;
 
   .extendable-bar {
     outline: none;
     background-color: #fff;
     border: none;
     border-radius: 50px;
-    padding: 15px 15px;
+    padding: 4px 0px 0px 35px;
     font-size: 15px;
-    height: 35px;
-    width: 0px;
+    height: 40px;
+    width: 40px;
     box-sizing: border-box;
     transition: all 0.7s ease-in-out;
     position: absolute;
     top: 0;
-    left: 0;
+    left: -4px;
   }
 
   .focused {
     width: 89%;
     flex-direction: row;
-    padding: 0px 0px 0px 30px;
     display: flex;
     overflow: hidden;
     flex-wrap: wrap;
@@ -57,13 +56,12 @@
 
   #filter-button {
     position: absolute;
-    background: #fff;
     width: 35px;
     height: 35px;
     border: none;
     border-radius: 50%;
     font-size: 20px;
-    top:0;
+    top: 6px;
     left: 0;
     outline: none;
     color: $text-dark;
@@ -71,17 +69,24 @@
   }
 }
 
-.filter-modal-heading {
-  position: relative;
-  padding: 24px 2px 2px 2px;
+
+.filter-header {
   display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: #3A2E39;
-    align-content: center;
+  align-items: baseline;
+  justify-content: space-around;
+}
+
+.filter-modal-heading {
+  // position: relative;
+  padding: 24px 2px 2px 2px;
+  // display: flex;
+    // flex-direction: column;
+    // flex-wrap: nowrap;
+    // justify-content: center;
+    // align-items: center;
+    // text-align: center;
+    color: $text-dark;
+    // align-content: center;
 }
 
 .current-filter {
@@ -91,7 +96,7 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  color: #3A2E39;
+  color: $text-dark;
   align-content: center;
   // position: absolute;
   // top: 30px;
@@ -106,6 +111,7 @@
   justify-content: center;
   align-items: center;
   margin: 0px 20px 20px 20px;
+  min-height: 32px;
 }
 
 .selected-filter-item {

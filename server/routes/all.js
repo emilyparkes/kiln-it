@@ -11,16 +11,24 @@ const { prepForJS } = require('../server-utils')
 const router = express.Router()
 
 router.get('/', (req, res) => {
-  const allItems = [getCreations(), getGlazes(), getStatuses(), getClay(), getShapes()]
+  const allItems = [
+    getCreations(),
+    getGlazes(),
+    getStatuses(),
+    getClay(),
+    getShapes(),
+  ]
   Promise.all(allItems)
-    .then((allItems) => allItems.map(tableArr => tableArr.map((obj) => prepForJS(obj))))
+    .then((allItems) =>
+      allItems.map((tableArr) => tableArr.map((obj) => prepForJS(obj)))
+    )
     .then(([creations, glazes, statuses, clay, shapes]) => {
       const allItems = {
         creations,
         glazes,
         statuses,
         clay,
-        shapes
+        shapes,
       }
       res.json(allItems)
       return null

@@ -1,4 +1,4 @@
-var _ = require('lodash')
+const _ = require('lodash')
 
 module.exports = {
   prepForDb,
@@ -7,18 +7,19 @@ module.exports = {
 
 function prepForDb (body) {
   if (_.isObject(body)) {
-    const n = {}
-    Object.keys(body).forEach(k => (n[_.snakeCase(k)] = prepForDb(body[k])))
-    return n
+    const newObj = {}
+    Object.keys(body).forEach(key => (newObj[_.snakeCase(key)] = body[key]))
+    return newObj
   } else if (_.isArray(body)) body.map(i => prepForDb(i))
   return body
 }
 
 function prepForJS (data) {
   if (_.isObject(data)) {
-    const n = {}
-    Object.keys(data).forEach(k => (n[_.camelCase(k)] = prepForJS(data[k])))
-    return n
+    const newObj = {}
+    Object.keys(data).forEach(key => (newObj[_.camelCase(key)] = data[key]))
+    if (_.isArray(newObj.glazes)) prepForJS(newObj.glazes)
+    return newObj
   } else if (_.isArray(data)) data.map(i => prepForJS(i))
   return data
 }

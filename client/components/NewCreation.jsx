@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import {
   TextField,
@@ -14,21 +14,30 @@ import {
   FormControl,
   Button,
 } from '@mui/material'
-import {
-  SaveRounded as SaveIcon,
-  Instagram as InstagramIcon,
-} from '@mui/icons-material'
-import { brown } from '@mui/material/colors'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
+import { brown } from '@mui/material/colors'
+import { SaveRounded as SaveIcon } from '@mui/icons-material'
 
 import { useStyles } from '../styles/mui_overrides'
-import { updateCreation } from '../actions/creations'
-import { findString, toLowHyphen, toCapSpace } from '../client-utils'
+import { createCreation } from '../actions/creations'
+import {
+  toLowHyphen,
+  cleanGlazes,
+  validateForm,
+  cleanForm,
+} from '../client-utils'
 
-function CreationEdit() {
+function NewCreation() {
   const [imgIdx, setImgIdx] = useState(0)
   const [currentImg, setCurrentImage] = useState('')
-  const [form, setForm] = useState(null)
+  const [formError, setFormError] = useState({})
+
+  const [form, setForm] = useState({
+    name: '',
+    shape: '',
+    status: '',
+    clay: '',
+  })
   const [selectedGlaze, setSelectedGlaze] = useState([])
 
   // HARD CODED FOR NOW
@@ -57,7 +66,6 @@ function CreationEdit() {
     },
   })
 
-  const params = useParams()
   const classes = useStyles()
 
   const navigate = useNavigate()
@@ -68,20 +76,6 @@ function CreationEdit() {
   const storeGlazes = useSelector((store) => store.glazes)
   const shapes = useSelector((store) => store.shapes)
   const statuses = useSelector((store) => store.statuses)
-
-  useEffect(() => {
-    if (creations && storeGlazes) {
-      const name = toCapSpace(params.name)
-      const creation = findString(creations, 'name', name)
-      setForm(creation)
-
-      const copyGlazes = [...storeGlazes]
-      const prettyState = copyGlazes.filter((glazeObj) => {
-        return creation.glazes.find((glaze) => glaze.id === glazeObj.id)
-      })
-      setSelectedGlaze(prettyState)
-    }
-  }, [creations, storeGlazes])
 
   useEffect(() => {
     setCurrentImage(images[imgIdx])
@@ -108,26 +102,22 @@ function CreationEdit() {
 
   const onSubmit = (e) => {
     e.preventDefault()
-    delete form.clay
-    delete form.shape
-    delete form.glaze
-    delete form.status
-    const formattedGlazes = selectedGlaze.map((selected) => {
-      if (selected.in_use) {
-        delete selected.in_use
-        delete selected.underglaze
-      }
-      return selected
-    })
-    form.glazes = formattedGlazes
-    dispatch(updateCreation(form))
-    const newName = toLowHyphen(form.name)
-    navigate(`/creations/${newName}`)
+    console.log(form)
+    const hasErrors = validateForm(form)
+    if (hasErrors) {
+      setFormError(hasErrors)
+    } else {
+      const newCreation = cleanForm(form)
+      newCreation.glazes = cleanGlazes(selectedGlaze)
+      dispatch(createCreation(newCreation))
+      const newName = toLowHyphen(newCreation.name)
+      navigate(`/creations/${newName}`)
+    }
   }
 
   return (
     <>
-      {form && creations && (
+      {creations && (
         <form>
           <div className="creation-container edit">
             <img className="creation-img" src={currentImg} />
@@ -151,13 +141,18 @@ function CreationEdit() {
                   <ThemeProvider theme={theme}>
                     <TextField
                       label="Name"
-                      className={classes.titleLabel}
+                      className={classes.titleLabelWide}
                       variant="outlined"
                       size="small"
                       id="outlined-name"
                       margin="dense"
                       name="name"
                       value={form.name}
+                      required
+                      error={formError.nameInput ? true : false}
+                      helperText={
+                        formError.nameInput ? 'Name is required.' : ''
+                      }
                       onChange={handleChange}
                     />
 
@@ -170,13 +165,18 @@ function CreationEdit() {
                         id="outlined-shape"
                         margin="dense"
                         select
+                        required
+                        error={formError.shapeInput ? true : false}
+                        helperText={
+                          formError.shapeInput ? 'Shape is required.' : ''
+                        }
                         name="shape"
                         value={form.shape}
                         onChange={handleChange}
                       >
-                        {shapes.map((obj) => (
-                          <MenuItem key={obj.id} value={obj.shape}>
-                            {obj.shape}
+                        {shapes.map((shapeObj) => (
+                          <MenuItem key={shapeObj.id} value={shapeObj}>
+                            {shapeObj.shape}
                           </MenuItem>
                         ))}
                       </TextField>
@@ -191,13 +191,18 @@ function CreationEdit() {
                         id="outlined-status"
                         margin="dense"
                         select
+                        required
+                        error={formError.statusInput ? true : false}
+                        helperText={
+                          formError.statusInput ? 'Status is required.' : ''
+                        }
                         name="status"
                         value={form.status}
                         onChange={handleChange}
                       >
-                        {statuses.map((obj) => (
-                          <MenuItem key={obj.id} value={obj.status}>
-                            {obj.status}
+                        {statuses.map((statusObj) => (
+                          <MenuItem key={statusObj.id} value={statusObj}>
+                            {statusObj.status}
                           </MenuItem>
                         ))}
                       </TextField>
@@ -212,13 +217,18 @@ function CreationEdit() {
                         id="outlined-clay"
                         margin="dense"
                         select
+                        required
+                        error={formError.clayInput ? true : false}
+                        helperText={
+                          formError.clayInput ? 'Clay is required.' : ''
+                        }
                         name="clay"
                         value={form.clay}
                         onChange={handleChange}
                       >
-                        {clay.map((obj) => (
-                          <MenuItem key={obj.id} value={obj.clay}>
-                            {obj.clay}
+                        {clay.map((clayObj) => (
+                          <MenuItem key={clayObj.id} value={clayObj}>
+                            {clayObj.clay}
                           </MenuItem>
                         ))}
                       </TextField>
@@ -296,45 +306,26 @@ function CreationEdit() {
                       id="outlined-makers-note"
                       margin="dense"
                       multiline
-                      rows={5}
+                      rows={9}
                       fullWidth
                       name="note"
                       value={form.note}
                       onChange={handleChange}
                     />
 
-                    <TextField
-                      label="Description"
-                      variant="outlined"
-                      size="small"
-                      id="outlined-description"
-                      margin="dense"
-                      multiline
-                      rows={7}
-                      fullWidth
-                      name="description"
-                      value={form.description}
-                      onChange={handleChange}
-                    />
-
-                    <div className="date">March 12 2021</div>
+                    <div className="date">Today</div>
                   </ThemeProvider>
                 </div>
               </div>
             </div>
-            <a
-              href="https://www.instagram.com/emily_coco/"
-              className="icon-instagram"
-            >
-              <InstagramIcon fontSize="large" />
-            </a>
+
             <Button
               variant="contained"
               className={classes.saveButton}
               onClick={onSubmit}
               endIcon={<SaveIcon fontSize="large" />}
             >
-              Save Changes
+              Save Creation
             </Button>
           </div>
         </form>
@@ -343,4 +334,4 @@ function CreationEdit() {
   )
 }
 
-export default CreationEdit
+export default NewCreation

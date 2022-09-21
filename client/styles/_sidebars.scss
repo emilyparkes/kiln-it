@@ -19,13 +19,13 @@
   }
 }
 
-.slide-open {
+.nav-slide-open {
   @include tablet-max {
     transform: translateX(0%); 
   }
 }
 
-.slide-closed{
+.nav-slide-closed{
   @include tablet-max {
     transform: translateX(-300px);
   }
@@ -52,5 +52,38 @@
 
   @include tablet-max {
     color: #b98462;
+  }
+}
+
+// FILTER SIDEBAR
+
+.filtersidebar {
+  list-style: none;
+  display: flex;
+  flex-flow: row nowrap;
+  z-index: 80;
+
+  @include tablet-max {
+    flex-flow: column nowrap;
+    background-color: $body-bg-light;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    padding-top: 3.5rem;
+    transition: transform 0.3s ease-in-out;
+  }
+}
+
+.filter-slide-open {
+  @include tablet-max {
+    transform: translateX(0%); 
+  }
+}
+
+.filter-slide-closed{
+  @include tablet-max {
+    transform: translateX(-100vw);
   }
 }

@@ -24,7 +24,7 @@
   right: 0px;
   bottom: 0px;
   background-color: rgba(0, 0, 0, 0.8);
-  z-index: 3;
+  z-index: 2000;
 
   .open & {
     display: block;
@@ -33,6 +33,14 @@
   .closed &{
     display: none;
   }
+}
+
+.modal-actions {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
 }
 
 .save{

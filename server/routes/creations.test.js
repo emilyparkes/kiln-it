@@ -6,7 +6,7 @@ const creationDb = require('../db/creations')
 
 jest.mock('../db/creations', () => ({
   getCreations: jest.fn(),
-  getCreationById: jest.fn()
+  getCreationById: jest.fn(),
 }))
 
 const mockCreations = [
@@ -23,7 +23,7 @@ const mockCreations = [
     weight_complete: 0,
     date_created: '2020-06-15T13:45:30',
     date_complete: '2020-07-15T13:45:30',
-    note: 'Glaze with criss-cross pattern'
+    note: 'Glaze with criss-cross pattern',
   },
   {
     id: 2,
@@ -38,8 +38,8 @@ const mockCreations = [
     weight_complete: 0,
     date_created: '2020-05-24T14:45:30',
     date_complete: '2020-06-24T14:45:30',
-    note: 'Glaze with criss-cross pattern'
-  }
+    note: 'Glaze with criss-cross pattern',
+  },
 ]
 
 // const mockCreation = {
@@ -96,13 +96,13 @@ describe('GET /api/v1/creations', () => {
   //     it('returns a 404 if id is not found', () => {
   //       creationDb.getCreationById.mockImplementation(() => Promise.resolve(null))
 
-//       return request(server)
-//         .get('/api/v1/creations/9999')
-//         .expect(404)
-//         .then((res) => {
-//           expect(res.body.error).toMatch('creation id not found')
-//           return res
-//         })
-//     })
-//   })
+  //       return request(server)
+  //         .get('/api/v1/creations/9999')
+  //         .expect(404)
+  //         .then((res) => {
+  //           expect(res.body.error).toMatch('creation id not found')
+  //           return res
+  //         })
+  //     })
+  //   })
 })

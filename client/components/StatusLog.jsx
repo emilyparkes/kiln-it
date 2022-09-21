@@ -1,37 +1,46 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import NavUtils from './nav-utils/NavUtils'
 import StatusLogItem from './StatusLogItem'
-import { updateCreation } from '../apis/creations'
-import { filterBy } from '../client-utils'
 
-function StatusLog ({ creations, history }) {
+import { filterBy, searchBy } from '../client-utils'
+import FloatingAddNew from './FloatingAddNew'
+import WaitIndicator from './WaitIndicator'
+
+function StatusLog() {
+  const focus = useSelector((store) => store.navUtils)
+  const creationsFiltered = useSelector((store) =>
+    filterBy(store.filter, store.creations)
+  )
+  const creationsSearched = useSelector((store) =>
+    searchBy(store.search, store.creations)
+  )
+
   return (
     <>
-      <NavUtils/>
-      {creations?.length ? (
-        <div className='log-container'>
-          {creations.map((creation) => {
-            return (
-              <StatusLogItem key={creation.id}
-                creation={creation}
-                updateCreation={updateCreation}
-                history={history}/>
-            )
-          })}
-        </div>
-      )
-        : 'Sorry nothing for you'
-      }
+      <NavUtils />
+      <WaitIndicator/>
+      {focus?.filter ? ( // filter bar active, list based on filters
+        <>
+            {creationsFiltered?.map((creation) => {
+              return <StatusLogItem key={creation.id} creation={creation} />
+            })}
+
+          <FloatingAddNew />
+        </>
+      ) : (
+        // or search bar active, list based on search terms
+        <>
+            {creationsSearched?.map((creation) => {
+              return <StatusLogItem key={creation.id} creation={creation} />
+            })}
+
+          <FloatingAddNew />
+        </>
+      )}
     </>
   )
 }
 
-const mapStateToProps = (store) => {
-  return {
-    creations: filterBy(store.filter, store.creations)
-  }
-}
-
-export default connect(mapStateToProps)(StatusLog)
+export default StatusLog

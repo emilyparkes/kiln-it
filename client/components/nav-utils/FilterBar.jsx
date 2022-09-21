@@ -1,59 +1,82 @@
 import React, { useState } from 'react'
-import { connect } from 'react-redux'
-import { HiFilter } from 'react-icons/hi'
+import { useDispatch, useSelector } from 'react-redux'
 
-import FilterModal from './FilterModal'
+import { FilterAltRounded as FilterIcon } from '@mui/icons-material'
+
+import { Chip, Stack, Button, ThemeProvider } from '@mui/material'
+import { theme } from '../../styles/theme'
+
+
+import FilterSidebar from './FilterSidebar.jsx'
 import FilterOption from './FilterOption'
-import Accordion from '../accordion/Accordion'
+import AnAccordion from '../accordion/Accordion'
+
 import { addFilter, removeFilter, clearFilter } from '../../actions/filter'
 
-function FilterBar ({ filter, clay, glazes, shapes, dispatch, focus, toggleFocus }) {
-  const [show, setShowModel] = useState(false)
+function FilterBar({ focus, toggleFocus }) {
+  const [open, setOpen] = useState(false)
+  const [currentAccordian, setCurrentAccordian] = useState('panel1')
 
-  const handleSelect = (category, value) => {
+  const dispatch = useDispatch()
+
+  const filter = useSelector((store) => store.filter)
+  const clay = useSelector((store) => store.clay)
+  const glazes = useSelector((store) => store.glazes)
+  const shapes = useSelector((store) => store.shapes)
+
+  const filterKeyArr = Object.keys(filter)
+
+  const select = (category, value) => {
     dispatch(addFilter(category, value))
   }
 
-  const handleRemove = (category, value) => {
+  const remove = (category, value) => {
     dispatch(removeFilter(category, value))
-  }
-
-  const toggleModal = () => {
-    setShowModel(!show)
   }
 
   const clear = () => {
     dispatch(clearFilter())
+    setCurrentAccordian('panel1')
+  }
+
+  const openAccordian = (accordianNum,) => {
+    setCurrentAccordian(accordianNum === currentAccordian ? false : accordianNum )
   }
 
   const renderSelectedFilters = (className, onBar) => {
     const listFilters = () => {
       // take filters out of store categorised objects, put into list
-      return Object.keys(filter).map(categoryName => {
+      return filterKeyArr.map((categoryName) => {
         let selecterFilters = []
-        filter[categoryName]?.map(name => {
+        filter[categoryName]?.map((name) => {
           selecterFilters.push(name)
         })
         // list out list and colour-code!
-        return selecterFilters.map(aFilter => {
-          return <p className={`${className} filter-label-${categoryName}`} key={aFilter}>
-            {aFilter}
-          </p>
+        return selecterFilters.map((aFilter) => {
+          return (
+             <Chip 
+             key={aFilter} 
+             label={aFilter} 
+             color={categoryName}
+             onDelete={() => remove(categoryName, aFilter)}/>
+          )
         })
       })
     }
-    if (Object.keys(filter).length && !onBar) { // if have filter and not on bar (on modal) - show resuts
+    if (filterKeyArr.length && !onBar) {
+      // if have filter and not on bar (on modal) - show resuts
       return listFilters()
-    } else if (!Object.keys(filter).length && onBar) { // if no filter and on bar - show placeholder
+    } else if (!filterKeyArr.length && onBar) {
+      // if no filter and on bar - show placeholder
       return <p className={`${className} placeholder`}>Select Filters</p>
-    } else if (Object.keys(filter).length && onBar) { // if have filter and on bar - show resuts
+    } else if (filterKeyArr.length && onBar) {
+      // if have filter and on bar - show resuts
       return listFilters()
     }
   }
 
   const trueFalseCheckboxes = (categoryName, cat, type) => {
-    console.log('obj keys: ', Object.keys(filter).length > 0)
-    if (Object.keys(filter).length > 0 && filter[categoryName]?.includes(cat[type])) {
+    if (filterKeyArr.length > 0 && filter[categoryName]?.includes(cat[type])) {
       return true
     } else {
       return false
@@ -64,77 +87,90 @@ function FilterBar ({ filter, clay, glazes, shapes, dispatch, focus, toggleFocus
     const options = {
       shape: { id: 1, colour: '#88A4B8', category: shapes, type: 'shape' },
       clay: { id: 2, colour: '#BA6D32', category: clay, type: 'clay' },
-      glazes: { id: 2, colour: '#6BA368', category: glazes, type: 'glaze' }
+      glazes: { id: 3, colour: '#6BA368', category: glazes, type: 'glaze' },
     }
     const { id, colour, category, type } = options[categoryName]
     return (
-      <Accordion title={categoryName} num={id}>
+      <AnAccordion
+        title={categoryName}
+        num={id}
+        currentAccordian={currentAccordian}
+        openAccordian={openAccordian}
+      >
         <div className='checklist'>
           {category.map((cat) => {
             // console.log('checked val: ', filter, filter[categoryName]?.includes(cat[type]))
-            return <FilterOption
-              key={cat.id}
-              category={categoryName}
-              colour={colour}
-              name={cat[type]}
-              select={handleSelect}
-              remove={handleRemove}
-              checked={trueFalseCheckboxes(categoryName, cat, type)} />
+            return (
+              <FilterOption
+                key={cat.id}
+                category={categoryName}
+                colour={colour}
+                name={cat[type]}
+                select={select}
+                remove={remove}
+                checked={trueFalseCheckboxes(categoryName, cat, type)}
+              />
+            )
           })}
         </div>
-      </Accordion>
+      </AnAccordion>
     )
   }
 
   return (
     <>
       <div className='filter-bar'>
-        <div onClick={toggleModal} type='text' className={focus ? 'extendable-bar focused' : 'extendable-bar'}>
+        <div
+          onClick={() => setOpen(true)}
+          type='text'
+          className={focus ? 'extendable-bar focused' : 'extendable-bar'}
+        >
           {focus ? renderSelectedFilters('filter-horizontal', true) : null}
         </div>
 
-        <button onClick={toggleFocus} id='filter-button'
-          className={focus ? 'active' : undefined}><HiFilter/></button>
+        <button
+          onClick={toggleFocus}
+          id='filter-button'
+          className={focus ? 'active' : undefined}
+        >
+        <FilterIcon/>
+        </button>
       </div>
 
-      {show &&
-        <FilterModal>
+      <FilterSidebar open={open} setOpen={setOpen}>
+        <div className='filter-header'>
+          <h4 className='filter-modal-heading'>FILTER</h4>
 
-          <div className='styled-burger line line-dark line-open'
-            onClick={toggleModal}>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
+          <ThemeProvider theme={theme}>
+            <Stack direction='row' spacing={4} justifyContent='center' alignItems='center' >
+              <Button onClick={clear} variant='outlined' color='secondary' size='small'>
+                Clear
+              </Button>
+              <Button onClick={() => setOpen(false)} variant='contained' color='secondary' size='small'>
+                {filterKeyArr.length ? 'Apply' : 'Go Back'}
+              </Button>
+            </Stack>
+          </ThemeProvider>
+        </div>
 
-          <p className='filter-modal-heading'>FILTER</p>
-          <p className='current-filter'>Selected Filters</p>
+        <p className='current-filter'>Selected Filters</p>
 
-          <div className='selected-filters'>
+
+        <div className='selected-filters'>
+          <Stack direction='row' spacing={1} justifyContent='center' flexWrap='wrap'>
             {renderSelectedFilters('selected-filter-item', false)}
-          </div>
+          </Stack>
+        </div>
 
-          <div className='accordions'>
-            {shapes && renderAccordion('shape')}
-            {clay && renderAccordion('clay')}
-            {glazes && renderAccordion('glazes')}
-          </div>
+        <div className='accordions'>
+          {shapes && renderAccordion('shape')}
+          {clay && renderAccordion('clay')}
+          {glazes && renderAccordion('glazes')}
+        </div>
 
-          <div onClick={clear}>Clear</div>
-
-        </FilterModal>
-      }
+      </FilterSidebar>
     </>
   )
 }
 
-const mapStateToProps = (store) => {
-  return {
-    filter: store.filter,
-    clay: store.clay,
-    glazes: store.glazes,
-    shapes: store.shapes
-  }
-}
-
-export default connect(mapStateToProps)(FilterBar)
+export default FilterBar

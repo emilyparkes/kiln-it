@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { TextField } from '@material-ui/core'
+import { TextField } from '@mui/material'
 import { CgClose } from 'react-icons/cg'
 
-function DataOptionItem ({ type, name, deleteItem }) {
+function DataOptionItem({ type, name, deleteItem }) {
   const [input, setCurrentInput] = useState('')
   const [edited, setEdited] = useState([])
 
@@ -16,14 +16,17 @@ function DataOptionItem ({ type, name, deleteItem }) {
   }
 
   return (
-    <div className='text-item'>
+    <div className="text-item">
       <TextField
         key={type.id}
         name={type[name]}
         value={input}
         onChange={handleChange}
       />
-      <CgClose className='option-btn option-btn--del' onClick={() => deleteItem(type.id)} />
+      <CgClose
+        className="option-btn option-btn--del"
+        onClick={() => deleteItem(type.id)}
+      />
     </div>
   )
 }

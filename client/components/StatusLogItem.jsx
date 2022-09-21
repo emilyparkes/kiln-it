@@ -1,23 +1,42 @@
 import React, { useState, useEffect } from 'react'
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import {
+  Card,
+  CardMedia,
+  CardContent,
+  Box,
+  Button,
+  Typography,
+  Stack,
+} from '@mui/material'
 
 import StatusModal from './StatusModal'
-import { toLowHyphen } from '../client-utils'
+import { toCamelCase, toLowHyphen } from '../client-utils'
+import { updateCreationStatus } from '../actions/creations'
+import { useStyles } from '../styles/mui_overrides'
 
-function StatusLogItem ({ statuses, creation, updateCreation, history }) {
+function StatusLogItem({ creation }) {
+  const initialState = { id: creation.statusId, status: creation.status }
+
   const [show, setShowModel] = useState(false)
   const [statusStyle, setStatusStyle] = useState(creation.status)
-  const [currentStatus, setStatus] = useState({ id: creation.statusId, status: creation.status })
+  const [currentStatus, setStatus] = useState(initialState)
 
-  const style = toLowHyphen(statusStyle)
-  const date = creation.dateComplete || creation.dateCreated
-  const formattedDate = new Date(date).toDateString()
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const classes = useStyles()
+
+  const statuses = useSelector((store) => store.statuses)
+
+  const style = toCamelCase(statusStyle)
+  // const date = creation.dateComplete || creation.dateCreated
+  // const formattedDate = new Date(date).toDateString()
 
   useEffect(() => {
     show
-      ? document.body.style.overflow = 'hidden'
-      : document.body.style.overflow = ''
+      ? (document.body.style.overflow = 'hidden')
+      : (document.body.style.overflow = '')
   }, [show, currentStatus])
 
   const showModal = () => {
@@ -28,96 +47,114 @@ function StatusLogItem ({ statuses, creation, updateCreation, history }) {
     setShowModel(false)
   }
 
-  const handleSelect = (e) => {
-    const selected = statuses.find(obj => obj.status === e.target.value)
-    setStatus(selected)
-    setStatusStyle(e.target.value)
+  const formatGlazeText = (selectedGlaze) => {
+    const glazeStrings = selectedGlaze.map((selected) => selected.glaze)
+    if (!selectedGlaze.length) {
+      return 'Unglazed'
+    } else {
+      return glazeStrings.join(', ')
+    }
   }
 
-  const onSubmit = (e) => {
+  const handleSelect = (e) => {
+    const selected = statuses.find((obj) => obj.status === e.target.value)
+    setStatusAndStyle(selected, e.target.value)
+  }
+
+  const setStatusAndStyle = (status, styleValue) => {
+    setStatus(status)
+    setStatusStyle(styleValue)
+  }
+
+  const onSubmit = () => {
     // e.preventDefault()
     hideModal()
-    delete creation.clay
-    delete creation.shape
-    delete creation.glaze
-    delete creation.status
+    // delete creation.clay
+    // delete creation.shape
+    // delete creation.glaze
+    creation.status = currentStatus.status
+    creation.statusId = currentStatus.id
     const updatedCreation = { ...creation }
-    updateCreation(updatedCreation)
-    history.push('/log')
+    dispatch(updateCreationStatus(updatedCreation))
+    navigate('/log')
   }
 
   return (
     <>
-      {show &&
-      <main className='main edit'>
-        <StatusModal show={show} save={onSubmit} close={hideModal}>
-          <div className='current'>
-            <p>Selected</p>
-            <p className={`status ${style}`}>
-              {currentStatus.status}
-            </p>
-          </div>
-          <div className='statusList'>
-            {statuses
-              ? statuses.map((statusobj) => {
-                const styleItem = toLowHyphen(statusobj.status)
-
-                return <button className={`status ${styleItem}`}
-                  key={statusobj.id} value={statusobj.status}
-                  onClick={handleSelect}>
-                  {statusobj.status}
-                </button>
-              })
-              : 'no statuses found'}
-          </div>
-        </StatusModal>
-      </main>
-      }
-
-      { statuses
-        ? <div className='item'>
-          <div className={`status ${style}`}
-            onClick={showModal}>
-            {currentStatus.status}
-          </div>
-
-          <Link to='/creations/le-vase'>
-            <div className='log-box' key={creation.id}>
-
-              <img className='log-img'
-                src='/images/plate.jpeg' />
-
-              <table className='info'>
-                <tbody >
-                  <tr>
-                    <td className='width info-shape'>{creation.shape}</td>
-                    <td className='width'>Name: {creation.name}</td>
-                  </tr>
-                  <tr>
-                    <td className='width'>{creation.clay} Clay</td>
-                    <td className='width'>{creation.glaze} Glaze</td>
-                  </tr>
-                  <tr>
-                    <td colSpan="2">
-                      Made on {formattedDate}
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-
+      {show && (
+        <main className="main edit">
+          <StatusModal
+            show={show}
+            save={onSubmit}
+            close={hideModal}
+            resetState={() =>
+              setStatusAndStyle(initialState, initialState.status)
+            }
+          >
+            <div className="current">
+              <p>Selected</p>
+              <p className={classes[`${style}`]}>{currentStatus.status}</p>
             </div>
-          </Link>
+            <div className="statusList">
+              {statuses
+                ? statuses.map((statusobj) => {
+                    const styleItem = toCamelCase(statusobj.status)
 
-        </div>
-        : 'Sorry, I couldn\'t load data...'}
+                    return (
+                      <button
+                        className={classes[`${styleItem}`]}
+                        key={statusobj.id}
+                        value={statusobj.status}
+                        onClick={handleSelect}
+                      >
+                        {statusobj.status}
+                      </button>
+                    )
+                  })
+                : 'no statuses found'}
+            </div>
+          </StatusModal>
+        </main>
+      )}
+
+      {statuses ? (
+        <Card sx={{ display: 'flex' }} className={classes.StatusLogItemCard}>
+          <Link to={`/creations/${toLowHyphen(creation.name)}`}>
+            <CardMedia
+              component="img"
+              sx={{ width: 151 }}
+              image="/images/plate.jpeg"
+              alt="text tdb"
+              className={classes.logImg}
+            />
+          </Link>
+          <Box sx={{ display: 'flex', width: '100%' }}>
+            <CardContent className={classes.StatusLogItemCardContent}>
+              <Button
+                variant="contained"
+                className={classes.statusButton}
+                color={`${style}`}
+                onClick={showModal}
+              >
+                {currentStatus.status}
+              </Button>
+              <Stack spacing={1} sx={{ paddingLeft: '10px' }}>
+                <Typography>
+                  {creation.shape}: {creation.name}
+                </Typography>
+                <Typography>Clay: {creation.clay}</Typography>
+                <Typography>
+                  Glazes: {formatGlazeText(creation?.glazes)}
+                </Typography>
+              </Stack>
+            </CardContent>
+          </Box>
+        </Card>
+      ) : (
+        'Sorry, I could not load data...'
+      )}
     </>
   )
 }
 
-const mapStateToProps = (store) => {
-  return {
-    statuses: store.statuses
-  }
-}
-
-export default connect(mapStateToProps)(StatusLogItem)
+export default StatusLogItem

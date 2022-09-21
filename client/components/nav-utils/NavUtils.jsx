@@ -1,23 +1,32 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 import FilterBar from './FilterBar'
 import SearchBar from './SearchBar'
 
+import { setFocus } from '../../actions/navutils-focus'
+
 function NavUtils () {
-  const [filterFocus, setFilterFocus] = useState(true)
-  const [searchFocus, setSearchFocus] = useState(false)
+
+  const dispatch = useDispatch()
+  const focus = useSelector(store => store.navUtils)
 
   const toggleFocus = (event) => {
     event.preventDefault()
-    setFilterFocus(!filterFocus)
-    setSearchFocus(!searchFocus)
+    const filter = !focus.filter
+    const search = !focus.search
+    dispatch(setFocus({ filter, search }))
   }
 
   return (
-    <div className='utils-container'>
-      <FilterBar focus={filterFocus} toggleFocus={toggleFocus}/>
-      <SearchBar focus={searchFocus} toggleFocus={toggleFocus}/>
-    </div>
+    <>
+      {focus && 
+        <div className='utils-container'>
+          <FilterBar focus={focus?.filter} toggleFocus={toggleFocus}/>
+          <SearchBar focus={focus?.search} toggleFocus={toggleFocus}/>
+        </div>
+      }
+    </>
   )
 }
 
