@@ -26,7 +26,7 @@ function Home() {
   return (
     <>
       <Card style={styles.card}>
-        <CardMedia image={'/images/hero.jpeg'} style={styles.media} />
+        <CardMedia image={'/assets/hero.jpeg'} style={styles.media} />
         <Link to={'/gallery'}>
           <CardContent style={styles.overlay}>
             <Typography variant="h3">See the</Typography>

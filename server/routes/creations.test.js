@@ -7,62 +7,69 @@ const creationDb = require('../db/creations')
 jest.mock('../db/creations', () => ({
   getCreations: jest.fn(),
   getCreationById: jest.fn(),
+  getGlazesByCreationId: jest.fn(),
 }))
 
 const mockCreations = [
   {
     id: 1,
-    clay: 1,
-    shape: 2,
-    status: 2,
-    glaze: 4,
-    weight_wet: 0,
+    clay_id: 1,
+    shape_id: 5,
+    status_id: 2,
     weight_leather_hard: 0,
     weight_bone_dry: 0,
-    weight_bisque: 0,
+    weight_bisque_fired: 0,
+    weight_glazed: 0,
     weight_complete: 0,
     date_created: '2020-06-15T13:45:30',
     date_complete: '2020-07-15T13:45:30',
+    description: 'Creations by emily is great',
     note: 'Glaze with criss-cross pattern',
+    name: 'Le Vase',
+    img_complete: '/images/vase.png'
   },
   {
     id: 2,
-    clay: 2,
-    shape: 2,
-    status: 1,
-    glaze: 4,
-    weight_wet: 0,
+    clay_id: 2,
+    shape_id: 2,
+    status_id: 1,
     weight_leather_hard: 0,
     weight_bone_dry: 0,
-    weight_bisque: 0,
+    weight_bisque_fired: 0,
+    weight_glazed: 0,
     weight_complete: 0,
     date_created: '2020-05-24T14:45:30',
     date_complete: '2020-06-24T14:45:30',
+    description: '',
     note: 'Glaze with criss-cross pattern',
+    name: 'Le Plate',
+    img_complete: ''
   },
 ]
 
-// const mockCreation = {
-//   id: 2,
-//   clay: 2,
-//   shape: 2,
-//   status: 1,
-//   glaze: 4,
-//   weight_wet: 0,
-//   weight_leather_hard: 0,
-//   weight_bone_dry: 0,
-//   weight_bisque: 0,
-//   weight_complete: 0,
-//   date_created: '2020-05-24T14:45:30',
-//   date_complete: '2020-06-24T14:45:30',
-//   note: 'Glaze with criss-cross pattern'
-// }
+const mockGlazes = [
+  {
+    id: 1,
+    glaze: 'Clear',
+  },
+  {
+    id: 10,
+    glaze: 'White',
+  },
+  {
+    id: 11,
+    glaze: 'Peach',
+  },
+]
 
 describe('GET /api/v1/creations', () => {
   it('returns the correct number of creations', () => {
     creationDb.getCreations.mockImplementation(() =>
       Promise.resolve(mockCreations)
     )
+    creationDb.getGlazesByCreationId.mockImplementation(() =>
+    Promise.resolve(mockGlazes)
+  )
     return request(server)
       .get('/api/v1/creations')
       .expect('Content-Type', /json/)
