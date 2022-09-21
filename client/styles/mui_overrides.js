@@ -58,6 +58,16 @@ export const useStyles = makeStyles(() => ({
   //     justifyContent: 'flex-start',
   //     color: 'whitesmoke',
   //   },
+  statusButton: {
+    width: '252px',
+    fontWeight: '200',
+    textTransform: 'uppercase',
+    textAlign: 'center',
+    margin: '8px',
+    padding: '6px 16px',
+    boxSizing: 'border-box',
+    borderRadius: '4px',
+  },
   wet: {
     width: '252px',
     color: 'black',
