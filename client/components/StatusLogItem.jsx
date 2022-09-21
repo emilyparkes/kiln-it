@@ -30,8 +30,8 @@ function StatusLogItem({ creation }) {
   const statuses = useSelector((store) => store.statuses)
 
   const style = toCamelCase(statusStyle)
-  const date = creation.dateComplete || creation.dateCreated
-  const formattedDate = new Date(date).toDateString()
+  // const date = creation.dateComplete || creation.dateCreated
+  // const formattedDate = new Date(date).toDateString()
 
   useEffect(() => {
     show
@@ -48,9 +48,7 @@ function StatusLogItem({ creation }) {
   }
 
   const formatGlazeText = (selectedGlaze) => {
-    const glazeStrings = selectedGlaze.map(
-      (selected) => selected.glaze
-    )
+    const glazeStrings = selectedGlaze.map((selected) => selected.glaze)
     if (!selectedGlaze.length) {
       return 'Unglazed'
     } else {
@@ -132,10 +130,15 @@ function StatusLogItem({ creation }) {
           </Link>
           <Box sx={{ display: 'flex', width: '100%' }}>
             <CardContent className={classes.StatusLogItemCardContent}>
-              <Button className={classes[`${style}`]} onClick={showModal}>
+              <Button
+                variant="contained"
+                className={classes.statusButton}
+                color={`${style}`}
+                onClick={showModal}
+              >
                 {currentStatus.status}
               </Button>
-              <Stack spacing={1} sx={{paddingLeft: '10px'}}>
+              <Stack spacing={1} sx={{ paddingLeft: '10px' }}>
                 <Typography>
                   {creation.shape}: {creation.name}
                 </Typography>
