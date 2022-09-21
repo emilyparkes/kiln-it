@@ -10,6 +10,10 @@ beforeEach(() => {
   return testConn.seed.run()
 })
 
+afterAll(() => {
+  return testConn.destroy()
+})
+
 test('getShapes returns the correct number of shapes', () => {
   return db.getShapes(testConn).then((shapes) => {
     expect(shapes).toHaveLength(7)

@@ -10,6 +10,10 @@ beforeEach(() => {
   return testConn.seed.run()
 })
 
+afterAll(() => {
+  return testConn.destroy()
+})
+
 test('getCreations returns the correct number of creations', () => {
   return db.getCreations(testConn).then((creations) => {
     expect(creations).toHaveLength(9)

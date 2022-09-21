@@ -10,6 +10,10 @@ beforeEach(() => {
   return testConn.seed.run()
 })
 
+afterAll(() => {
+  return testConn.destroy()
+})
+
 test('getGlazes returns the correct number of glazes', () => {
   return db.getGlazes(testConn).then((glazes) => {
     expect(glazes).toHaveLength(11)
