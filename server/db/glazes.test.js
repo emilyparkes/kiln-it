@@ -10,9 +10,9 @@ beforeEach(() => {
   return testConn.seed.run()
 })
 
-test('getGlazes returns the correct number of clay', () => {
-  return db.getGlazes(testConn).then((glaze) => {
-    expect(glaze).toHaveLength(8)
+test('getGlazes returns the correct number of glazes', () => {
+  return db.getGlazes(testConn).then((glazes) => {
+    expect(glazes).toHaveLength(11)
     return null
   })
 })
