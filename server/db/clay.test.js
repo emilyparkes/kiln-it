@@ -10,6 +10,10 @@ beforeEach(() => {
   return testConn.seed.run()
 })
 
+afterAll(() => {
+  return testConn.destroy()
+})
+
 test('getClay returns the correct number of clay', () => {
   return db.getClay(testConn).then((clay) => {
     expect(clay).toHaveLength(3)
