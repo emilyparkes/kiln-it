@@ -35,7 +35,10 @@ function StatusLog() {
       ) : (
         <>
           {searchterm && (
-            <Typography variant="h6">
+            <Typography
+              variant="h6"
+              sx={{ paddingLeft: '12px', marginBottom: '10px' }}
+            >
               Search results for &apos;{searchterm}&apos;
             </Typography>
           )}
