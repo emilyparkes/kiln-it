@@ -37,8 +37,8 @@ As an admin user:
 - [x] I want to view all my creations
 - [x] I want to update the status of a creation
 - [x] I want to edit a creation
-- [ ] I want to add a new creation
-- [ ] I want to add a note to a creation
+- [x] I want to add a new creation
+- [x] I want to add a note to a creation
 - [x] I want to add a new clay type
 - [x] I want to add a new creation shape
 - [x] I want to add a new glaze
@@ -46,7 +46,7 @@ As an admin user:
 
 As a friendly user:
 - [x] I want to view all the creations
-- [ ] I want to view a creation and all it's details
+- [x] I want to view a creation and all it's details
 - [ ] I want to click a link to take me to instagram to purchase the item
 
 
