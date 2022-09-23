@@ -76,6 +76,10 @@ export const theme = createTheme({
       main: '#6BA368',
       contrastText: '#000000',
     },
+    glazes: {
+      main: '#6BA368',
+      contrastText: '#000000',
+    },
     divider: '#744F44',
   },
   typography: {
