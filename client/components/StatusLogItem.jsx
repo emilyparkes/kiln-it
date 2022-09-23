@@ -117,7 +117,7 @@ function StatusLogItem({ creation }) {
         </main>
       )}
 
-      {statuses ? (
+      {statuses &&
         <Card sx={{ display: 'flex' }} className={classes.StatusLogItemCard}>
           <Link to={`/creations/${toLowHyphen(creation.name)}`}>
             <CardMedia
@@ -150,9 +150,7 @@ function StatusLogItem({ creation }) {
             </CardContent>
           </Box>
         </Card>
-      ) : (
-        'Sorry, I could not load data...'
-      )}
+      }
     </>
   )
 }

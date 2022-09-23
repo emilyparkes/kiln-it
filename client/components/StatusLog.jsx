@@ -1,40 +1,50 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { Typography } from '@mui/material'
 
 import NavUtils from './nav-utils/NavUtils'
 import StatusLogItem from './StatusLogItem'
-
-import { filterBy, searchBy } from '../client-utils'
 import FloatingAddNew from './FloatingAddNew'
 import WaitIndicator from './WaitIndicator'
+import { filterBy, searchBy } from '../client-utils'
 
 function StatusLog() {
   const focus = useSelector((store) => store.navUtils)
+
   const creationsFiltered = useSelector((store) =>
     filterBy(store.filter, store.creations)
   )
+  const searchterm = useSelector((store) => store.search)
+
   const creationsSearched = useSelector((store) =>
-    searchBy(store.search, store.creations)
+    store.search ? searchBy(store.search, store.creations) : store.creations
   )
 
   return (
     <>
       <NavUtils />
-      <WaitIndicator/>
-      {focus?.filter ? ( // filter bar active, list based on filters
+      <WaitIndicator />
+      {focus?.filter ? (
         <>
-            {creationsFiltered?.map((creation) => {
-              return <StatusLogItem key={creation.id} creation={creation} />
-            })}
+          {creationsFiltered?.map((creation) => (
+            <StatusLogItem key={creation.id} creation={creation} />
+          ))}
 
           <FloatingAddNew />
         </>
       ) : (
-        // or search bar active, list based on search terms
         <>
-            {creationsSearched?.map((creation) => {
-              return <StatusLogItem key={creation.id} creation={creation} />
-            })}
+          {searchterm && (
+            <Typography
+              variant="h6"
+              sx={{ paddingLeft: '12px', marginBottom: '10px' }}
+            >
+              Search results for &apos;{searchterm}&apos;
+            </Typography>
+          )}
+          {creationsSearched?.map((creation) => (
+            <StatusLogItem key={creation.id} creation={creation} />
+          ))}
 
           <FloatingAddNew />
         </>

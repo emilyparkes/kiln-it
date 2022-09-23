@@ -26,7 +26,7 @@ export function toLowHyphen(name) {
 // Le Vase => leVase
 export function toCamelCase(name) {
   name = name.toLowerCase()
-  return _ .camelCase(name)
+  return _.camelCase(name)
 }
 
 export function filterBy(filters, itemsToFilter) {
@@ -42,8 +42,24 @@ export function filterBy(filters, itemsToFilter) {
 }
 
 export function searchBy(searchterm, itemsToSearch) {
-  searchterm = searchterm?.toLowerCase()
-  return itemsToSearch === null ? null : itemsToSearch
+  searchterm = searchterm.toLowerCase()
+  let searchResults = itemsToSearch.filter((item) => {
+    
+    const glazeValues = item.glazes.map((glazeObj) => glazeObj.glaze)
+    const creationValues = Object.values(item)
+
+    let stringValues = [...glazeValues, ...creationValues]
+
+    stringValues = stringValues
+      .filter((value) => typeof value === 'string')
+      .map((value) => value.toLowerCase())
+      .join(' ')
+
+    let found = false
+    if (stringValues.includes(searchterm)) found = true
+    return found
+  })
+  return searchResults
 }
 
 export function cleanForm(formState) {

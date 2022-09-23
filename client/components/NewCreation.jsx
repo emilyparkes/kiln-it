@@ -314,19 +314,19 @@ function NewCreation() {
                     />
 
                     <div className="date">Today</div>
+
+                    <Button
+                      variant="contained"
+                      className={classes.saveButton}
+                      onClick={onSubmit}
+                      endIcon={<SaveIcon fontSize="large" />}
+                    >
+                      Save Creation
+                    </Button>
                   </ThemeProvider>
                 </div>
               </div>
             </div>
-
-            <Button
-              variant="contained"
-              className={classes.saveButton}
-              onClick={onSubmit}
-              endIcon={<SaveIcon fontSize="large" />}
-            >
-              Save Creation
-            </Button>
           </div>
         </form>
       )}
