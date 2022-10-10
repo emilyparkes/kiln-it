@@ -118,8 +118,8 @@ If your project has a lot of features, list them here. -->
 
 If you created an application or package and would like other developers to contribute it, you can include guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own if you'd prefer. -->
 
-## Tests
-![Node.js Lint and Test](https://github.com/emilyparkes/kiln-it/workflows/Node.js%20Lint%20and%20Test/badge.svg)  
+## Tests 
+
 Run tests with: 
 
 ```
