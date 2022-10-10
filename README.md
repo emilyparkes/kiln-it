@@ -23,18 +23,23 @@ Used for this project:
 ![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)
 ![UnSplash](https://img.shields.io/badge/Unsplash-000000?style=for-the-badge&logo=Unsplash&logoColor=white)
 
+## Table of Contents
+- [External Sources](#external-sources)  
+- [Installation](#installation)   
+<!-- - [Usage](#usage)  -->
+- [User Stories](#user-stories) 
+- [License](#license)   
+<!-- - [Features](#features)
+- [How to Contribute](#how-to-contribute)   -->
+- [Tests](#tests)
+
+### External Sources
 🚀 [Currently deployed version](https://kiln-it.herokuapp.com/)   
 🎨 [Figma Design](https://www.figma.com/file/09q8SUt5gSTAfpNtiGyUOEGt/Kiln-it?node-id=0%3A1) *an attempt*  
 📖 [ERD Diagram](https://dbdiagram.io/d/606395deecb54e10c33e0510)
 
 
-## Setup
-
-<!-- Create a `.env` file in the main directory and add:
-
-```sh
-JWT_SECRET="a fun secret"
-``` -->
+### Installation
 
 Run the following commands in your terminal
 
@@ -45,11 +50,19 @@ cp .env.example .env
 npm run dev
 ```
 
+<!-- ## Usage -->
+
+<!-- Create a `.env` file in the main directory and add:
+
+```sh
+JWT_SECRET="a fun secret"
+``` -->
+
 The site should then be available on http://localhost:3000
 
-## User Stories
+### User Stories
 
-### MVP
+#### MVP
 
 As an admin user:
 - [x] I want to view a creation status log
@@ -91,3 +104,24 @@ All these routes should be protected
 | Post | /api/auth/signin | Sign In a User | The Users JWT Token |
 | Post | /api/auth/register | Register a User | The Users JWT Token |
 | TBC | -->
+
+## License
+
+MIT License
+
+
+<!-- ## Features
+
+If your project has a lot of features, list them here. -->
+
+<!-- ## How to Contribute
+
+If you created an application or package and would like other developers to contribute it, you can include guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own if you'd prefer. -->
+
+## Tests
+![Node.js Lint and Test](https://github.com/emilyparkes/kiln-it/workflows/Node.js%20Lint%20and%20Test/badge.svg)  
+Run tests with: 
+
+```
+npm run test
+```
