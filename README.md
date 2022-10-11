@@ -6,6 +6,8 @@ A project that will allow me to keep records of my clay creations. Including typ
 
 Using fullstack technologies I have learned and mentor others in, as well as being a project to try out new tech in more complex scenarios. 
 
+🚀 [Currently deployed version](https://kiln-it.herokuapp.com/)   
+
 Used for this project:  
 ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)
 ![Heroku](https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white)
@@ -24,23 +26,18 @@ Used for this project:
 ![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)
 ![UnSplash](https://img.shields.io/badge/Unsplash-000000?style=for-the-badge&logo=Unsplash&logoColor=white)
 
-## Table of Contents
-- [External Sources](#external-sources)  
+## Table of Contents 
 - [Installation](#installation)   
 <!-- - [Usage](#usage)  -->
+- [Design](#design)  
+- [Project Documentation](#project-documentation)
 - [User Stories](#user-stories) 
 - [License](#license)   
 <!-- - [Features](#features)
 - [How to Contribute](#how-to-contribute)   -->
 - [Tests](#tests)
 
-### External Sources
-🚀 [Currently deployed version](https://kiln-it.herokuapp.com/)   
-🎨 [Figma Design](https://www.figma.com/file/09q8SUt5gSTAfpNtiGyUOEGt/Kiln-it?node-id=0%3A1) *an attempt*  
-📖 [ERD Diagram](https://dbdiagram.io/d/606395deecb54e10c33e0510)
-
-
-### Installation
+### Installation ⇣
 
 Run the following commands in your terminal
 
@@ -61,7 +58,14 @@ JWT_SECRET="a fun secret"
 
 The site should then be available on http://localhost:3000
 
-### User Stories
+### Design 🎨 
+[Figma Design](https://www.figma.com/file/09q8SUt5gSTAfpNtiGyUOEGt/Kiln-it?node-id=0%3A1) *an attempt*  
+
+### Project Doumentation 🗂
+[ERD](https://dbdiagram.io/d/606395deecb54e10c33e0510)  
+
+
+### User Stories 👤
 
 #### MVP
 
@@ -106,7 +110,7 @@ All these routes should be protected
 | Post | /api/auth/register | Register a User | The Users JWT Token |
 | TBC | -->
 
-## License
+## License 🪪
 
 MIT License
 
@@ -119,7 +123,7 @@ If your project has a lot of features, list them here. -->
 
 If you created an application or package and would like other developers to contribute it, you can include guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own if you'd prefer. -->
 
-## Tests 
+## Tests ✅
 
 Run tests with: 
 
