@@ -1,7 +1,7 @@
 ![Node.js Lint and Test](https://github.com/emilyparkes/kiln-it/workflows/Node.js%20Lint%20and%20Test/badge.svg) ![Deploy](https://github.com/emilyparkes/kiln-it/workflows/Deploy/badge.svg) ![issues](https://img.shields.io/github/issues/emilyparkes/kiln-it?color=%231580C0) ![Last Modified](https://img.shields.io/github/last-commit/emilyparkes/kiln-it)
 
 
-# kiln it
+# kiln it 🏺
 A project that will allow me to keep records of my clay creations. Including type of creation, percent shrinkage the status of firing. A platform for friends and whānau to be able to see a catalog of all the creations I've made and the process they went through. 
 
 Using fullstack technologies I have learned and mentor others in, as well as being a project to try out new tech in more complex scenarios. 
