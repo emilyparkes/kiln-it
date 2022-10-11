@@ -1,7 +1,7 @@
 ![Node.js Lint and Test](https://github.com/emilyparkes/kiln-it/workflows/Node.js%20Lint%20and%20Test/badge.svg) ![Deploy](https://github.com/emilyparkes/kiln-it/workflows/Deploy/badge.svg) ![issues](https://img.shields.io/github/issues/emilyparkes/kiln-it?color=%231580C0) ![Last Modified](https://img.shields.io/github/last-commit/emilyparkes/kiln-it)
 
 
-# kiln it 🏺
+# 🏺 kiln it 
 A project that will allow me to keep records of my clay creations. Including type of creation, percent shrinkage the status of firing. A platform for friends and whānau to be able to see a catalog of all the creations I've made and the process they went through. 
 
 Using fullstack technologies I have learned and mentor others in, as well as being a project to try out new tech in more complex scenarios. 
@@ -27,17 +27,14 @@ Used for this project:
 ![UnSplash](https://img.shields.io/badge/Unsplash-000000?style=for-the-badge&logo=Unsplash&logoColor=white)
 
 ## Table of Contents 
-- [Installation](#installation)   
-<!-- - [Usage](#usage)  -->
-- [Design](#design)  
-- [Project Documentation](#project-documentation)
-- [User Stories](#user-stories) 
-- [License](#license)   
-<!-- - [Features](#features)
-- [How to Contribute](#how-to-contribute)   -->
-- [Tests](#tests)
+- [Installation](#-installation)
+- [Design](#--design)
+- [Project Documentation](#-project-doumentation)
+- [User Stories](#-user-stories) 
+- [License](#-license)   
+- [Tests](#-tests)
 
-### Installation ⇣
+### ⇣ Installation 
 
 Run the following commands in your terminal
 
@@ -58,14 +55,14 @@ JWT_SECRET="a fun secret"
 
 The site should then be available on http://localhost:3000
 
-### Design 🎨 
+### 🎨  Design 
 [Figma Design](https://www.figma.com/file/09q8SUt5gSTAfpNtiGyUOEGt/Kiln-it?node-id=0%3A1) *an attempt*  
 
-### Project Doumentation 🗂
+### 🗂 Project Doumentation 
 [ERD](https://dbdiagram.io/d/606395deecb54e10c33e0510)  
 
 
-### User Stories 👤
+### 👤 User Stories 
 
 #### MVP
 
@@ -110,7 +107,7 @@ All these routes should be protected
 | Post | /api/auth/register | Register a User | The Users JWT Token |
 | TBC | -->
 
-## License 🪪
+## 🪪 License 
 
 MIT License
 
@@ -123,7 +120,7 @@ If your project has a lot of features, list them here. -->
 
 If you created an application or package and would like other developers to contribute it, you can include guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own if you'd prefer. -->
 
-## Tests ✅
+## ✅ Tests 
 
 Run tests with: 
 
