@@ -85,7 +85,7 @@ As a friendly user:
 - [ ] I want to click a link to take me to instagram to purchase the item
 
 
-## Views
+#### Views
   | name | user | purpose |
   | --- | --- | --- |
   | Sign In | * | View for user to enter their login credentials |
