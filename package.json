@@ -61,6 +61,7 @@
     ]
   },
   "dependencies": {
+    "authenticare": "^0.4.7",
     "express": "^4.17.2",
     "knex": "^2.1.0",
     "pg": "^8.7.1",
@@ -83,7 +84,6 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.1.3",
     "@testing-library/user-event": "^12.7.1",
-    "authenticare": "^0.4.7",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.3.0",
     "babel-loader": "^8.2.2",
