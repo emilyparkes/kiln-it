@@ -27,7 +27,7 @@ function StatusLog() {
 
       <WaitIndicator />
 
-      <Grid2 container spacing={1}>
+      <Grid2 container spacing={1} >
         {focus?.filter ? (
           <>
             {creationsFiltered?.map((creation) => (

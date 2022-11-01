@@ -29,7 +29,7 @@ function Gallery() {
         <>
           <div className="card-root">
             <div className="card-container">
-              {creationsFiltered.map((creation) => {
+              {creationsFiltered?.map((creation) => {
                 const name = toLowHyphen(creation.name)
                 return (
                   <Link to={`/creations/${name}`} key={creation.id}>
@@ -58,7 +58,7 @@ function Gallery() {
 
           <div className="card-root">
             <div className="card-container">
-              {creationsSearched.map((creation) => {
+              {creationsSearched?.map((creation) => {
                 const name = toLowHyphen(creation.name)
                 return (
                   <Link to={`/creations/${name}`} key={creation.id}>
