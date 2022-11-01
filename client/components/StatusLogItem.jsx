@@ -117,7 +117,7 @@ function StatusLogItem({ creation }) {
         </main>
       )}
 
-      {statuses &&
+      {statuses && (
         <Card sx={{ display: 'flex' }} className={classes.StatusLogItemCard}>
           <Link to={`/creations/${toLowHyphen(creation.name)}`}>
             <CardMedia
@@ -128,7 +128,7 @@ function StatusLogItem({ creation }) {
               className={classes.logImg}
             />
           </Link>
-          <Box sx={{ display: 'flex', width: '100%' }}>
+          <Box sx={{ display: 'flex', width: 1 }}>
             <CardContent className={classes.StatusLogItemCardContent}>
               <Button
                 variant="contained"
@@ -139,18 +139,18 @@ function StatusLogItem({ creation }) {
                 {currentStatus.status}
               </Button>
               <Stack spacing={1} sx={{ paddingLeft: '10px' }}>
-                <Typography>
+                <Typography variant="p">
                   {creation.shape}: {creation.name}
                 </Typography>
-                <Typography>Clay: {creation.clay}</Typography>
-                <Typography>
+                <Typography variant="p">Clay: {creation.clay}</Typography>
+                <Typography variant="p">
                   Glazes: {formatGlazeText(creation?.glazes)}
                 </Typography>
               </Stack>
             </CardContent>
           </Box>
         </Card>
-      }
+      )}
     </>
   )
 }

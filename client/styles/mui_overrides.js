@@ -59,7 +59,7 @@ export const useStyles = makeStyles(() => ({
   //     color: 'whitesmoke',
   //   },
   statusButton: {
-    width: '252px',
+    width: '80%',
     fontWeight: '200',
     textTransform: 'uppercase',
     textAlign: 'center',

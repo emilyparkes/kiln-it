@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Typography } from '@mui/material'
+import Grid2 from '@mui/material/Unstable_Grid2'
 
 import NavUtils from './nav-utils/NavUtils'
 import StatusLogItem from './StatusLogItem'
@@ -23,32 +24,41 @@ function StatusLog() {
   return (
     <>
       <NavUtils />
+
       <WaitIndicator />
-      {focus?.filter ? (
-        <>
-          {creationsFiltered?.map((creation) => (
-            <StatusLogItem key={creation.id} creation={creation} />
-          ))}
 
-          <FloatingAddNew />
-        </>
-      ) : (
-        <>
-          {searchterm && (
-            <Typography
-              variant="h6"
-              sx={{ paddingLeft: '12px', marginBottom: '10px' }}
-            >
-              Search results for &apos;{searchterm}&apos;
-            </Typography>
-          )}
-          {creationsSearched?.map((creation) => (
-            <StatusLogItem key={creation.id} creation={creation} />
-          ))}
+      <Grid2 container spacing={1}>
+        {focus?.filter ? (
+          <>
+            {creationsFiltered?.map((creation) => (
+              <Grid2 key={creation.id} item xs={12} sm={6} md={6} lg={4} xl={4}>
+                <StatusLogItem creation={creation} />
+              </Grid2>
+            ))}
 
-          <FloatingAddNew />
-        </>
-      )}
+            <FloatingAddNew />
+          </>
+        ) : (
+          <>
+            {searchterm && (
+              <Typography
+                variant="h6"
+                sx={{ paddingLeft: '12px', marginBottom: '10px' }}
+              >
+                Search results for &apos;{searchterm}&apos;
+              </Typography>
+            )}
+
+            {creationsSearched?.map((creation) => (
+              <Grid2 key={creation.id} item xs={12} sm={6} md={6} lg={4} xl={4}>
+                <StatusLogItem creation={creation} />
+              </Grid2>
+            ))}
+
+            <FloatingAddNew />
+          </>
+        )}
+      </Grid2>
     </>
   )
 }
