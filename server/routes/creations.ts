@@ -3,11 +3,11 @@ import express from 'express'
 
 import db from '../db/creations'
 import { prepForDb, prepForJS } from '../server-utils'
+import { Glaze } from '../../common/Glaze'
 
 const router = express.Router()
 
 // /api/v1/creations
-
 router.get('/', (req, res) => {
   db.getCreations()
     .then((creations) => {
@@ -30,12 +30,12 @@ router.get('/', (req, res) => {
 
 router.post('/new-creation', (req, res) => {
   const dbCreation = prepForDb(req.body)
-  let creationId = null
+  let creationId:number = 0
   db.createCreation(dbCreation)
     .then((creationIdArr) => {
       creationId = creationIdArr[0]
       return Promise.all(
-        dbCreation.glazes.map((glazeObj) => {
+        dbCreation.glazes.map((glazeObj:Glaze) => {
           return db.createCreationGlazes(creationId, glazeObj.id)
         })
       )
@@ -68,7 +68,7 @@ router.patch('/update-creation/:id', (req, res) => {
         })
       } else {
         return Promise.all(
-          dbCreation.glazes.map((glazeObj) => {
+          dbCreation.glazes.map((glazeObj:Glaze) => {
             return db.createCreationGlazes(creationId, glazeObj.id)
           })
         )
