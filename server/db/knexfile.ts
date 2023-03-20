@@ -1,16 +1,15 @@
 const path = require('path')
 
-module.exports = {
+export default {
   development: {
     client: 'sqlite3',
     useNullAsDefault: true,
     connection: {
-      filename: path.join(__dirname, 'dev.sqlite3')
+      filename: path.join(__dirname, 'dev.sqlite3'),
     },
     pool: {
-      afterCreate: (conn, cb) =>
-        conn.run('PRAGMA foreign_keys = ON', cb)
-    }
+      afterCreate: (conn, cb) => conn.run('PRAGMA foreign_keys = ON', cb),
+    },
   },
 
   staging: {
@@ -18,36 +17,36 @@ module.exports = {
     connection: {
       database: 'my_db',
       user: 'username',
-      password: 'password'
+      password: 'password',
     },
     pool: {
       min: 2,
-      max: 10
+      max: 10,
     },
     migrations: {
-      directory: path.join(__dirname, 'migrations')
-    }
+      directory: path.join(__dirname, 'migrations'),
+    },
   },
 
   production: {
     client: 'postgresql',
     connection: {
       connectionString: process.env.DATABASE_URL,
-      ssl: { rejectUnauthorized: false }
-    }
+      ssl: { rejectUnauthorized: false },
+    },
   },
 
   test: {
     client: 'sqlite3',
     useNullAsDefault: true,
     connection: {
-      filename: ':memory:'
+      filename: ':memory:',
     },
     migrations: {
-      directory: path.join(__dirname, 'migrations')
+      directory: path.join(__dirname, 'migrations'),
     },
     seeds: {
-      directory: path.join(__dirname, './tests/seeds')
-    }
-  }
+      directory: path.join(__dirname, './tests/seeds'),
+    },
+  },
 }

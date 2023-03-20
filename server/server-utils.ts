@@ -1,11 +1,6 @@
-const _ = require('lodash')
+import _ from 'lodash'
 
-module.exports = {
-  prepForDb,
-  prepForJS
-}
-
-function prepForDb (body) {
+export function prepForDb (body) {
   if (_.isObject(body)) {
     const newObj = {}
     Object.keys(body).forEach(key => (newObj[_.snakeCase(key)] = body[key]))
@@ -14,7 +9,7 @@ function prepForDb (body) {
   return body
 }
 
-function prepForJS (data) {
+export function prepForJS (data) {
   if (_.isObject(data)) {
     const newObj = {}
     Object.keys(data).forEach(key => (newObj[_.camelCase(key)] = data[key]))

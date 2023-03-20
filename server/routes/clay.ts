@@ -1,8 +1,8 @@
 /* eslint-disable promise/no-nesting */
-const express = require('express')
+import express from 'express'
 
-const db = require('../db/clay')
-const { getCreations } = require('../db/creations')
+import db from '../db/clay'
+import { getCreations } from '../db/creations'
 // const { prepForDb, prepForJS } = require('../server-utils')
 
 const router = express.Router()
@@ -38,13 +38,11 @@ router.delete('/:id', (req, res) => {
           })
           .then((clay) => res.json({ clay: clay }))
       }
-      return db
-        .deleteClay(id)
-        .then((deleted) =>
-          res.json({
-            deleted: `${deleted} item(s) have been deleted successfully`,
-          })
-        )
+      return db.deleteClay(id).then((deleted) =>
+        res.json({
+          deleted: `${deleted} item(s) have been deleted successfully`,
+        })
+      )
     })
     .catch((err) => {
       console.error(err)
@@ -61,4 +59,4 @@ function existsInCreations(id) {
   })
 }
 
-module.exports = router
+export default router

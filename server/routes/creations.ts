@@ -1,8 +1,8 @@
 /* eslint-disable promise/no-nesting */
-const express = require('express')
+import express from 'express'
 
-const db = require('../db/creations')
-const { prepForDb, prepForJS } = require('../server-utils')
+import db from '../db/creations'
+import { prepForDb, prepForJS } from '../server-utils'
 
 const router = express.Router()
 
@@ -129,15 +129,17 @@ router.delete('/:id', (req, res) => {
   const creationId = Number(req.params.id)
 
   db.deleteCreationGlazes(creationId)
-    .then(() => db.deleteCreation(creationId).then((deleted) =>
+    .then(() =>
+      db.deleteCreation(creationId).then((deleted) =>
         res.json({
           deleted: `${deleted} item(s) have been deleted successfully`,
         })
-      ))
+      )
+    )
     .catch((err) => {
       console.error(err)
       res.sendStatus(500)
     })
 })
 
-module.exports = router
+export default router

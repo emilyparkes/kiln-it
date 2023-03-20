@@ -1,7 +1,7 @@
 /* eslint-disable promise/no-nesting */
-const { connection } = require('./connection')
+import connection from './connection'
 
-module.exports = {
+export default {
   getCreations,
   getGlazesByCreationId,
   createCreationGlazes,
@@ -10,7 +10,7 @@ module.exports = {
   updateCreationById,
   createCreation,
   deleteCreationGlazes,
-  deleteCreation
+  deleteCreation,
 }
 
 function getCreations(db = connection) {
@@ -64,9 +64,7 @@ function createCreationGlazes(id, glazeId, db = connection) {
 }
 
 function deleteCreationGlazes(id, db = connection) {
-  return db('glaze_creations')
-  .where('creation_id', id)
-  .delete()
+  return db('glaze_creations').where('creation_id', id).delete()
 }
 
 function getCreationById(id, db = connection) {
