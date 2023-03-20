@@ -91,6 +91,15 @@ function CreationEdit() {
     setImgIdx(idx)
   }
 
+  // const showUploadWidget = () => {
+  //   cloudinary.openUploadWidget(cloudinarySettings,
+  //   (err, info) => {
+  //     if (!err) {    
+  //       console.log("Upload Widget event - ", info);
+  //     }
+  //    })
+  //   }
+
   const handleChange = (e) => {
     setForm({
       ...form,
@@ -131,6 +140,7 @@ function CreationEdit() {
         <form>
           <div className="creation-container edit">
             <img className="creation-img" src={currentImg} />
+            
 
             <div className="icon-dots">
               {images.map((dot, idx) => {

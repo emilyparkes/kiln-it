@@ -99,6 +99,9 @@ export const theme = createTheme({
     body2: {
       fontFamily: 'Alegreya Sans',
     },
+    p: {
+      fontFamily: 'Alegreya Sans',
+    },
     caption: {
       fontFamily: 'Alegreya Sans',
     },

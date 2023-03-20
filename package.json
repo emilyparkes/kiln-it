@@ -61,6 +61,8 @@
     ]
   },
   "dependencies": {
+    "cloudinary": "^1.32.0",
+    "cloudinary-core": "^2.13.0",
     "express": "^4.17.2",
     "knex": "^2.1.0",
     "pg": "^8.7.1",

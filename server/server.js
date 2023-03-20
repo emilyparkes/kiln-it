@@ -1,5 +1,6 @@
 const path = require('path')
 const express = require('express')
+const cloudinary = require('cloudinary-core')
 
 const allItemsRoutes = require('./routes/all')
 const creationRoutes = require('./routes/creations')
@@ -12,6 +13,8 @@ const server = express()
 
 server.use(express.static(path.join(__dirname, 'public')))
 server.use(express.json())
+
+// const cl = new cloudinary.Cloudinary({cloud_name: "dviwiz1cz", secure: true});
 
 server.use('/api/v1/all', allItemsRoutes)
 server.use('/api/v1/creations', creationRoutes)

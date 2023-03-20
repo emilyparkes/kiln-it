@@ -33,8 +33,7 @@
     width: 89%;
     flex-direction: row;
     display: flex;
-    overflow: hidden;
-    flex-wrap: wrap;
+    overflow:auto;
   }
 
   .filter-horizontal {
