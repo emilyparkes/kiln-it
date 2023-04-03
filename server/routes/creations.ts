@@ -2,8 +2,8 @@
 import express from 'express'
 
 import db from '../db/creations'
+import { Glaze } from '../../models/Glaze'
 import { prepForDb, prepForJS } from '../server-utils'
-import { Glaze } from '../../common/Glaze'
 
 const router = express.Router()
 

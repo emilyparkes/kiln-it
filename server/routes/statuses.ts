@@ -1,6 +1,7 @@
 import express from 'express'
 
 import db from '../db/statuses'
+import { Status } from '../../models/Status'
 // const { prepForDb, prepForJS } = require('../server-utils')
 
 const router = express.Router()
@@ -15,10 +16,10 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  const addedStatuses = req.body.map(status => {
+  const addedStatuses = req.body.map((status:Status) => {
     return db.addStatus(status)
       .then((id) => {
-        return { id: id[0], status }
+        return { id: id, status }
       })
   })
   Promise.all(addedStatuses)

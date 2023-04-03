@@ -1,6 +1,7 @@
 import express from 'express'
 
 import db from '../db/shapes'
+import { Shape } from '../../models/Shape'
 // const { prepForDb, prepForJS } = require('../server-utils')
 
 const router = express.Router()
@@ -15,9 +16,9 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  const addedShapes = req.body.map((shape) => {
+  const addedShapes = req.body.map((shape:Shape) => {
     return db.addShape(shape).then((id) => {
-      return { id: id[0], shape }
+      return { id: id, shape }
     })
   })
   Promise.all(addedShapes)
