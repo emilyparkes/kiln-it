@@ -1,19 +1,19 @@
-const path = require('path')
+const { join } = require('node:path')
 
-export default {
+module.exports = {
   entry: [
-    path.join(__dirname, 'index.js'),
-    path.join(__dirname, 'styles/index.scss'),
+    join(__dirname, 'index.tsx'),
+    join(__dirname, 'styles/index.scss'),
   ],
   output: {
-    path: path.join(__dirname, '../server/public'),
+    path: join(__dirname, '../server/public'),
     filename: 'bundle.js',
   },
   mode: 'development',
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.(j|t)sx?$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
       },
@@ -24,7 +24,7 @@ export default {
     ],
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
   devtool: 'source-map',
 }

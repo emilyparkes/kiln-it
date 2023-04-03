@@ -1,7 +1,7 @@
 /* eslint-disable promise/no-nesting */
 import connection from './connection'
-import { Creation, DBCreation } from '../../common/Creation'
-import { Glaze } from '../../common/Glaze'
+import { Creation, DBCreation } from '../../models/Creation'
+import { Glaze } from '../../models/Glaze'
 
 export default {
   getCreations,

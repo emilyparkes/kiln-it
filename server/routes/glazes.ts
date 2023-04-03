@@ -1,6 +1,7 @@
 import express from 'express'
 
 import db from '../db/glazes'
+import { Glaze } from '../../models/Glaze'
 // const { prepForDb, prepForJS } = require('../server-utils')
 
 const router = express.Router()
@@ -15,9 +16,9 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  const addedGlazes = req.body.map((glaze) => {
+  const addedGlazes = req.body.map((glaze:Glaze) => {
     return db.addGlaze(glaze).then((id) => {
-      return { id: id[0], glaze }
+      return { id: id, glaze }
     })
   })
   Promise.all(addedGlazes)

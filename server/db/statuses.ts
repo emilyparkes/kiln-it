@@ -1,4 +1,6 @@
-const { connection } = require('./connection')
+import connection from './connection'
+
+import { Status } from "../../models/Status"
 
 export default {
   getStatuses,
@@ -7,18 +9,18 @@ export default {
   deleteStatus,
 }
 
-function getStatuses(db = connection) {
+function getStatuses(db = connection): Promise<Status[]> {
   return db('statuses').select()
 }
 
-function addStatus(status, db = connection) {
+function addStatus(status:Status, db = connection): Promise<number> {
   return db('statuses').insert({ status })
 }
 
-function updateStatus(id, status, db = connection) {
+function updateStatus(id:number, status:Status, db = connection): Promise<number> {
   return db('statuses').where('id', id).update({ status })
 }
 
-function deleteStatus(id, db = connection) {
+function deleteStatus(id:number, db = connection): Promise<number> {
   return db('statuses').where('id', id).delete()
 }
