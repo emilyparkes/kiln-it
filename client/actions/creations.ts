@@ -62,7 +62,7 @@ export function fetchCreations(): ThunkAction {
   return (dispatch) => {
     dispatch(requestCreationsPending())
 
-    getCreations()
+    return getCreations()
       .then((creations) => dispatch(receiveCreationsSuccess(creations)))
       .catch((err) => dispatch(showError(err.message)))
   }
@@ -72,7 +72,7 @@ export function createCreation(newCreation: Creation): ThunkAction {
   return (dispatch) => {
     dispatch(requestCreationsPending())
 
-    postCreation(newCreation)
+    return postCreation(newCreation)
       .then((creation) => dispatch(newCreationSuccess(creation)))
       .catch((err) => dispatch(showError(err.message)))
   }
@@ -82,7 +82,7 @@ export function updateCreationStatus(creation: Creation): ThunkAction {
   return (dispatch) => {
     dispatch(requestCreationsPending())
 
-    patchCreationStatus(creation)
+    return patchCreationStatus(creation)
       .then((creation) => dispatch(updateCreationSuccess(creation)))
       .catch((err) => dispatch(showError(err.message)))
   }
@@ -92,7 +92,7 @@ export function updateCreation(creation: Creation): ThunkAction {
   return (dispatch) => {
     dispatch(requestCreationsPending())
 
-    patchCreation(creation)
+    return patchCreation(creation)
       .then((creation) => dispatch(updateCreationSuccess(creation)))
       .catch((err) => dispatch(showError(err.message)))
   }
@@ -102,7 +102,7 @@ export function removeCreation(id:number): ThunkAction {
   return (dispatch) => {
     dispatch(requestCreationsPending())
 
-    deleteCreation(id)
+    return deleteCreation(id)
       .then(() => dispatch(removeCreationSuccess(id)))
       .catch((err) => dispatch(showError(err.message)))
   }

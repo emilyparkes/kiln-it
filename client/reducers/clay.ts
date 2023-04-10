@@ -6,11 +6,11 @@ const initialState: Clay[] = []
 export default function clay (state = initialState, action: Action): Clay[] {
   switch (action.type) {
     case RECEIVE_CLAY:
-      return action.payload.clay
+      return action.payload
     case ADD_NEW_CLAY:
-      return [...state, action.payload.clay]
+      return [...state, action.payload]
     case UPDATE_CLAY:
-      return state.map(clay => clay.id === action.payload.clay.id ? action.payload.clay : clay)
+      return state.map(clay => clay.id === action.payload.id ? action.payload : clay)
     case REMOVE_CLAY:
       return state.filter(clay => clay.id !== action.payload.id)
     default:

@@ -2,25 +2,23 @@ import { useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../hooks'
 
 import { FilterAltRounded as FilterIcon } from '@mui/icons-material'
-
 import { Chip, Stack, Button, ThemeProvider } from '@mui/material'
-import { theme } from '../../styles/theme'
 
+import { theme } from '../../styles/theme'
 
 import FilterSidebar from './FilterSidebar'
 import FilterOption from './FilterOption'
 import AnAccordion from '../accordion/Accordion'
-
 import { addFilter, removeFilter, clearFilter } from '../../actions/filter'
 
 interface Props {
-  focus: any,
-  toggleFocus: any
+  focus: boolean,
+  toggleFocus: () => void
 }
 
 function FilterBar({ focus, toggleFocus }: Props) {
   const [open, setOpen] = useState(false)
-  const [currentAccordian, setCurrentAccordian] = useState('panel1')
+  const [currentAccordian, setCurrentAccordian] = useState<string>('panel1')
 
   const dispatch = useAppDispatch()
 
@@ -36,7 +34,7 @@ function FilterBar({ focus, toggleFocus }: Props) {
     dispatch(addFilter(category, value))
   }
 
-  const remove = (category, value) => {
+  const remove = (category: string, value: string) => {
     dispatch(removeFilter(category, value))
   }
 
@@ -45,7 +43,7 @@ function FilterBar({ focus, toggleFocus }: Props) {
     setCurrentAccordian('panel1')
   }
 
-  const openAccordian = (accordianNum) => {
+  const openAccordian = (accordianNum: string) => {
     setCurrentAccordian(accordianNum === currentAccordian ? false : accordianNum )
   }
 

@@ -53,7 +53,7 @@ function getGlazesByCreationId(id:number, db = connection): Promise<Glaze[]> {
     .select('glazes.id as id', 'glazes.glaze')
 }
 
-function createCreationGlazes(id:number, glazeId:number, db = connection): Promise<void> {
+function createCreationGlazes(id:number, glazeId:number, db = connection) {
   return db('glaze_creations')
     .where('creation_id', id)
     .delete()
@@ -65,7 +65,7 @@ function createCreationGlazes(id:number, glazeId:number, db = connection): Promi
     })
 }
 
-function deleteCreationGlazes(id:number, db = connection): Promise<void> {
+function deleteCreationGlazes(id:number, db = connection) {
   return db('glaze_creations').where('creation_id', id).delete()
 }
 
@@ -142,6 +142,6 @@ function createCreation(creation:any, db = connection): Promise<number[]> {
   })
 }
 
-function deleteCreation(id:number, db = connection): Promise<void> {
+function deleteCreation(id:number, db = connection) {
   return db('creations').where('id', id).delete()
 }

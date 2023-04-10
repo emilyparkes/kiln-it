@@ -1,4 +1,4 @@
-import { cloneElement } from 'react'
+import { ReactElement, cloneElement } from 'react'
 import Burger from './Burger'
 import PropTypes from 'prop-types'
 import { AppBar, Toolbar, useScrollTrigger } from '@mui/material'
@@ -7,7 +7,7 @@ import { ThemeProvider } from '@mui/material/styles'
 import { theme } from '../../styles/theme'
 
 interface Props {
-  children: any
+  children: ReactElement
 }
 
 function ElevationScroll({ children }: Props) {
@@ -25,7 +25,8 @@ ElevationScroll.propTypes = {
   children: PropTypes.element.isRequired,
 }
 
-export default function Navigation(props) {
+export default function Navigation(props: any) {
+  console.log('nav props', props)
   return (
     <>
       <ThemeProvider theme={theme}>

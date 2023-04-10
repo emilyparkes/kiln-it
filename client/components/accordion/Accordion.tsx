@@ -1,3 +1,4 @@
+import { ReactNode} from 'react'
 import {
   Accordion,
   AccordionDetails,
@@ -7,11 +8,11 @@ import {
 import { ExpandMore as ExpandMoreIcon } from '@mui/icons-material'
 
 interface Props {
-  title: any,
-  children: any,
-  num: any,
-  currentAccordian: any,
-  openAccordian: any,
+  title: string,
+  children: ReactNode,
+  num: number,
+  currentAccordian: string,
+  openAccordian: (string: string) => void,
 }
 
 function AnAccordion({

@@ -13,7 +13,7 @@ const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)))
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = ThunkDispatch<RootState, never, Action>
-export type ThunkAction<T = void> = BaseThunkAction<
+export type ThunkAction<T = unknown> = BaseThunkAction<
   Promise<T>,
   RootState,
   void,

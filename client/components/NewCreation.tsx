@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useAppSelector, useAppDispatch } from 'react-redux'
+import { useAppSelector, useAppDispatch } from '../hooks'
 import { useNavigate } from 'react-router-dom'
 
 import {
@@ -81,7 +81,7 @@ function NewCreation() {
     setCurrentImage(images[imgIdx])
   }, [imgIdx])
 
-  const getImage = (idx) => {
+  const getImage = (idx:number) => {
     setImgIdx(idx)
   }
 
@@ -117,7 +117,7 @@ function NewCreation() {
 
   return (
     <>
-      {creations && (
+      {creations.length > 0 && (
         <form>
           <div className="creation-container edit">
             <img className="creation-img" src={currentImg} />

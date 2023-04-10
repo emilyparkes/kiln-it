@@ -1,6 +1,6 @@
 import { showError } from './error'
 import { getShapes, addShapes, updateShape, deleteShape } from '../apis/shapes'
-
+import { ThunkAction } from '../store'
 import { Shape } from '../../models/Shape'
 
 export const SHAPES_REQUEST_PENDING = 'SHAPES_REQUEST_PENDING'
@@ -51,41 +51,41 @@ export function removeShapeSuccess (id: number): Action {
   }
 }
 
-export function fetchShapes () {
-  return dispatch => {
+export function fetchShapes (): ThunkAction {
+  return (dispatch) => {
     dispatch(requestShapesPending())
 
-    getShapes()
+  return getShapes()
       .then(shapes => dispatch(receiveShapes(shapes)))
       .catch(err => dispatch(showError(err.message)))
   }
 }
 
-export function createShapes (shapes: Shape[]) {
-  return dispatch => {
+export function createShapes (shapes: Shape[]): ThunkAction {
+  return (dispatch) => {
     dispatch(requestShapesPending())
 
-    addShapes(shapes)
+  return addShapes(shapes)
       .then(shapes => dispatch(newShapesSuccess(shapes)))
       .catch(err => dispatch(showError(err.message)))
   }
 }
 
-export function modifyShape (shape: Shape) {
-  return dispatch => {
+export function modifyShape (shape: Shape): ThunkAction {
+  return (dispatch) => {
     dispatch(requestShapesPending())
 
-    updateShape(shape)
+  return updateShape(shape.id, shape)
       .then((shape) => dispatch(updateShapeSuccess(shape)))
       .catch(err => dispatch(showError(err.message)))
   }
 }
 
-export function removeShape (id: number) {
-  return dispatch => {
+export function removeShape (id: number): ThunkAction {
+  return (dispatch) => {
     dispatch(requestShapesPending())
 
-    deleteShape(id)
+  return deleteShape(id)
       .then(() => dispatch(removeShapeSuccess(id)))
       .catch(err => dispatch(showError(err.message)))
   }

@@ -70,7 +70,7 @@ function CreationEdit() {
   const statuses = useAppSelector((store) => store.statuses)
 
   useEffect(() => {
-    if (creations && storeGlazes) {
+    if (creations.length > 0 && storeGlazes) {
       const name = toCapSpace(params.name)
       const creation = findString(creations, 'name', name)
       setForm(creation)
