@@ -56,7 +56,7 @@ export function fetchClay (): ThunkAction {
   return dispatch => {
     dispatch(requestClayPending())
 
-    getClay()
+    return getClay()
       .then(clay => dispatch(receiveClaySuccess(clay)))
       .catch(err => dispatch(showError(err.message)))
   }
@@ -66,7 +66,7 @@ export function createClay (clay:Clay): ThunkAction {
   return dispatch => {
     dispatch(requestClayPending())
 
-    addClay(clay)
+    return addClay(clay)
       .then(clay => dispatch(newClaySuccess(clay)))
       .catch(err => dispatch(showError(err.message)))
   }
@@ -76,7 +76,7 @@ export function modifyClay (clay:Clay): ThunkAction {
   return dispatch => {
     dispatch(requestClayPending())
 
-    updateClay(clay)
+    return updateClay(clay.id, clay)
       .then((clay) => dispatch(updateClaySuccess(clay)))
       .catch(err => dispatch(showError(err.message)))
   }
@@ -86,7 +86,7 @@ export function removeClay (id:number): ThunkAction {
   return dispatch => {
     dispatch(requestClayPending())
 
-    deleteClay(id)
+    return deleteClay(id)
       .then(() => dispatch(removeClaySuccess(id)))
       .catch(err => dispatch(showError(err.message)))
   }

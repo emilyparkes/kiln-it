@@ -4,10 +4,10 @@ import { Creation } from '../../models/Creation'
 
 const baseUrl = '/api/v1/creations'
 
-export function getCreations() {
+export function getCreations(): Promise<Creation[]> {
   return request
     .get(baseUrl)
-    .then((res) => res.body.clay)
+    .then((res) => res.body)
 }
 
 export function postCreation(newCreation: Creation) {

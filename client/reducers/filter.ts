@@ -1,13 +1,13 @@
-import { ADD_FILTER, REMOVE_FILTER, CLEAR_FILTER } from '../actions/filter'
+import { Action, ADD_FILTER, REMOVE_FILTER, CLEAR_FILTER } from '../actions/filter'
 
 const initialState = {}
 
-export default function filter (state = initialState, action) {
+export default function filter (state = initialState, action: Action) {
   switch (action.type) {
     case ADD_FILTER:
-      return addAdditionalFilter(state, action.category, action.value)
+      return addAdditionalFilter(state, action.payload.category, action.payload.value)
     case REMOVE_FILTER:
-      return delFilter(state, action.category, action.value)
+      return delFilter(state, action.payload.category, action.payload.value)
     case CLEAR_FILTER:
       return initialState
     default:

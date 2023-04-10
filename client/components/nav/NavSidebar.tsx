@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom'
 import { List, ListItem, ListItemText } from '@mui/material'
 
 interface Props {
-  open: any,
-  setOpen: any
+  open: boolean,
+  setOpen: () => void
 }
 
 function NavSidebar({ open, setOpen }: Props) {

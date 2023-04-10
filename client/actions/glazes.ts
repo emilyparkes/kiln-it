@@ -1,6 +1,7 @@
 import { showError } from './error'
 import { getGlazes, addGlazes, updateGlaze, deleteGlaze } from '../apis/glazes'
 import { Glaze } from '../../models/Glaze'
+import { ThunkAction } from '../store'
 
 export const GLAZES_REQUEST_PENDING = 'GLAZES_REQUEST_PENDING'
 export const RECEIVE_GLAZES = 'RECEIVE_GLAZES'
@@ -51,41 +52,41 @@ export function removeGlazeSuccess (id: number) {
   }
 }
 
-export function fetchGlazes () {
-  return dispatch => {
+export function fetchGlazes (): ThunkAction {
+  return (dispatch) => {
     dispatch(requestGlazesPending())
 
-    getGlazes()
+    return getGlazes()
       .then(glazes => dispatch(receiveGlazesSuccess(glazes)))
       .catch(err => dispatch(showError(err.message)))
   }
 }
 
-export function createGlazes (glazes: Glaze[]) {
-  return dispatch => {
+export function createGlazes (glazes: Glaze[]): ThunkAction {
+  return (dispatch) => {
     dispatch(requestGlazesPending())
 
-    addGlazes(glazes)
+    return addGlazes(glazes)
       .then(glazes => dispatch(newGlazesSuccess(glazes)))
       .catch(err => dispatch(showError(err.message)))
   }
 }
 
-export function modifyGlaze (glaze: Glaze) {
-  return dispatch => {
+export function modifyGlaze (glaze: Glaze): ThunkAction {
+  return (dispatch) => {
     dispatch(requestGlazesPending())
 
-    updateGlaze(glaze)
+    return updateGlaze(glaze.id, glaze)
       .then((glaze) => dispatch(updateGlazeSuccess(glaze)))
       .catch(err => dispatch(showError(err.message)))
   }
 }
 
-export function removeGlaze (id: number) {
-  return dispatch => {
+export function removeGlaze (id: number): ThunkAction {
+  return (dispatch) => {
     dispatch(requestGlazesPending())
 
-    deleteGlaze(id)
+    return deleteGlaze(id)
       .then(() => dispatch(removeGlazeSuccess(id)))
       .catch(err => dispatch(showError(err.message)))
   }

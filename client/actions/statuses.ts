@@ -1,6 +1,6 @@
 import { showError } from './error'
 import { getStatuses, addStatuses, updateStatus, deleteStatus } from '../apis/statuses'
-
+import { ThunkAction } from '../store'
 import { Status } from '../../models/Status'
 
 export const STATUSES_REQUEST_PENDING = 'STATUSES_REQUEST_PENDING'
@@ -16,76 +16,76 @@ export type Action =
 | { type: typeof UPDATE_STATUS; payload: Status }
 | { type: typeof REMOVE_STATUS; payload: number }
 
-export function requestStatusesPending () {
+export function requestStatusesPending (): Action {
   return {
     type: STATUSES_REQUEST_PENDING,
     payload: null
   }
 }
 
-export function receiveStatuses (statuses: Status[]) {
+export function receiveStatuses (statuses: Status[]): Action {
   return {
     type: RECEIVE_STATUSES,
     payload: statuses
   }
 }
 
-export function newStatusesSuccess (statuses: Status[]) {
+export function newStatusesSuccess (statuses: Status[]): Action {
   return {
     type: ADD_NEW_STATUSES,
     payload: statuses
   }
 }
 
-export function updateStatusSuccess (status: Status) {
+export function updateStatusSuccess (status: Status): Action {
   return {
     type: UPDATE_STATUS,
     payload: status
   }
 }
 
-export function removeStatusSuccess (id: number) {
+export function removeStatusSuccess (id: number): Action {
   return {
     type: REMOVE_STATUS,
-    id
+    payload: id
   }
 }
 
-export function fetchStatuses () {
-  return dispatch => {
+export function fetchStatuses (): ThunkAction {
+  return (dispatch) => {
     dispatch(requestStatusesPending())
 
-    getStatuses()
+    return getStatuses()
       .then(statuses => dispatch(receiveStatuses(statuses)))
       .catch(err => dispatch(showError(err.message)))
   }
 }
 
-export function createStatuses (statuses: Status[]) {
-  return dispatch => {
+export function createStatuses (statuses: Status[]): ThunkAction {
+  return (dispatch) => {
     dispatch(requestStatusesPending())
 
-    addStatuses(statuses)
+    return addStatuses(statuses)
       .then(statuses => dispatch(newStatusesSuccess(statuses)))
       .catch(err => dispatch(showError(err.message)))
   }
 }
 
-export function modifyStatus (status: Status) {
-  return dispatch => {
+export function modifyStatus (status: Status): ThunkAction {
+  return (dispatch) => {
     dispatch(requestStatusesPending())
 
-    updateStatus(status.id, status)
+    return updateStatus(status.id, status)
       .then((status) => dispatch(updateStatusSuccess(status)))
       .catch(err => dispatch(showError(err.message)))
   }
 }
 
-export function removeStatus (id: number) {
-  return dispatch => {
+export function removeStatus (id: number): ThunkAction {
+  return (dispatch) => {
     dispatch(requestStatusesPending())
 
-    deleteStatus(id)
+    return deleteStatus(id)
       .then(() => dispatch(removeStatusSuccess(id)))
       .catch(err => dispatch(showError(err.message)))
   }

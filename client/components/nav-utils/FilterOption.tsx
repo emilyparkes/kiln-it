@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Checkbox from '@mui/material/Checkbox'
 import FormControlLabel from '@mui/material/FormControlLabel'
-import { withStyles } from '@mui/system'
+// import { withStyles } from '@mui/system'
 
 interface Props {
   category: any,
@@ -19,15 +19,15 @@ export default function FilterOption({
   remove,
   checked: initChecked,
 }: Props) {
-  const CustomCheckbox = withStyles({
-    root: {
-      color: colour,
-      '&$checked': {
-        color: colour,
-      },
-    },
-    checked: {},
-  })((props) => <Checkbox color="default" {...props} />)
+  // const CustomCheckbox = withStyles({
+  //   root: {
+  //     color: colour,
+  //     '&$checked': {
+  //       color: colour,
+  //     },
+  //   },
+  //   checked: {},
+  // })((props) => <Checkbox color="default" {...props} />)
 
   const [checked, setChecked] = useState(Boolean(initChecked))
 
@@ -43,7 +43,7 @@ export default function FilterOption({
   return (
     <FormControlLabel
       control={
-        <CustomCheckbox
+        <Checkbox
           checked={checked}
           name={name}
           onChange={handleChange}

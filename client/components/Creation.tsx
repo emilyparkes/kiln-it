@@ -11,11 +11,13 @@ import {
 
 import { removeCreation } from '../actions/creations'
 import { findString, toCapSpace } from '../client-utils'
-// import { useStyles } from '../styles/mui_overrides'
+import { useStyles } from '../styles/mui_overrides'
+
+import { Creation as TCreation } from '../../models/Creation'
 
 
 function Creation() {
-  const [creation, setCreation] = useState(null)
+  const [creation, setCreation] = useState<TCreation | null>(null)
   const [imgIdx, setImgIdx] = useState(0)
   const [currentImg, setCurrentImage] = useState('')
 
@@ -38,7 +40,7 @@ function Creation() {
   ]
 
   useEffect(() => {
-    if (creations) {
+    if (creations.length > 0) {
       const name = toCapSpace(params.name)
       const creation = findString(creations, 'name', name)
       setCreation(creation)
@@ -49,7 +51,7 @@ function Creation() {
     setCurrentImage(images[imgIdx])
   }, [imgIdx])
 
-  const getImage = (idx) => {
+  const getImage = (idx:number) => {
     setImgIdx(idx)
   }
 
