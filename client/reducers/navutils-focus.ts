@@ -1,19 +1,19 @@
 import { Action, SET_FOCUS } from '../actions/navutils-focus'
 
 interface navUtils {
-  filter: boolean,
-  search: boolean
+  filter: string,
+  search: string
 }
 
 const initialState: navUtils = {
-  filter: true,
-  search: false
+  filter: 'active',
+  search: ''
 }
 
 export default function navUtils (state = initialState, action: Action) {
   switch (action.type) {
     case SET_FOCUS:
-      return action.payload.focus
+      return action.payload
     default:
       return state
   }

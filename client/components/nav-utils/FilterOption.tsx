@@ -35,7 +35,7 @@ export default function FilterOption({
     setChecked(!checked)
   }
 
-  const handleSelection = (category, value) => {
+  const handleSelection = (category: string, value: string) => {
     setChecked(!checked)
     checked ? remove(category, value) : select(category, value)
   }

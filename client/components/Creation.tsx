@@ -29,8 +29,6 @@ function Creation() {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
-
-
   const images = [
     '/images/plate.jpeg',
     '/images/vase.png',
@@ -56,8 +54,12 @@ function Creation() {
   }
 
   const deleteCreation = () => {
-    dispatch(removeCreation(creation.id))
-    navigate('/gallery')
+    if(creation) {
+      dispatch(removeCreation(creation.id))
+      navigate('/gallery')
+    } else {
+      console.error('No creation!')
+    }
   }
 
   return (
@@ -68,7 +70,7 @@ function Creation() {
             <img className="creation-img" src={currentImg} />
 
             <div className="icon-dots">
-              {images.map((dot, idx) => {
+              {images.map((dot, idx: number) => {
                 return (
                   <div
                     key={idx}

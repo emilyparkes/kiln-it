@@ -18,7 +18,7 @@ interface Props {
 
 function FilterBar({ focus, toggleFocus }: Props) {
   const [open, setOpen] = useState(false)
-  const [currentAccordian, setCurrentAccordian] = useState<string>('panel1')
+  const [currentAccordian, setCurrentAccordian] = useState('panel1')
 
   const dispatch = useAppDispatch()
 
@@ -44,15 +44,15 @@ function FilterBar({ focus, toggleFocus }: Props) {
   }
 
   const openAccordian = (accordianNum: string) => {
-    setCurrentAccordian(accordianNum === currentAccordian ? false : accordianNum )
+    setCurrentAccordian(accordianNum === currentAccordian ? '' : accordianNum )
   }
 
-  const renderSelectedFilters = (className, onBar) => {
+  const renderSelectedFilters = (className: string, onBar: boolean) => {
     const listFilters = () => {
       // take filters out of store categorised objects, put into list
       return filterKeyArr.map((categoryName) => {
-        let selecterFilters = []
-        filter[categoryName]?.map((name) => {
+        let selecterFilters: any[] = []
+        filter[categoryName]?.map((name: any) => {
           selecterFilters.push(name)
         })
         // list out list and colour-code!
@@ -79,20 +79,26 @@ function FilterBar({ focus, toggleFocus }: Props) {
     }
   }
 
-  const trueFalseCheckboxes = (categoryName, cat, type) => {
+  const trueFalseCheckboxes = (categoryName: string, cat: string, type: string) => {
     if (filterKeyArr.length > 0 && filter[categoryName]?.includes(cat[type])) {
       return true
     } else {
       return false
     }
   }
-
-  const renderAccordion = (categoryName) => {
+  interface AccordianOption {
+    id: number,
+    colour: string,
+    category: any[],
+    type: string 
+   }
+  const renderAccordion = (categoryName: string) => {
     const options = {
       shape: { id: 1, colour: '#88A4B8', category: shapes, type: 'shape' },
       clay: { id: 2, colour: '#BA6D32', category: clay, type: 'clay' },
       glazes: { id: 3, colour: '#6BA368', category: glazes, type: 'glaze' },
-    }
+    } as Record<string, AccordianOption>
+
     const { id, colour, category, type } = options[categoryName]
     return (
       <AnAccordion
@@ -126,7 +132,6 @@ function FilterBar({ focus, toggleFocus }: Props) {
       <div className='filter-bar'>
         <div
           onClick={() => setOpen(true)}
-          type='text'
           className={focus ? 'extendable-bar focused' : 'extendable-bar'}
         >
           {focus ? renderSelectedFilters('filter-horizontal', true) : null}
