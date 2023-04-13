@@ -20,16 +20,18 @@ import {
 } from '@mui/icons-material'
 import { brown } from '@mui/material/colors'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
-
 import { useStyles } from '../styles/mui_overrides'
+
+import { Creation } from '../../models/Creation'
 import { updateCreation } from '../actions/creations'
 import { findString, toLowHyphen, toCapSpace } from '../client-utils'
+
 
 function CreationEdit() {
   const [imgIdx, setImgIdx] = useState(0)
   const [currentImg, setCurrentImage] = useState('')
-  const [form, setForm] = useState(null)
-  const [selectedGlaze, setSelectedGlaze] = useState([])
+  const [form, setForm] = useState({} as Partial<Creation>)
+  const [selectedGlaze, setSelectedGlaze] = useState([] as any[])
 
   // HARD CODED FOR NOW
   const images = [
@@ -151,7 +153,7 @@ function CreationEdit() {
                   <ThemeProvider theme={theme}>
                     <TextField
                       label="Name"
-                      className={classes.titleLabel}
+                      // className={classes.titleLabel}
                       variant="outlined"
                       size="small"
                       id="outlined-name"
@@ -164,7 +166,7 @@ function CreationEdit() {
                     {shapes && (
                       <TextField
                         label="Shape"
-                        className={classes.inputLabel}
+                        // className={classes.inputLabel}
                         variant="outlined"
                         size="small"
                         id="outlined-shape"
@@ -185,7 +187,7 @@ function CreationEdit() {
                     {statuses && (
                       <TextField
                         label="Status"
-                        className={classes.inputLabel}
+                        // className={classes.inputLabel}
                         variant="outlined"
                         size="small"
                         id="outlined-status"
@@ -206,7 +208,7 @@ function CreationEdit() {
                     {clay && (
                       <TextField
                         label="Clay"
-                        className={classes.inputLabel}
+                        // className={classes.inputLabel}
                         variant="outlined"
                         size="small"
                         id="outlined-clay"
@@ -226,7 +228,7 @@ function CreationEdit() {
 
                     <TextField
                       label="Weight"
-                      className={classes.inputLabel}
+                      // className={classes.inputLabel}
                       variant="outlined"
                       size="small"
                       id="outlined-weight"
@@ -247,7 +249,7 @@ function CreationEdit() {
                           Glazes
                         </InputLabel>
                         <Select
-                          className={classes.multiSelect}
+                          // className={classes.multiSelect}
                           labelId="demo-multiple-checkbox-label"
                           id="demo-multiple-checkbox"
                           multiple
@@ -330,7 +332,7 @@ function CreationEdit() {
             </a>
             <Button
               variant="contained"
-              className={classes.saveButton}
+              // className={classes.saveButton}
               onClick={onSubmit}
               endIcon={<SaveIcon fontSize="large" />}
             >

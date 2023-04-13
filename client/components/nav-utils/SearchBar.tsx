@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, ChangeEvent } from 'react'
 import { useAppDispatch } from '../../hooks'
 import { SearchRounded as SearchIcon } from '@mui/icons-material'
 import _ from 'lodash'
@@ -6,16 +6,16 @@ import _ from 'lodash'
 import { setSearchTerm } from '../../actions/search'
 
 interface Props {
-  focus: any,
+  focus: string,
   toggleFocus: any
 }
 
 function SearchBar({ focus, toggleFocus }: Props) {
-  const [searchterm, setSearch] = useState(null)
+  const [searchterm, setSearch] = useState('')
   const dispatch = useAppDispatch()
   
   const debouncedSearch = useRef( // react remembers debounce between renders
-    _.debounce((searchterm) => dispatch(setSearchTerm(searchterm)), 400) // delay call of dispatch 300ms
+    _.debounce((searchterm: string) => dispatch(setSearchTerm(searchterm)), 400) // delay call of dispatch 300ms
   ).current
 
   useEffect(() => {
@@ -26,7 +26,7 @@ function SearchBar({ focus, toggleFocus }: Props) {
   }, [searchterm])
 
 
-  const onChange = (e) => {
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value)
   }
 
@@ -37,13 +37,13 @@ function SearchBar({ focus, toggleFocus }: Props) {
           onChange={onChange}
           value={searchterm || ''}
           type="text"
-          className={focus ? 'focused' : undefined}
+          className={focus ? 'focused' : ''}
           placeholder="Search"
         />
         <button
           onClick={toggleFocus}
           id="search-button"
-          className={focus ? 'active' : undefined}
+          className={focus ? 'active' : ''}
         >
           <SearchIcon />
         </button>
