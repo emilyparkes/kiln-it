@@ -1,21 +1,21 @@
-const { testConn } = require('./connection')
+import connection from './connection'
 
-let db = require('./creations')
+import * as db from './creations'
 
 beforeAll(() => {
-  return testConn.migrate.latest()
+  return connection.migrate.latest()
 })
 
 beforeEach(() => {
-  return testConn.seed.run()
+  return connection.seed.run()
 })
 
 afterAll(() => {
-  return testConn.destroy()
+  return connection.destroy()
 })
 
 test('getCreations returns the correct number of creations', () => {
-  return db.getCreations(testConn).then((creations) => {
+  return db.getCreations(connection).then((creations) => {
     expect(creations).toHaveLength(9)
     return null
   })
@@ -23,7 +23,7 @@ test('getCreations returns the correct number of creations', () => {
 
 test('getCreationById returns the correct creation details', () => {
   const id = 2
-  return db.getCreationById(id, testConn).then((creation) => {
+  return db.getCreationById(id, connection).then((creation) => {
     expect(creation.name).toBe('Le Plate')
     expect(creation.clay).toBe('Grey Pebble')
     expect(creation.shape).toBe('Plate')

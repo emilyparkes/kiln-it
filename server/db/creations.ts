@@ -3,19 +3,7 @@ import connection from './connection'
 import { Creation, DBCreation } from '../../models/Creation'
 import { Glaze } from '../../models/Glaze'
 
-export default {
-  getCreations,
-  getGlazesByCreationId,
-  createCreationGlazes,
-  getCreationById,
-  updateCreationStatusById,
-  updateCreationById,
-  createCreation,
-  deleteCreationGlazes,
-  deleteCreation,
-}
-
-function getCreations(db = connection): Promise<Creation[]> {
+export function getCreations(db = connection): Promise<Creation[]> {
   return db('creations')
     .join('clay', 'clay.id', 'creations.clay_id')
     .join('shapes', 'shapes.id', 'creations.shape_id')
@@ -46,14 +34,14 @@ function getCreations(db = connection): Promise<Creation[]> {
     )
 }
 
-function getGlazesByCreationId(id:number, db = connection): Promise<Glaze[]> {
+export function getGlazesByCreationId(id:number, db = connection): Promise<Glaze[]> {
   return db('glaze_creations')
     .join('glazes', 'glazes.id', 'glaze_creations.glaze_id')
     .where('glaze_creations.creation_id', id)
     .select('glazes.id as id', 'glazes.glaze')
 }
 
-function createCreationGlazes(id:number, glazeId:number, db = connection) {
+export function createCreationGlazes(id:number, glazeId:number, db = connection) {
   return db('glaze_creations')
     .where('creation_id', id)
     .delete()
@@ -65,11 +53,11 @@ function createCreationGlazes(id:number, glazeId:number, db = connection) {
     })
 }
 
-function deleteCreationGlazes(id:number, db = connection) {
+export function deleteCreationGlazes(id:number, db = connection) {
   return db('glaze_creations').where('creation_id', id).delete()
 }
 
-function getCreationById(id:number, db = connection): Promise<Creation> {
+export function getCreationById(id:number, db = connection): Promise<Creation> {
   return db('creations')
     .join('clay', 'clay.id', 'creations.clay_id')
     .join('shapes', 'shapes.id', 'creations.shape_id')
@@ -102,13 +90,13 @@ function getCreationById(id:number, db = connection): Promise<Creation> {
     .first()
 }
 
-function updateCreationStatusById(id:number, creation: DBCreation, db = connection): Promise<number> {
+export function updateCreationStatusById(id:number, creation: DBCreation, db = connection): Promise<number> {
   return db('creations')
     .where('creations.id', id)
     .update({ status_id: creation.status_id })
 }
 
-function updateCreationById(id:number, creation:DBCreation, db = connection): Promise<number> {
+export function updateCreationById(id:number, creation:DBCreation, db = connection): Promise<number> {
   return db('creations').where('creations.id', id).update({
     clay_id: creation.clay_id,
     shape_id: creation.shape_id,
@@ -125,7 +113,7 @@ function updateCreationById(id:number, creation:DBCreation, db = connection): Pr
   })
 }
 
-function createCreation(creation:any, db = connection): Promise<number[]> {
+export function createCreation(creation:any, db = connection): Promise<number[]> {
   return db('creations').insert({
     clay_id: creation.clay_id,
     shape_id: creation.shape_id,
@@ -142,6 +130,6 @@ function createCreation(creation:any, db = connection): Promise<number[]> {
   })
 }
 
-function deleteCreation(id:number, db = connection) {
+export function deleteCreation(id:number, db = connection) {
   return db('creations').where('id', id).delete()
 }

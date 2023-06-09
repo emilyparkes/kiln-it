@@ -1,7 +1,7 @@
 /* eslint-disable promise/no-nesting */
 import express from 'express'
 
-import db from '../db/creations'
+import * as db from '../db/creations'
 import { Glaze } from '../../models/Glaze'
 import { prepForDb, prepForJS } from '../server-utils'
 
@@ -30,7 +30,7 @@ router.get('/', (req, res) => {
 
 router.post('/new-creation', (req, res) => {
   const dbCreation = prepForDb(req.body)
-  let creationId:number = 0
+  let creationId = 0
   db.createCreation(dbCreation)
     .then((creationIdArr) => {
       creationId = creationIdArr[0]
