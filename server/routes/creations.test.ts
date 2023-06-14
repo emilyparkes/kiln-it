@@ -28,6 +28,7 @@ beforeEach(() => {
 // If the first test has the spyOn then none of the errors log, if the second has, then the first logs etc
 vi.spyOn(console, 'error').mockImplementation(() => {})
 
+// GET
 describe('GET /api/v1/creations', async () => {
   it('returns the correct number of creations', async () => {
     expect.assertions(5)
@@ -49,6 +50,7 @@ describe('GET /api/v1/creations', async () => {
   })
 })
 
+// GET /:id
 describe('GET /api/v1/creations/:id', async () => {
   it('returns the correct creation', async () => {
     expect.assertions(10)
@@ -75,7 +77,7 @@ describe('GET /api/v1/creations/:id', async () => {
   })
 })
 
-
+// POST
 describe('POST /api/v1/creations/new-creation', () => {
   it('adds a new creation to the database', async () => {
     expect.assertions(3)
@@ -86,7 +88,6 @@ describe('POST /api/v1/creations/new-creation', () => {
 
 
     const res = await request(server).post('/api/v1/creations/new-creation').send(mockFormCreation)
-    console.log('console log:', res.body)
     expect(res.body).toStrictEqual(mockNewCreationResult)
     expect(res.statusCode).toBe(200)
     expect(db.createCreation).toHaveBeenCalledOnce()
@@ -96,6 +97,78 @@ describe('POST /api/v1/creations/new-creation', () => {
     vi.mocked(db.createCreation).mockRejectedValue(new Error('Route error'))
     const res = await request(server).post('/api/v1/creations/new-creation').send(mockFormCreation)
 
+    expect(res.statusCode).toBe(500)
+  })
+})
+
+// PATCH /:id
+describe('PATCH /api/v1/creations/update-creation/:id', () => {
+  it('updates creation details', async () => {
+    expect.assertions(3)
+    vi.mocked(db.updateCreationById).mockResolvedValue(1)
+    vi.mocked(db.createCreationGlazes).mockResolvedValue([1])
+    vi.mocked(db.getCreationById).mockResolvedValue(mockNewCreation)
+    vi.mocked(db.getGlazesByCreationId).mockResolvedValue(mockNewGlazesResult)
+
+
+    const res = await request(server).patch('/api/v1/creations/update-creation/2').send(mockFormCreation)
+    expect(res.body).toStrictEqual(mockNewCreationResult)
+    expect(res.statusCode).toBe(200)
+    expect(db.updateCreationById).toHaveBeenCalledOnce()
+  })
+
+  it('responds with a 500 if fails', async () => {
+    vi.mocked(db.updateCreationById).mockRejectedValue(new Error('Route error'))
+    const res = await request(server).patch('/api/v1/creations/update-creation/2').send(mockFormCreation)
+
+    expect(res.statusCode).toBe(500)
+  })
+})
+
+// PATCH /:id
+describe('PATCH /api/v1/creations/update-creation-status/:id', () => {
+  it('updates the status of a creation', async () => {
+    expect.assertions(3)
+    vi.mocked(db.updateCreationStatusById).mockResolvedValue(1)
+
+    const res = await request(server).patch('/api/v1/creations/update-creation-status/2').send(mockFormCreation)
+    expect(res.body).toStrictEqual(1)
+    expect(res.statusCode).toBe(200)
+    expect(db.updateCreationStatusById).toHaveBeenCalledOnce()
+  })
+
+  it('responds with a 500 if fails', async () => {
+    vi.mocked(db.createCreation).mockRejectedValue(new Error('Route error'))
+    const res = await request(server).patch('/api/v1/creations/update-creation-status/2').send(mockFormCreation)
+
+    expect(res.statusCode).toBe(500)
+  })
+})
+
+// DELETE
+describe('DELETE /api/v1/creations/:id', () => {
+  it('deletes a specific creation', async () => {
+    const mockDeleted = 1
+
+    expect.assertions(4)
+    vi.mocked(db.deleteCreationGlazes).mockResolvedValue(mockDeleted)
+    vi.mocked(db.deleteCreation).mockResolvedValue(mockDeleted)
+
+    const res = await request(server).delete('/api/v1/creations/2')
+    // perhaps run the get route and check to see if isnt there anymore
+    // similar to db test
+    expect(db.deleteCreationGlazes).toHaveBeenCalledOnce()
+    expect(db.deleteCreation).toHaveBeenCalledOnce()
+    expect(res.body).toStrictEqual({
+      deleted: `${mockDeleted} item(s) have been deleted successfully`,
+    })
+    expect(res.statusCode).toBe(200)
+  })
+
+  it('responds with a 500 if fails', async () => {
+    vi.mocked(db.deleteCreationGlazes).mockRejectedValue(new Error('Route error'))
+
+    const res = await request(server).delete('/api/v1/creations/99999').send(mockFormCreation)
     expect(res.statusCode).toBe(500)
   })
 })

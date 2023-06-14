@@ -30,7 +30,7 @@ router.get('/', (req, res) => {
 
 router.post('/new-creation', (req, res) => {
   const dbCreation = prepForDb(req.body)
-  console.log(dbCreation)
+  // console.log(dbCreation)
   let creationId = 0
   db.createCreation(dbCreation)
     .then((creationIdArr) => {
@@ -43,7 +43,7 @@ router.post('/new-creation', (req, res) => {
     })
     .then(() => {
       return db.getCreationById(creationId).then((creation) => {
-        console.log(creation)
+        // console.log(creation)
         return db.getGlazesByCreationId(creation.id).then((glazes) => {
           creation.glazes = glazes
           creation = prepForJS(creation)
