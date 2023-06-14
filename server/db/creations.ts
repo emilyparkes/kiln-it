@@ -57,7 +57,7 @@ export function deleteCreationGlazes(id:number, db = connection) {
   return db('glaze_creations').where('creation_id', id).delete()
 }
 
-export function getCreationById(id:number, db = connection): Promise<Creation> {
+export function getCreationById(id:number, db = connection) {
   return db('creations')
     .join('clay', 'clay.id', 'creations.clay_id')
     .join('shapes', 'shapes.id', 'creations.shape_id')

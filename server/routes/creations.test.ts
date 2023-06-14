@@ -4,7 +4,7 @@ import { describe, it, expect, beforeEach, vi } from 'vitest'
 
 import server from '../server'
 import * as db from '../db/creations'
-import { mockCreations, mockCreation, mockGlazes } from './mocks'
+import { mockCreations, mockGlazes, mockNewCreationId, mockFormCreation, mockNewCreation, mockNewCreationResult, mockNewGlazesResult } from './mocks'
 
 describe('test environment working', () => {
   it('works as expected', () => {
@@ -46,35 +46,56 @@ describe('GET /api/v1/creations', async () => {
 
     const res = await request(server).get('/api/v1/creations')
     expect(res.statusCode).toBe(500)
-    
   })
 })
 
-  describe('GET /api/v1/creations/:id', async () => {
-    it('returns the correct creation', async () => {
-      expect.assertions(10)
-      vi.mocked(db.getCreationById).mockResolvedValue(mockCreation)
-      vi.mocked(db.getGlazesByCreationId).mockResolvedValue(mockGlazes)
-      
-      const res = await request(server).get('/api/v1/creations/2')
-      expect(db.getCreationById).toHaveBeenCalledOnce()
-      expect(res.body.id).toEqual(2)
-      expect(res.body.clay).toBe('Grey Pebble')
-      expect(res.body.shapeId).toBe(2)
-      expect(res.body.statusId).toBe(1)
-      expect(res.body.dateCreated).toBe('2020-05-24T14:45:30')
-      expect(res.body.dateComplete).toBe('2020-06-24T14:45:30')
-      expect(res.body.note).toBe('Glaze with criss-cross pattern')
-      expect(res.body.name).toEqual('Le Plate')
-      expect(200)
-    })
-    it('responds with a 500 error if fails', async () => {
-      vi.mocked(db.getCreations).mockRejectedValue(new Error('Route error'))
+describe('GET /api/v1/creations/:id', async () => {
+  it('returns the correct creation', async () => {
+    expect.assertions(10)
+    vi.mocked(db.getCreationById).mockResolvedValue(mockCreations[1])
+    vi.mocked(db.getGlazesByCreationId).mockResolvedValue(mockGlazes)
+
+    const res = await request(server).get('/api/v1/creations/2')
+    expect(db.getCreationById).toHaveBeenCalledOnce()
+    expect(res.body.id).toEqual(2)
+    expect(res.body.clay).toBe('Grey Pebble')
+    expect(res.body.shapeId).toBe(2)
+    expect(res.body.statusId).toBe(1)
+    expect(res.body.dateCreated).toBe('2020-05-24T14:45:30')
+    expect(res.body.dateComplete).toBe('2020-06-24T14:45:30')
+    expect(res.body.note).toBe('Glaze with criss-cross pattern')
+    expect(res.body.name).toEqual('Le Plate')
+    expect(200)
+  })
+  it('responds with a 500 error if fails', async () => {
+    vi.mocked(db.getCreations).mockRejectedValue(new Error('Route error'))
   
-      const res = await request(server).get('/api/v1/creations/2')
-      expect(res.statusCode).toBe(500)
-    })
+    const res = await request(server).get('/api/v1/creations/2')
+    expect(res.statusCode).toBe(500)
+  })
+})
+
+
+describe('POST /api/v1/creations/new-creation', () => {
+  it('adds a new creation to the database', async () => {
+    expect.assertions(3)
+    vi.mocked(db.createCreation).mockResolvedValue(mockNewCreationId)
+    vi.mocked(db.createCreationGlazes).mockResolvedValue([1])
+    vi.mocked(db.getCreationById).mockResolvedValue(mockNewCreation)
+    vi.mocked(db.getGlazesByCreationId).mockResolvedValue(mockNewGlazesResult)
+
+
+    const res = await request(server).post('/api/v1/creations/new-creation').send(mockFormCreation)
+    console.log('console log:', res.body)
+    expect(res.body).toStrictEqual(mockNewCreationResult)
+    expect(res.statusCode).toBe(200)
+    expect(db.createCreation).toHaveBeenCalledOnce()
   })
 
-  
-  
+  it('responds with a 500 if fails', async () => {
+    vi.mocked(db.createCreation).mockRejectedValue(new Error('Route error'))
+    const res = await request(server).post('/api/v1/creations/new-creation').send(mockFormCreation)
+
+    expect(res.statusCode).toBe(500)
+  })
+})
