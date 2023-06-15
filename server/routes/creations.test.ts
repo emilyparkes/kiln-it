@@ -4,7 +4,8 @@ import { describe, it, expect, beforeEach, vi } from 'vitest'
 
 import server from '../server'
 import * as db from '../db/creations'
-import { mockCreations, mockGlazes, mockNewCreationId, mockFormCreation, mockNewCreation, mockNewCreationResult, mockNewGlazesResult } from './mocks'
+import { mockCreations, mockNewCreationId, mockFormCreation, mockNewCreation, mockNewCreationResult } from './mocks/creations-mocks'
+import { mockGlazes, mockNewGlazesResult } from './mocks/glazes-mocks'
 
 describe('test environment working', () => {
   it('works as expected', () => {

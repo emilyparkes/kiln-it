@@ -3,8 +3,15 @@ import request from 'supertest'
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 
 import server from '../server'
+// import {getClay, getClayById, addClay, updateClay, deleteClay} from '../db/clay'
 import * as db from '../db/clay'
-import { mockClay, mockNewClayResult } from './mocks/clay-mocks'
+
+
+import { existsInCreations } from './clay'
+import { getCreations } from '../db/creations'
+
+import { mockCreations } from './mocks/creations-mocks'
+import { mockClay, mockNewClayResult, mockOneClay } from './mocks/clay-mocks'
 
 describe('test environment working', () => {
   it('works as expected', () => {
@@ -65,6 +72,37 @@ describe('POST /api/v1/clay', () => {
     vi.mocked(db.addClay).mockRejectedValue(new Error('Route error'))
     const res = await request(server).post('/api/v1/clay').send(mockNewClayResult)
 
+    expect(res.statusCode).toBe(500)
+  })
+})
+
+// DELETE
+describe('DELETE /api/v1/clay/:id', () => {
+  it('deletes a specific creation', async () => {
+    const mockDeleted = 1
+
+    expect.assertions(4)
+    vi.mocked(existsInCreations).mockResolvedValue(true)
+    vi.mocked(getCreations).mockResolvedValue(mockCreations)
+    vi.mocked(db.getClayById).mockResolvedValue(mockOneClay)
+    vi.mocked(db.updateClay).mockResolvedValue(1)
+    vi.mocked(db.deleteClay).mockResolvedValue(1)
+
+    const res = await request(server).delete('/api/v1/clay/2')
+    // perhaps run the get route and check to see if isnt there anymore
+    // similar to db test
+    // expect(existsInCreations).toHaveBeenCalledOnce()
+    expect(db.getClayById).toHaveBeenCalledOnce()
+    expect(res.body).toStrictEqual({
+      deleted: `${mockDeleted} item(s) have been deleted successfully`,
+    })
+    expect(res.statusCode).toBe(200)
+  })
+
+  it('responds with a 500 if fails', async () => {
+    vi.mocked(db.getClayById).mockRejectedValue(new Error('Route error'))
+
+    const res = await request(server).delete('/api/v1/clay/99999').send(mockOneClay)
     expect(res.statusCode).toBe(500)
   })
 })

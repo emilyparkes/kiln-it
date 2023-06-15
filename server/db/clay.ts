@@ -2,7 +2,6 @@ import connection from './connection'
 
 import { Clay, DBClay } from '../../models/Clay'
 
-
 export function getClay(db = connection): Promise<Clay[]>{
   return db('clay').select()
 }
