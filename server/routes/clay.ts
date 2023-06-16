@@ -9,7 +9,8 @@ import { getCreations } from '../db/creations'
 const router = express.Router()
 
 router.get('/', (req, res) => {
-  return db.getClay()
+  return db
+    .getClay()
     .then((clay) => res.json(clay))
     .catch((err) => {
       console.error(err)
@@ -18,7 +19,8 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  return db.addClay(req.body.clay)
+  return db
+    .addClay(req.body.clay)
     .then((id) => res.json({ id: id, clay: req.body.clay }))
     .catch((err) => {
       console.error(err)
@@ -37,7 +39,6 @@ router.delete('/:id', (req, res) => {
             return db.updateClay(id, { in_use: false })
           })
           .then((clay) => {
-            console.log(clay)
             return res.json({ clay: clay })
           })
       }
@@ -53,9 +54,9 @@ router.delete('/:id', (req, res) => {
     })
 })
 
-export function existsInCreations(id:number): Promise<boolean> {
+export function existsInCreations(id: number): Promise<boolean> {
   let exists = false
-  return getCreations().then((creations:Creation[]) => {
+  return getCreations().then((creations: Creation[]) => {
     const filteredOut = creations.filter((creation) => creation.clayId === id)
     filteredOut.length > 0 ? (exists = true) : (exists = false)
     return exists

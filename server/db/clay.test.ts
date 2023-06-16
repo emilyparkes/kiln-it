@@ -1,13 +1,13 @@
-const { testConn } = require('./connection')
-
-let db = require('./clay')
+import testConn from './connection'
+import * as db from './clay'
+import { beforeAll, beforeEach, afterAll, test, expect } from 'vitest'
 
 beforeAll(() => {
   return testConn.migrate.latest()
 })
 
-beforeEach(() => {
-  return testConn.seed.run()
+beforeEach(async () => {
+  await testConn.seed.run()
 })
 
 afterAll(() => {
@@ -27,4 +27,15 @@ test('getClayById returns the correct clay details', () => {
     expect(clay.clay).toBe('Grey Pebble')
     return null
   })
+})
+
+test('deleting a clay that is in use fails', () => {
+  return db
+    .deleteClay(1)
+    .then(() => ({ error: null }))
+    .catch((error) => ({ error }))
+    .then((obj) => {
+      expect(obj.error).not.toBeNull()
+      expect(obj.error.message).toMatchInlineSnapshot('"delete from `clay` where `id` = 1 - SQLITE_CONSTRAINT: FOREIGN KEY constraint failed"')
+    })
 })
