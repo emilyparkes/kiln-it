@@ -1,4 +1,4 @@
-![Node.js Lint and Test](https://github.com/emilyparkes/kiln-it/workflows/Node.js%20Lint%20and%20Test/badge.svg) ![Deploy](https://github.com/emilyparkes/kiln-it/workflows/Deploy/badge.svg) ![issues](https://img.shields.io/github/issues/emilyparkes/kiln-it?color=%231580C0) ![Last Modified](https://img.shields.io/github/last-commit/emilyparkes/kiln-it)
+![Node.js Lint and Test](https://github.com/emilyparkes/kiln-it/workflows/Node.js%20Lint%20and%20Test/badge.svg) ![Deploy](https://github.com/emilyparkes/kiln-it/workflows/Deploy/badge.svg) ![issues](https://img.shields.io/github/issues/emilyparkes/kiln-it?color=%231580C0) ![Last Modified](https://img.shields.io/github/last-commit/emilyparkes/kiln-it/typescriptit)
 
 
 # 🏺 kiln it 
