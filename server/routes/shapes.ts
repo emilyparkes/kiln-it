@@ -1,6 +1,6 @@
-const express = require('express')
+import express from 'express'
 
-const db = require('../db/shapes')
+import db from '../db/shapes'
 // const { prepForDb, prepForJS } = require('../server-utils')
 
 const router = express.Router()
@@ -15,11 +15,10 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  const addedShapes = req.body.map(shape => {
-    return db.addShape(shape)
-      .then((id) => {
-        return { id: id[0], shape }
-      })
+  const addedShapes = req.body.map((shape) => {
+    return db.addShape(shape).then((id) => {
+      return { id: id[0], shape }
+    })
   })
   Promise.all(addedShapes)
     .then((shapes) => res.json({ shapes }))
@@ -30,7 +29,8 @@ router.post('/', (req, res) => {
 })
 
 router.patch('/:id', (req, res) => {
-  return db.updateShape(Number(req.params.id), req.body.shape)
+  return db
+    .updateShape(Number(req.params.id), req.body.shape)
     .then((shape) => res.json({ shape }))
     .catch((err) => {
       console.error(err)
@@ -39,12 +39,15 @@ router.patch('/:id', (req, res) => {
 })
 
 router.delete('/:id', (req, res) => {
-  return db.deleteShape(Number(req.params.id))
-    .then((deleted) => res.json({ deleted: `${deleted} item(s) have been deleted successfully` }))
+  return db
+    .deleteShape(Number(req.params.id))
+    .then((deleted) =>
+      res.json({ deleted: `${deleted} item(s) have been deleted successfully` })
+    )
     .catch((err) => {
       console.error(err)
       res.sendStatus(500)
     })
 })
 
-module.exports = router
+export default router

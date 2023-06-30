@@ -2,7 +2,7 @@ const getDbConn = require('knex')
 
 const testConfig = require('../knexfile').test
 
-module.exports = {
+export default {
   getTestDb: () => getDbConn(testConfig),
   initialise: (db) => {
     return db.migrate.latest().then(() => {
@@ -11,5 +11,5 @@ module.exports = {
   },
   cleanup: (db) => {
     return db.destroy()
-  }
+  },
 }

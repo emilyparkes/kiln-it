@@ -1,6 +1,6 @@
-const express = require('express')
+import express from 'express'
 
-const db = require('../db/statuses')
+import db from '../db/statuses'
 // const { prepForDb, prepForJS } = require('../server-utils')
 
 const router = express.Router()
@@ -47,4 +47,4 @@ router.delete('/:id', (req, res) => {
     })
 })
 
-module.exports = router
+export default router

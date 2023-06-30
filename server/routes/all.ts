@@ -1,22 +1,22 @@
-const express = require('express')
+import express from 'express'
 
-const getCreations = require('../db/creations').getCreations
-const getGlazes = require('../db/glazes').getGlazes
-const getStatuses = require('../db/statuses').getStatuses
-const getClay = require('../db/clay').getClay
-const getShapes = require('../db/shapes').getShapes
+import creations from '../db/creations'
+import glazes from '../db/glazes'
+import statuses from '../db/statuses'
+import clay from '../db/clay'
+import shapes from '../db/shapes'
 
-const { prepForJS } = require('../server-utils')
+import { prepForJS } from '../server-utils'
 
 const router = express.Router()
 
 router.get('/', (req, res) => {
   const allItems = [
-    getCreations(),
-    getGlazes(),
-    getStatuses(),
-    getClay(),
-    getShapes(),
+    creations.getCreations(),
+    glazes.getGlazes(),
+    statuses.getStatuses(),
+    clay.getClay(),
+    shapes.getShapes(),
   ]
   Promise.all(allItems)
     .then((allItems) =>
@@ -39,4 +39,4 @@ router.get('/', (req, res) => {
     })
 })
 
-module.exports = router
+export default router

@@ -1,13 +1,13 @@
 const path = require('path')
 
-module.exports = {
+export default {
   entry: [
     path.join(__dirname, 'index.js'),
-    path.join(__dirname, 'styles/index.scss')
+    path.join(__dirname, 'styles/index.scss'),
   ],
   output: {
     path: path.join(__dirname, '../server/public'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   mode: 'development',
   module: {
@@ -15,16 +15,16 @@ module.exports = {
       {
         test: /\.jsx?$/,
         loader: 'babel-loader',
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
       {
         test: /\.(sa|sc|c)ss$/i,
-        use: ['style-loader', 'css-loader', 'sass-loader']
-      }
-    ]
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+    ],
   },
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'],
   },
-  devtool: 'source-map'
+  devtool: 'source-map',
 }

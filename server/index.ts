@@ -1,8 +1,9 @@
-const server = require('./server')
+import server from './server'
+import envConfig from 'dotenv'
 
 if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-  const envConfig = require('dotenv').config()
-  if (envConfig.error) throw envConfig.error
+  const env = envConfig.config()
+  if (env.error) throw env.error
 }
 
 const port = process.env.PORT || 3000
