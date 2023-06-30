@@ -4,7 +4,7 @@
   "description": "\"Keep records of clay percent shrinkage, weight and dates of firing for my clay creations\"",
   "main": "index.js",
   "engines": {
-    "node": "16.13.2"
+    "node": "18.16.0"
   },
   "repository": {
     "type": "git",
