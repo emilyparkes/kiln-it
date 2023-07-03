@@ -20,8 +20,6 @@ const mockStatuses = [
   { id: 8, status: 'Complete' },
 ]
 
-// const mockStatus = { id: 2, status: 'Leather Hard' }
-
 describe('GET /api/v1/statuses', () => {
   it('returns an object with an array of statuses', () => {
     statusDb.getStatuses.mockImplementation(() => Promise.resolve(mockStatuses))

@@ -1,14 +1,14 @@
 import express from 'express'
 
-import db from '../db/glazes'
+import * as db from '../db/glazes'
 import { Glaze } from '../../models/Glaze'
 // const { prepForDb, prepForJS } = require('../server-utils')
 
 const router = express.Router()
 
 router.get('/', (req, res) => {
-  db.getGlazes()
-    .then((glazes) => res.json({ glazes }))
+  return db.getGlazes()
+    .then((glazes: Glaze[]) => res.json(glazes))
     .catch((err) => {
       console.error(err)
       res.sendStatus(500)
@@ -32,8 +32,7 @@ router.post('/', (req, res) => {
 })
 
 router.patch('/:id', (req, res) => {
-  return db
-    .updateGlaze(Number(req.params.id), req.body.glaze)
+  return db.updateGlaze(Number(req.params.id), req.body.glaze)
     .then((glaze) => res.json({ glaze }))
     .catch((err) => {
       console.error(err)
@@ -42,8 +41,7 @@ router.patch('/:id', (req, res) => {
 })
 
 router.delete('/:id', (req, res) => {
-  return db
-    .deleteGlaze(Number(req.params.id))
+  return db.deleteGlaze(Number(req.params.id))
     .then((deleted) =>
       res.json({ deleted: `${deleted} item(s) have been deleted successfully` })
     )

@@ -5,6 +5,5 @@ exports.seed = (knex) => {
     .then(() => knex('clay').del())
     .then(() => knex('glazes').del())
     .then(() => knex('statuses').del())
-    .then(() => knex('users').del())
 }
 
