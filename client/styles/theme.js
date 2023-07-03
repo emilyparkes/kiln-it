@@ -1,65 +1,32 @@
 import { createTheme } from '@mui/material/styles'
 
 export const theme = createTheme({
-  typography: {
-    h1: {
-      fontFamily: "Alegreya Sans SC, sans-serif"
-    },
-    h2: {
-      fontFamily: "Alegreya Sans SC, sans-serif"
-    },
-    h3: {
-      fontFamily: "Alegreya Sans SC, sans-serif;"
-    },
-    h4: {
-      fontFamily: "Alegreya Sans, sans-serif;"
-    },
-    h5: {
-      fontFamily: "Alegreya Sans, sans-serif;"
-    },
-    h6: {
-      fontFamily: "Alegreya Sans, sans-serif;"
-    },
-    button: {
-      fontFamily: "Alegreya Sans, sans-serif;"
-    },
-    subtitle1: {
-      fontFamily: "Alegreya Sans SC, sans-serif"
-    },
-    subtitle2: {
-      fontFamily: "Alegreya Sans, sans-serif;"
-    },
-    body1: {
-      fontFamily: "Alegreya Sans, sans-serif;"
-    },
-    body2: {
-      fontFamily: "Alegreya Sans, sans-serif;"
-    },
-  },
   palette: {
+    type: 'light',
     primary: {
-      // Sand
-      light: '#e3c6a4',
       main: '#e3c6a4',
       contrastText: '#744F44',
     },
     secondary: {
-      // Brown
-      light: '#e3c6a4',
-      main: '#744F44',
-      // dark: will be calculated from palette.secondary.main,
+      main: '#744f44',
       contrastText: '#e3c6a4',
     },
     tertiary: {
-      // Brown
       light: '#e3c6a4',
       main: '#B66148',
-      // dark: will be calculated from palette.secondary.main,
       contrastText: '#744F44',
     },
     quartarnary: {
       main: '#b98462',
       contrastText: '#e3c6a4',
+    },
+    background: {
+      default: '#e3c6a4',
+      paper: '#ffffff',
+    },
+    text: {
+      primary: '#744F44',
+      secondary: '#ffffff',
     },
     white: {
       main: '#ffffff',
@@ -109,16 +76,68 @@ export const theme = createTheme({
       main: '#6BA368',
       contrastText: '#000000',
     },
+    glazes: {
+      main: '#6BA368',
+      contrastText: '#000000',
+    },
+    divider: '#744F44',
   },
-  components: {
-    MuiCard: {
-      styleOverrides: {
-        // root: {
-        //   margin: 'auto',
-        //   maxWidth: '90%',
-        //   backgroundColor: 'rgba(255, 255, 255, 0.6)',
-        // },
+  typography: {
+    fontFamily: 'Alegreya Sans SC',
+    h4: {
+      fontFamily: 'Alegreya Sans',
+    },
+    h5: {
+      fontFamily: 'Alegreya Sans',
+    },
+    h6: {
+      fontFamily: 'Alegreya Sans ',
+    },
+    subtitle2: {
+      fontFamily: 'Alegreya Sans',
+    },
+    body2: {
+      fontFamily: 'Alegreya Sans',
+    },
+    caption: {
+      fontFamily: 'Alegreya Sans',
+    },
+  },
+  overrides: {
+    MuiSwitch: {
+      root: {
+        width: 42,
+        height: 26,
+        padding: 0,
+        margin: 8,
       },
+      switchBase: {
+        padding: 1,
+        '&$checked, &$colorPrimary$checked, &$colorSecondary$checked': {
+          transform: 'translateX(16px)',
+          color: '#fff',
+          '& + $track': {
+            opacity: 1,
+            border: 'none',
+          },
+        },
+      },
+      thumb: {
+        width: 24,
+        height: 24,
+      },
+      track: {
+        borderRadius: 13,
+        border: '1px solid #bdbdbd',
+        backgroundColor: '#fafafa',
+        opacity: 1,
+        transition: 'background-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+      },
+    },
+  },
+  props: {
+    MuiTooltip: {
+      arrow: true,
     },
   },
 })

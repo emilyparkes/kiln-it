@@ -1,6 +1,6 @@
-import { makeStyles } from '@mui/styles'
+// import { makeStyles } from '@mui/system'
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = () => ({
   box: {
     display: 'flex',
     flexDirection: 'row',
@@ -59,7 +59,7 @@ export const useStyles = makeStyles(() => ({
   //     color: 'whitesmoke',
   //   },
   statusButton: {
-    width: '252px',
+    width: '80%',
     fontWeight: '200',
     textTransform: 'uppercase',
     textAlign: 'center',
@@ -180,4 +180,4 @@ export const useStyles = makeStyles(() => ({
     bottom: '1rem',
     right: '2rem',
   },
-}))
+})

@@ -1,12 +1,6 @@
-# Database
-*.sqlite3
-
-# Bundle
-bundle.*
-
-# Logs
-logs
+node_modules
 *.log
+<<<<<<< HEAD
 npm-debug.log*
 
 # Dependency directories
@@ -34,3 +28,11 @@ dist
 
 # vercel
 .vercel
+=======
+*.sqlite3
+server/public/bundle.js
+server/public/bundle.js.map
+.env
+tags
+.vercel
+>>>>>>> 499b1082dab88ae8e216f66713a34985734bd23a
