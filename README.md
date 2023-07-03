@@ -6,7 +6,8 @@ A project that will allow me to keep records of my clay creations. Including typ
 
 Using fullstack technologies I have learned and mentor others in, as well as being a project to try out new tech in more complex scenarios. 
 
-🚀 [Currently deployed version](https://kiln-it.herokuapp.com/)   
+🚀 New Deployment Link coming soon! 
+<!-- 🚀 [Currently deployed version](https://kiln-it.herokuapp.com/)    -->
 
 Used for this project:  
 ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)
@@ -28,11 +29,12 @@ Used for this project:
 
 ## Table of Contents 
 - [Installation](#-installation)
-- [Design](#--design)
+- [Contribution](#-contribution)
 - [Project Documentation](#-project-doumentation)
-- [User Stories](#-user-stories) 
-- [License](#-license)   
+<!-- - [Features](#-features) -->
+<!-- - [Credits](#-credits) -->
 - [Tests](#-tests)
+- [License](#-license)   
 
 ### ⇣ Installation 
 
@@ -55,70 +57,28 @@ JWT_SECRET="a fun secret"
 
 The site should then be available on http://localhost:3000
 
-### 🎨  Design 
-[Figma Design](https://www.figma.com/file/09q8SUt5gSTAfpNtiGyUOEGt/Kiln-it?node-id=0%3A1) *an attempt*  
+### ↑ Contribution
+Feel free to contribute! I have many issues in my project kanban on GitHub.   
+I would appreciate any kind advice/help on code quality, testing and ways I could refactor my code. Always down to learn more!  
+
+1. Follow the installation commands
+2. Add your contributions under a new branch with the prefix `support-`
+3. Make a PR back to `dev`! 
+4. Include any additional info
+
+I'll review when I have time, always appreciate the support! 
 
 ### 🗂 Project Doumentation 
-[ERD](https://dbdiagram.io/d/606395deecb54e10c33e0510)  
+- [GitHub Wiki 📋](https://github.com/emilyparkes/kiln-it/wiki)  
+- [Figma Design 🎨](https://www.figma.com/file/09q8SUt5gSTAfpNtiGyUOEGt/Kiln-it?type=design&node-id=14%3A3&mode=design&t=WkfH31QLCuUiUn2b-1)  
+- [ERD](https://dbdiagram.io/d/606395deecb54e10c33e0510)  
+- All other info is in the Wiki! 
 
-
-### 👤 User Stories 
-
-#### MVP
-
-As an admin user:
-- [x] I want to view a creation status log
-- [x] I want to view a creation and all it's details
-- [x] I want to view all my creations
-- [x] I want to update the status of a creation
-- [x] I want to edit a creation
-- [x] I want to add a new creation
-- [x] I want to add a note to a creation
-- [x] I want to add a new clay type
-- [x] I want to add a new creation shape
-- [x] I want to add a new glaze
-
-
-As a friendly user:
-- [x] I want to view all the creations
-- [x] I want to view a creation and all it's details
-- [ ] I want to click a link to take me to instagram to purchase the item
-
-
-#### Views
-  | name | user | purpose |
-  | --- | --- | --- |
-  | Sign In | * | View for user to enter their login credentials |
-  | Register | * | View for user to sign up |
-  | Home | * | View list of clay creations |
-  | Creation Details | * | View an existing creation, and when Admin all it's recorded details |
-  | Creation Log | Admin | View list of clay creations and their current status |
-  | Add/Edit Creation | Admin | Create new or edit an existing entry |
-
-  
-<!-- 
-## API 
-
-All these routes should be protected
-
-| Method | Endpoint | User | Usage | Response |
-| --- | --- | --- | --- | --- |
-| Post | /api/auth/signin | Sign In a User | The Users JWT Token |
-| Post | /api/auth/register | Register a User | The Users JWT Token |
-| TBC | -->
-
-## 🪪 License 
-
-MIT License
-
-
-<!-- ## Features
+<!-- ### Features
 
 If your project has a lot of features, list them here. -->
 
-<!-- ## How to Contribute
-
-If you created an application or package and would like other developers to contribute it, you can include guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own if you'd prefer. -->
+<!-- ### 💖 Credits -->
 
 ## ✅ Tests 
 
@@ -127,3 +87,11 @@ Run tests with:
 ```
 npm run test
 ```
+
+## 🪪 License 
+
+MIT License
+
+<!-- ## How to Contribute
+
+If you created an application or package and would like other developers to contribute it, you can include guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own if you'd prefer. -->
