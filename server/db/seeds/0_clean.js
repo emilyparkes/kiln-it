@@ -1,5 +1,6 @@
 exports.seed = (knex) => {
-  return knex('glaze_creations').del()
+  return knex('glaze_creations')
+    .del()
     .then(() => knex('creations').del())
     .then(() => knex('shapes').del())
     .then(() => knex('clay').del())

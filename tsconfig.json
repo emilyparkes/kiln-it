@@ -1,7 +1,6 @@
 {
-  "ts-node": {
-    "transpileOnly": true
-  },
+  "include": ["server/**/*", "client/**/*", "test-setup.ts", "public"],
+  "ts-node": { "transpileOnly": true },
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig to read more about this file */
     /* Projects */
@@ -16,9 +15,12 @@
     "esModuleInterop": true /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */,
     "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
     "allowJs": true,
+
     /* Type Checking */
     "strict": true /* Enable all strict
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */,
-    "noEmit": true
+    "noEmit": true,
+
+    "types": ["vite/client"]
   }
 }

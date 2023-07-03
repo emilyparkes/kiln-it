@@ -3,6 +3,16 @@ import connection from './connection'
 import { Creation, DBCreation } from '../../models/Creation'
 import { Glaze } from '../../models/Glaze'
 
+
+export function existsInCreations(id: number): Promise<boolean> {
+  let exists = false
+  return getCreations().then((creations: Creation[]) => {
+    const filteredOut = creations.filter((creation) => creation.clayId === id)
+    filteredOut.length > 0 ? (exists = true) : (exists = false)
+    return exists
+  })
+}
+
 export function getCreations(db = connection): Promise<Creation[]> {
   return db('creations')
     .join('clay', 'clay.id', 'creations.clay_id')

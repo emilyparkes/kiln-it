@@ -3,15 +3,12 @@ import request from 'supertest'
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 
 import server from '../server'
-// import {getClay, getClayById, addClay, updateClay, deleteClay} from '../db/clay'
+
 import * as db from '../db/clay'
+import { getCreations, existsInCreations } from '../db/creations'
 
-
-import { existsInCreations } from './clay'
-import { getCreations } from '../db/creations'
-
-import { mockCreations } from './mocks/creations-mocks'
 import { mockClay, mockNewClayResult, mockOneClay } from './mocks/clay-mocks'
+import { mockCreations } from './mocks/creations-mocks'
 
 describe('test environment working', () => {
   it('works as expected', () => {
@@ -24,7 +21,7 @@ describe('test environment working', () => {
 })
 
 vi.mock('../db/clay')
-
+vi.mock('../db/creations')
 // This will clear mock history and reset its implementation to an empty function
 beforeEach(() => {
   vi.resetAllMocks()
@@ -79,6 +76,7 @@ describe('POST /api/v1/clay', () => {
 // DELETE
 describe('DELETE /api/v1/clay/:id', () => {
   it('deletes a specific creation', async () => {
+
     const mockDeleted = 1
 
     expect.assertions(4)
