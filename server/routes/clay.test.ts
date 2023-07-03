@@ -75,11 +75,11 @@ describe('POST /api/v1/clay', () => {
 
 // DELETE
 describe('DELETE /api/v1/clay/:id', () => {
-  it('deletes a specific creation', async () => {
+  it('marks a specific clay as no longer in use (if it already exists on creations)', async () => {
 
     const mockDeleted = 1
 
-    expect.assertions(4)
+    expect.assertions(3)
     vi.mocked(existsInCreations).mockResolvedValue(true)
     vi.mocked(getCreations).mockResolvedValue(mockCreations)
     vi.mocked(db.getClayById).mockResolvedValue(mockOneClay)
@@ -89,7 +89,23 @@ describe('DELETE /api/v1/clay/:id', () => {
     const res = await request(server).delete('/api/v1/clay/2')
     expect(db.getClayById).toHaveBeenCalledOnce()
     expect(res.body).toStrictEqual({
-      deleted: `${mockDeleted} item(s) have been deleted successfully`,
+      updated: `${mockDeleted} item have been updated successfully to be marked as not in use`,
+    })
+    expect(res.statusCode).toBe(200)
+  })
+
+  it('deletes a specific clay if it is not in use on any creations', async () => {
+
+    const mockDeleted = 1
+
+    expect.assertions(2)
+    vi.mocked(existsInCreations).mockResolvedValue(false)
+    vi.mocked(getCreations).mockResolvedValue(mockCreations)
+    vi.mocked(db.deleteClay).mockResolvedValue(1)
+
+    const res = await request(server).delete('/api/v1/clay/2')
+    expect(res.body).toStrictEqual({
+      deleted: `${mockDeleted} item have been deleted successfully`,
     })
     expect(res.statusCode).toBe(200)
   })
