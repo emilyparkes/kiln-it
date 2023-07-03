@@ -1,11 +1,5 @@
-node_modules
-*.log
-<<<<<<< HEAD
-npm-debug.log*
-
 # Dependency directories
 node_modules/
-jspm_packages/
 
 # TypeScript v1 declaration files
 typings/
@@ -26,13 +20,10 @@ typings/
 # generate output
 dist
 
-# vercel
-.vercel
-=======
+# database
 *.sqlite3
-server/public/bundle.js
-server/public/bundle.js.map
-.env
+
+# other
+*.log
+npm-debug.log*
 tags
-.vercel
->>>>>>> 499b1082dab88ae8e216f66713a34985734bd23a
