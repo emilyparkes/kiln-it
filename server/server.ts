@@ -8,7 +8,6 @@ import clayRoutes from './routes/clay'
 import glazesRoutes from './routes/glazes'
 
 const server = express()
-
 server.use(express.json())
 
 server.use('/api/v1/all', allItemsRoutes)
