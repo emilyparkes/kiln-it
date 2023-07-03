@@ -29,8 +29,7 @@ typings/
 .env
 .env.test
 
-# Nuxt.js build / generate output
-.nuxt
+# generate output
 dist
 
 # vercel
