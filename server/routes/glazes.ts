@@ -15,15 +15,17 @@ router.get('/', (req, res) => {
     })
 })
 
+// TODO: Think this route should change to being when a new glaze option is created
 router.post('/', (req, res) => {
-  const addedGlazes = req.body.map((glaze:Glaze) => {
-    return db.addGlaze(glaze).then((id) => {
-      return { id: id, glaze }
+  const addedGlazes = req.body.map((glazeObj:Glaze) => {
+    return db.addGlaze(glazeObj).then((idArr) => {
+      const id = idArr[0]
+      return { id: id, glaze: glazeObj.glaze }
     })
   })
   Promise.all(addedGlazes)
     .then((glazes) => {
-      return res.json({ glazes })
+      return res.json(glazes)
     })
     .catch((err) => {
       console.error(err)

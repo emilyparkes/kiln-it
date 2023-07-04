@@ -1,3 +1,9 @@
+export const mockNewGlazes = [
+	{
+		glaze: "Clear"
+	}
+]
+
 export const mockNewGlazesResult = [
   {
     id: 1,

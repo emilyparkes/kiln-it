@@ -2,9 +2,11 @@ import request from 'supertest'
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 
 import server from '../server'
-import * as db from '../db/glazes'
-import { mockGlazes, mockNewGlazesResult } from './mocks/glazes-mocks'
-import { mockNewCreationId, mockFormCreation, mockNewCreation, mockNewCreationResult } from './mocks/creations-mocks'
+import * as dbGlazes from '../db/glazes'
+import * as db from '../db/creations'
+
+import { mockGlazes, mockNewGlazes, mockNewGlazesResult } from './mocks/glazes-mocks'
+import { mockFormCreation, mockNewCreation, mockNewCreationResult } from './mocks/creations-mocks'
 
 
 describe('test environment working', () => {
@@ -18,6 +20,8 @@ describe('test environment working', () => {
 })
 
 vi.mock('../db/glazes')
+vi.mock('../db/creations')
+
 
 beforeEach(() => {
   vi.resetAllMocks()
@@ -29,37 +33,35 @@ vi.spyOn(console, 'error').mockImplementation(() => {})
 describe('GET /api/v1/glazes', async () => {
   it('returns the correct number of glazes', async () => {
     expect.assertions(5)
-    vi.mocked(db.getGlazes).mockResolvedValue(mockGlazes)
+    vi.mocked(dbGlazes.getGlazes).mockResolvedValue(mockGlazes)
     
     const res = await request(server).get('/api/v1/glazes')
       expect(res.body).toHaveLength(3)
-      expect(db.getGlazes).toHaveBeenCalledOnce()
+      expect(dbGlazes.getGlazes).toHaveBeenCalledOnce()
       expect(res.body[0].id).toEqual(1)
       expect(res.body[0].glaze).toEqual('Clear')
       expect(200)
   })
   it('responds with a 500 error if fails', async () => {
-    vi.mocked(db.getGlazes).mockRejectedValue(new Error('Route error'))
+    vi.mocked(dbGlazes.getGlazes).mockRejectedValue(new Error('Route error'))
 
     const res = await request(server).get('/api/v1/glazes')
     expect(res.statusCode).toBe(500)
   })
 })
 
+// TODO: Think this route should change to being when a new glaze option is created - for now test as is
 // POST
 describe('POST /api/v1/glazes', () => {
-  it('adds a new creation to the database', async () => {
-    expect.assertions(3)
-    vi.mocked(db.addGlaze).mockResolvedValue(mockNewCreationId)
-    vi.mocked(db.createCreationGlazes).mockResolvedValue([1])
-    vi.mocked(db.getCreationById).mockResolvedValue(mockNewCreation)
-    vi.mocked(db.getGlazesByCreationId).mockResolvedValue(mockNewGlazesResult)
+  it('adds a new glaze to the database', async () => {
+    expect.assertions(2)
+    vi.mocked(dbGlazes.addGlaze).mockResolvedValue([1])
 
+    const res = await request(server).post('/api/v1/glazes').send(mockNewGlazes)
 
-    const res = await request(server).post('/api/v1/glazes').send(mockFormCreation)
-    expect(res.body).toStrictEqual(mockNewCreationResult)
+    console.log('res', res.body)
+    expect(res.body).toStrictEqual(mockNewGlazesResult)
     expect(res.statusCode).toBe(200)
-    expect(db.createCreation).toHaveBeenCalledOnce()
   })
 
   it('responds with a 500 if fails', async () => {
@@ -71,7 +73,7 @@ describe('POST /api/v1/glazes', () => {
 })
 
 // PATCH /:id
-describe('PATCH /api/v1/glazes/update-creation/:id', () => {
+describe('PATCH /api/v1/glazes/', () => {
   it('updates creation details', async () => {
     expect.assertions(3)
     vi.mocked(db.updateCreationById).mockResolvedValue(1)
@@ -94,25 +96,25 @@ describe('PATCH /api/v1/glazes/update-creation/:id', () => {
   })
 })
 
-// PATCH /:id
-describe('PATCH /api/v1/glazes/update-creation-status/:id', () => {
-  it('updates the status of a creation', async () => {
-    expect.assertions(3)
-    vi.mocked(db.updateglazestatusById).mockResolvedValue(1)
+// // PATCH /:id
+// describe('PATCH /api/v1/glazes/update-creation-status/:id', () => {
+//   it('updates the status of a creation', async () => {
+//     expect.assertions(3)
+//     vi.mocked(db.updateGlazeStatusById).mockResolvedValue(1)
 
-    const res = await request(server).patch('/api/v1/glazes/update-creation-status/2').send(mockFormCreation)
-    expect(res.body).toStrictEqual(1)
-    expect(res.statusCode).toBe(200)
-    expect(db.updateglazestatusById).toHaveBeenCalledOnce()
-  })
+//     const res = await request(server).patch('/api/v1/glazes/update-creation-status/2').send(mockFormCreation)
+//     expect(res.body).toStrictEqual(1)
+//     expect(res.statusCode).toBe(200)
+//     expect(db.updateGlazeStatusById).toHaveBeenCalledOnce()
+//   })
 
-  it('responds with a 500 if fails', async () => {
-    vi.mocked(db.createCreation).mockRejectedValue(new Error('Route error'))
-    const res = await request(server).patch('/api/v1/glazes/update-creation-status/2').send(mockFormCreation)
+//   it('responds with a 500 if fails', async () => {
+//     vi.mocked(db.createCreation).mockRejectedValue(new Error('Route error'))
+//     const res = await request(server).patch('/api/v1/glazes/update-creation-status/2').send(mockFormCreation)
 
-    expect(res.statusCode).toBe(500)
-  })
-})
+//     expect(res.statusCode).toBe(500)
+//   })
+// })
 
 // DELETE
 describe('DELETE /api/v1/glazes/:id', () => {
