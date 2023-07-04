@@ -35,7 +35,10 @@ router.post('/', (req, res) => {
 
 router.patch('/:id', (req, res) => {
   return db.updateGlaze(Number(req.params.id), req.body.glaze)
-    .then((glaze) => res.json({ glaze }))
+    .then(() => db.getGlazeById(Number(req.params.id)))
+    .then((glaze) => {
+      return res.json(glaze)
+    })
     .catch((err) => {
       console.error(err)
       res.sendStatus(500)

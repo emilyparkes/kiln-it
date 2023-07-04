@@ -6,6 +6,10 @@ export function getGlazes(db = connection): Promise <Glaze[]> {
   return db('glazes').select()
 }
 
+export function getGlazeById(id: number, db = connection): Promise <Glaze> {
+  return db('glazes').where('id', id).select().first()
+}
+
 export function addGlaze(glaze: Glaze, db = connection): Promise <number[]> {
   return db('glazes').insert({ glaze })
 }
