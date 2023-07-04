@@ -33,12 +33,14 @@ describe('GET /api/v1/creations', async () => {
     vi.mocked(db.getGlazesByCreationId).mockResolvedValue(mockGlazes)
     
     const res = await request(server).get('/api/v1/creations')
-      expect(res.body).toHaveLength(2)
-      expect(db.getCreations).toHaveBeenCalledOnce()
-      expect(res.body[0].id).toEqual(1)
-      expect(res.body[0].name).toEqual('Le Vase')
-      expect(200)
+    
+    expect(res.body).toHaveLength(2)
+    expect(db.getCreations).toHaveBeenCalledOnce()
+    expect(res.body[0].id).toEqual(1)
+    expect(res.body[0].name).toEqual('Le Vase')
+    expect(200)
   })
+  
   it('responds with a 500 error if fails', async () => {
     vi.mocked(db.getCreations).mockRejectedValue(new Error('Route error'))
 
@@ -55,6 +57,7 @@ describe('GET /api/v1/creations/:id', async () => {
     vi.mocked(db.getGlazesByCreationId).mockResolvedValue(mockGlazes)
 
     const res = await request(server).get('/api/v1/creations/2')
+    
     expect(db.getCreationById).toHaveBeenCalledOnce()
     expect(res.body.id).toEqual(2)
     expect(res.body.clay).toBe('Grey Pebble')
@@ -70,6 +73,7 @@ describe('GET /api/v1/creations/:id', async () => {
     vi.mocked(db.getCreations).mockRejectedValue(new Error('Route error'))
   
     const res = await request(server).get('/api/v1/creations/2')
+    
     expect(res.statusCode).toBe(500)
   })
 })
@@ -85,6 +89,7 @@ describe('POST /api/v1/creations/new-creation', () => {
 
 
     const res = await request(server).post('/api/v1/creations/new-creation').send(mockFormCreation)
+    
     expect(res.body).toStrictEqual(mockNewCreationResult)
     expect(res.statusCode).toBe(200)
     expect(db.createCreation).toHaveBeenCalledOnce()
@@ -109,6 +114,7 @@ describe('PATCH /api/v1/creations/update-creation/:id', () => {
 
 
     const res = await request(server).patch('/api/v1/creations/update-creation/2').send(mockFormCreation)
+    
     expect(res.body).toStrictEqual(mockNewCreationResult)
     expect(res.statusCode).toBe(200)
     expect(db.updateCreationById).toHaveBeenCalledOnce()
@@ -129,6 +135,7 @@ describe('PATCH /api/v1/creations/update-creation-status/:id', () => {
     vi.mocked(db.updateCreationStatusById).mockResolvedValue(1)
 
     const res = await request(server).patch('/api/v1/creations/update-creation-status/2').send(mockFormCreation)
+    
     expect(res.body).toStrictEqual(1)
     expect(res.statusCode).toBe(200)
     expect(db.updateCreationStatusById).toHaveBeenCalledOnce()
@@ -152,8 +159,7 @@ describe('DELETE /api/v1/creations/:id', () => {
     vi.mocked(db.deleteCreation).mockResolvedValue(mockDeleted)
 
     const res = await request(server).delete('/api/v1/creations/2')
-    // perhaps run the get route and check to see if isnt there anymore
-    // similar to db test
+
     expect(db.deleteCreationGlazes).toHaveBeenCalledOnce()
     expect(db.deleteCreation).toHaveBeenCalledOnce()
     expect(res.body).toStrictEqual({
