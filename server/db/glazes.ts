@@ -6,7 +6,7 @@ export function getGlazes(db = connection): Promise <Glaze[]> {
   return db('glazes').select()
 }
 
-export function addGlaze(glaze: Glaze, db = connection): Promise <number> {
+export function addGlaze(glaze: Glaze, db = connection): Promise <number[]> {
   return db('glazes').insert({ glaze })
 }
 
