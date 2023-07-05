@@ -1,5 +1,5 @@
 import { showError } from './error'
-import { getStatuses, addStatuses, updateStatus, deleteStatus } from '../apis/statuses'
+import { fetchStatuses, postStatuses, patchStatus, delStatus } from '../apis/statuses'
 import { ThunkAction } from '../store'
 import { Status } from '../../models/Status'
 
@@ -51,11 +51,11 @@ export function removeStatusSuccess (id: number): Action {
   }
 }
 
-export function fetchStatuses (): ThunkAction {
+export function getStatuses (): ThunkAction {
   return (dispatch) => {
     dispatch(requestStatusesPending())
 
-    return getStatuses()
+    return fetchStatuses()
       .then(statuses => dispatch(receiveStatuses(statuses)))
       .catch(err => dispatch(showError(err.message)))
   }
@@ -65,7 +65,7 @@ export function createStatuses (statuses: Status[]): ThunkAction {
   return (dispatch) => {
     dispatch(requestStatusesPending())
 
-    return addStatuses(statuses)
+    return postStatuses(statuses)
       .then(statuses => dispatch(newStatusesSuccess(statuses)))
       .catch(err => dispatch(showError(err.message)))
   }
@@ -75,7 +75,7 @@ export function modifyStatus (status: Status): ThunkAction {
   return (dispatch) => {
     dispatch(requestStatusesPending())
 
-    return updateStatus(status.id, status)
+    return patchStatus(status.id, status)
       .then((status) => dispatch(updateStatusSuccess(status)))
       .catch(err => dispatch(showError(err.message)))
   }
@@ -85,7 +85,7 @@ export function removeStatus (id: number): ThunkAction {
   return (dispatch) => {
     dispatch(requestStatusesPending())
 
-    return deleteStatus(id)
+    return delStatus(id)
       .then(() => dispatch(removeStatusSuccess(id)))
       .catch(err => dispatch(showError(err.message)))
   }
