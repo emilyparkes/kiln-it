@@ -4,11 +4,11 @@ import { useAppDispatch } from '../hooks'
 // import { ThemeProvider } from '@mui/material/styles'
 // import { theme } from '../styles/theme'
 
-import { fetchCreations } from '../actions/creations'
+import { getCreations } from '../actions/creations'
 import { getClay } from '../actions/clay'
-import { fetchGlazes } from '../actions/glazes'
-import { fetchShapes } from '../actions/shapes'
-import { fetchStatuses } from '../actions/statuses'
+import { getGlazes } from '../actions/glazes'
+import { getShapes } from '../actions/shapes'
+import { getStatuses } from '../actions/statuses'
 
 import Navigation from './nav/Navigation'
 import Home from './Home'
@@ -27,11 +27,11 @@ function App() {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(fetchCreations())
+    dispatch(getCreations())
     dispatch(getClay())
-    dispatch(fetchGlazes())
-    dispatch(fetchShapes())
-    dispatch(fetchStatuses())
+    dispatch(getGlazes())
+    dispatch(getShapes())
+    dispatch(getStatuses())
   }, [])
 
   return (

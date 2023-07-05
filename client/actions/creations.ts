@@ -3,7 +3,7 @@ import { Creation } from '../../models/Creation'
 
 import { showError } from './error'
 import {
-  getCreations,
+  fetchCreations,
   postCreation,
   patchCreationStatus,
   patchCreation,
@@ -58,11 +58,11 @@ export function removeCreationSuccess(id:number): Action {
   }
 }
 
-export function fetchCreations(): ThunkAction {
+export function getCreations(): ThunkAction {
   return (dispatch) => {
     dispatch(requestCreationsPending())
 
-    return getCreations()
+    return fetchCreations()
       .then((creations) => dispatch(receiveCreationsSuccess(creations)))
       .catch((err) => dispatch(showError(err.message)))
   }

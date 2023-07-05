@@ -73,7 +73,7 @@ export const mockResponse = [
 	}
 ]
 
-export const mockSingleResponse = {
+export const newCreationResponse = {
 	id: 10,
 	clayId: 1,
 	clay: 'White',
@@ -100,6 +100,66 @@ export const mockSingleResponse = {
 		{
 			id: 1,
 			glaze: 'Clear'
+		}
+	]
+}
+
+export const newCreation = {
+	clayId: 1,
+	glazes: [{id: 1, glaze: 'Clear'}],
+	name: 'Espresso Mini',
+	note: 'hi',
+	shapeId: 1,
+ 	statusId: 1,
+	clay: 'White',
+	shape: 'Coffee Cup',
+	status: 'Wet',
+	weightLeatherHard: 0,
+	weightBoneDry: 0,
+	weightBisqueFired: 0,
+	weightGlazed: 0,
+	weightComplete: 0,
+	dateCreated: '',
+	dateComplete: '',
+	description: '',
+	imgLeatherHard: '',
+	imgBisqueFired: '',
+	imgGlazed: '',
+	imgComplete: '',
+	imgGallery: ''
+}
+
+export const modifiedCreation = {
+	id: 2,
+	clayId: 2,
+	clay: 'Grey Pebble',
+	shapeId: 2,
+	shape: 'Plate',
+	statusId: 1,
+	status: 'Wet',
+	weightLeatherHard: 0,
+	weightBoneDry: 0,
+	weightBisqueFired: 0,
+	weightGlazed: 0,
+	weightComplete: 0,
+	dateCreated: '2020-05-24T14:45:30',
+	dateComplete: '2020-06-24T14:45:30',
+	description: '',
+	note: 'Glaze with criss-cross pattern',
+	name: 'Large Gathering Plate',
+	imgLeatherHard: '',
+	imgBisqueFired: '',
+	imgGlazed: '',
+	imgComplete: '',
+	imgGallery: '',
+	glazes: [
+		{
+			id: 1,
+			glaze: 'Clear'
+		},
+		{
+			id: 10,
+			glaze: 'White'
 		}
 	]
 }
