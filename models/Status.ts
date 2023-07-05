@@ -1,4 +1,7 @@
 export interface Status {
-  id: number, 
   status: string
+}
+
+export interface DBStatus extends Status {
+  id: number, 
 }
