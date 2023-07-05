@@ -1,4 +1,7 @@
 export interface Shape {
-  id: number, 
   shape: string
+}
+
+export interface DBShape extends Shape {
+  id: number
 }
