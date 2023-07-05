@@ -5,7 +5,7 @@ import { useAppDispatch } from '../hooks'
 // import { theme } from '../styles/theme'
 
 import { fetchCreations } from '../actions/creations'
-import { fetchClay } from '../actions/clay'
+import { getClay } from '../actions/clay'
 import { fetchGlazes } from '../actions/glazes'
 import { fetchShapes } from '../actions/shapes'
 import { fetchStatuses } from '../actions/statuses'
@@ -28,7 +28,7 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchCreations())
-    dispatch(fetchClay())
+    dispatch(getClay())
     dispatch(fetchGlazes())
     dispatch(fetchShapes())
     dispatch(fetchStatuses())

@@ -1,5 +1,5 @@
 export interface Clay {
-  id: number, 
+  id?: number, 
   clay: string,
 }
 
