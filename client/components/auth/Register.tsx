@@ -13,7 +13,7 @@ function Register () {
         <h1>Register</h1>
       </div>
 
-      <label className='label'>Username</label>
+      <label htmlFor='username' className='label'>Username</label>
       <input
         type='username'
         value={username}
@@ -21,7 +21,7 @@ function Register () {
         onChange={(e) => setUsername(e.target.value)}
       ></input>
 
-      <label>Email</label>
+      <label htmlFor='email' >Email</label>
       <input
         id='email'
         name='email'
@@ -30,7 +30,7 @@ function Register () {
         placeholder='email'
       />
 
-      <label className='label'>Password</label>
+      <label htmlFor='password' className='label'>Password</label>
       <input
         type='password'
         value={password}

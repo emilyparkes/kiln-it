@@ -3,5 +3,6 @@ export interface Shape {
 }
 
 export interface DBShape extends Shape {
-  id: number
+  id: number,
+  in_use: boolean
 }

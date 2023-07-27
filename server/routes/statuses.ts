@@ -33,10 +33,8 @@ router.post('/', (req, res) => {
 
 router.patch('/:id', (req, res) => {
   return db.updateStatus(Number(req.params.id), req.body.status)
-    .then(() => {
-      db.getStatusById(Number(req.params.id))
-      .then((status) => res.json(status))
-    })
+    .then(() => db.getStatusById(Number(req.params.id)))
+    .then((status) => res.json(status))
     .catch((err) => {
       console.error(err)
       res.sendStatus(500)

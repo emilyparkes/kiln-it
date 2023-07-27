@@ -33,10 +33,8 @@ router.post('/', (req, res) => {
 router.patch('/:id', (req, res) => {
   return db
     .updateShape(Number(req.params.id), req.body.shape)
-    .then(() => {
-      db. getShapeById(Number(req.params.id))
-      .then((shape) => res.json(shape))
-    })
+    .then(() => db. getShapeById(Number(req.params.id)))
+    .then((shape) => res.json(shape))
     .catch((err) => {
       console.error(err)
       res.sendStatus(500)

@@ -4,21 +4,23 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 // import { withStyles } from '@mui/system'
 
 interface Props {
-  category: any,
-  name: any,
-  colour: any,
-  select: any,
-  remove: any,
-  checked: any
+  category: string,
+  name: string,
+  colour: string,
+  select: (category: string, value:string) => void,
+  remove: (category: string, value: string) => void,
+  checked: boolean,
 }
 export default function FilterOption({
   category,
   name,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   colour,
   select,
   remove,
   checked: initChecked,
 }: Props) {
+
   // const CustomCheckbox = withStyles({
   //   root: {
   //     color: colour,

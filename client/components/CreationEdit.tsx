@@ -31,7 +31,7 @@ function CreationEdit() {
   const [imgIdx, setImgIdx] = useState(0)
   const [currentImg, setCurrentImage] = useState('')
   const [form, setForm] = useState({} as Partial<Creation>)
-  const [selectedGlaze, setSelectedGlaze] = useState([] as any[])
+  const [selectedGlaze, setSelectedGlaze] = useState([] as unknown[])
 
   // HARD CODED FOR NOW
   const images = [
@@ -83,10 +83,11 @@ function CreationEdit() {
       })
       setSelectedGlaze(prettyState)
     }
-  }, [creations, storeGlazes])
+  }, [creations, storeGlazes, params.name])
 
   useEffect(() => {
     setCurrentImage(images[imgIdx])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [imgIdx])
 
   const getImage = (idx) => {
@@ -132,11 +133,12 @@ function CreationEdit() {
       {form && creations && (
         <form>
           <div className="creation-container edit">
-            <img className="creation-img" src={currentImg} />
+            <img className="creation-img" src={currentImg} alt='some text'/>
 
             <div className="icon-dots">
               {images.map((dot, idx) => {
                 return (
+                  // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
                   <div
                     key={idx}
                     className={imgIdx === idx ? 'dot selected' : 'dot'}

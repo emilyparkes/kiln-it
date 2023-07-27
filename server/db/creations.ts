@@ -1,6 +1,6 @@
 /* eslint-disable promise/no-nesting */
 import connection from './connection'
-import { Creation, DBCreation } from '../../models/Creation'
+import { Creation, InsertCreation } from '../../models/Creation'
 import { Glaze } from '../../models/Glaze'
 
 
@@ -100,18 +100,17 @@ export function getCreationById(id:number, db = connection) {
     .first()
 }
 
-export function updateCreationStatusById(id:number, creation: DBCreation, db = connection): Promise<number> {
+export function updateCreationStatusById(id:number, creation: InsertCreation, db = connection): Promise<number> {
   return db('creations')
     .where('creations.id', id)
     .update({ status_id: creation.status_id })
 }
 
-export function updateCreationById(id:number, creation:DBCreation, db = connection): Promise<number> {
+export function updateCreationById(id:number, creation:InsertCreation, db = connection): Promise<number> {
   return db('creations').where('creations.id', id).update({
     clay_id: creation.clay_id,
     shape_id: creation.shape_id,
     status_id: creation.status_id,
-    glaze_id: creation.glaze_id,
     weight_leather_hard: creation.weight_leather_hard,
     weight_bone_dry: creation.weight_bone_dry,
     weight_bisque_fired: creation.weight_bisque_fired,
@@ -123,12 +122,11 @@ export function updateCreationById(id:number, creation:DBCreation, db = connecti
   })
 }
 
-export function createCreation(creation:any, db = connection): Promise<number[]> {
+export function createCreation(creation:InsertCreation, db = connection): Promise<number[]> {
   return db('creations').insert({
     clay_id: creation.clay_id,
     shape_id: creation.shape_id,
     status_id: creation.status_id,
-    glaze_id: creation.glaze_id,
     weight_leather_hard: creation.weight_leather_hard,
     weight_bone_dry: creation.weight_bone_dry,
     weight_bisque_fired: creation.weight_bisque_fired,

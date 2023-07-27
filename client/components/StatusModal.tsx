@@ -1,9 +1,11 @@
+import { ReactNode } from "react"
+
 interface Props {
-  save: any,
-  close: any,
-  show: any,
-  resetState: any,
-  children: any
+  save: () => void,
+  close: () => void,
+  show: boolean,
+  resetState: () => void,
+  children: ReactNode
 }
 
 function StatusModal ({ save, close, show, resetState, children }: Props) {

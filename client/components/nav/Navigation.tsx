@@ -25,7 +25,7 @@ ElevationScroll.propTypes = {
   children: PropTypes.element.isRequired,
 }
 
-export default function Navigation(props: any) {
+export default function Navigation(props: object) {
   console.log('nav props', props)
   return (
     <>

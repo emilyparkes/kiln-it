@@ -1,23 +1,32 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, ChangeEvent } from 'react'
 import { TextField } from '@mui/material'
 import { CgClose } from 'react-icons/cg'
+// import { DBGlaze } from '../../models/Glaze'
+// import { DBShape } from '../../models/Shape'
+// import { DBStatus } from '../../models/Status'
+// import { DBClay } from '../../models/Clay'
 
+// type Options = DBClay | DBGlaze | DBShape | DBStatus
 interface Props {
-  type: any,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  type: any
   name: string,
-  deleteItem: any
+  deleteItem: (id: number) => void
 }
 
 function DataOptionItem({ type, name, deleteItem }: Props) {
-  const [input, setCurrentInput] = useState('')
-  const [edited, setEdited] = useState([])
+  console.log('type: ', type)
+  const [input, setCurrentInput] = useState('' as keyof typeof type)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [edited, setEdited] = useState([] as any)
 
   useEffect(() => {
-    setCurrentInput(type[name])
-  }, [])
+    console.log('type[name]', type[name])
+    setCurrentInput(type[name as keyof typeof type])
+  }, [type, name])
 
-  const handleChange = (e) => {
-    setCurrentInput(e.target.value)
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setCurrentInput(event.target.value)
     setEdited([...edited, input])
   }
 

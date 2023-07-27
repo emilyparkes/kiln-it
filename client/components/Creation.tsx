@@ -43,10 +43,11 @@ function Creation() {
       const creation = findString(creations, 'name', name)
       setCreation(creation)
     }
-  }, [creations])
+  }, [creations, params.name])
 
   useEffect(() => {
     setCurrentImage(images[imgIdx])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [imgIdx])
 
   const getImage = (idx:number) => {
@@ -67,16 +68,18 @@ function Creation() {
       {creation && (
         <>
           <div className="creation-container">
-            <img className="creation-img" src={currentImg} />
+            <img className="creation-img" src={currentImg} alt='some text'/>
 
             <div className="icon-dots">
               {images.map((dot, idx: number) => {
                 return (
+                  // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/interactive-supports-focus
                   <div
                     key={idx}
                     className={imgIdx === idx ? 'dot selected' : 'dot'}
                     id={idx}
-                    onClick={() => getImage(idx)}
+                    onClick={() => {getImage(idx)}}
+                    role="button"
                   ></div>
                 )
               })}

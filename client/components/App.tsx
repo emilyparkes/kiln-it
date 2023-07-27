@@ -32,7 +32,7 @@ function App() {
     dispatch(getGlazes())
     dispatch(getShapes())
     dispatch(getStatuses())
-  }, [])
+  }, [dispatch])
 
   return (
     <>

@@ -1,8 +1,10 @@
 /* eslint-disable promise/no-nesting */
 import express from 'express'
-import { Creation } from '../../models/Creation'
+// import { Creation } from '../../models/Creation'
 import * as db from '../db/clay'
-import { getCreations, existsInCreations } from '../db/creations'
+import { 
+  // getCreations, 
+  existsInCreations } from '../db/creations'
 // const { prepForDb, prepForJS } = require('../server-utils')
 const router = express.Router()
 
