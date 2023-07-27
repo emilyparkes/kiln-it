@@ -1,4 +1,3 @@
-/* eslint-disable jest/no-commented-out-tests */
 import request from 'supertest'
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 
