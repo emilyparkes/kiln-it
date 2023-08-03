@@ -1,10 +1,7 @@
-import { describe, it, expect, beforeAll, afterAll, beforeEach, vi } from 'vitest'
+import { describe, it, expect, beforeAll, afterAll, beforeEach } from 'vitest'
 
 import connection from './connection'
 import * as clay from './clay'
-import { existsInCreations } from '../db/creations'
-
-vi.mock('./creations')
 
 beforeAll(async () => {
   await connection.migrate.latest()
@@ -12,7 +9,6 @@ beforeAll(async () => {
 
 beforeEach(async () => {
   await connection.seed.run()
-  vi.resetAllMocks()
 })
 
 afterAll(async () => {
@@ -52,7 +48,7 @@ describe('clay can ', () => {
 
   it('add a new clay', async () => {
     expect.assertions(3)
-    const result = await clay.addClay('White Speckle')
+    const result = await clay.addClay({ clay: 'White Speckle'})
 
     const expectedResult = { id: 5, clay: 'White Speckle', in_use: 1 }
     

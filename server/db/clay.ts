@@ -11,7 +11,7 @@ export function getClayById(id:number, db = connection): Promise<Clay> {
 }
 
 export function addClay(clay:Clay, db = connection): Promise<number> {
-  return db('clay').insert({ clay })
+  return db('clay').insert(clay)
 }
 
 export function updateClay(id:number, clay:Partial<DBClay>, db = connection): Promise<number> {
