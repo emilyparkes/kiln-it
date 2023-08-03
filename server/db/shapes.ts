@@ -11,7 +11,7 @@ export function getShapeById(id:number, db = connection): Promise<DBShape> {
 }
 
 export function addShape(shape:Shape, db = connection): Promise<number[]> {
-  return db('shapes').insert({ shape })
+  return db('shapes').insert(shape)
 }
 
 export function updateShape(id:number, shape:Shape, db = connection): Promise<number> {
