@@ -5,5 +5,6 @@ export interface Glaze {
 
 export interface DBGlaze extends Glaze{
   id: number,
-  underglaze: boolean
+  underglaze: boolean,
+  in_use: boolean
 }

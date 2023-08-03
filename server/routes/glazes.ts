@@ -34,7 +34,7 @@ router.post('/', (req, res) => {
 })
 
 router.patch('/:id', (req, res) => {
-  return db.updateGlaze(Number(req.params.id), req.body.glaze)
+  return db.updateGlaze(Number(req.params.id), req.body)
     .then(() => db.getGlazeById(Number(req.params.id)))
     .then((glaze) => {
       return res.json(glaze)
