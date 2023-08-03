@@ -1,4 +1,5 @@
 export interface Glaze {
+  id?: number,
   glaze: string
 }
 

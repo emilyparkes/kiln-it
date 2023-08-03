@@ -15,11 +15,11 @@ exports.up = (knex) => {
     table.text('note')
     table.string('date_created')
     table.string('date_complete')
-    table.string('img_leather_hard')
-    table.string('img_bisque_fired')
-    table.string('img_glazed')
-    table.string('img_complete')
-    table.string('img_gallery')
+    table.string('img_leather_hard').defaultTo('')
+    table.string('img_bisque_fired').defaultTo('')
+    table.string('img_glazed').defaultTo('')
+    table.string('img_complete').defaultTo('')
+    table.string('img_gallery').defaultTo('')
   })
 }
 

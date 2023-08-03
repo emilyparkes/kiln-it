@@ -32,6 +32,7 @@ router.post('/new-creation', (req, res) => {
   const dbCreation = prepForDb(req.body)
   // console.log(dbCreation)
   let creationId = 0
+  dbCreation.date_created = Date.now()
   db.createCreation(dbCreation)
     .then((creationIdArr) => {
       creationId = creationIdArr[0]
