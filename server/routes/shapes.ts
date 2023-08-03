@@ -32,7 +32,7 @@ router.post('/', (req, res) => {
 
 router.patch('/:id', (req, res) => {
   return db
-    .updateShape(Number(req.params.id), req.body.shape)
+    .updateShape(Number(req.params.id), req.body)
     .then(() => db. getShapeById(Number(req.params.id)))
     .then((shape) => res.json(shape))
     .catch((err) => {
