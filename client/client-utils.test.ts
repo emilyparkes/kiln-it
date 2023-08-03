@@ -1,10 +1,17 @@
+import { describe, it, expect } from 'vitest'
 import {
   findString,
   toCapSpace,
   toLowHyphen } from './client-utils'
 
-test('jest working correctly', () => {
-  expect(true).toBeTruthy()
+describe('test environment working', () => {
+  it('works as expected', () => {
+    expect.assertions(4)
+    expect(false).toBeFalsy()
+    expect(7).not.toBeNaN()
+    expect(0.2 + 0.1).toBeCloseTo(0.3, 10)
+    expect([1, 2, 3]).toBeDefined()
+  })
 })
 
 describe('findString', () => {
@@ -16,6 +23,7 @@ describe('findString', () => {
     const actual = findString(arr, property, value)
     expect(actual).toEqual(expected)
   })
+
   it('finds item based on arr, property, value and type', () => {
     const arr = [{ name: 'emily-coco', job: 'dev' }, { name: 'maryon-wils', job: 'audience' }]
     const property = 'name'

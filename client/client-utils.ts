@@ -1,6 +1,6 @@
 import _ from 'lodash'
 
-export function findString(arr, property, value, type) {
+export function findString(arr, property, value, type?) {
   const found = arr.find((obj) => obj[property] === value)
   if (type) {
     return found[type]
