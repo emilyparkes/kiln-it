@@ -51,10 +51,10 @@ describe('shapes can ', () => {
     expect.assertions(3)
     const result = await shapes.addShape({ shape: 'Platter' })
 
-    const expectedResult = { id: 2, shape: 'Plate', in_use: 1 }
+    const expectedResult = { id: 9, shape: 'Platter', in_use: 1 }
     
     const allshapes = await shapes.getShapes()
-    const found = allshapes.find((shape => shape.id === 2))
+    const found = allshapes.find((shape => shape.id === 9))
 
     expect(result).toStrictEqual([9])
     expect(allshapes).toHaveLength(9)
