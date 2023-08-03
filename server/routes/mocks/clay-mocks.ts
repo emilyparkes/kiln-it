@@ -13,15 +13,20 @@ export const mockClay = [
 		id: 3,
 		clay: 'Primo Red Stoneware',
 		in_use: 1
+	},
+	{ 
+		id: 4,
+		clay: 'Porcelian',
+		in_use: false
 	}
 ]
 
 export const mockNewClayResult = {
-	id: 4,
+	id: 5,
 	clay: 'Blue Pebble'
 }
 
 export const mockOneClay = {
-	id: 4,
+	id: 5,
 	clay: 'Blue Pebble'
 }
