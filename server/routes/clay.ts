@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   return db
-    .addClay(req.body.clay)
+    .addClay(req.body)
     .then((id) => res.json({ id: id, clay: req.body.clay }))
     .catch((err) => {
       console.error(err)

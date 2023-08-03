@@ -38,7 +38,7 @@ describe('GET /api/v1/clay', async () => {
     vi.mocked(db.getClay).mockResolvedValue(mockClay)
     
     const res = await request(server).get('/api/v1/clay')
-      expect(res.body).toHaveLength(3)
+      expect(res.body).toHaveLength(4)
       expect(db.getClay).toHaveBeenCalledOnce()
       expect(res.body[0].id).toEqual(1)
       expect(res.body[0].clay).toEqual('White')
@@ -56,7 +56,7 @@ describe('GET /api/v1/clay', async () => {
 describe('POST /api/v1/clay', () => {
   it('adds a new clay to the database', async () => {
     expect.assertions(3)
-    vi.mocked(db.addClay).mockResolvedValue(4)
+    vi.mocked(db.addClay).mockResolvedValue(5)
 
     const res = await request(server).post('/api/v1/clay').send(mockNewClayResult)
     expect(res.body).toStrictEqual(mockNewClayResult)
