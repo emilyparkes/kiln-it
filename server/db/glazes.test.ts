@@ -1,10 +1,8 @@
-import { describe, it, expect, beforeAll, afterAll, beforeEach, vi } from 'vitest'
+import { describe, it, expect, beforeAll, afterAll, beforeEach } from 'vitest'
 
 import connection from './connection'
 import * as glazes from './glazes'
-import { existsInCreations } from '../db/creations'
 
-vi.mock('./creations')
 
 beforeAll(async () => {
   await connection.migrate.latest()
@@ -12,7 +10,6 @@ beforeAll(async () => {
 
 beforeEach(async () => {
   await connection.seed.run()
-  vi.resetAllMocks()
 })
 
 afterAll(async () => {
