@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 const path = require('path')
 
 export default {
@@ -8,7 +9,7 @@ export default {
       filename: path.join(__dirname, 'dev.sqlite3'),
     },
     pool: {
-      afterCreate: (conn, cb) => conn.run('PRAGMA foreign_keys = ON', cb),
+      afterCreate: (conn: any, cb: any) => conn.run('PRAGMA foreign_keys = ON', cb),
     },
   },
 
@@ -49,7 +50,6 @@ export default {
       directory: path.join(__dirname, 'seeds'),
     },
     pool: {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       afterCreate: (conn: any, cb: any) =>
         conn.run('PRAGMA foreign_keys = ON', cb),
     },
