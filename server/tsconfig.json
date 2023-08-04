@@ -3,6 +3,7 @@
   "include": [".", "../common"],
   "compilerOptions": {
     "outDir": "../dist",
-    "noEmit": false
+    "noEmit": false,
+    "types": ["node"]
   }
 }

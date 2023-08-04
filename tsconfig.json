@@ -21,6 +21,6 @@
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */,
     "noEmit": true,
 
-    "types": ["vite/client"]
+    "types": ["vite/client", "node"]
   }
 }
