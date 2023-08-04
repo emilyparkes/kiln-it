@@ -49,7 +49,7 @@ describe('glazes can ', () => {
 
   it('add a new glaze', async () => {
     expect.assertions(3)
-    const result = await glazes.addGlaze('Ocean')
+    const result = await glazes.addGlaze({ glaze: 'Ocean'})
 
     const expectedResult = { id: 12, glaze: 'Ocean', underglaze: null, in_use: 1 }
     

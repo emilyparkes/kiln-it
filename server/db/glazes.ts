@@ -11,7 +11,7 @@ export function getGlazeById(id: number, db = connection): Promise <DBGlaze> {
 }
 
 export function addGlaze(glaze: Glaze, db = connection): Promise <number[]> {
-  return db('glazes').insert({ glaze })
+  return db('glazes').insert(glaze)
 }
 
 export function updateGlaze(id:number, glaze: Glaze, db = connection): Promise <number> {
