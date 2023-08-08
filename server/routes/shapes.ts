@@ -15,11 +15,12 @@ router.get('/', (req, res) => {
     })
 })
 
+//TODO: make this for adding new shapes options: just one at a time
 router.post('/', (req, res) => {
   const addedShapes = req.body.map((shapeObj:Shape) => {
     return db.addShape(shapeObj).then((idArr) => {
       const id = idArr[0]
-      return { id: id, shape: shapeObj.shape }
+      return { id: id, shape: shapeObj.shape, inUse: true }
     })
   })
   Promise.all(addedShapes)

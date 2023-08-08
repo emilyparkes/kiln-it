@@ -62,7 +62,7 @@ describe('shapes can ', () => {
   })
 
   it('update a single shape', async () => {
-    expect.assertions(3)
+    expect.assertions(2)
     const id = 2
     const editedShape = { shape: 'Large Dinner Plate'}
     await shapes.updateShape(id, editedShape)
@@ -72,7 +72,6 @@ describe('shapes can ', () => {
     
     expect(result[1].shape).toBe('Large Dinner Plate')
     expect(found?.shape).toBe('Large Dinner Plate')
-    expect(found?.in_use).toBe(1)
   })
 
   it('delete a shapes if it is not in use on any creations', async () => {

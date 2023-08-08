@@ -2,17 +2,17 @@ export const mockShapes = [
 	{
 		id: 1,
 		shape: "Coffee Cup",
-		in_use: 1
+		inUse: true
 	},
 	{
 		id: 2,
 		shape: "Plate",
-		in_use: 1
+		inUse: true
 	},
 	{
 		id: 3,
 		shape: "Bowl",
-		in_use: 1
+		inUse: true
 	}
 ]
 
@@ -26,6 +26,7 @@ export const mockNewShapeResult = [
 	{
     id: 4,
 		shape: "Espresso Mini Cup",
+		inUse: true
 	}
 ]
 
@@ -36,4 +37,5 @@ export const mockModifiedShape = {
 export const mockModifiedShapeResult = {
   id: 2,
 	shape: "Platter",
+	inUse: true
 }
