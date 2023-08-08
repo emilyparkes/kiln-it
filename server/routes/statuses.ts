@@ -2,7 +2,7 @@ import express from 'express'
 
 import * as db from '../db/statuses'
 import { Status } from '../../models/Status'
-// const { prepForDb, prepForJS } = require('../server-utils')
+// const { prepForDb, prepForTS } = require('../server-utils')
 
 const router = express.Router()
 

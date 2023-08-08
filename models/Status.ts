@@ -5,3 +5,8 @@ export interface Status {
 export interface DBStatus extends Status {
   id: number, 
 }
+
+export interface SnakeStatus {
+  id: number,
+  status: string
+}
