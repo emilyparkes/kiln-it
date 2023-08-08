@@ -2,22 +2,22 @@ export const mockClay = [
 	{
 		id: 1,
 		clay: 'White',
-		in_use: 1
+		inUse: true
 	},
 	{
 		id: 2,
 		clay: 'Grey Pebble',
-		in_use: 1
+		inUse: true
 	},
 	{
 		id: 3,
 		clay: 'Primo Red Stoneware',
-		in_use: 1
+		inUse: true
 	},
 	{ 
 		id: 4,
 		clay: 'Porcelian',
-		in_use: false
+		inUse: false
 	}
 ]
 

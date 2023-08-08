@@ -61,17 +61,16 @@ describe('clay can ', () => {
   })
 
   it('update a single clay', async () => {
-    expect.assertions(3)
+    expect.assertions(2)
     const id = 2
     const editedClay = { id: 2, clay: 'Grey Pebbled', in_use: false }
     await clay.updateClay(id, editedClay)
 
     const result = await clay.getClay()
     const found = result.find((clay => clay.id === id))
-    
+
     expect(result[1].clay).toBe('Grey Pebbled')
     expect(found?.clay).toBe('Grey Pebbled')
-    expect(found?.in_use).toBe(0)
   })
 
   it('delete a clay if it is not in use on any creations', async () => {

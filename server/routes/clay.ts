@@ -5,7 +5,7 @@ import * as db from '../db/clay'
 import { 
   // getCreations, 
   existsInCreations } from '../db/creations'
-// const { prepForDb, prepForJS } = require('../server-utils')
+// const { prepForDb, prepForTS } = require('../server-utils')
 const router = express.Router()
 
 router.get('/', (req, res) => {
@@ -36,7 +36,7 @@ router.delete('/:id', (req, res) => {
         return db
           .getClayById(id)
           .then(() => {
-            return db.updateClay(id, { in_use: false })
+            return db.updateClay(id, { inUse: false })
           })
           .then((clay) => {
             return res.json({
