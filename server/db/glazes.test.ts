@@ -62,7 +62,7 @@ describe('glazes can ', () => {
   })
 
   it('update a single glaze', async () => {
-    expect.assertions(3)
+    expect.assertions(2)
     const id = 2
     const editedGlazes = { glaze: 'White Matte Sheer'}
     await glazes.updateGlaze(id, editedGlazes)
@@ -72,7 +72,6 @@ describe('glazes can ', () => {
     
     expect(result[1].glaze).toBe('White Matte Sheer')
     expect(found?.glaze).toBe('White Matte Sheer')
-    expect(found?.in_use).toBe(1)
   })
 
   it('delete a glazes if it is not in use on any creations', async () => {

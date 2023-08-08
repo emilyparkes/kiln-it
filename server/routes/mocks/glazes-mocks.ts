@@ -2,14 +2,20 @@ export const mockGlazes = [
   {
     id: 1,
     glaze: 'Clear',
+    underglaze: false,
+    inUse: true
   },
   {
     id: 10,
     glaze: 'White',
+    underglaze: false,
+    inUse: true
   },
   {
     id: 11,
     glaze: 'Peach',
+    underglaze: false,
+    inUse: true
   },
   ]
   
@@ -33,6 +39,6 @@ export const mockModifiedGlaze = {
 export const mockModifiedGlazeResult = 	{
   id: 2,
   glaze: "Blue Pebble",
-  underglaze: 0,
-  in_use: 1
+  underglaze: false,
+  inUse: true
 }

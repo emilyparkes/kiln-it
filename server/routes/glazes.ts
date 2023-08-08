@@ -2,7 +2,7 @@ import express from 'express'
 
 import * as db from '../db/glazes'
 import { Glaze } from '../../models/Glaze'
-// const { prepForDb, prepForJS } = require('../server-utils')
+// const { prepForDb, prepForTS } = require('../server-utils')
 
 const router = express.Router()
 
