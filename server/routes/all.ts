@@ -6,8 +6,8 @@ import * as statuses from '../db/statuses'
 import * as clay from '../db/clay'
 import * as shapes from '../db/shapes'
 
-import { prepForJS } from '../server-utils'
-import { Options } from '../../models/Options'
+import { prepForTS } from '../server-utils'
+import { DBOptions } from '../../models/Options'
 
 const router = express.Router()
 
@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
   ]
   Promise.all(allItems)
     .then((allItems) =>
-      allItems.map((tableArr) => tableArr.map((obj: Options ) => prepForJS(obj)))
+      allItems.map((tableArr) => tableArr.map((obj: DBOptions ) => prepForTS(obj)))
     )
     .then(([creations, glazes, statuses, clay, shapes]) => {
       const allItems = {

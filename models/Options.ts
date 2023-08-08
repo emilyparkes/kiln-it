@@ -1,9 +1,9 @@
-import { Clay, DBClay } from './Clay'
-import { Creation, DBCreation } from './Creation'
-import { Glaze, DBGlaze } from './Glaze'
-import { Shape, DBShape } from './Shape'
-import { Status, DBStatus } from './Status'
+import { SnakeClay, DBClay } from './Clay'
+import { SnakeCreation, DBCreation } from './Creation'
+import { SnakeGlaze, DBGlaze } from './Glaze'
+import { SnakeShape, DBShape } from './Shape'
+import { SnakeStatus, DBStatus } from './Status'
 
-export type DBOptions = DBClay | DBCreation | DBGlaze | DBShape | DBStatus
+export type DBOptions = DBCreation| DBClay | DBGlaze | DBShape | DBStatus
 
-export type Options = Clay | Creation | Glaze | Shape | Status
+export type SnakeOptions =  SnakeCreation | SnakeClay | SnakeGlaze | SnakeShape | SnakeStatus
