@@ -2,8 +2,9 @@
 import express from 'express'
 
 import * as db from '../db/creations'
-import { Glaze } from '../../models/Glaze'
-import { prepForDb, prepForJS } from '../server-utils'
+import { DBGlaze, Glaze } from '../../models/Glaze'
+import { prepForDB, prepForTS } from '../server-utils'
+import { DBCreation, SnakeCreation } from '../../models/Creation'
 
 const router = express.Router()
 
@@ -15,7 +16,7 @@ router.get('/', (req, res) => {
         creations.map((creation) => {
           return db.getGlazesByCreationId(creation.id).then((glazes) => {
             creation.glazes = glazes
-            creation = prepForJS(creation)
+            creation = prepForTS(creation) as DBCreation
             return creation
           })
         })
@@ -29,25 +30,27 @@ router.get('/', (req, res) => {
 })
 
 router.post('/new-creation', (req, res) => {
-  const dbCreation = prepForDb(req.body)
-  // console.log(dbCreation)
+  const dbCreation = prepForDB(req.body) as SnakeCreation
   let creationId = 0
-  dbCreation.date_created = Date.now()
+  dbCreation.date_created = `${Date.now()}`
   db.createCreation(dbCreation)
     .then((creationIdArr) => {
       creationId = creationIdArr[0]
       return Promise.all(
-        dbCreation.glazes.map((glazeObj:Glaze) => {
-          return db.createCreationGlazes(creationId, glazeObj.id)
+        dbCreation.glazes.map((glazeObj: Partial<DBGlaze>) => {
+          if (glazeObj.id) {
+            return db.createCreationGlazes(creationId, glazeObj.id)
+          } else {
+            throw new Error ('Missing glaze id argument')
+          }
         })
       )
     })
     .then(() => {
       return db.getCreationById(creationId).then((creation) => {
-        // console.log(creation)
         return db.getGlazesByCreationId(creation.id).then((glazes) => {
           creation.glazes = glazes
-          creation = prepForJS(creation)
+          creation = prepForTS(creation)
           res.json(creation)
         })
       })
@@ -60,32 +63,35 @@ router.post('/new-creation', (req, res) => {
 
 // /api/v1/creations
 router.patch('/update-creation/:id', (req, res) => {
-  const dbCreation = prepForDb(req.body)
+  const dbCreation = prepForDB(req.body) as SnakeCreation
   const creationId = Number(req.params.id)
 
   db.updateCreationById(creationId, dbCreation)
-    .then((creation) => {
-      if (!creation) {
-        return res.status(404).json({
+    .then((success) => {
+      if (!success) {
+        res.status(404).json({
           error: 'creation id not found',
         })
       } else {
         return Promise.all(
-          dbCreation.glazes.map((glazeObj:Glaze) => {
-            return db.createCreationGlazes(creationId, glazeObj.id)
+          dbCreation.glazes.map((glazeObj: Partial<DBGlaze>) => {
+            if (glazeObj.id) {
+              return db.createCreationGlazes(creationId, glazeObj.id)
+            } else {
+              throw new Error ('Missing glaze id argument')
+            }
           })
+        ).then(() =>
+          db.getCreationById(creationId).then((creation) =>
+            db.getGlazesByCreationId(creation.id).then((glazes) => {
+              creation.glazes = glazes
+              creation = prepForTS(creation)
+              res.json(creation)
+            })
+          )
         )
       }
     })
-    .then(() =>
-      db.getCreationById(creationId).then((creation) =>
-        db.getGlazesByCreationId(creation.id).then((glazes) => {
-          creation.glazes = glazes
-          creation = prepForJS(creation)
-          res.json(creation)
-        })
-      )
-    )
     .catch((err) => {
       console.error(err)
       res.sendStatus(500)
@@ -93,18 +99,24 @@ router.patch('/update-creation/:id', (req, res) => {
 })
 
 router.patch('/update-creation-status/:id', (req, res) => {
-  const dbCreation = prepForDb(req.body)
+  const dbCreation = prepForDB(req.body) as SnakeCreation
   const creationId = Number(req.params.id)
 
   db.updateCreationStatusById(creationId, dbCreation)
-    .then((creation) => {
-      if (!creation) {
-        return res.status(404).json({
+    .then((success) => {
+      if (!success) {
+        res.status(404).json({
           error: 'creation id not found',
         })
+      } else {
+        return db.getCreationById(creationId).then((creation) =>
+          db.getGlazesByCreationId(creation.id).then((glazes) => {
+            creation.glazes = glazes
+            creation = prepForTS(creation)
+            res.json(creation)
+          })
+        )
       }
-      creation = prepForJS(creation)
-      res.json(creation)
     })
     .catch((err) => {
       console.error(err)
@@ -118,7 +130,7 @@ router.get('/:id', (req, res) => {
     .then((creation) =>
       db.getGlazesByCreationId(creation.id).then((glazes) => {
         creation.glazes = glazes
-        creation = prepForJS(creation)
+        creation = prepForTS(creation)
         res.json(creation)
       })
     )

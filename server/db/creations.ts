@@ -1,7 +1,7 @@
 /* eslint-disable promise/no-nesting */
 import connection from './connection'
-import { Creation, DBCreation, InsertCreation } from '../../models/Creation'
-import { Glaze } from '../../models/Glaze'
+import { Creation, DBCreation, SnakeCreation } from '../../models/Creation'
+import { Glaze, DBGlaze } from '../../models/Glaze'
 
 
 export function existsInCreations(id: number): Promise<boolean> {
@@ -77,14 +77,14 @@ export function getCreationById(id:number, db = connection) {
     .first()
 }
 
-export function getGlazesByCreationId(id:number, db = connection): Promise<Glaze[]> {
+export function getGlazesByCreationId(id:number, db = connection): Promise<Partial<DBGlaze>[]> {
   return db('glaze_creations')
     .join('glazes', 'glazes.id', 'glaze_creations.glaze_id')
     .where('glaze_creations.creation_id', id)
     .select('glazes.id as id', 'glazes.glaze')
 }
 
-export function createCreation(creation:InsertCreation, db = connection): Promise<number[]> {
+export function createCreation(creation:SnakeCreation, db = connection): Promise<number[]> {
   return db('creations').insert({
     clay_id: creation.clay_id,
     shape_id: creation.shape_id,
@@ -113,7 +113,7 @@ export function createCreationGlazes(id:number, glazeId:number, db = connection)
     })
 }
 
-export function updateCreationById(id:number, creation:InsertCreation, db = connection): Promise<number> {
+export function updateCreationById(id:number, creation:SnakeCreation, db = connection): Promise<number> {
   return db('creations').where('creations.id', id).update({
     clay_id: creation.clay_id,
     shape_id: creation.shape_id,
@@ -129,7 +129,7 @@ export function updateCreationById(id:number, creation:InsertCreation, db = conn
   })
 }
 
-export function updateCreationStatusById(id:number, creation: InsertCreation, db = connection): Promise<number> {
+export function updateCreationStatusById(id:number, creation: SnakeCreation, db = connection): Promise<number> {
   return db('creations')
     .where('creations.id', id)
     .update({ status_id: creation.status_id })

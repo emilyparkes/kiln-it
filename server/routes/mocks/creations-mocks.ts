@@ -139,3 +139,34 @@ export const mockNewCreationResult = {
 		}
 	]
 } 
+
+export const mockUpdatedStatus = {
+	id: 2,
+	clayId: 1,
+	clay: "White",
+	shapeId: 1,
+	shape: "Coffee Cup",
+	statusId: 1,
+	status: "Wet",
+	weightLeatherHard: null,
+	weightBoneDry: null,
+	weightBisqueFired: null,
+	weightGlazed: null,
+	weightComplete: null,
+	dateCreated: "2020-05-24T14:45:30",
+	dateComplete: "2020-06-24T14:45:30",
+	description: null,
+	note: "hi",
+	name: "Emily Test 1",
+	imgLeatherHard: "",
+	imgBisqueFired: "",
+	imgGlazed: "",
+	imgComplete: "",
+	imgGallery: "",
+	glazes: [
+			{
+			id: 1,
+			glaze: "Clear"
+			}
+		]
+}

@@ -3,7 +3,7 @@ import { describe, it, expect, beforeEach, vi } from 'vitest'
 
 import server from '../server'
 import * as db from '../db/creations'
-import { mockCreations, mockNewCreationId, mockFormCreation, mockNewCreation, mockNewCreationResult } from './mocks/creations-mocks'
+import { mockCreations, mockNewCreationId, mockFormCreation, mockNewCreation, mockNewCreationResult, mockUpdatedStatus } from './mocks/creations-mocks'
 import { mockGlazes, mockNewGlazesResult } from './mocks/glazes-mocks'
 
 describe('test environment working', () => {
@@ -132,10 +132,13 @@ describe('PATCH /api/v1/creations/update-creation-status/:id', () => {
   it('updates the status of a creation', async () => {
     expect.assertions(3)
     vi.mocked(db.updateCreationStatusById).mockResolvedValue(1)
+    vi.mocked(db.getCreationById).mockResolvedValue(mockNewCreation)
+    vi.mocked(db.getGlazesByCreationId).mockResolvedValue(mockNewGlazesResult)
+
 
     const res = await request(server).patch('/api/v1/creations/update-creation-status/2').send(mockFormCreation)
     
-    expect(res.body).toStrictEqual(1)
+    expect(res.body).toStrictEqual(mockNewCreationResult)
     expect(res.statusCode).toBe(200)
     expect(db.updateCreationStatusById).toHaveBeenCalledOnce()
   })

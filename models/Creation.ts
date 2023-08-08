@@ -1,5 +1,5 @@
 import { Glaze, 
-  // DBGlaze 
+  DBGlaze 
 } from './Glaze'
 export interface Creation {
   clayId: number,
@@ -23,14 +23,15 @@ export interface Creation {
   imgGlazed: string,
   imgComplete: string,
   imgGallery: string,
-  glazes: Glaze[]
+  glazes: Partial<DBGlaze>[]
 }
 
 export interface DBCreation extends Creation {
 	id: number
 }
 
-export interface InsertCreation {
+export interface SnakeCreation {
+  id?: number
   clay_id: number,
   clay: string,
   shape_id: number,
@@ -52,5 +53,5 @@ export interface InsertCreation {
   img_glazed: string,
   img_complete: string,
   img_gallery: string,
-  glazes: Glaze[]
+  glazes: Partial<DBGlaze>[]
 }
