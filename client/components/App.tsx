@@ -1,8 +1,9 @@
 import { useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
+
 import { useAppDispatch } from '../hooks'
-// import { ThemeProvider } from '@mui/material/styles'
-// import { theme } from '../styles/theme'
+import { ThemeProvider } from '@mui/material/styles'
+import { theme } from '../styles/theme'
 
 import { getCreations } from '../actions/creations'
 import { getClay } from '../actions/clay'
@@ -17,8 +18,8 @@ import About from './About'
 import NewCreation from './NewCreation'
 import CreationEdit from './CreationEdit'
 import Creation from './Creation'
-import Register from './auth/Register'
-import SignIn from './auth/SignIn'
+// import Register from './auth/Register'
+// import SignIn from './auth/SignIn'
 import Log from './StatusLog'
 import DataOptionsView from './DataOptionsView'
 import PageNotFound from './PageNotFound'
@@ -36,7 +37,7 @@ function App() {
 
   return (
     <>
-      {/* <ThemeProvider theme={theme}> */}
+      <ThemeProvider theme={theme}>
       <Navigation />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -47,11 +48,11 @@ function App() {
         <Route path="/creations/:name/edit" element={<CreationEdit />} />
         <Route path="/creations/:name" element={<Creation />} />
         <Route path="/options/edit" element={<DataOptionsView />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/signin" element={<SignIn />} />
+        {/* <Route path="/register" element={<Register />} />
+        <Route path="/signin" element={<SignIn />} /> */}
         <Route path="*" element={<PageNotFound />} />
       </Routes>
-      {/* </ThemeProvider> */}
+      </ThemeProvider>
     </>
   )
 }
