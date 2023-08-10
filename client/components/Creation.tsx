@@ -21,7 +21,7 @@ function Creation() {
   const [imgIdx, setImgIdx] = useState(0)
   const [currentImg, setCurrentImage] = useState('')
 
-  const classes = useStyles()
+   const { classes } = useStyles()
 
   const params = useParams()
   const creations = useAppSelector((store) => store.creations)
@@ -99,18 +99,25 @@ function Creation() {
             <InstagramIcon fontSize="large" className="icon-instagram" />
 
             <ButtonGroup
-              className={classes.saveButton}
+              sx={{
+                position: 'absolute',
+                color: '#e3c6a4',
+                backgroundColor: '#744F44',
+                right: '18px',
+                bottom: '50px',
+                height: '35px',
+              }}
               variant="contained"
               aria-label="outlined button group"
             >
               <IconButton
-                className={classes.ButtonIcon}
+                sx={{ color: '#e3c6a4' }}
                 onClick={deleteCreation}
               >
                 <DeleteIcon fontSize="medium" />
               </IconButton>
               <IconButton
-                className={classes.ButtonIcon}
+                sx={{ color: '#e3c6a4' }}
                 onClick={() => navigate(`/creations/${params.name}/edit`)}
               >
                 <EditIcon fontSize="medium" />

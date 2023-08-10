@@ -73,7 +73,7 @@ function NewCreation() {
     },
   })
 
-  const classes = useStyles()
+   const { classes } = useStyles()
 
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
@@ -146,11 +146,14 @@ function NewCreation() {
 
             <div className="text-card">
               <div className="text-card-content">
-                <div className={classes.box}>
+                <div style={{display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',}}>
                   <ThemeProvider theme={theme}>
                     <TextField
                       label="Name"
-                      className={classes.titleLabelWide}
+                      sx={{ width: '56ch' }}
                       variant="outlined"
                       size="small"
                       id="outlined-name"
@@ -168,7 +171,7 @@ function NewCreation() {
                     {shapes && (
                       <TextField
                         label="Shape"
-                        className={classes.inputLabel}
+                        sx={{width: '22ch',}}
                         variant="outlined"
                         size="small"
                         id="outlined-shape"
@@ -194,7 +197,7 @@ function NewCreation() {
                     {statuses && (
                       <TextField
                         label="Status"
-                        className={classes.inputLabel}
+                        sx={{width: '22ch',}}
                         variant="outlined"
                         size="small"
                         id="outlined-status"
@@ -220,7 +223,7 @@ function NewCreation() {
                     {clay && (
                       <TextField
                         label="Clay"
-                        className={classes.inputLabel}
+                        sx={{width: '22ch',}}
                         variant="outlined"
                         size="small"
                         id="outlined-clay"
@@ -245,7 +248,7 @@ function NewCreation() {
 
                     <TextField
                       label="Weight"
-                      className={classes.inputLabel}
+                      sx={{ width: '22ch' }} 
                       variant="outlined"
                       size="small"
                       id="outlined-weight"
@@ -266,7 +269,7 @@ function NewCreation() {
                           Glazes
                         </InputLabel>
                         <Select
-                          className={classes.multiSelect}
+                          sx={{ width: '43.5ch' }} 
                           labelId="demo-multiple-checkbox-label"
                           id="demo-multiple-checkbox"
                           multiple
@@ -326,7 +329,14 @@ function NewCreation() {
 
                     <Button
                       variant="contained"
-                      className={classes.saveButton}
+                      sx={{ 
+                        position: 'absolute',
+                        color: '#e3c6a4',
+                        backgroundColor: '#744F44',
+                        right: '18px',
+                        bottom: '50px',
+                        height: '35px'
+                      }} 
                       onClick={onSubmit}
                       endIcon={<SaveIcon fontSize="large" />}
                     >

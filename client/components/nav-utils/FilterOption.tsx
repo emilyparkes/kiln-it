@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import Checkbox from '@mui/material/Checkbox'
 import FormControlLabel from '@mui/material/FormControlLabel'
-// import { withStyles } from '@mui/system'
 
 interface Props {
   category: string,

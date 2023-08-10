@@ -55,7 +55,8 @@
     "express": "^4.17.2",
     "knex": "^2.3.0",
     "pg": "^8.8.0",
-    "sqlite3": "^5.1.2"
+    "sqlite3": "^5.1.2",
+    "tss-react": "^4.8.8"
   },
   "devDependencies": {
     "@devacademy/eslint-config": "^1.9.1",
