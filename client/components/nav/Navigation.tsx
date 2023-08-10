@@ -1,9 +1,11 @@
-import { ReactElement, cloneElement } from 'react'
-import Burger from './Burger'
-import PropTypes from 'prop-types'
-import { AppBar, Toolbar, useScrollTrigger } from '@mui/material'
-import { ThemeProvider } from '@mui/material/styles'
+import { useState, ReactElement, cloneElement } from 'react'
+import NavSidebar from './NavSidebar'
 
+import PropTypes from 'prop-types'
+
+import { Box, AppBar, Toolbar, IconButton, Typography, useScrollTrigger } from '@mui/material'
+import MenuIcon from '@mui/icons-material/Menu'
+import { ThemeProvider } from '@mui/material/styles'
 import { theme } from '../../styles/theme'
 
 interface Props {
@@ -25,23 +27,52 @@ ElevationScroll.propTypes = {
   children: PropTypes.element.isRequired,
 }
 
+
+
 export default function Navigation(props: object) {
+  const [open, setOpen] = useState(false)
+
+  const toggleDrawer = (open: boolean) =>
+    (event: React.KeyboardEvent | React.MouseEvent) => {
+      if (
+        event.type === 'keydown' &&
+        ((event as React.KeyboardEvent).key === 'Tab' ||
+          (event as React.KeyboardEvent).key === 'Shift')
+      ) {
+        return
+      }
+
+      setOpen(open)
+    }
+
   console.log('nav props', props)
   return (
     <>
       <ThemeProvider theme={theme}>
-        <ElevationScroll {...props}>
-          <AppBar position='fixed'>
-            <Toolbar>
-              <div className='nav'>
-                <Burger />
-                <div className='logo'>Dirty Hands Studio</div>
-              </div>
-            </Toolbar>
-          </AppBar>
-        </ElevationScroll>
-        <Toolbar />
-      </ThemeProvider>
+      <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+            onClick={toggleDrawer(true)}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Dirty Hands Studio
+          </Typography>
+        </Toolbar>
+      </AppBar>
+
+      <NavSidebar open={open} toggleDrawer={toggleDrawer}/>
+
+    </Box>
+    </ThemeProvider>
+
     </>
   )
 }
