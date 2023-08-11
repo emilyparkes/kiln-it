@@ -1,78 +1,85 @@
-import { Link } from 'react-router-dom'
-import { List, ListItem, ListItemText } from '@mui/material'
-import Box from '@mui/material/Box'
-import Drawer from '@mui/material/Drawer'
-import Divider from '@mui/material/Divider'
+import { forwardRef, ReactEventHandler } from 'react'
+import {
+  Link as RouterLink,
+  LinkProps as RouterLinkProps,
+} from 'react-router-dom'
+import {
+  Box,
+  Drawer,
+  Divider,
+  IconButton,
+  List,
+  ListItem,
+  ListItemText,
+} from '@mui/material'
+import CloseIcon from '@mui/icons-material/Close'
+
 interface Props {
   open: boolean
-  toggleDrawer: (open: boolean) => void
+  toggleDrawer: (open: boolean) => ReactEventHandler
+}
+
+interface ListItemLinkProps {
+  primary: string
+  to: string
 }
 
 function NavSidebar({ open, toggleDrawer }: Props) {
+
+  const Link = forwardRef<HTMLAnchorElement, RouterLinkProps>(function Link(
+    itemProps,
+    ref,
+  ) {
+    return <RouterLink ref={ref} {...itemProps} role={undefined} />
+  })
+
+  function ListItemLink(props: ListItemLinkProps) {
+    const { primary, to } = props
+  
+    return (
+      <li>
+        <ListItem component={Link} to={to}>
+          <ListItemText primary={primary} sx={{color:'#e3c6a4'}}/>
+        </ListItem>
+      </li>
+    )
+  }
+  // color: 'success.main',
+  //   '& .MuiSlider-thumb': {
+  //     borderRadius: '1px',
+  //   },
+
   return (
-    <Drawer open={open} onClose={toggleDrawer(false)}>
-      <Box
-        sx={{ width: 250, backgroundColor: '#744F44', height: '100%' }}
-      >
+    <Drawer open={open} onClose={toggleDrawer(false)} >
+      <Box sx={{ backgroundColor: '#744F44', color: '#e3c6a4', width: 250, height: '100%' }}>
         <div
           role="presentation"
           onClick={toggleDrawer(false)}
           onKeyDown={toggleDrawer(false)}
+        >
+          <List aria-label="main pages">
+          <IconButton
+            size="large"
+            aria-label="menu"
+            sx={{ mr: 2, color: '#e3c6a4'}}
+            onClick={toggleDrawer(false)}
           >
-        <List>
-          <ListItem key={'Home'} disablePadding>
-            <Link to="/" className="link" >
-              <ListItemText primary={'Home'} />
-            </Link>
-          </ListItem>
-          <ListItem key={'Gallery'} disablePadding>
-            <Link to="/gallery" className="link" >
-              <ListItemText primary={'Gallery'} />
-            </Link>
-          </ListItem>
-          <ListItem key={'About'} disablePadding>
-            <Link to="/about" className="link" >
-              <ListItemText primary={'About'} />
-            </Link>
-          </ListItem>
-          <ListItem key={'Edit'} disablePadding>
-            <Link
-              to="/creations/le-vase/edit"
-              className="link"
-              
-            >
-              <ListItemText primary={'Edit'} />
-            </Link>
-          </ListItem>
-          <ListItem key={'New'} disablePadding>
-            <Link to="/creations/new" className="link" >
-              <ListItemText primary={'New'} />
-            </Link>
-          </ListItem>
-          <ListItem key={'Log'} disablePadding>
-            <Link to="/log" className="link" >
-              <ListItemText primary={'Log'} />
-            </Link>
-          </ListItem>
-        </List>
-        <Divider />
-        <List>
-          <ListItem key={'Options'} disablePadding>
-            <Link to="/options/edit" className="link" >
-              <ListItemText primary={'Options'} />
-            </Link>
-          </ListItem>
-          <ListItem key={'Sign In'} disablePadding>
-            <Link to="/signin" className="link" >
-              <ListItemText primary={'Sign In'} />
-            </Link>
-          </ListItem>
-          <ListItem key={'Register'} disablePadding>
-            <Link to="/register" className="link" >
-              <ListItemText primary={'Register'} />
-            </Link>
-          </ListItem>
-        </List>
+            <CloseIcon />
+          </IconButton>
+            
+              <ListItemLink to="/" primary="Home" />
+              <ListItemLink to="/gallery" primary="Gallery" />  
+              <ListItemLink to="/about" primary="About" />  
+              <ListItemLink to="/creations/le-vase/edit" primary="Edit" />  
+              <ListItemLink to="/creations/new" primary="New" />  
+              <ListItemLink to="/log" primary="Log" />  
+          </List>
+          <Divider variant="middle" light={true} sx={{borderColor: '#e3c6a4'}}/>
+          <List aria-label="secondary pages for">
+              <ListItemLink to="/options/edit" primary="Options" />  
+              <ListItemLink to="/signin" primary="Sign In" />  
+              <ListItemLink to="/register" primary="Register" />  
+          </List>
         </div>
       </Box>
     </Drawer>
