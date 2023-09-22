@@ -25,7 +25,7 @@ import { useStyles } from '../styles/mui_overrides'
 import { Creation } from '../../models/Creation'
 import { updateCreation } from '../actions/creations'
 import { findString, toLowHyphen, toCapSpace } from '../client-utils'
-import { DBGlaze, Glaze } from '../../models/Glaze'
+import { DBGlaze } from '../../models/Glaze'
 
 function CreationEdit() {
   const [imgIdx, setImgIdx] = useState(0)
@@ -60,7 +60,7 @@ function CreationEdit() {
   })
 
   const params = useParams()
-  const { classes } = useStyles()
+  // const { classes } = useStyles()
 
   const navigate = useNavigate()
   const dispatch = useAppDispatch()

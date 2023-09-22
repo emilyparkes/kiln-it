@@ -2,7 +2,7 @@
 import express from 'express'
 
 import * as db from '../db/creations'
-import { DBGlaze, Glaze } from '../../models/Glaze'
+import { DBGlaze } from '../../models/Glaze'
 import { prepForDB, prepForTS } from '../server-utils'
 import { DBCreation, SnakeCreation } from '../../models/Creation'
 

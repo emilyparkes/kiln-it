@@ -1,7 +1,7 @@
 /* eslint-disable promise/no-nesting */
 import connection from './connection'
 import { Creation, DBCreation, SnakeCreation } from '../../models/Creation'
-import { Glaze, DBGlaze } from '../../models/Glaze'
+import { DBGlaze } from '../../models/Glaze'
 
 
 export function existsInCreations(id: number): Promise<boolean> {

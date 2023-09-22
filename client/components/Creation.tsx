@@ -21,7 +21,7 @@ function Creation() {
   const [imgIdx, setImgIdx] = useState(0)
   const [currentImg, setCurrentImage] = useState('')
 
-   const { classes } = useStyles()
+  //  const { classes } = useStyles()
 
   const params = useParams()
   const creations = useAppSelector((store) => store.creations)
