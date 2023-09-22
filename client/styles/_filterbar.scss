@@ -10,8 +10,8 @@
 }
 
 .filter-bar {  
-  position: relative;
-  margin: 0px 15px 0px 20px;
+  // position: relative;
+  // margin: 0px 15px 0px 20px;
 
   .extendable-bar {
     outline: none;
@@ -25,12 +25,12 @@
     box-sizing: border-box;
     transition: all 0.7s ease-in-out;
     position: absolute;
-    top: 0;
-    left: -4px;
+    top: 14%;
+    left: 16px;
   }
 
   .focused {
-    width: 89%;
+    width: 82%;
     flex-direction: row;
     display: flex;
     overflow: hidden;
@@ -61,8 +61,8 @@
     border: none;
     border-radius: 50%;
     font-size: 20px;
-    top: 6px;
-    left: 0;
+    top: 14px;
+    left: 18px;
     outline: none;
     color: $text-dark;
     transition: all 0.5s ease;

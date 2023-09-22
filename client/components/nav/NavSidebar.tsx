@@ -44,11 +44,7 @@ function NavSidebar({ open, toggleDrawer }: Props) {
       </li>
     )
   }
-  // color: 'success.main',
-  //   '& .MuiSlider-thumb': {
-  //     borderRadius: '1px',
-  //   },
-
+  
   return (
     <Drawer open={open} onClose={toggleDrawer(false)} >
       <Box sx={{ backgroundColor: '#744F44', color: '#e3c6a4', width: 250, height: '100%' }}>
@@ -66,7 +62,6 @@ function NavSidebar({ open, toggleDrawer }: Props) {
           >
             <CloseIcon />
           </IconButton>
-            
               <ListItemLink to="/" primary="Home" />
               <ListItemLink to="/gallery" primary="Gallery" />  
               <ListItemLink to="/about" primary="About" />  
@@ -75,7 +70,7 @@ function NavSidebar({ open, toggleDrawer }: Props) {
               <ListItemLink to="/log" primary="Log" />  
           </List>
           <Divider variant="middle" light={true} sx={{borderColor: '#e3c6a4'}}/>
-          <List aria-label="secondary pages for">
+          <List aria-label="secondary pages for admin">
               <ListItemLink to="/options/edit" primary="Options" />  
               <ListItemLink to="/signin" primary="Sign In" />  
               <ListItemLink to="/register" primary="Register" />  

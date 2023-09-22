@@ -153,6 +153,57 @@ exports.seed = (knex) => {
           note: '',
           name: 'Artist\'s Plate',
           img_complete: ''
+        },
+        {
+          id: 10,
+          clay_id: 2,
+          shape_id: 4,
+          status_id: 7,
+          weight_leather_hard: 0,
+          weight_bone_dry: 0,
+          weight_bisque_fired: 0,
+          weight_glazed: 0,
+          weight_complete: 0,
+          date_created: '2020-08-10T17:22:30',
+          date_complete: '2020-09-10T17:22:30',
+          description: '',
+          note: '',
+          name: 'Extra Item 1',
+          img_complete: ''
+        },
+        {
+          id: 11,
+          clay_id: 2,
+          shape_id: 4,
+          status_id: 7,
+          weight_leather_hard: 0,
+          weight_bone_dry: 0,
+          weight_bisque_fired: 0,
+          weight_glazed: 0,
+          weight_complete: 0,
+          date_created: '2020-08-10T17:22:30',
+          date_complete: '2020-09-10T17:22:30',
+          description: '',
+          note: '',
+          name: 'Extra Item 2',
+          img_complete: ''
+        },
+        {
+          id: 12,
+          clay_id: 2,
+          shape_id: 4,
+          status_id: 7,
+          weight_leather_hard: 0,
+          weight_bone_dry: 0,
+          weight_bisque_fired: 0,
+          weight_glazed: 0,
+          weight_complete: 0,
+          date_created: '2020-08-10T17:22:30',
+          date_complete: '2020-09-10T17:22:30',
+          description: '',
+          note: '',
+          name: 'Extra Item 3',
+          img_complete: ''
         }
       ])
     })

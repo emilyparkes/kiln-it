@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { FormEvent, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../hooks'
 
 import { FilterAltRounded as FilterIcon } from '@mui/icons-material'
@@ -13,7 +13,7 @@ import { addFilter, removeFilter, clearFilter } from '../../actions/filter'
 
 interface Props {
   focus: boolean,
-  toggleFocus: () => void
+  toggleFocus: (event: FormEvent<HTMLFormElement>) => void
 }
 
 function FilterBar({ focus, toggleFocus }: Props) {

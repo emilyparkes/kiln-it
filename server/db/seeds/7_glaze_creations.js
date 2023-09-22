@@ -15,7 +15,11 @@ exports.seed = (knex) => {
         { id: 10, glaze_id: 8, creation_id: 6 },
         { id: 11, glaze_id: 9, creation_id: 7 },
         { id: 12, glaze_id: 4, creation_id: 8 },
-        { id: 13, glaze_id: 3, creation_id: 9 }
+        { id: 13, glaze_id: 3, creation_id: 9 },
+        { id: 14, glaze_id: 3, creation_id: 10 },
+        { id: 15, glaze_id: 3, creation_id: 11 },
+        { id: 16, glaze_id: 3, creation_id: 12 },
+
       ])
     })
 }

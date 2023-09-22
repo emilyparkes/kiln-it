@@ -7,7 +7,7 @@ import { setSearchTerm } from '../../actions/search'
 
 interface Props {
   focus: string,
-  toggleFocus: boolean
+  toggleFocus: () => boolean
 }
 
 function SearchBar({ focus, toggleFocus }: Props) {
