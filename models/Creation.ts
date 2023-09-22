@@ -1,6 +1,4 @@
-import { Glaze, 
-  DBGlaze 
-} from './Glaze'
+import { DBGlaze } from './Glaze'
 export interface Creation {
   clayId: number,
   clay: string,
