@@ -1,11 +1,13 @@
+import { DBCreation } from "../../models/Creation"
+
 interface Props {
-  creation: any
+  creation: DBCreation
 }
 
 function CreationItemDisplay ({ creation }: Props) {
   return (
     <>
-      <img className='creation-img' src={creation.image} />
+      <img className='creation-img' src={creation.imgComplete} alt='some text'/>
       <div className='textbox'>
         <div>{creation.name}</div>
         {/* <SubTitle>{creation.shape}</SubTitle>

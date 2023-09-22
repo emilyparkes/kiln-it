@@ -7,7 +7,7 @@ import { setSearchTerm } from '../../actions/search'
 
 interface Props {
   focus: string,
-  toggleFocus: any
+  toggleFocus: () => boolean
 }
 
 function SearchBar({ focus, toggleFocus }: Props) {
@@ -23,7 +23,7 @@ function SearchBar({ focus, toggleFocus }: Props) {
     return () => { // calls to cancel running when not on this page 
       debouncedSearch.cancel()
     }
-  }, [searchterm])
+  }, [searchterm, debouncedSearch])
 
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {

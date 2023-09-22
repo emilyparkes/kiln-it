@@ -5,7 +5,7 @@ import { GLAZES_REQUEST_PENDING, RECEIVE_GLAZES, ADD_NEW_GLAZES, UPDATE_GLAZE, R
 import { SHAPES_REQUEST_PENDING, RECEIVE_SHAPES, ADD_NEW_SHAPES, UPDATE_SHAPE, REMOVE_SHAPE } from '../actions/shapes'
 import { STATUSES_REQUEST_PENDING, RECEIVE_STATUSES, ADD_NEW_STATUSES, UPDATE_STATUS, REMOVE_STATUS } from '../actions/statuses'
 
-const initialState: boolean = false
+const initialState = false
 
 export default function waitIndicator (state = initialState, action: Action) {
   switch (action.type) {

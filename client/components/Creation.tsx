@@ -11,7 +11,7 @@ import {
 
 import { removeCreation } from '../actions/creations'
 import { findString, toCapSpace } from '../client-utils'
-import { useStyles } from '../styles/mui_overrides'
+// import { useStyles } from '../styles/mui_overrides'
 
 import { Creation as TCreation } from '../../models/Creation'
 
@@ -21,7 +21,7 @@ function Creation() {
   const [imgIdx, setImgIdx] = useState(0)
   const [currentImg, setCurrentImage] = useState('')
 
-  const classes = useStyles()
+  //  const { classes } = useStyles()
 
   const params = useParams()
   const creations = useAppSelector((store) => store.creations)
@@ -43,10 +43,11 @@ function Creation() {
       const creation = findString(creations, 'name', name)
       setCreation(creation)
     }
-  }, [creations])
+  }, [creations, params.name])
 
   useEffect(() => {
     setCurrentImage(images[imgIdx])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [imgIdx])
 
   const getImage = (idx:number) => {
@@ -67,16 +68,18 @@ function Creation() {
       {creation && (
         <>
           <div className="creation-container">
-            <img className="creation-img" src={currentImg} />
+            <img className="creation-img" src={currentImg} alt='some text'/>
 
             <div className="icon-dots">
               {images.map((dot, idx: number) => {
                 return (
+                  // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/interactive-supports-focus
                   <div
                     key={idx}
                     className={imgIdx === idx ? 'dot selected' : 'dot'}
                     id={idx}
-                    onClick={() => getImage(idx)}
+                    onClick={() => {getImage(idx)}}
+                    role="button"
                   ></div>
                 )
               })}
@@ -96,18 +99,25 @@ function Creation() {
             <InstagramIcon fontSize="large" className="icon-instagram" />
 
             <ButtonGroup
-              className={classes.saveButton}
+              sx={{
+                position: 'absolute',
+                color: '#e3c6a4',
+                backgroundColor: '#744F44',
+                right: '18px',
+                bottom: '50px',
+                height: '35px',
+              }}
               variant="contained"
               aria-label="outlined button group"
             >
               <IconButton
-                className={classes.ButtonIcon}
+                sx={{ color: '#e3c6a4' }}
                 onClick={deleteCreation}
               >
                 <DeleteIcon fontSize="medium" />
               </IconButton>
               <IconButton
-                className={classes.ButtonIcon}
+                sx={{ color: '#e3c6a4' }}
                 onClick={() => navigate(`/creations/${params.name}/edit`)}
               >
                 <EditIcon fontSize="medium" />

@@ -1,14 +1,15 @@
 import { useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
-import { useAppDispatch } from '../hooks'
-// import { ThemeProvider } from '@mui/material/styles'
-// import { theme } from '../styles/theme'
 
-import { fetchCreations } from '../actions/creations'
-import { fetchClay } from '../actions/clay'
-import { fetchGlazes } from '../actions/glazes'
-import { fetchShapes } from '../actions/shapes'
-import { fetchStatuses } from '../actions/statuses'
+import { useAppDispatch } from '../hooks'
+import { ThemeProvider } from '@mui/material/styles'
+import { theme } from '../styles/theme'
+
+import { getCreations } from '../actions/creations'
+import { getClay } from '../actions/clay'
+import { getGlazes } from '../actions/glazes'
+import { getShapes } from '../actions/shapes'
+import { getStatuses } from '../actions/statuses'
 
 import Navigation from './nav/Navigation'
 import Home from './Home'
@@ -17,8 +18,8 @@ import About from './About'
 import NewCreation from './NewCreation'
 import CreationEdit from './CreationEdit'
 import Creation from './Creation'
-import Register from './auth/Register'
-import SignIn from './auth/SignIn'
+// import Register from './auth/Register'
+// import SignIn from './auth/SignIn'
 import Log from './StatusLog'
 import DataOptionsView from './DataOptionsView'
 import PageNotFound from './PageNotFound'
@@ -27,16 +28,16 @@ function App() {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(fetchCreations())
-    dispatch(fetchClay())
-    dispatch(fetchGlazes())
-    dispatch(fetchShapes())
-    dispatch(fetchStatuses())
-  }, [])
+    dispatch(getCreations())
+    dispatch(getClay())
+    dispatch(getGlazes())
+    dispatch(getShapes())
+    dispatch(getStatuses())
+  }, [dispatch])
 
   return (
     <>
-      {/* <ThemeProvider theme={theme}> */}
+      <ThemeProvider theme={theme}>
       <Navigation />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -47,11 +48,11 @@ function App() {
         <Route path="/creations/:name/edit" element={<CreationEdit />} />
         <Route path="/creations/:name" element={<Creation />} />
         <Route path="/options/edit" element={<DataOptionsView />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/signin" element={<SignIn />} />
+        {/* <Route path="/register" element={<Register />} />
+        <Route path="/signin" element={<SignIn />} /> */}
         <Route path="*" element={<PageNotFound />} />
       </Routes>
-      {/* </ThemeProvider> */}
+      </ThemeProvider>
     </>
   )
 }

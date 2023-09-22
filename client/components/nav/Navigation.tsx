@@ -1,46 +1,110 @@
-import { ReactElement, cloneElement } from 'react'
-import Burger from './Burger'
-import PropTypes from 'prop-types'
-import { AppBar, Toolbar, useScrollTrigger } from '@mui/material'
-import { ThemeProvider } from '@mui/material/styles'
+import { useState, ReactElement, cloneElement } from 'react'
+import NavSidebar from './NavSidebar'
 
+// import PropTypes from 'prop-types'
+
+import {
+  Box,
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+  useScrollTrigger,
+  styled,
+} from '@mui/material'
+import MenuIcon from '@mui/icons-material/Menu'
+import { ThemeProvider } from '@mui/material/styles'
 import { theme } from '../../styles/theme'
+import NavUtils from '../nav-utils/NavUtils'
 
 interface Props {
-  children: ReactElement
+  /**
+   * Injected by the documentation to work in an iframe.
+   * You won't need it on your project.
+   */
+  children: ReactElement;
 }
 
-function ElevationScroll({ children }: Props) {
+function ElevationScroll(props: Props) {
+  const { children, } = props;
+  // Note that you normally won't need to set the window ref as useScrollTrigger
+  // will default to window.
+  // This is only being set here because the demo is in an iframe.
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 0,
-  })
+  });
 
   return cloneElement(children, {
     elevation: trigger ? 4 : 0,
-  })
+  });
 }
 
-ElevationScroll.propTypes = {
-  children: PropTypes.element.isRequired,
-}
+const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
-export default function Navigation(props: any) {
+// function App() {
+//   return (
+//     <React.Fragment>
+//       <AppBar position="fixed">
+//         <Toolbar>{/* content */}</Toolbar>
+//       </AppBar>
+//       <Offset />
+//     </React.Fragment>
+//   );
+// }
+
+
+
+export default function Navigation(props: object) {
+  const [open, setOpen] = useState(false)
+
+  const toggleDrawer =
+    (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+      if (
+        event.type === 'keydown' &&
+        ((event as React.KeyboardEvent).key === 'Tab' ||
+          (event as React.KeyboardEvent).key === 'Shift')
+      ) {
+        return
+      }
+
+      setOpen(open)
+    }
+
   console.log('nav props', props)
   return (
     <>
       <ThemeProvider theme={theme}>
+        <Box sx={{ flexGrow: 1 }}>
         <ElevationScroll {...props}>
-          <AppBar position='fixed'>
-            <Toolbar>
-              <div className='nav'>
-                <Burger />
-                <div className='logo'>Dirty Hands Studio</div>
-              </div>
+          <AppBar position="fixed">
+            <Toolbar >
+              <IconButton
+                size="large"
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                sx={{ mr: 2 }}
+                onClick={toggleDrawer(true)}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                Dirty Hands Studio
+              </Typography>
+
+              
+
             </Toolbar>
+            <NavUtils />
+
           </AppBar>
+
         </ElevationScroll>
-        <Toolbar />
+        <Offset />
+
+          <NavSidebar open={open} toggleDrawer={toggleDrawer} />
+        </Box>
       </ThemeProvider>
     </>
   )

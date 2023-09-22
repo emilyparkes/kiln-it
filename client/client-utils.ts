@@ -1,6 +1,6 @@
 import _ from 'lodash'
 
-export function findString(arr, property, value, type) {
+export function findString(arr, property, value, type?) {
   const found = arr.find((obj) => obj[property] === value)
   if (type) {
     return found[type]
@@ -34,7 +34,7 @@ export function filterBy(filters, itemsToFilter) {
     ? null
     : itemsToFilter.filter((creation) => {
         let isFilterOption = true
-        for (let key in filters) {
+        for (const key in filters) {
           if (!filters[key].includes(creation[key])) isFilterOption = false
         }
         return isFilterOption
@@ -43,7 +43,7 @@ export function filterBy(filters, itemsToFilter) {
 
 export function searchBy(searchterm, itemsToSearch) {
   searchterm = searchterm.toLowerCase()
-  let searchResults = itemsToSearch.filter((item) => {
+  const searchResults = itemsToSearch.filter((item) => {
     
     const glazeValues = item.glazes.map((glazeObj) => glazeObj.glaze)
     const creationValues = Object.values(item)
@@ -83,7 +83,7 @@ export function cleanGlazes(glazesState) {
 }
 
 export function validateForm(formState) {
-  let errors = {}
+  const errors = {}
   if (!formState.name) {
     errors.nameInput = true
   }

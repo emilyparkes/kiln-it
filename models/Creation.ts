@@ -1,6 +1,5 @@
-import { Glaze, DBGlaze } from './Glaze'
+import { DBGlaze } from './Glaze'
 export interface Creation {
-  id: number,
   clayId: number,
   clay: string,
   shapeId: number,
@@ -17,16 +16,20 @@ export interface Creation {
   description: string,
   note: string,
   name: string,
-  imgLeatherHard: null,
-  imgBisqueFired: null,
-  imgGlazed: null,
+  imgLeatherHard: string,
+  imgBisqueFired: string,
+  imgGlazed: string,
   imgComplete: string,
-  imgGallery: null,
-  glazes: Glaze[]
+  imgGallery: string,
+  glazes: Partial<DBGlaze>[]
 }
 
-export interface DBCreation {
-	id: number,
+export interface DBCreation extends Creation {
+	id: number
+}
+
+export interface SnakeCreation {
+  id?: number
   clay_id: number,
   clay: string,
   shape_id: number,
@@ -43,10 +46,10 @@ export interface DBCreation {
   description: string,
   note: string,
   name: string,
-  img_leather_hard: null,
-  img_bisque_fired: null,
-  img_glazed: null,
+  img_leather_hard: string,
+  img_bisque_fired: string,
+  img_glazed: string,
   img_complete: string,
-  img_gallery: null,
-  glaze_id: number
+  img_gallery: string,
+  glazes: Partial<DBGlaze>[]
 }

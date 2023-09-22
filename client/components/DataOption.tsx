@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { useAppDispatch } from '../hooks'
 import { TextField } from '@mui/material'
 import { EditRounded as EditIcon } from '@mui/icons-material'
@@ -15,7 +15,12 @@ import { createStatuses, removeStatus } from '../actions/statuses'
 
 import { toCapSpace } from '../client-utils'
 
-function DataOption({ name, arrOfType }) {
+interface Props {
+  name: string,
+  arrOfType: unknown
+}
+
+function DataOption({ name, arrOfType }: Props) {
   const [currentAddition, setCurrentAddition] = useState('')
   const [newInputVisible, setNewInputVisible] = useState(false)
   const [editVisible, setEditVisible] = useState(false)
@@ -31,11 +36,11 @@ function DataOption({ name, arrOfType }) {
     setCurrentAddition('')
   }
 
-  const handleChange = (e) => {
-    setCurrentAddition(e.target.value)
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setCurrentAddition(event.target.value)
   }
 
-  const deleteItem = (id) => {
+  const deleteItem = (id: number) => {
     switch (name) {
       case 'shape':
         dispatch(removeShape(id))

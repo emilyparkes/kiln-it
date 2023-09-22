@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { FormEvent, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../hooks'
 
 import { FilterAltRounded as FilterIcon } from '@mui/icons-material'
@@ -13,7 +13,7 @@ import { addFilter, removeFilter, clearFilter } from '../../actions/filter'
 
 interface Props {
   focus: boolean,
-  toggleFocus: () => void
+  toggleFocus: (event: FormEvent<HTMLFormElement>) => void
 }
 
 function FilterBar({ focus, toggleFocus }: Props) {
@@ -29,7 +29,7 @@ function FilterBar({ focus, toggleFocus }: Props) {
 
   const filterKeyArr = Object.keys(filter)
 
-  const select = (category: string, value: any) => {
+  const select = (category: string, value: string) => {
     console.log(typeof value)
     dispatch(addFilter(category, value))
   }
@@ -51,8 +51,8 @@ function FilterBar({ focus, toggleFocus }: Props) {
     const listFilters = () => {
       // take filters out of store categorised objects, put into list
       return filterKeyArr.map((categoryName) => {
-        let selecterFilters: any[] = []
-        filter[categoryName]?.map((name: any) => {
+        const selecterFilters: string[] = []
+        filter[categoryName]?.map((name: string) => {
           selecterFilters.push(name)
         })
         // list out list and colour-code!
@@ -80,7 +80,7 @@ function FilterBar({ focus, toggleFocus }: Props) {
   }
 
   const trueFalseCheckboxes = (categoryName: string, cat: string, type: string) => {
-    if (filterKeyArr.length > 0 && filter[categoryName]?.includes(cat[type])) {
+    if (filterKeyArr.length > 0 && filter[categoryName]?.includes(cat[type as keyof typeof cat])) {
       return true
     } else {
       return false
@@ -89,7 +89,7 @@ function FilterBar({ focus, toggleFocus }: Props) {
   interface AccordianOption {
     id: number,
     colour: string,
-    category: any[],
+    category: unknown[],
     type: string 
    }
   const renderAccordion = (categoryName: string) => {
@@ -130,6 +130,7 @@ function FilterBar({ focus, toggleFocus }: Props) {
   return (
     <>
       <div className='filter-bar'>
+        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
         <div
           onClick={() => setOpen(true)}
           className={focus ? 'extendable-bar focused' : 'extendable-bar'}

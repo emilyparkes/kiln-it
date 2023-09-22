@@ -25,7 +25,7 @@ function StatusLogItem({ creation }) {
 
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const classes = useStyles()
+  const {classes} = useStyles()
 
   const statuses = useAppSelector((store) => store.statuses)
 
@@ -118,21 +118,60 @@ function StatusLogItem({ creation }) {
       )}
 
       {statuses && (
-        <Card sx={{ display: 'flex' }} className={classes.StatusLogItemCard}>
+        <Card
+          sx={{
+            display: 'flex',
+            height: '145px',
+            //     width: '100%',
+            backgroundColor: '#744f44',
+            //     overflow: 'hidden',
+            //     boxShadow: [
+            //       '0px 2px 1px -1px rgba(0, 0, 0, 0.2)',
+            //       '0px 1px 1px 0px rgba(0, 0, 0, 0.14)',
+            //       '0px 1px 3px 0px rgba(0, 0, 0, 0.12)',
+            //     ],
+            borderRadius: '4px',
+            margin: '2px 10px 8px 10px',
+          }}
+        >
           <Link to={`/creations/${toLowHyphen(creation.name)}`}>
             <CardMedia
               component="img"
-              sx={{ width: 151 }}
+              // sx={{ width: 151 }}
               image="/images/plate.jpeg"
               alt="text tdb"
-              className={classes.logImg}
+              sx={{
+                width: '139.95px',
+                height: '144.65px',
+                objectFit: 'cover',
+                borderRadius: '4px',
+              }}
             />
           </Link>
           <Box sx={{ display: 'flex', width: 1 }}>
-            <CardContent className={classes.StatusLogItemCardContent}>
+            <CardContent
+              sx={{
+                display: 'flex',
+                padding: '0px 3px 0px 0px',
+                top: '40px',
+                alignontent: 'center',
+                flexWrap: 'wrap',
+                alignItems: 'center',
+                color: 'whitesmoke',
+              }}
+            >
               <Button
                 variant="contained"
-                className={classes.statusButton}
+                sx={{
+                  width: '80%',
+                  fontWeight: '200',
+                  textTransform: 'uppercase',
+                  textAlign: 'center',
+                  margin: '8px',
+                  padding: '6px 16px',
+                  boxSizing: 'border-box',
+                  borderRadius: '4px',
+                }}
                 color={`${style}`}
                 onClick={showModal}
               >

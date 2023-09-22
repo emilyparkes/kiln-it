@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { useAppSelector, useAppDispatch } from '../hooks'
 import { useNavigate } from 'react-router-dom'
 
@@ -18,7 +18,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles'
 import { brown } from '@mui/material/colors'
 import { SaveRounded as SaveIcon } from '@mui/icons-material'
 
-import { useStyles } from '../styles/mui_overrides'
+// import { useStyles } from '../styles/mui_overrides'
 import { createCreation } from '../actions/creations'
 import {
   toLowHyphen,
@@ -26,19 +26,26 @@ import {
   validateForm,
   cleanForm,
 } from '../client-utils'
+import { Status } from '../../models/Status'
+import { Clay } from '../../models/Clay'
+import { Shape } from '../../models/Shape'
+import { DBGlaze, Glaze } from '../../models/Glaze'
 
 function NewCreation() {
   const [imgIdx, setImgIdx] = useState(0)
   const [currentImg, setCurrentImage] = useState('')
-  const [formError, setFormError] = useState({})
+  const [formError, setFormError] = useState({ nameInput: false, clayInput: false, shapeInput: false, statusInput: false, })
 
   const [form, setForm] = useState({
     name: '',
     shape: '',
     status: '',
     clay: '',
+    glazes: [] as string[],
+    weight: '',
+    note: '',
   })
-  const [selectedGlaze, setSelectedGlaze] = useState([])
+  const [selectedGlaze, setSelectedGlaze] = useState([] as DBGlaze[])
 
   // HARD CODED FOR NOW
   const images = [
@@ -66,7 +73,7 @@ function NewCreation() {
     },
   })
 
-  const classes = useStyles()
+  //  const { classes } = useStyles()
 
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
@@ -79,29 +86,30 @@ function NewCreation() {
 
   useEffect(() => {
     setCurrentImage(images[imgIdx])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [imgIdx])
 
   const getImage = (idx:number) => {
     setImgIdx(idx)
   }
 
-  const handleChange = (e) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setForm({
       ...form,
-      [e.target.name]: e.target.value,
+      [event.target.name]: event.target.value,
     })
   }
 
-  const selectGlaze = (event) => {
+  const selectGlaze = (event: ChangeEvent<HTMLInputElement>) => {
     setForm({
       ...form,
-      glazes: event.target.value,
+      glazes: [...form.glazes, event.target.value],
     })
-    setSelectedGlaze(event.target.value)
+    setSelectedGlaze([...selectedGlaze, event.target.value])
   }
 
-  const onSubmit = (e) => {
-    e.preventDefault()
+  const onSubmit = (event: FormEvent) => {
+    event.preventDefault()
     console.log(form)
     const hasErrors = validateForm(form)
     if (hasErrors) {
@@ -120,11 +128,12 @@ function NewCreation() {
       {creations.length > 0 && (
         <form>
           <div className="creation-container edit">
-            <img className="creation-img" src={currentImg} />
+            <img className="creation-img" src={currentImg} alt='some text'/>
 
             <div className="icon-dots">
               {images.map((dot, idx) => {
                 return (
+                  // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
                   <div
                     key={idx}
                     className={imgIdx === idx ? 'dot selected' : 'dot'}
@@ -137,11 +146,14 @@ function NewCreation() {
 
             <div className="text-card">
               <div className="text-card-content">
-                <div className={classes.box}>
+                <div style={{display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',}}>
                   <ThemeProvider theme={theme}>
                     <TextField
                       label="Name"
-                      className={classes.titleLabelWide}
+                      sx={{ width: '56ch' }}
                       variant="outlined"
                       size="small"
                       id="outlined-name"
@@ -159,7 +171,7 @@ function NewCreation() {
                     {shapes && (
                       <TextField
                         label="Shape"
-                        className={classes.inputLabel}
+                        sx={{width: '22ch',}}
                         variant="outlined"
                         size="small"
                         id="outlined-shape"
@@ -174,7 +186,7 @@ function NewCreation() {
                         value={form.shape}
                         onChange={handleChange}
                       >
-                        {shapes.map((shapeObj) => (
+                        {shapes.map((shapeObj: Shape) => (
                           <MenuItem key={shapeObj.id} value={shapeObj}>
                             {shapeObj.shape}
                           </MenuItem>
@@ -185,7 +197,7 @@ function NewCreation() {
                     {statuses && (
                       <TextField
                         label="Status"
-                        className={classes.inputLabel}
+                        sx={{width: '22ch',}}
                         variant="outlined"
                         size="small"
                         id="outlined-status"
@@ -200,7 +212,7 @@ function NewCreation() {
                         value={form.status}
                         onChange={handleChange}
                       >
-                        {statuses.map((statusObj) => (
+                        {statuses.map((statusObj: Status) => (
                           <MenuItem key={statusObj.id} value={statusObj}>
                             {statusObj.status}
                           </MenuItem>
@@ -211,7 +223,7 @@ function NewCreation() {
                     {clay && (
                       <TextField
                         label="Clay"
-                        className={classes.inputLabel}
+                        sx={{width: '22ch',}}
                         variant="outlined"
                         size="small"
                         id="outlined-clay"
@@ -226,7 +238,7 @@ function NewCreation() {
                         value={form.clay}
                         onChange={handleChange}
                       >
-                        {clay.map((clayObj) => (
+                        {clay.map((clayObj: Clay) => (
                           <MenuItem key={clayObj.id} value={clayObj}>
                             {clayObj.clay}
                           </MenuItem>
@@ -236,7 +248,7 @@ function NewCreation() {
 
                     <TextField
                       label="Weight"
-                      className={classes.inputLabel}
+                      sx={{ width: '22ch' }} 
                       variant="outlined"
                       size="small"
                       id="outlined-weight"
@@ -257,7 +269,7 @@ function NewCreation() {
                           Glazes
                         </InputLabel>
                         <Select
-                          className={classes.multiSelect}
+                          sx={{ width: '43.5ch' }} 
                           labelId="demo-multiple-checkbox-label"
                           id="demo-multiple-checkbox"
                           multiple
@@ -266,7 +278,7 @@ function NewCreation() {
                           input={<OutlinedInput label="Glazes" />}
                           renderValue={() => {
                             const glazeStrings = selectedGlaze.map(
-                              (selected) => selected.glaze
+                              (selected: Glaze) => selected.glaze
                             )
                             if (!selectedGlaze.length) {
                               return 'Unglazed'
@@ -276,12 +288,12 @@ function NewCreation() {
                           }}
                           MenuProps={MenuProps}
                         >
-                          {storeGlazes.map((glazeObj) => {
+                          {storeGlazes.map((glazeObj: DBGlaze) => {
                             const underglaze = glazeObj.underglaze
                               ? 'underglaze'
                               : '-'
                             const selectedIds = selectedGlaze.map(
-                              (selected) => selected.id
+                              (selected: DBGlaze) => selected.id
                             )
                             return (
                               <MenuItem key={glazeObj.id} value={glazeObj}>
@@ -317,7 +329,14 @@ function NewCreation() {
 
                     <Button
                       variant="contained"
-                      className={classes.saveButton}
+                      sx={{ 
+                        position: 'absolute',
+                        color: '#e3c6a4',
+                        backgroundColor: '#744F44',
+                        right: '18px',
+                        bottom: '50px',
+                        height: '35px'
+                      }} 
                       onClick={onSubmit}
                       endIcon={<SaveIcon fontSize="large" />}
                     >

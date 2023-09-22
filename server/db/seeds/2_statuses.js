@@ -9,7 +9,8 @@ exports.seed = (knex) => {
         { id: 5, status: 'Bisque Fired' },
         { id: 6, status: 'Glazed' },
         { id: 7, status: 'Glaze Firing' },
-        { id: 8, status: 'Complete' }
+        { id: 8, status: 'Complete' },
+        { id: 9, status: 'Sold' }
       ])
     })
 }

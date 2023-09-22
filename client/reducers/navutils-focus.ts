@@ -1,13 +1,13 @@
 import { Action, SET_FOCUS } from '../actions/navutils-focus'
 
-interface navUtils {
-  filter: string,
-  search: string
+export interface Utils {
+  filter: boolean,
+  search: boolean
 }
 
-const initialState: navUtils = {
-  filter: 'active',
-  search: ''
+const initialState: Utils = {
+  filter: true,
+  search: false
 }
 
 export default function navUtils (state = initialState, action: Action) {

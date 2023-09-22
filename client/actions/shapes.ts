@@ -1,7 +1,7 @@
 import { showError } from './error'
-import { getShapes, addShapes, updateShape, deleteShape } from '../apis/shapes'
+import { fetchShapes, postShapes, patchShape, delShape } from '../apis/shapes'
 import { ThunkAction } from '../store'
-import { Shape } from '../../models/Shape'
+import { Shape, DBShape } from '../../models/Shape'
 
 export const SHAPES_REQUEST_PENDING = 'SHAPES_REQUEST_PENDING'
 export const RECEIVE_SHAPES = 'RECEIVE_SHAPES'
@@ -51,11 +51,11 @@ export function removeShapeSuccess (id: number): Action {
   }
 }
 
-export function fetchShapes (): ThunkAction {
+export function getShapes (): ThunkAction {
   return (dispatch) => {
     dispatch(requestShapesPending())
 
-  return getShapes()
+  return fetchShapes()
       .then(shapes => dispatch(receiveShapes(shapes)))
       .catch(err => dispatch(showError(err.message)))
   }
@@ -65,17 +65,17 @@ export function createShapes (shapes: Shape[]): ThunkAction {
   return (dispatch) => {
     dispatch(requestShapesPending())
 
-  return addShapes(shapes)
+  return postShapes(shapes)
       .then(shapes => dispatch(newShapesSuccess(shapes)))
       .catch(err => dispatch(showError(err.message)))
   }
 }
 
-export function modifyShape (shape: Shape): ThunkAction {
+export function modifyShape (shape: DBShape): ThunkAction {
   return (dispatch) => {
     dispatch(requestShapesPending())
 
-  return updateShape(shape.id, shape)
+  return patchShape(shape.id, shape)
       .then((shape) => dispatch(updateShapeSuccess(shape)))
       .catch(err => dispatch(showError(err.message)))
   }
@@ -85,7 +85,7 @@ export function removeShape (id: number): ThunkAction {
   return (dispatch) => {
     dispatch(requestShapesPending())
 
-  return deleteShape(id)
+  return delShape(id)
       .then(() => dispatch(removeShapeSuccess(id)))
       .catch(err => dispatch(showError(err.message)))
   }

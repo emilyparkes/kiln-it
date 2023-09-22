@@ -1,5 +1,5 @@
 import { showError } from './error'
-import { getGlazes, addGlazes, updateGlaze, deleteGlaze } from '../apis/glazes'
+import { fetchGlazes, postGlazes, patchGlaze, delGlaze } from '../apis/glazes'
 import { Glaze } from '../../models/Glaze'
 import { ThunkAction } from '../store'
 
@@ -38,7 +38,7 @@ export function newGlazesSuccess (glazes: Glaze[]): Action {
   }
 }
 
-export function updateGlazeSuccess (glaze: Glaze) {
+export function patchGlazeSuccess (glaze: Glaze) {
   return {
     type: UPDATE_GLAZE,
     payload: glaze
@@ -52,11 +52,11 @@ export function removeGlazeSuccess (id: number) {
   }
 }
 
-export function fetchGlazes (): ThunkAction {
+export function getGlazes (): ThunkAction {
   return (dispatch) => {
     dispatch(requestGlazesPending())
 
-    return getGlazes()
+    return fetchGlazes()
       .then(glazes => dispatch(receiveGlazesSuccess(glazes)))
       .catch(err => dispatch(showError(err.message)))
   }
@@ -66,7 +66,7 @@ export function createGlazes (glazes: Glaze[]): ThunkAction {
   return (dispatch) => {
     dispatch(requestGlazesPending())
 
-    return addGlazes(glazes)
+    return postGlazes(glazes)
       .then(glazes => dispatch(newGlazesSuccess(glazes)))
       .catch(err => dispatch(showError(err.message)))
   }
@@ -76,8 +76,8 @@ export function modifyGlaze (glaze: Glaze): ThunkAction {
   return (dispatch) => {
     dispatch(requestGlazesPending())
 
-    return updateGlaze(glaze.id, glaze)
-      .then((glaze) => dispatch(updateGlazeSuccess(glaze)))
+    return patchGlaze(glaze.id, glaze)
+      .then((glaze) => dispatch(patchGlazeSuccess(glaze)))
       .catch(err => dispatch(showError(err.message)))
   }
 }
@@ -86,7 +86,7 @@ export function removeGlaze (id: number): ThunkAction {
   return (dispatch) => {
     dispatch(requestGlazesPending())
 
-    return deleteGlaze(id)
+    return delGlaze(id)
       .then(() => dispatch(removeGlazeSuccess(id)))
       .catch(err => dispatch(showError(err.message)))
   }

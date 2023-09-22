@@ -20,18 +20,18 @@ import {
 } from '@mui/icons-material'
 import { brown } from '@mui/material/colors'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
-import { useStyles } from '../styles/mui_overrides'
+// import { useStyles } from '../styles/mui_overrides'
 
 import { Creation } from '../../models/Creation'
 import { updateCreation } from '../actions/creations'
 import { findString, toLowHyphen, toCapSpace } from '../client-utils'
-
+import { DBGlaze } from '../../models/Glaze'
 
 function CreationEdit() {
   const [imgIdx, setImgIdx] = useState(0)
   const [currentImg, setCurrentImage] = useState('')
   const [form, setForm] = useState({} as Partial<Creation>)
-  const [selectedGlaze, setSelectedGlaze] = useState([] as any[])
+  const [selectedGlaze, setSelectedGlaze] = useState([] as unknown[])
 
   // HARD CODED FOR NOW
   const images = [
@@ -60,7 +60,7 @@ function CreationEdit() {
   })
 
   const params = useParams()
-  const classes = useStyles()
+  // const { classes } = useStyles()
 
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
@@ -79,24 +79,27 @@ function CreationEdit() {
 
       const copyGlazes = [...storeGlazes]
       const prettyState = copyGlazes.filter((glazeObj) => {
-        return creation.glazes.find((glaze) => glaze.id === glazeObj.id)
+        return creation.glazes.find(
+          (glaze: DBGlaze) => glaze.id === glazeObj.id
+        )
       })
       setSelectedGlaze(prettyState)
     }
-  }, [creations, storeGlazes])
+  }, [creations, storeGlazes, params.name])
 
   useEffect(() => {
     setCurrentImage(images[imgIdx])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [imgIdx])
 
-  const getImage = (idx) => {
+  const getImage = (idx: number) => {
     setImgIdx(idx)
   }
 
-  const handleChange = (e) => {
+  const handleChange = (event) => {
     setForm({
       ...form,
-      [e.target.name]: e.target.value,
+      [event.target.name]: event.target.value,
     })
   }
 
@@ -112,7 +115,7 @@ function CreationEdit() {
     e.preventDefault()
     delete form.clay
     delete form.shape
-    delete form.glaze
+    delete form.glazes
     delete form.status
     const formattedGlazes = selectedGlaze.map((selected) => {
       if (selected.in_use) {
@@ -132,11 +135,12 @@ function CreationEdit() {
       {form && creations && (
         <form>
           <div className="creation-container edit">
-            <img className="creation-img" src={currentImg} />
+            <img className="creation-img" src={currentImg} alt="some text" />
 
             <div className="icon-dots">
               {images.map((dot, idx) => {
                 return (
+                  // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
                   <div
                     key={idx}
                     className={imgIdx === idx ? 'dot selected' : 'dot'}
@@ -149,11 +153,18 @@ function CreationEdit() {
 
             <div className="text-card">
               <div className="text-card-content">
-                <div className={classes.box}>
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    flexWrap: 'wrap',
+                    justifyContent: 'space-between',
+                  }}
+                >
                   <ThemeProvider theme={theme}>
                     <TextField
                       label="Name"
-                      // className={classes.titleLabel}
+                      sx={{width: '40ch',}}
                       variant="outlined"
                       size="small"
                       id="outlined-name"
@@ -166,7 +177,7 @@ function CreationEdit() {
                     {shapes && (
                       <TextField
                         label="Shape"
-                        // className={classes.inputLabel}
+                        sx={{ width: '22ch' }}
                         variant="outlined"
                         size="small"
                         id="outlined-shape"
@@ -187,7 +198,7 @@ function CreationEdit() {
                     {statuses && (
                       <TextField
                         label="Status"
-                        // className={classes.inputLabel}
+                        sx={{ width: '22ch' }}
                         variant="outlined"
                         size="small"
                         id="outlined-status"
@@ -208,7 +219,7 @@ function CreationEdit() {
                     {clay && (
                       <TextField
                         label="Clay"
-                        // className={classes.inputLabel}
+                        sx={{ width: '22ch' }}
                         variant="outlined"
                         size="small"
                         id="outlined-clay"
@@ -228,7 +239,7 @@ function CreationEdit() {
 
                     <TextField
                       label="Weight"
-                      // className={classes.inputLabel}
+                      sx={{ width: '22ch' }}
                       variant="outlined"
                       size="small"
                       id="outlined-weight"
@@ -249,7 +260,7 @@ function CreationEdit() {
                           Glazes
                         </InputLabel>
                         <Select
-                          // className={classes.multiSelect}
+                          sx={{ width: '43.5ch' }}
                           labelId="demo-multiple-checkbox-label"
                           id="demo-multiple-checkbox"
                           multiple
@@ -332,7 +343,14 @@ function CreationEdit() {
             </a>
             <Button
               variant="contained"
-              // className={classes.saveButton}
+              sx={{
+                position: 'absolute',
+                color: '#e3c6a4',
+                backgroundColor: '#744F44',
+                right: '18px',
+                bottom: '50px',
+                height: '35px',
+              }}
               onClick={onSubmit}
               endIcon={<SaveIcon fontSize="large" />}
             >

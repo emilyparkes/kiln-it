@@ -4,29 +4,29 @@ import { Status } from '../../models/Status'
 
 const baseUrl = '/api/v1/statuses'
 
-export function getStatuses () {
+export function fetchStatuses () {
   return request
     .get(baseUrl)
-    .then((res) => res.body.statuses)
+    .then((res) => res.body)
 }
 
-export function addStatuses (statuses: Status[]) {
+export function postStatuses (statuses: Status[]) {
   return request
     .post(baseUrl)
     .send(statuses)
     .then((res) => {
-      return res.body.statuses
+      return res.body
     })
 }
 
-export function updateStatus (id:number, status:Status) {
+export function patchStatus (id:number, status:Status) {
   return request
     .patch(`${baseUrl}/${id}`)
     .send(status)
     .then((res) => res.body)
 }
 
-export function deleteStatus (id:number) {
+export function delStatus (id:number) {
   return request
     .delete(`${baseUrl}/${id}`)
     .then((res) => res.body)

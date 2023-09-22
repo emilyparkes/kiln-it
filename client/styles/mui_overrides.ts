@@ -1,6 +1,8 @@
-// import { makeStyles } from '@mui/system'
+import { makeStyles } from 'tss-react/mui'
+// import { theme } from './theme'
 
-export const useStyles = () => ({
+export const useStyles = makeStyles()(() => {
+  return {
   box: {
     display: 'flex',
     flexDirection: 'row',
@@ -180,4 +182,5 @@ export const useStyles = () => ({
     bottom: '1rem',
     right: '2rem',
   },
+}
 })

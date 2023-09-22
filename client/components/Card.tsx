@@ -1,7 +1,7 @@
 interface Props {
   img: string,
   name: string,
-  shape: any, 
+  shape: string, 
   description: string
 }
 
@@ -14,7 +14,7 @@ function Card ({ img, name, shape, description }: Props) {
           <p>{name}</p>
           <p>{shape}</p>
         </div>
-        {/* <p>{description}</p> */}
+        <p>{description}</p>
       </div>
       <img className='card-img' src={img} alt='description tbd'/>
     </div>

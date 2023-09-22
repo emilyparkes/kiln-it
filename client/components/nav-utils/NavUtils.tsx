@@ -5,11 +5,11 @@ import FilterBar from './FilterBar'
 import SearchBar from './SearchBar'
 
 import { setFocus } from '../../actions/navutils-focus'
+import Toolbar from '@mui/material/Toolbar'
 
-function NavUtils () {
-
+function NavUtils() {
   const dispatch = useAppDispatch()
-  const focus = useAppSelector(store => store.navUtils)
+  const focus = useAppSelector((store) => store.navUtils)
 
   const toggleFocus = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -20,12 +20,12 @@ function NavUtils () {
 
   return (
     <>
-      {focus && 
-        <div className='utils-container'>
-          <FilterBar focus={focus?.filter} toggleFocus={toggleFocus}/>
-          <SearchBar focus={focus?.search} toggleFocus={toggleFocus}/>
-        </div>
-      }
+      {focus && (
+          <Toolbar sx ={{ width: '100%', height: '45px', margin: '0px auto 10px auto', backgroundColor: '#e3c6a4'}}>
+            <FilterBar focus={focus.filter} toggleFocus={toggleFocus} />
+            <SearchBar focus={focus.search} toggleFocus={toggleFocus} />
+          </Toolbar>
+      )}
     </>
   )
 }

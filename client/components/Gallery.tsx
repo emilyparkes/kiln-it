@@ -5,7 +5,7 @@ import { Typography } from '@mui/material'
 import { toLowHyphen, filterBy, searchBy } from '../client-utils'
 
 import Card from './Card'
-import NavUtils from './nav-utils/NavUtils'
+// import NavUtils from './nav-utils/NavUtils'
 import WaitIndicator from './WaitIndicator'
 
 function Gallery() {
@@ -22,7 +22,6 @@ function Gallery() {
 
   return (
     <>
-      <NavUtils />
       <WaitIndicator />
       {focus?.filter ? (
         <>

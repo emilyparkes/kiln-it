@@ -12,7 +12,7 @@ function SignIn () {
         <h1>Sign in</h1>
       </div>
 
-      <label>Username</label>
+      <label htmlFor='username'>Username</label>
       <input
         id='username'
         name='username'
@@ -22,7 +22,7 @@ function SignIn () {
         type='text'
       />
 
-      <label>Password</label>
+      <label htmlFor='password'>Password</label>
       <input
         id='password'
         name='password'
