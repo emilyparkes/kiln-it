@@ -40,7 +40,7 @@ describe('Creations can ', () => {
     expect.assertions(2)
     const result = await creations.getCreations()
 
-    expect(result).toHaveLength(9)
+    expect(result).toHaveLength(12)
     expect(result[1]).toStrictEqual({
       id: 2,
       clayId: 2,
@@ -136,7 +136,7 @@ describe('Creations can ', () => {
     })
 
     const expectedResult = {
-      id: 10,
+      id: 13,
       clayId: 1,
       clay: 'White',
       shapeId: 1,
@@ -160,20 +160,20 @@ describe('Creations can ', () => {
       img_gallery: '',
     }
     const allCreations = await creations.getCreations()
-    const found = allCreations.find((creation => creation.id === 10))
+    const found = allCreations.find((creation => creation.id === 13))
 
-    expect(result).toStrictEqual([10])
-    expect(allCreations).toHaveLength(10)
+    expect(result).toStrictEqual([13])
+    expect(allCreations).toHaveLength(13)
     expect(found).toStrictEqual(expectedResult)
   })
 
-  it('adds a new creation\'s glazes', async () => {
+  it('add a new creation\'s glazes', async () => {
     expect.assertions(3)
     const id = 9
     const glazeId = 10
     const result = await creations.createCreationGlazes(id, glazeId)
 
-    const expectedResult = [14]
+    const expectedResult = [17]
     const glazes = await creations.getGlazesByCreationId(id)
 
     expect(result).toStrictEqual(expectedResult)
@@ -281,7 +281,7 @@ describe('Creations can ', () => {
     const result = await creations.getCreations()
     const found = result.find((creation => creation.id === id))
     
-    expect(result).toHaveLength(8)
+    expect(result).toHaveLength(11)
     expect(found).toBeUndefined()
   })
 
