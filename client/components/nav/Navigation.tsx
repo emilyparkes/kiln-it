@@ -1,4 +1,5 @@
 import { useState, ReactElement, cloneElement } from 'react'
+import { useLocation } from 'react-router-dom'
 import NavSidebar from './NavSidebar'
 
 // import PropTypes from 'prop-types'
@@ -57,6 +58,7 @@ const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
 export default function Navigation(props: object) {
   const [open, setOpen] = useState(false)
+  const location = useLocation()
 
   const toggleDrawer =
     (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -70,6 +72,14 @@ export default function Navigation(props: object) {
 
       setOpen(open)
     }
+
+  const renderNavUtils = () => {
+    const { pathname } = location
+    console.log(pathname)
+    if (pathname == '/gallery' || pathname == '/log' ) {
+      return <NavUtils />
+    } else return null
+  }
 
   console.log('nav props', props)
   return (
@@ -96,7 +106,10 @@ export default function Navigation(props: object) {
               
 
             </Toolbar>
-            <NavUtils />
+            {renderNavUtils()}
+
+
+
 
           </AppBar>
 
