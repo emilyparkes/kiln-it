@@ -1,12 +1,14 @@
 import { useAppSelector } from '../hooks'
 import { Link } from 'react-router-dom'
 import { Typography } from '@mui/material'
+import Grid2 from '@mui/material/Unstable_Grid2'
 
 import { toLowHyphen, filterBy, searchBy } from '../client-utils'
 
 import Card from './Card'
-// import NavUtils from './nav-utils/NavUtils'
 import WaitIndicator from './WaitIndicator'
+import { DBCreation } from '../../models/Creation'
+import { Container } from '@mui/material'
 
 function Gallery() {
   const focus = useAppSelector((store) => store.navUtils)
@@ -25,12 +27,13 @@ function Gallery() {
       <WaitIndicator />
       {focus?.filter ? (
         <>
-          <div className="card-root">
-            <div className="card-container">
-              {creationsFiltered?.map((creation) => {
+          <Container sx={{paddingTop: '75px', paddingLeft: '11px'}}>
+            <Grid2 container spacing={0.5}>
+              {creationsFiltered?.map((creation: DBCreation) => {
                 const name = toLowHyphen(creation.name)
                 return (
-                  <Link to={`/creations/${name}`} key={creation.id}>
+                  <Grid2 key={creation.id} xs={6} sm={6} md={4} lg={4} xl={2}>
+                  <Link to={`/creations/${name}`} >
                     <Card
                       img={'/images/plate.jpeg'}
                       name={creation.name}
@@ -38,10 +41,11 @@ function Gallery() {
                       description={creation.glaze}
                     />
                   </Link>
+                  </Grid2>
                 )
-              })}
-            </div>
-          </div>
+                })}
+              </Grid2>
+            </Container>
         </>
       ) : (
         <>
@@ -54,12 +58,13 @@ function Gallery() {
             </Typography>
           )}
 
-          <div className="card-root">
-            <div className="card-container">
+          <Container sx={{paddingTop: '75px', paddingLeft: '11px'}}>
+            <Grid2 container spacing={0.5}>
               {creationsSearched?.map((creation) => {
-                const name = toLowHyphen(creation.name)
+              const name = toLowHyphen(creation.name)
                 return (
-                  <Link to={`/creations/${name}`} key={creation.id}>
+                  <Grid2 key={creation.id} xs={6} sm={6} md={4} lg={4} xl={2}>
+                  <Link to={`/creations/${name}`}>
                     <Card
                       img={'/images/plate.jpeg'}
                       name={creation.name}
@@ -67,10 +72,11 @@ function Gallery() {
                       description={creation.glaze}
                     />
                   </Link>
+                  </Grid2>
                 )
               })}
-            </div>
-          </div>
+            </Grid2>
+          </Container>
         </>
       )}
     </>
