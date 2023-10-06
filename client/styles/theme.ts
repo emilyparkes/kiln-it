@@ -63,6 +63,10 @@ export const theme = createTheme({
       main: '#744F44',
       contrastText: '#FFFFFF',
     },
+    sold: {
+      main: '#744F44',
+      contrastText: '#FFFFFF',
+    },
     shape: {
       main: '#88A4B8',
       contrastText: '#000000',
@@ -169,6 +173,7 @@ declare module '@mui/material/styles/createPalette' {
     glazed: Palette['primary']
     glazeFiring: Palette['primary']
     complete: Palette['primary']
+    sold: Palette['primary']
     clay: Palette['primary']
     shape: Palette['primary']
     glaze: Palette['primary']
@@ -188,9 +193,29 @@ declare module '@mui/material/styles/createPalette' {
     glazed: PaletteOptions['primary']
     glazeFiring: PaletteOptions['primary']
     complete: PaletteOptions['primary']
+    sold: PaletteOptions['primary']
     clay: PaletteOptions['primary']
     shape: PaletteOptions['primary']
     glaze: PaletteOptions['primary']
     glazes: PaletteOptions['primary']    
   }
 }
+
+declare module '@mui/material/Button' {
+  interface ButtonPropsColorOverrides {
+    wet: true,
+    leatherHard: true,
+    boneDry: true,
+    bisqueFiring: true,
+    bisqueFired: true,
+    glazed: true,
+    glazeFiring: true,
+    complete: true,
+    sold: true,
+    clay: true,
+    shape: true,
+    glaze: true,
+    glazes: true
+  }
+}
+
