@@ -7,7 +7,10 @@ const baseUrl = '/api/v1/creations'
 export function fetchCreations(): Promise<Creation[]> {
   return request
     .get(baseUrl)
-    .then((res) => res.body)
+    .then((res) => {
+      console.log(res.body)
+      return res.body
+    })
 }
 
 export function postCreation(newCreation: Creation) {

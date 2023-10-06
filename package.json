@@ -23,8 +23,8 @@
   },
   "homepage": "https://github.com/emilyparkes/kiln-it#readme",
   "scripts": {
-    "start": "ts-node server/index.ts",
-    "dev": "run-p dev:client dev:server",
+    "start": "node dist/server/index.js",
+    "dev": "run-p dev:client dev:server sass",
     "dev:client": "vite && sass",
     "dev:server": "nodemon server/index.ts",
     "build": "run-s build:client build:server",

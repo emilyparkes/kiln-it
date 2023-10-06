@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for kiln-it on 2023-09-22T14:13:24+12:00
+# fly.toml app configuration file generated for kiln-it on 2023-09-22T16:36:49+12:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -8,12 +8,8 @@ primary_region = "syd"
 
 [build]
 
-[[mounts]]
-  source = "data"
-  destination = "/data"
-
 [http_service]
-  internal_port = 5173
+  internal_port = 8080
   force_https = true
   auto_stop_machines = true
   auto_start_machines = true

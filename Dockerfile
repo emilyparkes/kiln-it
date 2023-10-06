@@ -45,6 +45,6 @@ RUN mkdir -p /data
 VOLUME /data
 
 # Start the server by default, this can be overwritten at runtime
-EXPOSE 3000
+EXPOSE 8080
 ENV DATABASE_URL="file:///data/sqlite.db"
 CMD [ "npm", "run", "start" ]
