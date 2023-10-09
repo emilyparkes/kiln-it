@@ -139,10 +139,6 @@ export const theme = createTheme({
         },
       },
     },
-  // props: {
-  //   MuiTooltip: {
-  //     arrow: true,
-  //   },
   },
 })
 
