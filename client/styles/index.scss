@@ -6,7 +6,6 @@
 
 
 // Nav
-@import '_burger.scss';
 @import '_sidebars.scss';
 @import '_nav.scss';
 @import '_nav-utils.scss';
@@ -14,12 +13,10 @@
 @import '_searchbar.scss';
 
 // Shared
-@import '_about.scss';
 @import '_card.scss';
 @import '_creation.scss';
 @import '_accordion.scss';
 
 // Admin
-@import '_statuslog.scss';
 @import '_statusmodal.scss';
 @import '_dataoptions.scss';
