@@ -8,6 +8,9 @@
   margin-left: auto;
   margin-right: auto;
   overflow: auto;
+  @include mobile-mini {
+    max-width: 400px;
+  }
   @include mobile {
     max-width: 400px;
   }
@@ -25,14 +28,26 @@
   }
 }
 
+.button-add-new {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: auto;
+  align-content: center;
+  justify-content: flex-end;
+  align-items: center;
+  z-index: 50;
+}
+
 
 // LOG ITEM 
-
 .log-box {
   display: flex;
-  width: 400px;
   height: 128px;
-  // max-width: 80%;
+  max-width: 400px;
   background-color: #744f44;
   overflow: hidden;
   box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
@@ -61,7 +76,6 @@
 // }
 
 // MODAL IN STATUS LOG ITEM
-
 .main {
   position: relative
 }
@@ -83,11 +97,10 @@
 }
 
 // STATUS LOG ITEM
-
 .log-img {
   display: block;
   width: 129.95px;
-  height: 127.65px;
+  height: 128.65px;
   object-fit: cover;
   
   border-radius: 4px;
@@ -122,7 +135,7 @@
 
 // STATUS STYLING
 .status {
-  width: 230px;
+  width: 256px;
   height: 30px;
   position: absolute;
   left: 142px;
@@ -152,8 +165,6 @@
   }
 
 }
-
-
 
 // STATUS COLOURS
 .wet{

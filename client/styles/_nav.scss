@@ -9,6 +9,10 @@
   display: flex;
 }
 
+.appbar {
+  background-color: $body-bg-light;
+}
+
 // DIRTY HANDS STUDIO
 .logo {
   font-family: $font-headings;

@@ -1,0 +1,8 @@
+node_modules
+*.log
+*.sqlite3
+server/public/bundle.js
+server/public/bundle.js.map
+.env
+tags
+.vercel

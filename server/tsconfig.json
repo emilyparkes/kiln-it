@@ -1,0 +1,9 @@
+{
+  "extends": "../tsconfig.json",
+  "include": [".", "../common"],
+  "compilerOptions": {
+    "outDir": "../dist",
+    "noEmit": false,
+    "types": ["node"]
+  }
+}

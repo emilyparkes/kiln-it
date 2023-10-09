@@ -8,7 +8,8 @@ exports.seed = (knex) => {
         { id: 4, shape: 'Paint Palette', in_use: true },
         { id: 5, shape: 'Vase', in_use: true },
         { id: 6, shape: 'Planter', in_use: true },
-        { id: 7, shape: 'Artistic', in_use: true }
+        { id: 7, shape: 'Artistic', in_use: true },
+        { id: 8, shape: 'Pasta Dish', in_use: true }
       ])
     })
 }
