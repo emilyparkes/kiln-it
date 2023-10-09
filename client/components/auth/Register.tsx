@@ -11,6 +11,7 @@ import {
   Typography,
 } from '@mui/material'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
+import { Link } from 'react-router-dom'
 
 function Register() {
   const [form, setForm] = useState({
@@ -150,6 +151,10 @@ function Register() {
           <Button color='secondary' sx={{ m: 1, width: '37ch' }} variant='contained' onClick={handleClick}>
             Register
           </Button>
+
+          <Typography variant='subtitle2' style={{ width: '100%', padding: '0 10px 10px' }}>
+            Already got an account? <Link to='/signin' style={{color: '#1675d1', textDecoration: 'underline #1675d1'}}>Sign In</Link>
+          </Typography>
         </Box>
       </Paper>
     </>
