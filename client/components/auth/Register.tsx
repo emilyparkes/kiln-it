@@ -1,4 +1,5 @@
 import { ChangeEvent, useState } from 'react'
+import { Link } from 'react-router-dom'
 import {
   Box,
   Button,
@@ -11,7 +12,6 @@ import {
   Typography,
 } from '@mui/material'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
-import { Link } from 'react-router-dom'
 
 function Register() {
   const [form, setForm] = useState({
