@@ -1,64 +1,67 @@
-.card-root {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  @include mobile {
-    max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  @include tablet {
-    max-width: 614px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  @include desktop {
-    max-width: 850px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  @include desktop-large {
-    max-width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  @include desktop-xlarge {
-    max-width: 75%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
+// .card-root {
+//   display: flex;
+//   flex-direction: row;
+//   flex-wrap: wrap;
+//   justify-content: center;
+//   padding-top: 75px;
+//   @include mobile {
+//     padding-top: 75px;
+//     max-width: 200px;
+//     margin-left: auto;
+//     margin-right: auto;
+//   }
+//   @include tablet {
+//     max-width: 614px;
+//     margin-left: auto;
+//     margin-right: auto;
+//   }
+//   @include desktop {
+//     max-width: 850px;
+//     margin-left: auto;
+//     margin-right: auto;
+//   }
+//   @include desktop-large {
+//     max-width: 80%;
+//     margin-left: auto;
+//     margin-right: auto;
+//   }
+//   @include desktop-xlarge {
+//     max-width: 75%;
+//     margin-left: auto;
+//     margin-right: auto;
+//   }
+// }
 
-.card-container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  margin-left: auto;
-  margin-right: auto;
-  align-items: center;
-  align-content: center;
-  @include mobile-mini {
-    max-width: 400px;
-    // padding-left: 2%;
-  }
-  @include mobile {
-    max-width: 400px;
-  }
-  @include tablet {
-    max-width: 614px;
-  }
-  @include desktop {
-    max-width: 614px;
-  }
-  @include desktop-large {
-    max-width: 850px;
-  }
-  @include desktop-xlarge {
-    max-width: 1125px;
-  }
-}
+// .card-container {
+//   display: flex;
+//   flex-direction: row;
+//   flex-wrap: wrap;
+//   justify-content: flex-start;
+//   margin-left: auto;
+//   margin-right: auto;
+//   align-items: center;
+//   align-content: center;
+
+//   @include mobile-mini {
+//     max-width: 400px;
+//     // padding-left: 2%;
+//   }
+//   @include mobile {
+//     max-width: 400px;
+//   }
+//   @include tablet {
+//     max-width: 614px;
+//   }
+//   @include desktop {
+//     max-width: 614px;
+//   }
+//   @include desktop-large {
+//     max-width: 850px;
+//   }
+//   @include desktop-xlarge {
+//     max-width: 1125px;
+//   }
+// }
 
 // #e3c6a4 or b98462
 .card {
@@ -141,11 +144,3 @@
     margin: 0;
   }
 }
-// p {
-//   color: #fff;
-//   font-weight: 300;
-//   padding: 16px;
-//   @include mobile-mini {
-//     font-size: 0.75rem;
-//   }
-// }

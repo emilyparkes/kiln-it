@@ -1,9 +1,38 @@
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
+import { Link } from 'react-router-dom'
+import {
+  Box,
+  Button,
+  FormControl,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
+  Paper,
+  Typography,
+} from '@mui/material'
+import { Visibility, VisibilityOff } from '@mui/icons-material'
 
+<<<<<<< HEAD
 function SignIn () {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [formErr, setFormErr] = useState('')
+=======
+function SignIn() {
+  const [form, setForm] = useState({
+    username: '',
+    password: '',
+  })
+  const [showPassword, setShowPassword] = useState(false)
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    })
+  }
+>>>>>>> 449264d00ab7fc5a00379caae47667eef530dd40
 
   const dispatch = useDispatch()
   const classes = useEditStyles()
@@ -20,41 +49,114 @@ function SignIn () {
       .catch(err => console.log(err.message))
   }
 
+  const clickShowPassword = () => {
+    setShowPassword(!showPassword)
+  }
+
+  const mouseDownPassword = () => {
+    setShowPassword(!showPassword)
+  }
+
   return (
     <>
-      {formErr}
-      <ThemeProvider theme={theme}>
-        <div>
-          <h1>Sign in</h1>
-        </div>
+      <Paper elevation={3} style={{ width: '80%', margin: '15vh auto 0 auto' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            width: '80%',
+            margin: 'auto',
+            flexDirection: 'column',
+            alignItems: 'center',
+            padding: '10px 0 30px 0',
+          }}
+        >
+          <Typography variant="h4" style={{ padding: '25px' }}>
+            Welcome back
+          </Typography>
 
-      <label htmlFor='username'>Username</label>
-      <input
-        id='username'
-        name='username'
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        placeholder='Username'
-        type='text'
-      />
+          <FormControl
+            sx={{ m: 1, width: '32ch' }}
+            variant="outlined"
+            color="secondary"
+          >
+            <InputLabel htmlFor="username" sx={{ color: '#744F44' }}>
+              Username
+            </InputLabel>
+            <OutlinedInput
+              required
+              id="username"
+              label="Username"
+              value={form.username}
+              onChange={handleChange}
+            />
+          </FormControl>
+          {/* // error={formError.usernameInput ? true : false}
+            // helperText={ */}
+          {/* //   formError.usernameInput ? 'Username is required.' : ''
+            // } */}
 
-      <label htmlFor='password'>Password</label>
-      <input
-        id='password'
-        name='password'
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder='Password'
-        type='password'
-      />
+          <FormControl sx={{ m: 1, width: '32ch' }} variant="outlined">
+            <InputLabel htmlFor="password" sx={{ color: '#744F44' }}>
+              Password
+            </InputLabel>
+            <OutlinedInput
+              required
+              id="password"
+              type={showPassword ? 'text' : 'password'}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={clickShowPassword}
+                    onMouseDown={mouseDownPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              label="Password"
+            />
+          </FormControl>
+          <Typography
+            variant="subtitle2"
+            style={{ width: '100%', padding: '0 10px 10px' }}
+          >
+            <Link
+              to="/"
+              style={{ color: '#1675d1', textDecoration: 'underline #1675d1' }}
+            >
+              Forgot password?
+            </Link>
+          </Typography>
 
-        <button data-testid='submit-button'
-          onClick={handleClick}> Sign in
-        </button>
-      </ThemeProvider>
+          <Button
+            color="secondary"
+            sx={{ m: 1, width: '37ch' }}
+            variant="contained"
+            onClick={handleClick}
+          >
+            Sign in
+          </Button>
+
+          <Typography
+            variant="subtitle2"
+            style={{ width: '100%', padding: '0 10px 10px' }}
+          >
+            Don&apos;t have an account?{' '}
+            <Link
+              to="/register"
+              style={{ color: '#1675d1', textDecoration: 'underline #1675d1' }}
+            >
+              Register
+            </Link>
+          </Typography>
+        </Box>
+      </Paper>
     </>
   )
 }
+
 export default SignIn
 
 // const auth = getAuth();

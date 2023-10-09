@@ -6,15 +6,17 @@ import {
   CardMedia,
   CardContent,
   Box,
-  Button,
   Typography,
   Stack,
+  ButtonPropsColorOverrides,
 } from '@mui/material'
+
+import Button from '@mui/material/Button'
 
 import StatusModal from './StatusModal'
 import { toCamelCase, toLowHyphen } from '../client-utils'
 import { updateCreationStatus } from '../actions/creations'
-import { useStyles } from '../styles/mui_overrides'
+
 
 function StatusLogItem({ creation }) {
   const initialState = { id: creation.statusId, status: creation.status }
@@ -25,13 +27,13 @@ function StatusLogItem({ creation }) {
 
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const {classes} = useStyles()
 
   const statuses = useAppSelector((store) => store.statuses)
 
-  const style = toCamelCase(statusStyle)
+  const style = toCamelCase(statusStyle) as unknown as ButtonPropsColorOverrides
   // const date = creation.dateComplete || creation.dateCreated
   // const formattedDate = new Date(date).toDateString()
+
 
   useEffect(() => {
     show
@@ -86,33 +88,33 @@ function StatusLogItem({ creation }) {
           <StatusModal
             show={show}
             save={onSubmit}
+            open={showModal}
             close={hideModal}
             resetState={() =>
               setStatusAndStyle(initialState, initialState.status)
             }
           >
-            <div className="current">
-              <p>Selected</p>
-              <p className={classes[`${style}`]}>{currentStatus.status}</p>
-            </div>
-            <div className="statusList">
+            <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
               {statuses
-                ? statuses.map((statusobj) => {
-                    const styleItem = toCamelCase(statusobj.status)
-
-                    return (
-                      <button
-                        className={classes[`${styleItem}`]}
-                        key={statusobj.id}
-                        value={statusobj.status}
-                        onClick={handleSelect}
-                      >
-                        {statusobj.status}
-                      </button>
-                    )
-                  })
+                ? <Stack spacing={1}>
+                    {statuses.map((statusobj) => {
+                      const styleItem = toCamelCase(statusobj.status) as unknown as ButtonPropsColorOverrides
+                      console.log(styleItem)
+                      return (
+                        <Button
+                          variant="contained"
+                          color={styleItem}
+                          key={statusobj.id}
+                          value={statusobj.status}
+                          onClick={handleSelect}
+                        >
+                          {statusobj.status}
+                        </Button>
+                      )
+                    })}
+                  </Stack>
                 : 'no statuses found'}
-            </div>
+            </Box>
           </StatusModal>
         </main>
       )}
@@ -122,14 +124,7 @@ function StatusLogItem({ creation }) {
           sx={{
             display: 'flex',
             height: '145px',
-            //     width: '100%',
             backgroundColor: '#744f44',
-            //     overflow: 'hidden',
-            //     boxShadow: [
-            //       '0px 2px 1px -1px rgba(0, 0, 0, 0.2)',
-            //       '0px 1px 1px 0px rgba(0, 0, 0, 0.14)',
-            //       '0px 1px 3px 0px rgba(0, 0, 0, 0.12)',
-            //     ],
             borderRadius: '4px',
             margin: '2px 10px 8px 10px',
           }}
@@ -137,7 +132,6 @@ function StatusLogItem({ creation }) {
           <Link to={`/creations/${toLowHyphen(creation.name)}`}>
             <CardMedia
               component="img"
-              // sx={{ width: 151 }}
               image="/images/plate.jpeg"
               alt="text tdb"
               sx={{
@@ -163,7 +157,7 @@ function StatusLogItem({ creation }) {
               <Button
                 variant="contained"
                 sx={{
-                  width: '80%',
+                  width: '95%',
                   fontWeight: '200',
                   textTransform: 'uppercase',
                   textAlign: 'center',
@@ -172,17 +166,17 @@ function StatusLogItem({ creation }) {
                   boxSizing: 'border-box',
                   borderRadius: '4px',
                 }}
-                color={`${style}`}
+                color={style}
                 onClick={showModal}
               >
                 {currentStatus.status}
               </Button>
               <Stack spacing={1} sx={{ paddingLeft: '10px' }}>
-                <Typography variant="p">
+                <Typography>
                   {creation.shape}: {creation.name}
                 </Typography>
-                <Typography variant="p">Clay: {creation.clay}</Typography>
-                <Typography variant="p">
+                <Typography>Clay: {creation.clay}</Typography>
+                <Typography>
                   Glazes: {formatGlazeText(creation?.glazes)}
                 </Typography>
               </Stack>

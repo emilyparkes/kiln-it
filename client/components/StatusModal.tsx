@@ -1,15 +1,16 @@
-import { ReactNode } from "react"
+import { ReactNode } from 'react'
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton } from '@mui/material'
+import CloseIcon from '@mui/icons-material/Close'
 
 interface Props {
   save: () => void,
   close: () => void,
-  show: boolean,
+  open: boolean,
   resetState: () => void,
   children: ReactNode
 }
 
-function StatusModal ({ save, close, show, resetState, children }: Props) {
-  const showHideClassName = show ? 'modal open' : 'modal closed'
+function StatusModal ({ save, close, open, resetState, children }: Props) {
 
   const handleCancel = () => {
     resetState()
@@ -22,19 +23,29 @@ function StatusModal ({ save, close, show, resetState, children }: Props) {
   }
 
   return (
-    <div className={showHideClassName}>
-      <section className='model-box'>
+    <Dialog onClose={close} open={open} fullWidth={true}>
+      <DialogTitle>Set new status</DialogTitle>
+      <IconButton
+          aria-label='close'
+          onClick={handleCancel}
+          sx={{
+            position: 'absolute',
+            right: 8,
+            top: 8,
+            color: (theme) => theme.palette.grey[500],
+          }}
+        >
+          <CloseIcon />
+      </IconButton>
+      <DialogContent >
         {children}
-        <div className='modal-actions'>
-        <button className='save' type='button' onClick={handleCancel}>
-          Cancel
-        </button>
-        <button className='save' type='button' onClick={handleSave}>
-          Apply
-        </button>
-        </div>
-      </section>
-    </div>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleSave} color='secondary'>
+          Save changes
+        </Button>
+        </DialogActions>
+    </Dialog>
   )
 }
 
