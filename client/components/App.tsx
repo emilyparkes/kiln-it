@@ -1,10 +1,9 @@
 import { useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
+import { ThemeProvider } from '@mui/material/styles'
 
 import { useAppDispatch } from '../hooks'
-import { ThemeProvider } from '@mui/material/styles'
 import { theme } from '../styles/theme'
-
 import { getCreations } from '../actions/creations'
 import { getClay } from '../actions/clay'
 import { getGlazes } from '../actions/glazes'
@@ -25,6 +24,7 @@ import DataOptionsView from './DataOptionsView'
 import PageNotFound from './PageNotFound'
 
 function App() {
+  
   const dispatch = useAppDispatch()
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
   Box,
@@ -13,15 +13,11 @@ import {
 } from '@mui/material'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 
-<<<<<<< HEAD
-function SignIn () {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [formErr, setFormErr] = useState('')
-=======
+import { signIn } from '../../../firebase/auth'
+
 function SignIn() {
   const [form, setForm] = useState({
-    username: '',
+    email: '',
     password: '',
   })
   const [showPassword, setShowPassword] = useState(false)
@@ -32,22 +28,15 @@ function SignIn() {
       [e.target.name]: e.target.value,
     })
   }
->>>>>>> 449264d00ab7fc5a00379caae47667eef530dd40
-
-  const dispatch = useDispatch()
-  const classes = useEditStyles()
-
-  const theme = createMuiTheme({
-    palette: {
-      primary: brown
+  const handleClick = async (e: FormEvent) => {
+    e.preventDefault()
+    try {
+      await signIn(form.email, form.password)
+    } catch (error) {
+      console.log(error)
     }
-  })
-
-  const handleClick = () => {
-    signIn(email, password, setFormErr)
-      .then(user => dispatch(user))
-      .catch(err => console.log(err.message))
   }
+
 
   const clickShowPassword = () => {
     setShowPassword(!showPassword)
@@ -79,20 +68,20 @@ function SignIn() {
             variant="outlined"
             color="secondary"
           >
-            <InputLabel htmlFor="username" sx={{ color: '#744F44' }}>
-              Username
+            <InputLabel htmlFor="email" sx={{ color: '#744F44' }}>
+              Email
             </InputLabel>
             <OutlinedInput
               required
-              id="username"
-              label="Username"
-              value={form.username}
+              id="email"
+              label="email"
+              value={form.email}
               onChange={handleChange}
             />
           </FormControl>
-          {/* // error={formError.usernameInput ? true : false}
+          {/* // error={formError.emailInput ? true : false}
             // helperText={ */}
-          {/* //   formError.usernameInput ? 'Username is required.' : ''
+          {/* //   formError.emailInput ? 'email is required.' : ''
             // } */}
 
           <FormControl sx={{ m: 1, width: '32ch' }} variant="outlined">

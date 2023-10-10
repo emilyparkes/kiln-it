@@ -1,4 +1,3 @@
-import { FirebaseUser } from './models'
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
@@ -6,10 +5,13 @@ import {
   updateProfile,
 } from '@firebase/auth'
 
+import { User } from 'firebase/auth'
 import { auth } from './index'
 import { addUserToDb } from './db'
 
-export function signUp(email: string, password: string, name: string) {
+export type FirebaseUser = User
+
+export function register(email: string, password: string, name: string) {
   return createUserWithEmailAndPassword(auth, email, password)
     .then(({ user }) => updateProfile(user, { displayName: name }))
     .then(() => addUserToDb())

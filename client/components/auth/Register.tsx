@@ -1,5 +1,5 @@
-import { ChangeEvent, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { ChangeEvent, FormEvent, StrictMode, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import {
   Box,
   Button,
@@ -13,6 +13,9 @@ import {
 } from '@mui/material'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 
+import { register } from '../../../firebase/auth'
+import MyFormHelperText from './MyFormHelperText'
+
 function Register() {
   const [form, setForm] = useState({
     username: '',
@@ -23,32 +26,14 @@ function Register() {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
+  const navigate = useNavigate()
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.name)
     setForm({
       ...form,
       [e.target.name]: e.target.value,
     })
-  }
-
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const classes = useEditStyles()
-
-  const theme = createMuiTheme({
-    palette: {
-      primary: brown
-    }
-  })
-
-  const handleClick = () => {
-    register(email, password, setFormErr)
-      // eslint-disable-next-line promise/always-return
-      .then(user => {
-        dispatch(signInUser(user))
-        navigate('/gallery')
-      })
-      .catch(err => console.log(err.message))
   }
 
   const clickShowPassword = () => {
@@ -67,8 +52,19 @@ function Register() {
     setShowConfirmPassword(!showConfirmPassword)
   }
 
+  const handleClick = async (e: FormEvent) => {
+    e.preventDefault()
+    try {
+      await register(form.email, form.password, form.username)
+      navigate('/gallery')
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <>
+    <StrictMode>
       <Paper elevation={3} style={{ width: '80%', margin: '15vh auto 0 auto' }}>
         <Box
           sx={{
@@ -77,55 +73,79 @@ function Register() {
             margin: 'auto',
             flexDirection: 'column',
             alignItems: 'center',
-            padding: '10px 0 30px 0'
+            padding: '10px 0 30px 0',
           }}
         >
           <Typography variant='h4' style={{ padding: '25px' }}>
             Create Account
           </Typography>
 
-          <Typography variant='caption' style={{ width: '100%', padding: '0 10px 10px' }}>
-            Creating an account to get access to &apos;behind the scenes&apos; photos and notes of the pieces created
+          <Typography
+            variant='caption'
+            style={{ width: '100%', padding: '0 10px 10px' }}
+          >
+            Creating an account to get access to &apos;behind the scenes&apos;
+            photos and notes of the pieces created
           </Typography>
 
-          <FormControl sx={{ m: 1, width: '32ch',}} variant='outlined' color='secondary'>
-            <InputLabel htmlFor='username' sx={{ color: '#744F44'}}>
+          <FormControl
+            sx={{ m: 1, width: '32ch' }}
+            variant='outlined'
+            color='secondary'
+          >
+            <InputLabel htmlFor='username' sx={{ color: '#744F44' }}>
               Username
             </InputLabel>
             <OutlinedInput
               required
               id='username'
               label='Username'
+              name='username'
               value={form.username}
               onChange={handleChange}
+             
             />
+             <MyFormHelperText />
           </FormControl>
 
-          <FormControl sx={{ m: 1, width: '32ch' }} variant='outlined'>
-          <InputLabel htmlFor='email' sx={{ color: '#744F44'}}>
+          <FormControl
+            sx={{ m: 1, width: '32ch' }}
+            variant='outlined'
+            color='secondary'
+          >
+            <InputLabel htmlFor='email' sx={{ color: '#744F44' }}>
               Email
             </InputLabel>
             <OutlinedInput
               required
               id='email'
               label='email'
+              name='email'
               value={form.email}
               onChange={handleChange}
             />
+            <MyFormHelperText />
           </FormControl>
           {/* // error={formError.usernameInput ? true : false}
             // helperText={ */}
-            {/* //   formError.usernameInput ? 'Username is required.' : ''
+          {/* //   formError.usernameInput ? 'Username is required.' : ''
             // } */}
 
-          <FormControl sx={{ m: 1, width: '32ch' }} variant='outlined'>
-            <InputLabel htmlFor='password' sx={{ color: '#744F44'}}>
+          <FormControl
+            sx={{ m: 1, width: '32ch' }}
+            variant='outlined'
+            color='secondary'
+          >
+            <InputLabel htmlFor='password' sx={{ color: '#744F44' }}>
               Password
             </InputLabel>
             <OutlinedInput
               required
               id='password'
               type={showPassword ? 'text' : 'password'}
+              name='password'
+              value={form.password}
+              onChange={handleChange}
               endAdornment={
                 <InputAdornment position='end'>
                   <IconButton
@@ -134,22 +154,30 @@ function Register() {
                     onMouseDown={mouseDownPassword}
                     edge='end'
                   >
-                    {showPassword ?  <Visibility /> : <VisibilityOff />}
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
                   </IconButton>
                 </InputAdornment>
               }
               label='Password'
             />
+            <MyFormHelperText />
           </FormControl>
 
-          <FormControl sx={{ m: 1, width: '32ch' }} variant='outlined'>
-            <InputLabel htmlFor='confirm-password' sx={{ color: '#744F44'}}>
+          <FormControl
+            sx={{ m: 1, width: '32ch' }}
+            variant='outlined'
+            color='secondary'
+          >
+            <InputLabel htmlFor='confirm-password' sx={{ color: '#744F44' }}>
               Confirm Password
             </InputLabel>
             <OutlinedInput
               required
               id='confirm-password'
-              type={showConfirmPassword ? 'text' : 'Confirm Password'}
+              type={showConfirmPassword ? 'text' : 'password'}
+              name='confirm'
+              value={form.confirm}
+              onChange={handleChange}
               endAdornment={
                 <InputAdornment position='end'>
                   <IconButton
@@ -158,23 +186,39 @@ function Register() {
                     onMouseDown={mouseDownConfirmPassword}
                     edge='end'
                   >
-                    {showConfirmPassword ?  <Visibility /> : <VisibilityOff />}
+                    {showConfirmPassword ? <Visibility /> : <VisibilityOff />}
                   </IconButton>
                 </InputAdornment>
               }
               label='Confirm Password'
             />
+            <MyFormHelperText />
           </FormControl>
 
-          <Button color='secondary' sx={{ m: 1, width: '37ch' }} variant='contained' onClick={handleClick}>
+          <Button
+            color='secondary'
+            sx={{ m: 1, width: '37ch' }}
+            variant='contained'
+            onClick={handleClick}
+          >
             Register
           </Button>
 
-          <Typography variant='subtitle2' style={{ width: '100%', padding: '0 10px 10px' }}>
-            Already got an account? <Link to='/signin' style={{color: '#1675d1', textDecoration: 'underline #1675d1'}}>Sign In</Link>
+          <Typography
+            variant='subtitle2'
+            style={{ width: '100%', padding: '0 10px 10px' }}
+          >
+            Already got an account?{' '}
+            <Link
+              to='/signin'
+              style={{ color: '#1675d1', textDecoration: 'underline #1675d1' }}
+            >
+              Sign In
+            </Link>
           </Typography>
         </Box>
       </Paper>
+      </StrictMode>
     </>
   )
 }
