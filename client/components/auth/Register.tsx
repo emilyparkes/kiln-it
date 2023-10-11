@@ -18,7 +18,6 @@ import MyFormHelperText from './MyFormHelperText'
 
 function Register() {
   const [form, setForm] = useState({
-    username: '',
     email: '',
     password: '',
     confirm: '',
@@ -55,7 +54,7 @@ function Register() {
   const handleClick = async (e: FormEvent) => {
     e.preventDefault()
     try {
-      await register(form.email, form.password, form.username)
+      await register(form.email, form.password)
       navigate('/gallery')
     } catch (error) {
       console.log(error)
@@ -87,26 +86,6 @@ function Register() {
             Creating an account to get access to &apos;behind the scenes&apos;
             photos and notes of the pieces created
           </Typography>
-
-          <FormControl
-            sx={{ m: 1, width: '32ch' }}
-            variant='outlined'
-            color='secondary'
-          >
-            <InputLabel htmlFor='username' sx={{ color: '#744F44' }}>
-              Username
-            </InputLabel>
-            <OutlinedInput
-              required
-              id='username'
-              label='Username'
-              name='username'
-              value={form.username}
-              onChange={handleChange}
-             
-            />
-             <MyFormHelperText />
-          </FormControl>
 
           <FormControl
             sx={{ m: 1, width: '32ch' }}
