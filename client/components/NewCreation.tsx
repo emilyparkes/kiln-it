@@ -31,7 +31,7 @@ import { Clay } from '../../models/Clay'
 import { Shape } from '../../models/Shape'
 import { DBGlaze, Glaze } from '../../models/Glaze'
 
-function NewCreation() {
+export default function NewCreation() {
   const [imgIdx, setImgIdx] = useState(0)
   const [currentImg, setCurrentImage] = useState('')
   const [formError, setFormError] = useState({ nameInput: false, clayInput: false, shapeInput: false, statusInput: false, })
@@ -352,5 +352,3 @@ function NewCreation() {
     </>
   )
 }
-
-export default NewCreation

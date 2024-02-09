@@ -11,12 +11,12 @@ import FilterOption from './FilterOption'
 import AnAccordion from '../accordion/Accordion'
 import { addFilter, removeFilter, clearFilter } from '../../actions/filter'
 
-interface Props {
+interface FilterBarProps {
   focus: boolean,
   toggleFocus: (event: FormEvent<HTMLFormElement>) => void
 }
 
-function FilterBar({ focus, toggleFocus }: Props) {
+export default function FilterBar({ focus, toggleFocus }: FilterBarProps) {
   const [open, setOpen] = useState(false)
   const [currentAccordian, setCurrentAccordian] = useState('panel1')
 
@@ -182,5 +182,3 @@ function FilterBar({ focus, toggleFocus }: Props) {
     </>
   )
 }
-
-export default FilterBar

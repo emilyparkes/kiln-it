@@ -1,4 +1,4 @@
-interface Props {
+interface CardProps {
   img: string,
   name: string,
   shape: string, 
@@ -6,7 +6,7 @@ interface Props {
 }
 
 // eslint-disable-next-line no-unused-vars
-function Card ({ img, name, shape, description }: Props) {
+export default function Card ({ img, name, shape, description }: CardProps) {
   return (
     <div className='card' >
       <div className='card-overlay'>
@@ -20,5 +20,3 @@ function Card ({ img, name, shape, description }: Props) {
     </div>
   )
 }
-
-export default Card

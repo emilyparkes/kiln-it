@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Checkbox from '@mui/material/Checkbox'
 import FormControlLabel from '@mui/material/FormControlLabel'
 
-interface Props {
+interface FilterOptionProps {
   category: string,
   name: string,
   colour: string,
@@ -18,7 +18,7 @@ export default function FilterOption({
   select,
   remove,
   checked: initChecked,
-}: Props) {
+}: FilterOptionProps) {
 
   // const CustomCheckbox = withStyles({
   //   root: {

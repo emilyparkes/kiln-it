@@ -2,7 +2,7 @@ import { useAppSelector } from '../hooks'
 
 import DataOption from './DataOption'
 
-function AddDataOptions () {
+export default function AddDataOptions () {
 
   const clay = useAppSelector(store => store.clay)
   const glazes = useAppSelector(store => store.glazes)
@@ -26,4 +26,3 @@ function AddDataOptions () {
   )
 }
 
-export default AddDataOptions

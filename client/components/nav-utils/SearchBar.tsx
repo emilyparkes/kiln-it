@@ -5,12 +5,12 @@ import _ from 'lodash'
 
 import { setSearchTerm } from '../../actions/search'
 
-interface Props {
+interface SearchBarProps {
   focus: string,
   toggleFocus: () => boolean
 }
 
-function SearchBar({ focus, toggleFocus }: Props) {
+export default function SearchBar({ focus, toggleFocus }: SearchBarProps) {
   const [searchterm, setSearch] = useState('')
   const dispatch = useAppDispatch()
   
@@ -51,8 +51,6 @@ function SearchBar({ focus, toggleFocus }: Props) {
     </div>
   )
 }
-
-export default SearchBar
 
 // elastic search
 // https://www.elastic.co/?ultron=B-Stack-Trials-APJ-ANZ-Exact&gambit=Stack-Core&blade=adwords-s&hulk=paid&Device=c&thor=elastisearch

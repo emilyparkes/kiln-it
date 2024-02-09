@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { Box, Button, Container, Grid, Typography } from '@mui/material'
 
-function PageNotFound() {
+export default function PageNotFound() {
   const navigate = useNavigate()
   return (
     <>
@@ -43,5 +43,3 @@ function PageNotFound() {
     </>
   )
 }
-
-export default PageNotFound

@@ -15,12 +15,12 @@ import { createStatuses, removeStatus } from '../actions/statuses'
 
 import { toCapSpace } from '../client-utils'
 
-interface Props {
+interface DataOptionProps {
   name: string,
   arrOfType: unknown
 }
 
-function DataOption({ name, arrOfType }: Props) {
+export default function DataOption({ name, arrOfType }: DataOptionProps) {
   const [currentAddition, setCurrentAddition] = useState('')
   const [newInputVisible, setNewInputVisible] = useState(false)
   const [editVisible, setEditVisible] = useState(false)
@@ -168,5 +168,3 @@ function DataOption({ name, arrOfType }: Props) {
     </>
   )
 }
-
-export default DataOption

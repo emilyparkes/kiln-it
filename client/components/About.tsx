@@ -7,7 +7,7 @@ import {
   Typography,
 } from '@mui/material'
 
-function About() {
+export default function About() {
   return (
     <div className='about'>
       <Card sx={{ minWidth: 275 }}>
@@ -46,5 +46,3 @@ function About() {
     </div>
   )
 }
-
-export default About

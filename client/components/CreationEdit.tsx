@@ -27,7 +27,7 @@ import { updateCreation } from '../actions/creations'
 import { findString, toLowHyphen, toCapSpace } from '../client-utils'
 import { DBGlaze } from '../../models/Glaze'
 
-function CreationEdit() {
+export default function CreationEdit() {
   const [imgIdx, setImgIdx] = useState(0)
   const [currentImg, setCurrentImage] = useState('')
   const [form, setForm] = useState({} as Partial<Creation>)
@@ -362,5 +362,3 @@ function CreationEdit() {
     </>
   )
 }
-
-export default CreationEdit

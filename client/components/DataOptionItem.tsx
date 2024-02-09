@@ -7,14 +7,14 @@ import { CgClose } from 'react-icons/cg'
 // import { DBClay } from '../../models/Clay'
 
 // type Options = DBClay | DBGlaze | DBShape | DBStatus
-interface Props {
+interface DataOptionItemProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   type: any
   name: string,
   deleteItem: (id: number) => void
 }
 
-function DataOptionItem({ type, name, deleteItem }: Props) {
+export default function DataOptionItem({ type, name, deleteItem }: DataOptionItemProps) {
   console.log('type: ', type)
   const [input, setCurrentInput] = useState('' as keyof typeof type)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -46,4 +46,3 @@ function DataOptionItem({ type, name, deleteItem }: Props) {
   )
 }
 
-export default DataOptionItem

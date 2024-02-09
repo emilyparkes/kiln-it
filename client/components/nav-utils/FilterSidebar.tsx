@@ -1,13 +1,13 @@
 import { Dispatch, ReactNode, SetStateAction } from "react"
 
-interface Props {
+interface FilterSidebarProps {
   open: boolean,
   setOpen: Dispatch<SetStateAction<boolean>>,
   children: ReactNode
 }
 
 // eslint-disable-next-line no-unused-vars
-function FilterSidebar ({ open, children }: Props) {
+export default function FilterSidebar ({ open, children }: FilterSidebarProps) {
   const showHideClassName = open ? 'filtersidebar filter-slide-open' : 'filtersidebar filter-slide-closed'
   
   return (
@@ -18,5 +18,3 @@ function FilterSidebar ({ open, children }: Props) {
     </div>
   )
 }
-
-export default FilterSidebar

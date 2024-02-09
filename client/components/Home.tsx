@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Card, CardMedia, CardContent, Typography } from '@mui/material'
 
-function Home() {
+export default function Home() {
   // const styles = {
   //   media: {
   //     height: '100%',
@@ -47,5 +47,3 @@ function Home() {
     </>
   )
 }
-
-export default Home

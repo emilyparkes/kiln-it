@@ -8,7 +8,7 @@ import FloatingAddNew from './FloatingAddNew'
 import WaitIndicator from './WaitIndicator'
 import { filterBy, searchBy } from '../client-utils'
 
-function StatusLog() {
+export default function StatusLog() {
   const focus = useAppSelector((store) => store.navUtils)
 
   const creationsFiltered = useAppSelector((store) =>
@@ -61,5 +61,3 @@ function StatusLog() {
     </>
   )
 }
-
-export default StatusLog

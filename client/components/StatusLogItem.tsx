@@ -16,7 +16,7 @@ import { toCamelCase, toLowHyphen } from '../client-utils'
 import { updateCreationStatus } from '../actions/creations'
 import { useStyles } from '../styles/mui_overrides'
 
-function StatusLogItem({ creation }) {
+export default function StatusLogItem({ creation }) {
   const initialState = { id: creation.statusId, status: creation.status }
 
   const [show, setShowModel] = useState(false)
@@ -193,5 +193,3 @@ function StatusLogItem({ creation }) {
     </>
   )
 }
-
-export default StatusLogItem

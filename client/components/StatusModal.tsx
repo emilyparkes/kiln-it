@@ -1,6 +1,6 @@
 import { ReactNode } from "react"
 
-interface Props {
+interface StatusModalProps {
   save: () => void,
   close: () => void,
   show: boolean,
@@ -8,7 +8,7 @@ interface Props {
   children: ReactNode
 }
 
-function StatusModal ({ save, close, show, resetState, children }: Props) {
+export default function StatusModal ({ save, close, show, resetState, children }: StatusModalProps) {
   const showHideClassName = show ? 'modal open' : 'modal closed'
 
   const handleCancel = () => {
@@ -37,5 +37,3 @@ function StatusModal ({ save, close, show, resetState, children }: Props) {
     </div>
   )
 }
-
-export default StatusModal

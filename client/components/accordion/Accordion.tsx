@@ -15,7 +15,7 @@ interface Props {
   openAccordian: (string: string) => void,
 }
 
-function AnAccordion({
+export default function AnAccordion({
   title,
   children,
   num,
@@ -39,5 +39,3 @@ function AnAccordion({
     </Accordion>
   )
 }
-
-export default AnAccordion

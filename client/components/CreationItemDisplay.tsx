@@ -1,10 +1,10 @@
 import { DBCreation } from "../../models/Creation"
 
-interface Props {
+interface CreationItemDisplayProps {
   creation: DBCreation
 }
 
-function CreationItemDisplay ({ creation }: Props) {
+export default function CreationItemDisplay ({ creation }: CreationItemDisplayProps) {
   return (
     <>
       <img className='creation-img' src={creation.imgComplete} alt='some text'/>
@@ -17,5 +17,3 @@ function CreationItemDisplay ({ creation }: Props) {
     </>
   )
 }
-
-export default CreationItemDisplay

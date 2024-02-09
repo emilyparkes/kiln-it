@@ -7,7 +7,7 @@ import SearchBar from './SearchBar'
 import { setFocus } from '../../actions/navutils-focus'
 import Toolbar from '@mui/material/Toolbar'
 
-function NavUtils() {
+export default function NavUtils() {
   const dispatch = useAppDispatch()
   const focus = useAppSelector((store) => store.navUtils)
 
@@ -29,5 +29,3 @@ function NavUtils() {
     </>
   )
 }
-
-export default NavUtils

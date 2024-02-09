@@ -8,7 +8,7 @@ import Card from './Card'
 // import NavUtils from './nav-utils/NavUtils'
 import WaitIndicator from './WaitIndicator'
 
-function Gallery() {
+export default function Gallery() {
   const focus = useAppSelector((store) => store.navUtils)
 
   const creationsFiltered = useAppSelector((store) =>
@@ -76,5 +76,3 @@ function Gallery() {
     </>
   )
 }
-
-export default Gallery

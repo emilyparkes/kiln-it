@@ -16,7 +16,7 @@ import { findString, toCapSpace } from '../client-utils'
 import { Creation as TCreation } from '../../models/Creation'
 
 
-function Creation() {
+export default function Creation() {
   const [creation, setCreation] = useState<TCreation | null>(null)
   const [imgIdx, setImgIdx] = useState(0)
   const [currentImg, setCurrentImage] = useState('')
@@ -129,8 +129,6 @@ function Creation() {
     </>
   )
 }
-
-export default Creation
 
 // const [touchStart, setTouchStart] = React.useState(0);
 // const [touchEnd, setTouchEnd] = React.useState(0);
