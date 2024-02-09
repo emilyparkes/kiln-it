@@ -4,7 +4,7 @@ import { Box, Fab } from '@mui/material'
 import { Add as AddIcon } from '@mui/icons-material'
 
 
-function FloatingAddNew() {
+export default function FloatingAddNew() {
   const navigate = useNavigate()
 
   const handleClick = () => {
@@ -18,5 +18,3 @@ function FloatingAddNew() {
       </Box>
   )
 }
-
-export default FloatingAddNew

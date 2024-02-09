@@ -24,7 +24,7 @@ import Log from './StatusLog'
 import DataOptionsView from './DataOptionsView'
 import PageNotFound from './PageNotFound'
 
-function App() {
+export default function App() {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
@@ -57,4 +57,3 @@ function App() {
   )
 }
 
-export default App

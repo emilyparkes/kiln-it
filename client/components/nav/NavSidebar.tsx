@@ -24,7 +24,7 @@ interface ListItemLinkProps {
   to: string
 }
 
-function NavSidebar({ open, toggleDrawer }: Props) {
+export default function NavSidebar({ open, toggleDrawer }: Props) {
 
   const Link = forwardRef<HTMLAnchorElement, RouterLinkProps>(function Link(
     itemProps,
@@ -80,5 +80,3 @@ function NavSidebar({ open, toggleDrawer }: Props) {
     </Drawer>
   )
 }
-
-export default NavSidebar
